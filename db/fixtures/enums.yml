@@ -1,0 +1,11 @@
+category:
+  name: Category
+
+when:
+  name: When
+  
+effort:
+  name: Effort
+  
+access_level:
+  name: Access Level

@@ -1,13 +1,15 @@
 class Task < ActiveRecord::Base
-  belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
+  belongs_to :author, :class_name => 'User', :foreign_key => :author_id
   belongs_to :assigned_to, :class_name => 'User', :foreign_key => :assigned_to
   
-  belongs_to :duplicate => :class_name => 'Task', :foreign_key => :duplicate_of
-  has_many :duplicates => :class_name => 'Task', :foreign_key => :duplicate_of
+  belongs_to :duplicate, :class_name => 'Task', :foreign_key => :duplicate_of
+  has_many :duplicates, :class_name => 'Task', :foreign_key => :duplicate_of
 
-  validates_inclusion_of :category, :in => %w( feature bug change )
-  validates_inclusion_of :when, :in => %w( now soon later )
-  validates_inclusion_of :effort, :in => [1, 2, 4, 8]
+  belongs_to :category, :class_name => 'EnumValue', :readonly => true
+  belongs_to :when, :class_name => 'EnumValue', :readonly => true
+  belongs_to :effort, :class_name => 'EnumValue', :readonly => true
 
-  default_scope :order => '', :group => 
+  validates_presence_of :author
+  validates_presence_of :category
+  validates_presence_of :when
 end

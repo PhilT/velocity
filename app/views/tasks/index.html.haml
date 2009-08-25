@@ -1,0 +1,14 @@
+%ul
+  - @tasks.each do |task|
+    %li
+      - form_for task do |t|
+      %div.task
+        = t.check_box :completed
+        %strong.name= task.name
+        -
+        %span.detail= task.detail
+        by
+        %span.author= task.author
+      %ul.actions
+        %li= t.select :assigned_to, options_for_select(@developers, task.assigned_to)
+        %li= t.check_box :started

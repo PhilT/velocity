@@ -29,19 +29,19 @@ ActiveRecord::Schema.define(:version => 20090823173947) do
     t.datetime "updated_at"
     t.datetime "started_on"
     t.datetime "completed_on"
-    t.integer  "created_by"
+    t.integer  "author_id"
     t.integer  "assigned_to"
     t.integer  "duplicate_of"
-    t.string   "category"
-    t.string   "when"
-    t.integer  "effort"
+    t.integer  "category_id"
+    t.integer  "when_id"
+    t.integer  "effort_id"
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.string   "kind"
+    t.integer  "access_level_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

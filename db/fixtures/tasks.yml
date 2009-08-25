@@ -1,0 +1,23 @@
+first:
+  name: This is a task
+  detail: Here is some detail about this task
+  started_on:
+  completed_on: 
+  author: phil
+  assigned_to: 
+  duplicate_of: 
+  category: feature
+  when: now
+  effort: small
+
+second:
+  name: This is another task
+  detail: And here is the detail for this other task
+  started_on: 
+  completed_on: 
+  author: phil
+  assigned_to: 
+  duplicate_of: 
+  category: bug
+  when: now
+  effort: medium

@@ -6,12 +6,12 @@ class CreateTasks < ActiveRecord::Migration
       t.timestamps
       t.datetime  :started_on
       t.datetime  :completed_on
-      t.integer   :created_by
+      t.integer   :author_id
       t.integer   :assigned_to
       t.integer   :duplicate_of
-      t.string    :category
-      t.string    :when
-      t.integer   :effort
+      t.integer    :category_id
+      t.integer    :when_id
+      t.integer   :effort_id
     end
   end
 
