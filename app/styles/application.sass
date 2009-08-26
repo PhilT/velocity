@@ -1,0 +1,68 @@
+body
+  :font 14px Arial, Sans
+  :color #333
+  
+body, ul, li
+  :margin 0
+  :padding 0
+
+h1
+  :background url(/images/logo.png) no-repeat
+  :line-height 30px
+  :margin-left 20px
+  :padding-left 50px
+  sup
+    :font-size 14px
+  
+li
+  :list-style-type none
+
+.id
+  :font-size 11px
+  
+.task
+  :border-bottom 1px solid #ccc
+  :border-top 1px solid #fff
+  :clear both
+  :overflow auto
+  :padding 5px
+  &.heading
+    :padding-left 10px
+  &.feature
+    :background #ded
+    :border-bottom 1px solid #9c9
+    :border-color-top #efe
+  &.bug
+    :background #edd
+    :border-bottom 1px solid #c99
+    :border-color-top #fee
+  &.change
+    :background #dde
+    :border-bottom 1px solid #99c
+    :border-color-top #eef
+  
+#active_tasks
+  .task
+    &.heading
+      :background #efe
+  
+#completed_tasks
+  .task
+    :background #ddd
+    &.heading
+      :background #eee
+  
+.actions
+  li
+    :float left
+    :padding-top 5px
+    :padding-left 25px
+    :font-size 11px
+    .assigned
+      select
+        :width 120px
+  .duplicate
+    select
+      :width 250px
+  select
+    :font-size 11px

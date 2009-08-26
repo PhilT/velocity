@@ -1,5 +1,5 @@
 namespace :db do
-  desc "Drop, create, migrate then seed the database"
+  desc "Drop, create, migrate then seed development and test databases"
   task :seed => :environment do
     seed_for('development')
     seed_for('test')

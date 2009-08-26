@@ -7,10 +7,10 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime  :started_on
       t.datetime  :completed_on
       t.integer   :author_id
-      t.integer   :assigned_to
-      t.integer   :duplicate_of
-      t.integer    :category_id
-      t.integer    :when_id
+      t.integer   :assigned_to_id
+      t.integer   :duplicate_id
+      t.integer   :category_id
+      t.integer   :when_id
       t.integer   :effort_id
     end
   end

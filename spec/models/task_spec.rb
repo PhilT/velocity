@@ -12,4 +12,22 @@ describe Task do
   it "should create a new instance given valid attributes" do
     Task.create!(@valid_attributes)
   end
+  
+  describe 'form helper methods' do
+    it "should handle started" do
+      task = Factory :task
+      task.started?.should == false
+      task.started = true
+      task.started?.should == true
+      task.started_on.should_not be_nil
+    end
+
+    it "should handle completed" do
+      task = Factory :task
+      task.completed?.should == false
+      task.completed = true
+      task.completed?.should == true
+      task.completed_on.should_not be_nil
+    end
+  end
 end

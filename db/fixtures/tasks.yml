@@ -1,23 +1,51 @@
 first:
+  id: 1
   name: This is a task
   detail: Here is some detail about this task
   started_on:
   completed_on: 
   author: phil
   assigned_to: 
-  duplicate_of: 
+  duplicate: 
   category: feature
   when: now
   effort: small
 
-second:
+another:
+  id: 2
   name: This is another task
   detail: And here is the detail for this other task
   started_on: 
   completed_on: 
   author: phil
   assigned_to: 
-  duplicate_of: 
+  duplicate: 
   category: bug
   when: now
   effort: medium
+
+all_filled:
+  id: 3
+  name: This is another task
+  detail: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  started_on: 200908241312
+  completed_on: 
+  author: phil
+  assigned_to: phil
+  duplicate: 
+  category: bug
+  when: now
+  effort: large
+
+completed:
+  id: 4
+  name: This is a completed task
+  detail: And here is the detail for this completed task
+  started_on: 200908250930
+  completed_on: 200908251312
+  author: phil
+  assigned_to: phil
+  duplicate: 
+  category: bug
+  when: now
+  effort: small

@@ -1,14 +1,34 @@
-%ul
-  - @tasks.each do |task|
-    %li
+= render :partial => 'tasks', :object => @now_tasks, :locals => {:heading => 'Tasks that need doing now'}
+= render :partial => 'tasks', :object => @soon_tasks, :locals => {:heading => 'Tasks that need doing next'}
+= render :partial => 'tasks', :object => @later_tasks, :locals => {:heading => 'Tasking for future planning'}
+
+%ul#completed_tasks
+  %li.task.heading
+    %h3 Completed Tasks
+  - @completed_tasks.each do |task|
+    %li.task
       - form_for task do |t|
-      %div.task
-        = t.check_box :completed
-        %strong.name= task.name
-        -
-        %span.detail= task.detail
-        by
-        %span.author= task.author
-      %ul.actions
-        %li= t.select :assigned_to, options_for_select(@developers, task.assigned_to)
-        %li= t.check_box :started
+        %div.info
+          = t.check_box :completed, :id => "task_completed_#{task.id}"
+          %span.id== (#{sprintf('%05d', task.id)})
+          %strong.name= task.name
+          \-
+          %span.detail= task.detail
+        %ul.actions
+          %li.by
+            by
+            = task.author.name
+          %li
+            Completed
+            = time_ago_in_words(task.completed_on).gsub('about', '')
+            ago
+          %li.category== type: #{task.category.value}
+          %li.effort= task.effort.try(:value)
+          - if task.assigned_to
+            %li.assigned== Assigned to #{task.assigned_to.name}
+          %li.started
+            Started
+            = time_ago_in_words(task.started_on).gsub('about', '')
+            ago
+          - if task.duplicate
+            %li.duplicate== Duplicate of #{task.duplicate.name}

@@ -13,6 +13,6 @@ describe User do
   it "should only get developers" do
     developer = Factory :developer
     customer = Factory :customer
-    User.developers.should == [developer]
+    User.developers.should_not include(customer)
   end
 end
