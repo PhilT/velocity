@@ -1,26 +1,28 @@
-%ul.active_tasks
+%ul
   %li.task.heading
     %h3= heading
     - tasks.each do |task|
-      %li.task{:class => task.category.value.downcase}
-        - form_for task do |t|
+      %li.task{:class => task.completed? ? 'completed' : task.category.value.downcase}
+        - form_for task do |f|
           %div.info
-            = t.check_box :completed, :id => "task_completed_#{task.id}"
+            = f.check_box :completed, :id => "task_completed_#{task.id}"
             %span.id== (#{sprintf('%05d', task.id)})
             %strong.name= task.name
             \-
             %span.detail= task.detail
           %ul.actions
-            %li.by
-              by
-              = task.author.name
-            %li.category= t.collection_select(:category, @categories, :id, :value)
-            %li.when= t.collection_select(:when, @whens, :id, :value)
-            %li.effort= t.collection_select(:effort, @efforts, :id, :value)
-            %li.assigned= t.collection_select(:assigned_to_id, @developers, :id, :name, {:prompt => 'Assigned to:'}, {:id => "task_assigned_to_#{task.id}"})
-            %li.started
-              = t.check_box :started, :id => "task_started_#{task.id}"
-              = t.label :started, 'Started?', :value => task.id
-            %li.duplicate= t.collection_select(:duplicate, @active_tasks.reject{|t| t == task}, :id, :name, {:prompt => 'Duplicate of:'}, {:id => "task_duplicate_#{task.id}"})
-    
+            %li.by== by #{task.author.name}
+            %li.category= task.completed? ? "type: #{task.category.value}" : f.collection_select(:category_id, @categories, :id, :value, {:prompt => 'Type:'})
+            %li.when= f.collection_select(:when_id, @whens, :id, :value, {:prompt => true}, {}) unless task.completed?
+            %li.effort= f.collection_select(:effort_id, @efforts, :id, :value) unless task.completed?
+            %li.assigned
+              - if task.completed? 
+                - if task.assigned_to
+                  == Assigned to #{task.assigned_to.name}
+              - else
+                = f.collection_select(:assigned_to_id, @developers, :id, :name, {:prompt => 'Assign:'}, {:id => "task_assigned_to_#{task.id}"})
+            %li.started= render :partial => 'started', :locals => {:f => f, :task => task}
+            %li.completed= time_ago(task.completed_on, 'Completed')
+            %li.duplicate= render :partial => 'duplicate', :locals => {:f => f, :task => task}
+
 %p

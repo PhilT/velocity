@@ -5,9 +5,9 @@ class Task < ActiveRecord::Base
   belongs_to :duplicate, :class_name => 'Task', :foreign_key => :duplicate_id
   has_many :duplicates, :class_name => 'Task', :foreign_key => :duplicate_id
 
-  belongs_to :category, :class_name => 'EnumValue', :readonly => true
-  belongs_to :when, :class_name => 'EnumValue', :readonly => true
-  belongs_to :effort, :class_name => 'EnumValue', :readonly => true
+  belongs_to :category, :class_name => 'EnumValue', :foreign_key => :category_id
+  belongs_to :when, :class_name => 'EnumValue', :foreign_key => :when_id
+  belongs_to :effort, :class_name => 'EnumValue', :foreign_key => :effort_id
 
   validates_presence_of :author
   validates_presence_of :category

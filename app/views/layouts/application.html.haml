@@ -1,10 +1,10 @@
 !!!strict
 %html
   %head
-    %title Bustle - To-do with bells
+    %title== Bustle - #{STRAPLINE}
     = stylesheet_link_tag 'application'
   %body
     %h1
       Bustle
-      %sup To-do with bells
+      %sup= STRAPLINE
     = yield

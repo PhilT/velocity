@@ -1,0 +1,9 @@
+- if task.started?
+  Started
+  = time_ago_in_words(task.started_on).gsub('about', '')
+  ago
+- elsif !task.completed?
+  = f.check_box :started, :id => "task_started_#{task.id}"
+  = f.label :started, 'Started?', :value => task.id
+- else
+  never started

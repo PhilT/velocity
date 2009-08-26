@@ -9,7 +9,7 @@ first:
   duplicate: 
   category: feature
   when: now
-  effort: small
+  effort: one
 
 another:
   id: 2
@@ -21,8 +21,8 @@ another:
   assigned_to: 
   duplicate: 
   category: bug
-  when: now
-  effort: medium
+  when: soon
+  effort: two
 
 all_filled:
   id: 3
@@ -35,7 +35,7 @@ all_filled:
   duplicate: 
   category: bug
   when: now
-  effort: large
+  effort: four
 
 completed:
   id: 4
@@ -48,4 +48,4 @@ completed:
   duplicate: 
   category: bug
   when: now
-  effort: small
+  effort: one
