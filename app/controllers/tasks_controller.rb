@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @active_tasks = Task.active
+    @new_tasks = [Task.new]
     @now_tasks = Task.now
     @soon_tasks = Task.soon
     @later_tasks = Task.later
