@@ -1,3 +1,6 @@
 == Bustle - To-do list with extra padding
 
-Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers  to easily view and add tasks.
+Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers to easily view and add tasks.
+
+Default database is SQLite3. Use db:seed to populate the database with static data needed by Bustle
+

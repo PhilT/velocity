@@ -1,0 +1,5 @@
+user:
+  name: Joe Blogs
+  email: joe@example.com
+  access_level: developer
+

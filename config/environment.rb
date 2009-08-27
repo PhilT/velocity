@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem 'haml', :version => '2.2.2'
+  config.gem 'haml'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -43,3 +43,4 @@ end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles'
 STRAPLINE = "To-do with extra padding"
+
