@@ -1,71 +1,72 @@
 feature:
-  value: Feature
+  value: feature
   description: A new feature not previously implemented
   position: 1
   enum: category
-  
-bug:  
-  value: Bug
+
+bug:
+  value: bug
   description: A defect in the system that was not intended in the original design
   position: 2
   enum: category
-  
-change:  
-  value: Change
+
+change:
+  value: change
   description: A change in behaviour from the original design
   position: 3
   enum: category
 
 now:
-  value: Now
+  value: now
   description: Needs to be completed in the current release
   position: 1
   enum: when
 
 soon:
-  value: Soon
+  value: soon
   description: If there is time complete in the current release
   position: 2
   enum: when
 
 later:
-  value: Later
+  value: later
   description: Will be scheduled in a future release
   position: 3
   enum: when
 
 one:
-  value: 1
+  value: small
   description: This is a simple task
   position:  1
   enum: effort
-  
+
 two:
-  value: 2
+  value: medium
   description: This is task of moderate complexity
   position:  2
   enum: effort
 
 four:
-  value: 4
+  value: large
   description: This task is either complex or time consuming
   position:  3
   enum: effort
 
 eight:
-  value: 8
+  value: too large
   description: This task is very large and may need spliting
   position:  4
   enum: effort
 
 customer:
-  value: Customer
-  description: Can create and edit tasks. Specifically, they can enter a name, detail, set a category, mark it as a duplicate and set when either soon or later
+  value: customer
+  description: Can create and edit tasks. Specifically, they can enter a name, detail, set a category, mark it as related and set when either soon or later
   position:  1
   enum: access_level
 
-developer:  
-  value: Developer
+developer:
+  value: developer
   description: As well as do everything a customer can do, developers can assign, start, complete and set the effort of a task
   position:  2
   enum: access_level
+

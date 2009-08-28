@@ -7,23 +7,24 @@
           - form_for task do |f|
             %div.info
               = f.check_box :completed, :id => "task_completed_#{task.id}"
-              %span.id== (#{sprintf('%05d', task.id)})
-              %strong.name= task.name
+              %span.id= "#{sprintf('%05d', task.id)}:"
+              %strong.name= task.name || f.text_field(:name, :title => "what's this about?")
               \-
-              %span.detail= task.detail
+              %span.detail= task.detail || f.text_field(:name, :title => 'would you like to expand on that?')
             %ul.actions
               %li.by= "by #{task.author.name}" unless task.new_record?
-              %li.category= task.completed? ? "type: #{task.category.value}" : f.collection_select(:category_id, @categories, :id, :value, {:prompt => 'Type:'})
-              %li.when= f.collection_select(:when_id, @whens, :id, :value, {:prompt => true}, {}) unless task.completed?
-              %li.effort= f.collection_select(:effort_id, @efforts, :id, :value) unless task.completed?
+              %li.category= task.completed? ? "type: #{task.category.value}" : f.collection_select(:category_id, @categories, :id, :value, {:prompt => 'Feature, bug?'})
+              %li.when= f.collection_select(:when_id, @whens, :id, :value, {:prompt => 'Do this now, later?'}, {}) unless task.completed?
+              %li.effort= f.collection_select(:effort_id, @efforts, :id, :value, :prompt => 'Effort required?') unless task.completed?
               %li.assigned
-                - if task.completed? 
+                - if task.completed?
                   - if task.assigned_to
                     == Assigned to #{task.assigned_to.name}
                 - else
-                  = f.collection_select(:assigned_to_id, @developers, :id, :name, {:prompt => 'Assign:'}, {:id => "task_assigned_to_#{task.id}"})
+                  = f.collection_select(:assigned_to_id, @developers, :id, :name, {:prompt => 'Who will do this?'}, {:id => "task_assigned_to_#{task.id}"})
               %li.started= render :partial => 'started', :locals => {:f => f, :task => task}
               %li.completed= time_ago(task.completed_on, 'Completed')
-              %li.duplicate= render :partial => 'duplicate', :locals => {:f => f, :task => task}
-  
+              %li.related= render :partial => 'related', :locals => {:f => f, :task => task}
+              %li.save= submit_tag(task.new_record? ? 'Create' : 'Update') unless task.completed?
   %p
+

@@ -8,7 +8,7 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime  :completed_on
       t.integer   :author_id
       t.integer   :assigned_to_id
-      t.integer   :duplicate_id
+      t.integer   :related_id
       t.integer   :category_id
       t.integer   :when_id
       t.integer   :effort_id
@@ -19,3 +19,4 @@ class CreateTasks < ActiveRecord::Migration
     drop_table :tasks
   end
 end
+

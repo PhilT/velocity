@@ -1,7 +1,7 @@
 body
   :font 14px Arial, Sans
   :color #333
-  
+
 body, ul, li
   :margin 0
   :padding 0
@@ -13,16 +13,23 @@ h1
   :padding-left 50px
   sup
     :font-size 14px
-    
+
 h3
   :margin-bottom 0
-  
+
 li
   :list-style-type none
 
+.detail
+  input
+    :width 500px
+
 .id
   :font-size 11px
-  
+
+.info
+  :vertical-align top
+
 .task
   :border-bottom 1px solid #ccc
   :border-top 2px solid #fff
@@ -30,7 +37,7 @@ li
   :overflow auto
   :padding 5px
   &.heading
-    :background #efe
+    :background #fff
     :padding-left 10px
   &.feature
     :background #ded
@@ -44,13 +51,14 @@ li
     :background #dde
     :border-bottom 1px solid #99c
     :border-color-top #eef
-  
+
   &.completed
     :color #777
     :background #ddd
-    &.heading
+    .heading
       :background #eee
-  
+      :border-top #ccc
+
 .actions
   li
     :float left
@@ -60,8 +68,9 @@ li
     .assigned
       select
         :width 120px
-  .duplicate
+  .related
     select
       :width 250px
   select
     :font-size 11px
+

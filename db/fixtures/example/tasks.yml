@@ -6,7 +6,7 @@ first:
   completed_on:
   author: user
   assigned_to:
-  duplicate:
+  related:
   category: feature
   when: now
   effort: one
@@ -19,7 +19,7 @@ another:
   completed_on:
   author: user
   assigned_to:
-  duplicate:
+  related:
   category: bug
   when: soon
   effort: two
@@ -32,7 +32,7 @@ all_filled:
   completed_on:
   author: user
   assigned_to: user
-  duplicate:
+  related:
   category: bug
   when: now
   effort: four
@@ -45,7 +45,7 @@ completed:
   completed_on: 200908251312
   author: user
   assigned_to: user
-  duplicate:
+  related:
   category: bug
   when: now
   effort: one

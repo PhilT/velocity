@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20090823173947) do
     t.datetime "completed_on"
     t.integer  "author_id"
     t.integer  "assigned_to_id"
-    t.integer  "duplicate_id"
+    t.integer  "related_id"
     t.integer  "category_id"
     t.integer  "when_id"
     t.integer  "effort_id"

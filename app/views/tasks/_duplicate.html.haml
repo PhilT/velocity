@@ -1,4 +1,0 @@
-- if task.duplicate
-  == Duplicate of #{task.duplicate.name}
-- elsif !task.completed?  
-  = f.collection_select(:duplicate, duplicates(task), :id, :name, {:prompt => 'Duplicate?'}, {:id => "task_duplicate_#{task.id}"})
