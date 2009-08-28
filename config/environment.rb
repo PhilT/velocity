@@ -41,6 +41,6 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles'
+Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
 STRAPLINE = "To-do with extra padding"
 
