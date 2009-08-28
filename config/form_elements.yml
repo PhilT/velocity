@@ -1,0 +1,52 @@
+complete:
+  name: completed
+  type: check_box
+  prefix:
+  suffix:
+  hint:
+
+id:
+  type: text
+  prefix:
+  suffix: ':'
+  hint:
+
+name:
+  type: text_field
+  prefix:
+  suffix:
+  hint: "what's this about?"
+
+detail:
+  type: text_field
+  prefix:
+  suffix:
+  hint: would you like to expand on that?
+
+author:
+  type: select
+  prefix:
+  suffix:
+  hint:
+
+category:
+  type: select
+  prefix:
+  suffix:
+  hint: feature, bug?
+  collection: [feature, bug, change]
+
+when:
+  type: select
+  prefix:
+  suffix:
+  hint: do this now? later?
+  collection: [now, soon, later]
+  show: lambda{|task| !task.completed?}
+
+assigned_to:
+  type: select
+  prefix: "assigned to "
+  hint: who will do this?
+  show: lambda{|task| task.assigned_to}
+

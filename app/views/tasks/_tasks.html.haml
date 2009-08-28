@@ -5,26 +5,19 @@
       - tasks.each do |task|
         %li.task{:class => task_class(task)}
           - form_for task do |f|
-            %div.info
-              = f.check_box :completed, :id => "task_completed_#{task.id}"
-              %span.id= "#{sprintf('%05d', task.id)}:"
-              %strong.name= task.name || f.text_field(:name, :title => "what's this about?")
-              \-
-              %span.detail= task.detail || f.text_field(:name, :title => 'would you like to expand on that?')
+            %ul.info
+              - complete(f, task)
+              - id(f, task)
+              - name(f, task)
+              - detail(f, task)
             %ul.actions
-              %li.by= "by #{task.author.name}" unless task.new_record?
-              %li.category= task.completed? ? "type: #{task.category.value}" : f.collection_select(:category_id, @categories, :id, :value, {:prompt => 'Feature, bug?'})
-              %li.when= f.collection_select(:when_id, @whens, :id, :value, {:prompt => 'Do this now, later?'}, {}) unless task.completed?
-              %li.effort= f.collection_select(:effort_id, @efforts, :id, :value, :prompt => 'Effort required?') unless task.completed?
-              %li.assigned
-                - if task.completed?
-                  - if task.assigned_to
-                    == Assigned to #{task.assigned_to.name}
-                - else
-                  = f.collection_select(:assigned_to_id, @developers, :id, :name, {:prompt => 'Who will do this?'}, {:id => "task_assigned_to_#{task.id}"})
-              %li.started= render :partial => 'started', :locals => {:f => f, :task => task}
-              %li.completed= time_ago(task.completed_on, 'Completed')
-              %li.related= render :partial => 'related', :locals => {:f => f, :task => task}
-              %li.save= submit_tag(task.new_record? ? 'Create' : 'Update') unless task.completed?
-  %p
+              - author(f, task)
+              - category(f, task)
+              - when_needed(f, task)
+              - effort(f, task)
+              - f.input :assigned_to, task, task.assigned_to, :collection => @developers
+              - f.input :started, task, time_ago_in_words(task.started_on).gsub('about', '')
+              - f.input :completed, task, time_ago_in_words(task.completed_on).gsub('about', '')
+              - f.input :related, task, task.related, :collection => relateds(task)
+              - f.input :submit, task
 
