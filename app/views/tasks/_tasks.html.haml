@@ -4,20 +4,20 @@
       %h3= heading
       - tasks.each do |task|
         %li.task{:class => task_class(task)}
-          - form_for task do |f|
+          - form_for task, :builder => CustomFormBuilder do |f|
             %ul.info
-              - complete(f, task)
-              - id(f, task)
-              - name(f, task)
-              - detail(f, task)
+              - f.input :completed_on, task, :show => :input
+              -# f.input :id, task
+              -# f.input :name, task
+              -# f.input :detail, task
             %ul.actions
-              - author(f, task)
-              - category(f, task)
-              - when_needed(f, task)
-              - effort(f, task)
-              - f.input :assigned_to, task, task.assigned_to, :collection => @developers
-              - f.input :started, task, time_ago_in_words(task.started_on).gsub('about', '')
-              - f.input :completed, task, time_ago_in_words(task.completed_on).gsub('about', '')
-              - f.input :related, task, task.related, :collection => relateds(task)
-              - f.input :submit, task
+              -# f.input :author_id, task
+              -# f.input :category_id, task, :collection => @categories
+              -# f.input :when_id, task, :collection => @whens
+              -# f.input :effort_id, task, :collection => @efforts
+              -# f.input :assigned_id, task, :collection => @developers
+              -# f.input :started_on, task, :value => time_ago_in_words(task.started_on).gsub('about', '')
+              -# f.input :completed_on, task, :value => time_ago_in_words(task.completed_on).gsub('about', '')
+              -# f.input :related_id, task, :collection => relateds(task)
+              -# f.input :submit, task
 

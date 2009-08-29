@@ -13,3 +13,4 @@ class TasksController < ApplicationController
     @efforts = Enum.find_by_name('Effort').enum_values
   end
 end
+

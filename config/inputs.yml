@@ -1,0 +1,59 @@
+id:
+  type: text
+  suffix: ':'
+
+name:
+  type: text_field
+  hint: "what's this about?"
+
+detail:
+  type: text_field
+  hint: would you like to expand on that?
+
+author:
+
+category_id:
+  type: collection_select
+  hint: feature, bug?
+
+when_id:
+  type: collection_select
+  prefix: "needed "
+  hint: do this now? later?
+  show: lambda{|task| !task.completed?}
+
+effort_id:
+  type: collection_select
+  hint: How much effort?
+  show: lambda{|task| !task.completed?}
+
+assigned_id:
+  type: collection_select
+  prefix: "assigned to "
+  hint: who will do this?
+  show: lambda{|task| task.assigned_to}
+
+started_on:
+  type: check_box
+  prefix: "started "
+  suffix: " ago"
+  hint: started?
+  show: lambda{|task| task.started_on}
+  edit: lambda{|task| task.started_on.nil?}
+
+completed_on:
+  type: check_box
+  prefix: "started "
+  suffix: " ago"
+  show: lambda{|task| task.started_on}
+  edit: lambda{|task| task.started_on.nil?}
+
+related_id:
+  type: collection_select
+  hint: is this related to another task?
+  prefix: "related to "
+
+submit:
+  type: submit
+  hint: Save
+

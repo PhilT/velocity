@@ -22,17 +22,6 @@ module ApplicationHelper
   end
 
 =begin
-  def time_ago(time, prefix)
-    logger.info(time)
-    "#{prefix} #{} ago" unless time.blank?
-  end
-
-  def li_tag(name, value, prefix = nil, suffix = nil)
-    haml_tag :li, "#{prefix}#{value}#{suffix}", :class => name
-  end
-
-
-
   def complete(f, task)
     li_tag :complete, t_check_box(f, :completed, task.id)
   end
@@ -43,6 +32,14 @@ module ApplicationHelper
 
   def name(f, task, options)
     li_tag :name, options[:edit] ? f.text_field(:name, :title => "what's this about?") : task.name
+  end
+
+  def edit_field(field)
+    form.send(fields[field]['type'], )
+  end
+
+  def show_field(field)
+
   end
 
   def detail(f, task)
