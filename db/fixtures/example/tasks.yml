@@ -2,11 +2,7 @@ first:
   id: 1
   name: This is a task
   detail: Here is some detail about this task
-  started_on:
-  completed_on:
-  author: user
-  assigned_to:
-  related:
+  author: developer
   category: feature
   when: now
   effort: one
@@ -15,11 +11,7 @@ another:
   id: 2
   name: This is another task
   detail: And here is the detail for this other task
-  started_on:
-  completed_on:
-  author: user
-  assigned_to:
-  related:
+  author: customer
   category: bug
   when: soon
   effort: two
@@ -29,10 +21,8 @@ all_filled:
   name: This is a task with lots of detail
   detail: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   started_on: 200908241312
-  completed_on:
-  author: user
-  assigned_to: user
-  related:
+  author: developer
+  assigned: developer
   category: bug
   when: now
   effort: four
@@ -43,10 +33,26 @@ completed:
   detail: And here is the detail for this completed task
   started_on: 200908250930
   completed_on: 200908251312
-  author: user
-  assigned_to: user
-  related:
+  author: developer
+  assigned: developer
   category: bug
   when: now
   effort: one
+
+unimportant:
+  id: 5
+  name: Some unimportant task
+  detail: "that'll probably never get done"
+  author: customer
+  when: later
+  category: change
+
+working_on:
+  id: 6
+  name: Another task being worked on
+  detail: to show styling of multiple tasks in one section
+  author: customer
+  when: now
+  category: feature
+  started_on: 20090830
 

@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
-  belongs_to :assigned_to, :class_name => 'User', :foreign_key => :assigned_to_id
+  belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
 
   belongs_to :related, :class_name => 'Task', :foreign_key => :related_id
   has_many :relateds, :class_name => 'Task', :foreign_key => :related_id
@@ -14,10 +14,11 @@ class Task < ActiveRecord::Base
   validates_presence_of :when
 
   named_scope :active, :conditions => {:completed_on => nil}
-  named_scope :now, :conditions => {:completed_on => nil, :enum_values => {:value => 'now'}}, :joins => :when
-  named_scope :soon, :conditions => {:completed_on => nil, :enum_values => {:value => 'soon'}}, :joins => :when
-  named_scope :later, :conditions => {:completed_on => nil, :enum_values => {:value => 'later'}}, :joins => :when
+  named_scope :now, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
+  named_scope :soon, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
+  named_scope :later, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
 
+  named_scope :started, :conditions => "started_on IS NOT NULL AND completed_on IS NULL"
   named_scope :completed, :conditions => "completed_on IS NOT NULL"
 
   def started?

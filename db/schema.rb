@@ -12,7 +12,7 @@
 ActiveRecord::Schema.define(:version => 20090823173947) do
 
   create_table "enum_values", :force => true do |t|
-    t.string  "value"
+    t.string  "name"
     t.text    "description"
     t.integer "position"
     t.integer "enum_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20090823173947) do
     t.datetime "started_on"
     t.datetime "completed_on"
     t.integer  "author_id"
-    t.integer  "assigned_to_id"
+    t.integer  "assigned_id"
     t.integer  "related_id"
     t.integer  "category_id"
     t.integer  "when_id"

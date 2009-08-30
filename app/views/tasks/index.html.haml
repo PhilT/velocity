@@ -1,5 +1,7 @@
 = render :partial => 'tasks', :object => @new_tasks, :locals => {:heading => 'Add a new task'}
+= render :partial => 'tasks', :object => @started_tasks, :locals => {:heading => 'Tasks currently being worked on'}
 = render :partial => 'tasks', :object => @now_tasks, :locals => {:heading => 'Tasks that need doing now'}
 = render :partial => 'tasks', :object => @soon_tasks, :locals => {:heading => 'Tasks that need doing next'}
-= render :partial => 'tasks', :object => @later_tasks, :locals => {:heading => 'Tasking for future planning'}
+= render :partial => 'tasks', :object => @later_tasks, :locals => {:heading => 'Tasks to do later'}
 = render :partial => 'tasks', :object => @completed_tasks, :locals => {:heading => 'Completed Tasks'}
+

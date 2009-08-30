@@ -3,9 +3,9 @@ class CreateEnums < ActiveRecord::Migration
     create_table :enums do |t|
       t.string :name
     end
-    
+
     create_table :enum_values do |t|
-      t.string :value
+      t.string :name
       t.text :description
       t.integer :position
       t.integer :enum_id
@@ -16,3 +16,4 @@ class CreateEnums < ActiveRecord::Migration
     drop_table :enums
   end
 end
+

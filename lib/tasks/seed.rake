@@ -12,7 +12,7 @@ namespace :db do
     Rake::Task[env == 'test' ? 'db:test:prepare' : 'db:migrate'].invoke
     require 'active_record/fixtures'
     populate('db/fixtures/static')
-    populate('db/fixtures/example') if ENV['example']
+    populate('db/fixtures/example') if ENV['EXAMPLE']
   end
 
   def populate(sub_dir)

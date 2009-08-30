@@ -1,5 +1,0 @@
-- if task.related
-  == Related to #{task.related.name}
-- elsif !task.completed?
-  = f.collection_select(:related, relateds(task), :id, :name, {:prompt => 'Is this related to another task?'}, {:id => "task_related_#{task.id}"})
-

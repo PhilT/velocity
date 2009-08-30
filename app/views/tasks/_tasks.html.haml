@@ -1,23 +1,24 @@
 - if tasks.any?
-  %ul
+  %ul.tasks
     %li.task.heading
       %h3= heading
       - tasks.each do |task|
-        %li.task{:class => task_class(task)}
+        %li.task
           - form_for task, :builder => CustomFormBuilder do |f|
             %ul.info
-              - f.input :completed_on, task, :show => :input
-              -# f.input :id, task
-              -# f.input :name, task
-              -# f.input :detail, task
+              %li
+                = f.check :completed_on, task, :show => :input, :label => false, :wrap => false
+                = f.label :id, task, :wrap => false unless task.new_record?
+                = f.text :name, task, :wrap => false
+                = f.text :detail, task, :wrap => false
             %ul.actions
-              -# f.input :author_id, task
-              -# f.input :category_id, task, :collection => @categories
-              -# f.input :when_id, task, :collection => @whens
-              -# f.input :effort_id, task, :collection => @efforts
-              -# f.input :assigned_id, task, :collection => @developers
-              -# f.input :started_on, task, :value => time_ago_in_words(task.started_on).gsub('about', '')
-              -# f.input :completed_on, task, :value => time_ago_in_words(task.completed_on).gsub('about', '')
-              -# f.input :related_id, task, :collection => relateds(task)
-              -# f.input :submit, task
+              = f.label :author, task unless task.new_record?
+              = f.select :category, task, :collection => @categories
+              = f.select :when, task, :collection => @whens
+              = f.select :effort, task, :collection => @efforts
+              = f.select :assigned, task, :collection => @developers
+              = f.check :started_on, task
+              = f.check :completed_on, task, :only => :when_complete
+              = f.select :related, task, :collection => relateds(task)
+              = f.submit task
 

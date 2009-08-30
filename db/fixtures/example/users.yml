@@ -1,5 +1,10 @@
-user:
-  name: Joe Blogs
-  email: joe@example.com
+developer:
+  name: Dev Guy
+  email: dev@example.com
   access_level: developer
+
+customer:
+  name: Doh Bringer
+  email: doh@example.com
+  access_level: customer
 

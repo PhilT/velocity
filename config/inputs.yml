@@ -1,59 +1,45 @@
 id:
-  type: text
   suffix: ':'
 
 name:
-  type: text_field
+  prefix: <strong>
+  suffix: "</strong> - "
   hint: "what's this about?"
 
 detail:
-  type: text_field
   hint: would you like to expand on that?
 
 author:
+  prefix: "by "
 
-category_id:
-  type: collection_select
-  hint: feature, bug?
+category:
+  prompt: feature, bug?
 
-when_id:
-  type: collection_select
+when:
   prefix: "needed "
-  hint: do this now? later?
-  show: lambda{|task| !task.completed?}
+  prompt: do this now? later?
 
-effort_id:
-  type: collection_select
+effort:
   hint: How much effort?
-  show: lambda{|task| !task.completed?}
+  suffix: " job"
 
-assigned_id:
-  type: collection_select
+assigned:
   prefix: "assigned to "
-  hint: who will do this?
-  show: lambda{|task| task.assigned_to}
+  prompt: who will do this?
 
 started_on:
-  type: check_box
   prefix: "started "
   suffix: " ago"
-  hint: started?
-  show: lambda{|task| task.started_on}
-  edit: lambda{|task| task.started_on.nil?}
+  label: started?
 
 completed_on:
-  type: check_box
-  prefix: "started "
+  prefix: "completed "
   suffix: " ago"
-  show: lambda{|task| task.started_on}
-  edit: lambda{|task| task.started_on.nil?}
 
-related_id:
-  type: collection_select
-  hint: is this related to another task?
+related:
+  prompt: is this related to another task?
   prefix: "related to "
 
-submit:
-  type: submit
+save:
   hint: Save
 
