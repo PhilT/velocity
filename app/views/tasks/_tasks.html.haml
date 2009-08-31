@@ -1,24 +1,25 @@
 - if tasks.any?
   %ul.tasks
-    %li.task.heading
+    %li.task.heading{:id => ('add_new_task' if tasks.first.new_record?)}
       %h3= heading
+      %span.notice
       - tasks.each do |task|
-        %li.task
+        %li.task{:class => "task_#{task.id || 'new'}"}
           - form_for task, :builder => CustomFormBuilder do |f|
             %ul.info
               %li
-                = f.check :completed_on, task, :show => :input, :label => false, :wrap => false
+                = f.check :completed, task, :show => :input, :label => false, :wrap => false
                 = f.label :id, task, :wrap => false unless task.new_record?
                 = f.text :name, task, :wrap => false
                 = f.text :detail, task, :wrap => false
             %ul.actions
-              = f.label :author, task unless task.new_record?
-              = f.select :category, task, :collection => @categories
-              = f.select :when, task, :collection => @whens
-              = f.select :effort, task, :collection => @efforts
-              = f.select :assigned, task, :collection => @developers
-              = f.check :started_on, task
-              = f.check :completed_on, task, :only => :when_complete
-              = f.select :related, task, :collection => relateds(task)
+              = f.label :author_id, task unless task.new_record?
+              = f.select :category_id, task, :collection => @categories
+              = f.select :when_id, task, :collection => @whens
+              = f.select :effort_id, task, :collection => @efforts
+              = f.select :assigned_id, task, :collection => @developers
+              = f.check :started, task, :value => task.started_on
+              = f.label :completed_on, task, :only => :when_complete
+              = f.select :related_id, task, :collection => relateds(task)
               = f.submit task
 

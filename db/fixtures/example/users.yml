@@ -4,7 +4,7 @@ developer:
   access_level: developer
 
 customer:
-  name: Doh Bringer
-  email: doh@example.com
+  name: Sales Dude
+  email: sales@example.com
   access_level: customer
 

@@ -1,3 +1,8 @@
+!border_color = #788
+!feature_color = #0c0
+!bug_color = #e00
+!change_color = #22e
+
 body
   :font 14px Arial, Sans
   :color #333
@@ -18,14 +23,37 @@ h1
     :font-size 14px
 
 h3
-  :margin-bottom 0
+  :margin 0
+  :float left
+
+span.notice
+  :color= !feature_color
+  :float right
+  :font-weight bold
 
 li
   :list-style-type none
 
+.blur
+  :color #777
+
+#add_new_task
+  :cursor pointer
+  h3:hover
+    :color= !change_color
+
+.name,
 .detail
   input
-    :width 500px
+    :background url(/images/field.png) repeat-x
+    :border= 1px solid !border_color + 20
+    :border-bottom-color white
+    :border-right-color white
+    :padding 2px
+
+.detail
+  input
+    :width 600px
 
 .id
   :font-size 11px
@@ -37,12 +65,12 @@ li
 
 .tasks
   :margin-bottom 20px
-  :border 1px solid #788
+  :border= 1px solid !border_color
   :border-bottom none
 
 .task
   :background url(/images/task.png) repeat-x #e3eded
-  :border-bottom 1px solid #788
+  :border-bottom= 1px solid !border_color
   :border-top 1px solid #fff
   :clear both
   :overflow auto
@@ -59,12 +87,14 @@ li
       :border-top #ccc
 
   .feature
-    :color #0c0
+    :color= !feature_color
+    :font-weight bold
   .bug
-    :color #e00
+    :color= !bug_color
     :font-weight bold
   .change
-    :color #33f
+    :color= !change_color
+    :font-weight bold
 
 .actions
   :clear both

@@ -42,7 +42,7 @@ class Task < ActiveRecord::Base
   end
 
   def completed=(value)
-     value ? touch(:completed_on) : self.completed_on = nil
+     value == true ? touch(:completed_on) : self.completed_on = nil
   end
 end
 

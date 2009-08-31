@@ -5,7 +5,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   @@inputs = YAML::load(File.open(RAILS_ROOT + '/config/inputs.yml'))
 
   def check(name, model, options = {})
-    defaults(name, model)
+    defaults(name, model, options)
     if (options[:show] == :input || @value.nil?) && !options[:only]
       wrap check_box(name, :id => @id) + add_label(options), name, options
     elsif !@value.blank?
@@ -14,12 +14,12 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def label(name, model, options = {})
-    defaults(name, model)
+    defaults(name, model, options)
     wrap decorate(@value), name, options
   end
 
   def select(name, model, options = {})
-    defaults(name, model)
+    defaults(name, model, options)
     if @value.blank? && !model.completed?
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
@@ -29,9 +29,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text(name, model, options = {})
-    defaults(name, model)
+    defaults(name, model, options)
     value = model.send(name)
-    content = value.blank? ? text_field(name, :id => @id) : decorate(value)
+    content = value.blank? ? text_field(name, :id => @id, :title => @defaults['hint']) : decorate(value)
     wrap content, name, options
   end
 
@@ -40,10 +40,10 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
 private
-  def defaults(name, model)
+  def defaults(name, model, options)
     @defaults = @@inputs[name.to_s]
     @model = model
-    @value = model.send(name)
+    @value = options[:value] || model.send(name.to_s.gsub(/_id$/, ''))
     @value = @value.name if @value.kind_of?(ActiveRecord::Base) unless @value.blank?
     @id = "#{name}_#{model.id || 'new'}"
   end

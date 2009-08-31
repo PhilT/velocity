@@ -13,5 +13,12 @@ class TasksController < ApplicationController
     @whens = Enum.find_by_name('When').enum_values
     @efforts = Enum.find_by_name('Effort').enum_values
   end
+
+  def create
+    @task = Task.create!(params[:task])
+    respond_to do|format|
+      format.js{render :layout => false}
+    end
+  end
 end
 

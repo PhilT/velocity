@@ -9,25 +9,25 @@ name:
 detail:
   hint: would you like to expand on that?
 
-author:
+author_id:
   prefix: "by "
 
-category:
+category_id:
   prompt: feature, bug?
 
-when:
+when_id:
   prefix: "needed "
   prompt: do this now? later?
 
-effort:
-  hint: How much effort?
+effort_id:
+  prompt: How much effort?
   suffix: " job"
 
-assigned:
+assigned_id:
   prefix: "assigned to "
   prompt: who will do this?
 
-started_on:
+started:
   prefix: "started "
   suffix: " ago"
   label: started?
@@ -36,7 +36,7 @@ completed_on:
   prefix: "completed "
   suffix: " ago"
 
-related:
+related_id:
   prompt: is this related to another task?
   prefix: "related to "
 
