@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(:version => 20090823173947) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
+    t.string   "crypted_password"
+    t.string   "persistence_token"
     t.integer  "access_level_id"
     t.datetime "created_at"
     t.datetime "updated_at"
