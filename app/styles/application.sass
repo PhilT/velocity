@@ -2,10 +2,14 @@
 !feature_color = #0c0
 !bug_color = #e00
 !change_color = #22e
+!text_color = #333
+!link_color = !text_color + #005
+!task_color = #e3eded
+!hover_color = !task_color - 15
 
 body
   :font 14px Arial, Sans
-  :color #333
+  :color= !text_color
 
 body, ul, li
   :margin 0
@@ -26,10 +30,14 @@ h3
   :margin 0
   :float left
 
-span.notice
-  :color= !feature_color
+span.message
   :float right
   :font-weight bold
+
+span.notice
+  :color= !feature_color
+span.error
+  :color= !bug_color
 
 li
   :list-style-type none
@@ -69,35 +77,54 @@ li
   :border-bottom none
 
 .task
-  :background url(/images/task.png) repeat-x #e3eded
+  :background= url(/images/task.png) "repeat-x" !task_color
   :border-bottom= 1px solid !border_color
   :border-top 1px solid #fff
   :clear both
   :overflow auto
-  :padding 5px
+  :padding 1px
   &.heading
     :background url(/images/heading.png) repeat-x #e5e5e5
     :padding-left 10px
 
-  &.completed
+  .actions a
+    :color= !link_color
+    :font-weight bold
+
+  .feature a
+    :color= !feature_color
+  .bug a
+    :color= !bug_color
+  .change a
+    :color= !change_color
+
+  a
+    :color= !text_color
+    :text-decoration none
+    &:hover
+      :background= !hover_color
+      :border-style solid
+      :border-width 1px 0
+      :border-top-color= !hover_color - 30
+      :border-bottom-color= !hover_color + 30
+
+.completed_tasks
+  h3
+    :color= !text_color
+  .task
     :color #777
     :background #ddd
-    .heading
-      :background #eee
-      :border-top #ccc
+  a,
+  .actions a,
+  .feature a,
+  .bug a,
+  .change a
+    :color #777
 
-  .feature
-    :color= !feature_color
-    :font-weight bold
-  .bug
-    :color= !bug_color
-    :font-weight bold
-  .change
-    :color= !change_color
-    :font-weight bold
 
 .actions
   :clear both
+  :vertical-align center
   li
     :float left
     :padding-top 5px
@@ -111,4 +138,10 @@ li
       :width 230px
   select
     :font-size 11px
+  .submit
+    :padding-top 3px
+    input
+      :border= 1px solid !hover_color + 30
+      :border-bottom-color= !hover_color - 30
+      :border-right-color= !hover_color - 30
 

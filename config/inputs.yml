@@ -22,10 +22,12 @@ when_id:
 effort_id:
   prompt: How much effort?
   suffix: " job"
+  nil: unknown
 
 assigned_id:
   prefix: "assigned to "
   prompt: who will do this?
+  nil: nobody
 
 started:
   prefix: "started "
@@ -37,7 +39,8 @@ completed_on:
   suffix: " ago"
 
 related_id:
-  prompt: is this related to another task?
+  prompt: relates to?
+  nil: no other
   prefix: "related to "
 
 save:

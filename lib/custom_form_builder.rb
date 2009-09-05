@@ -2,11 +2,13 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::FormTagHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::UrlHelper
+
   @@inputs = YAML::load(File.open(RAILS_ROOT + '/config/inputs.yml'))
 
   def check(name, model, options = {})
     defaults(name, model, options)
-    if (options[:show] == :input || @value.nil?) && !options[:only]
+    if (options[:show] == :input || @value == false) && options[:only].nil?
       wrap check_box(name, :id => @id) + add_label(options), name, options
     elsif !@value.blank?
       wrap decorate(time_ago(@value)), name, options
@@ -15,15 +17,17 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def label(name, model, options = {})
     defaults(name, model, options)
-    wrap decorate(@value), name, options
+    wrap decorate(@value, :link => false), name, options unless @value.blank?
   end
 
   def select(name, model, options = {})
     defaults(name, model, options)
-    if @value.blank? && !model.completed?
+    if @model.new_record?
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
       content = decorate(@value)
+    else
+      content = decorate(@defaults['nil'])
     end
     wrap content, "#{name} #{@value}", options
   end
@@ -48,7 +52,8 @@ private
     @id = "#{name}_#{model.id || 'new'}"
   end
 
-  def decorate(input)
+  def decorate(input, options = {})
+    input = link_to "#{input}", "/tasks/#{@id}/edit" unless @model.new_record? || options[:link] == false
     "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
   end
 
