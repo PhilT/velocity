@@ -40,7 +40,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(model, options = {})
-    wrap super(model.new_record? ? 'create' : 'save'), "submit", options unless model.completed?
+    wrap super('create'), "submit", options if model.new_record?
   end
 
 private
