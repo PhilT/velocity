@@ -9,6 +9,7 @@ class Task < ActiveRecord::Base
   belongs_to :when, :class_name => 'EnumValue', :foreign_key => :when_id
   belongs_to :effort, :class_name => 'EnumValue', :foreign_key => :effort_id
 
+  validates_presence_of :name
   validates_presence_of :author
   validates_presence_of :category
   validates_presence_of :when
@@ -30,7 +31,7 @@ class Task < ActiveRecord::Base
   end
 
   def started=(value)
-     value ? touch(:started_on) : self.started_on = nil
+     value == true ? touch(:started_on) : self.started_on = nil
   end
 
   def completed?

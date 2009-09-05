@@ -9,7 +9,7 @@ $(function(){
 
   function setupNewTaskForm(){
     $('.task_new').hide();
-    $('#add_new_task span.notice').hide();
+    $('#add_new_task span.message').hide();
     $('#add_new_task').click(function(){
       $('.task_new').slideToggle();
     });
