@@ -19,7 +19,7 @@
               = f.select :effort_id, task, :collection => @efforts
               = f.select :assigned_id, task, :collection => @developers
               = f.check :started, task, :value => task.started_on, :edit => false
-              = f.label :completed_on, task, :only => :when_complete, :value => task.completed_on
+              = f.check :completed_on, task, :only => :when_complete, :value => task.completed_on
               = f.select :related_id, task, :collection => relateds(task)
               = f.submit task
 
