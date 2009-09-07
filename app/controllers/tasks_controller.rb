@@ -20,5 +20,13 @@ class TasksController < ApplicationController
       format.js{render :layout => false}
     end
   end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.started = params[:started]
+    form = CustomFormBuilder.new('task', @task, template)
+    c = form.check :started, @task, :value => @task.started_on, :edit => false
+    render :text => "$('#edit_task_#{@task} .started').replaceHTML(#{c})"
+  end
 end
 
