@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(params[:task])
+    @task = Task.create(params[:task].merge(:author => current_user))
     respond_to do|format|
       format.js{render :layout => false}
     end

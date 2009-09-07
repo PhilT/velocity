@@ -1,18 +1,18 @@
 namespace :db do
-  desc "Drop, create, migrate then seed development and test databases"
+  desc "Drop, create, migrate then seed"
   task :seed => :environment do
-    seed_for('development')
-    seed_for('test')
-  end
-
-  def self.seed_for(env)
-    ENV['RAILS_ENV'] = env
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke
-    Rake::Task[env == 'test' ? 'db:test:prepare' : 'db:migrate'].invoke
+    Rake::Task[RAILS_ENV == 'test' ? 'db:test:prepare' : 'db:migrate'].invoke
     require 'active_record/fixtures'
     populate('db/fixtures/static')
     populate('db/fixtures/example') if ENV['EXAMPLE']
+  end
+
+  namespace :seed do
+    task :user => :environment do
+      User.create!(:name => 'Dev Guy', :email => 'dev@example.com', :password => 'password', :password_confirmation => 'password', :access_level => EnumValue.find_by_name('developer'))
+    end
   end
 
   def populate(sub_dir)

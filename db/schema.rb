@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20090823173947) do
     t.string   "name"
     t.string   "email"
     t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token"
     t.integer  "access_level_id"
     t.datetime "created_at"
