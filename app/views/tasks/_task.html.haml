@@ -5,7 +5,6 @@
         = f.check :completed, task, :show => :input, :label => false, :wrap => false
         = f.label :id, task, :wrap => false unless task.new_record?
         = f.text :name, task, :wrap => false
-        = f.text :detail, task, :wrap => false
     %ul.actions
       = f.label :author_id, task unless task.new_record?
       = f.select :category_id, task, :collection => @categories

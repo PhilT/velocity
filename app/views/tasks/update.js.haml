@@ -1,3 +1,10 @@
 == $('.task_#{@task.id}').replaceWith('')
-== $('.tasks_currently_being_worked_on').append('#{escape_javascript(render @task)}')
+- if @task.completed?
+  - section = 'completed_tasks'
+- elsif @task.started?
+  - section = '.tasks_currently_being_worked_on'
+- else
+  - do_when = {:now => 'tasks_that_need_doing_now', :soon => 'tasks_that_need_doing_next', :later => 'tasks_to_do_later'}
+  - section = do_when[@task.when.name]
+== $('#{section}').append('#{escape_javascript(render @task)}')
 

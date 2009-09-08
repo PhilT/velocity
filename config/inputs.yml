@@ -2,8 +2,6 @@ id:
   suffix: ':'
 
 name:
-  prefix: <strong>
-  suffix: "</strong> - "
   hint: "what's this about?"
 
 detail:

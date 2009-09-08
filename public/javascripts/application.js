@@ -160,7 +160,7 @@ $(function(){
   }
 
   function attachToStarted(){
-    $('.started input').change(function(){
+    $('input').change(function(){
       form = $(this).closest('form');
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;
