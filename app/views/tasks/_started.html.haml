@@ -1,0 +1,3 @@
+- fields_for :task, @task, :builder => CustomFormBuilder do |f|
+  = f.check :started, @task, :value => @task.started_on, :edit => false
+

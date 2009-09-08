@@ -162,9 +162,8 @@ $(function(){
   function attachToStarted(){
     $('.started input').change(function(){
       form = $(this).closest('form');
-      h = form.serialize();
-      h['control'] = 'checked';
-      $.put(form.attr('action'), h, null, 'script');
+      $.put(form.attr('action'), form.serialize(), null, 'script');
+      return false;
     });
   }
 

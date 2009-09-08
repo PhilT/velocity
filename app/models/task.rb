@@ -31,7 +31,8 @@ class Task < ActiveRecord::Base
   end
 
   def started=(value)
-     value == true ? touch(:started_on) : self.started_on = nil
+     [true, 'true', '1'].include?(value) ? touch(:started_on) : self.started_on = nil
+     save!
   end
 
   def completed?
