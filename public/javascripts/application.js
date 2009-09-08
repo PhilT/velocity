@@ -150,7 +150,7 @@ $(function(){
   function setupNewTaskForm(){
     $('.task_new').hide();
     $('#add_new_task span.message').hide();
-    $('#add_new_task').click(function(){
+    $('#add_new_task').live('click', function(){
       $('.task_new').slideToggle();
     });
     $('#new_task').submit(function(){
@@ -160,7 +160,7 @@ $(function(){
   }
 
   function attachToStarted(){
-    $('input').change(function(){
+    $('input:checkbox').live('change', function(){
       form = $(this).closest('form');
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;

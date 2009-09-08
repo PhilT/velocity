@@ -4,7 +4,10 @@
 !change_color = #22e
 !text_color = #333
 !link_color = !text_color + #005
-!task_color = #e3eded
+!task_color = #edf5e1
+!task_border = #c8e59f
+!completed_task_color = #ddd
+!completed_task_border = #ddd - 30
 !hover_color = !task_color - 15
 
 body
@@ -21,8 +24,8 @@ body
 h1
   :background url(/images/logo.png) no-repeat
   :float left
+  :margin-top 0
   :line-height 30px
-  :margin-left 20px
   :padding-left 50px
   sup
     :font-size 14px
@@ -61,7 +64,6 @@ h2
 .name,
 .detail
   input
-    :background url(/images/field.png) repeat-x
     :border= 1px solid !border_color + 20
     :border-bottom-color white
     :border-right-color white
@@ -80,18 +82,15 @@ h2
 
 .tasks
   :margin-bottom 20px
-  :border= 1px solid !border_color
-  :border-bottom none
 
 .task
-  :background= url(/images/task.png) "repeat-x" !task_color
-  :border-bottom= 1px solid !border_color
-  :border-top 1px solid #fff
+  :background= !task_color
+  :border-top= 2px solid !task_border
   :clear both
   :overflow auto
   :padding 2px
   &.heading
-    :background url(/images/heading.png) repeat-x #e5e5e5
+    :background= !task_border
     :padding-left 10px
 
   .actions a
@@ -120,7 +119,11 @@ h2
     :color= !text_color
   .task
     :color #777
-    :background #ddd
+    :background= !completed_task_color
+    :border-top= 2px solid !completed_task_border
+    &.heading
+      :background= !completed_task_border
+      :padding-left 10px
   a,
   .actions a,
   .feature a,

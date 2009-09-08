@@ -31,8 +31,7 @@ class Task < ActiveRecord::Base
   end
 
   def started=(value)
-     [true, 'true', '1'].include?(value) ? touch(:started_on) : self.started_on = nil
-     save!
+     Boolean.parse(value) ? touch(:started_on) : self.started_on = nil
   end
 
   def completed?
@@ -44,7 +43,9 @@ class Task < ActiveRecord::Base
   end
 
   def completed=(value)
-     value == true ? touch(:completed_on) : self.completed_on = nil
+     Boolean.parse(value) ? touch(:completed_on) : self.completed_on = nil
   end
+
+
 end
 

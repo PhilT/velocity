@@ -1,6 +1,7 @@
 - if @task.valid?
   == $('.task_new').slideUp()
   - message = "<span class='notice'>Task \"#{@task.name}\" created</span>"
+  == $('#new_task .name input').val('')
 - else
   - message = "<span class='error'>Task must have a title, category and when<span>"
 
