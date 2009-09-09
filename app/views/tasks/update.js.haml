@@ -1,9 +1,9 @@
-== $('.task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
+== $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
 - if @task.completed?
-  == #{render_hidden_task}.insertAfter($('.completed_tasks .heading')).slideDown()
+  == #{render_hidden_task}.insertAfter($('#completed .heading')).slideDown()
 - else
   - if @task.started?
-    == #{render_hidden_task}.appendTo($('.tasks_currently_being_worked_on')).slideDown()
+    == #{render_hidden_task}.appendTo($('#current')).slideDown()
   - else
-    == #{render_hidden_task}.appendTo($('#{do_when(@task.when.name)}')).slideDown()
+    == #{render_hidden_task}.appendTo($('##{@task.when.name}')).slideDown()
 

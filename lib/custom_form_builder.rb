@@ -27,7 +27,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     elsif !@value.blank?
       content = decorate(@value)
   else
-      content = decorate(@defaults['nil'])
+      content = decorate(@defaults['nil'], :class => 'not_set')
     end
     wrap content, "#{name} #{@value}", options
   end
@@ -35,7 +35,13 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   def text(name, options = {})
     defaults(name, options)
     value = @object.send(name)
-    content = value.blank? ? text_field(name, :id => @id, :title => @defaults['hint']) : decorate(value)
+    if value.blank?
+      content = text_field(name, :id => @id, :title => @defaults['hint'])
+    else
+      value = value.gsub(/([.,"\(])/, '\1</strong>')
+      value += '</strong>' unless value.include?('</strong>')
+      content = decorate("<strong>#{value}")
+    end
     wrap content, name, options
   end
 
@@ -52,7 +58,7 @@ private
   end
 
   def decorate(input, options = {})
-    input = link_to "#{input}", "/tasks/#{@id}/edit" unless @object.new_record? || options[:link] == false
+    input = link_to "#{input}", "/tasks/#{@id}/edit", :class => options[:class] unless @object.new_record? || options[:link] == false
     "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
   end
 

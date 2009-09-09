@@ -20,7 +20,7 @@ class Task < ActiveRecord::Base
   named_scope :later, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
 
   named_scope :started, :conditions => "started_on IS NOT NULL AND completed_on IS NULL"
-  named_scope :completed, :conditions => "completed_on IS NOT NULL"
+  named_scope :completed, :conditions => ["completed_on IS NOT NULL AND ? <= completed_on", Date.today - 14.days], :order => 'completed_on DESC'
 
   def started?
     !self.started_on.blank?

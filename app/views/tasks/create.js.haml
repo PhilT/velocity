@@ -1,10 +1,10 @@
 - if @task.valid?
-  == $('.task_new').slideUp()
+  == $('#task_new').slideUp()
   - message = "<span class='notice'>Task created</span>"
   == $('#new_task .name input').val('')
 - else
   - message = "<span class='error'>Task must have a title, category and when<span>"
 
 == $('#add_new_task span.message').html('#{escape_javascript(message)}').effect("pulsate", {times: 2}).delay(4000).fadeOut()
-== #{render_hidden_task}.appendTo($('#{do_when(@task.when.name)}')).slideDown()
+== #{render_hidden_task}.appendTo($('##{@task.when.name}')).slideDown()
 

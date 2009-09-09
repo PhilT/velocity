@@ -4,13 +4,18 @@
 !bug_color = #e00
 !change_color = #22e
 
+!feature_background = #edf5e1
+!feature_border = #c8e59f
+!bug_background = #efcfcf
+!bug_border = #e5686f
+!change_background = #ede1f5
+!change_border = #a89fe5
+
+
 !text_color = #333
 !link_color = !text_color + #005
-!task_color = #edf5e1
-!task_border = #c8e59f
 !completed_task_color = #ddd
 !completed_task_border = #ddd - 30
-!hover_color = !task_color - 15
 
 body
   :font 14px Arial, Sans
@@ -74,9 +79,6 @@ h2
     :padding 2px
     :width 700px
 
-.id
-  :font-size 11px
-
 .info
   li
     :float left
@@ -85,14 +87,17 @@ h2
   :margin-bottom 20px
 
 .task
-  :background= !task_color
-  :border-top= 2px solid !task_border
+  :background= url(/images/edit.png) "no-repeat" 4px 22px !feature_background
+  :border-top= 2px solid !feature_border
   :clear both
   :overflow auto
   :padding 2px
   &.heading
-    :background= !task_border
+    :background= !feature_border
     :padding-left 10px
+
+  .id
+    :padding-left 5px
 
   .actions a
     :color= !link_color
@@ -108,14 +113,19 @@ h2
   a
     :color= !text_color
     :text-decoration none
-    &:hover
-      :background= !hover_color
-      :border-style solid
-      :border-width 1px 0
-      :border-top-color= !hover_color - 30
-      :border-bottom-color= !hover_color + 30
 
-.completed_tasks
+.task_new
+  :background= !feature_background
+
+.bug
+  :background-color= !bug_background
+  :border-color= !bug_border
+
+.change
+  :background-color= !change_background
+  :border-color= !change_border
+
+#completed
   h3
     :color= !text_color
   .task
@@ -139,7 +149,7 @@ h2
     :float left
     :padding-top 5px
     :padding-left 20px
-    :font-size 12px
+    :font-size 11px
     .assigned
       select
         :width 120px
@@ -150,8 +160,6 @@ h2
     :font-size 11px
   .submit
     :padding-top 3px
-    input
-      :border= 1px solid !hover_color + 30
-      :border-bottom-color= !hover_color - 30
-      :border-right-color= !hover_color - 30
+  a.not_set
+    :color #666
 

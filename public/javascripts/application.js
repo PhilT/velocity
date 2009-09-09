@@ -148,10 +148,10 @@ $(function(){
   }
 
   function setupNewTaskForm(){
-    $('.task_new').hide();
+    $('#task_new').hide();
     $('#add_new_task span.message').hide();
     $('#add_new_task').live('click', function(){
-      $('.task_new').slideToggle();
+      $('#task_new').slideToggle();
     });
     $('#new_task').submit(function(){
       $.post($(this).attr('action'), $(this).serialize(), null, 'script');

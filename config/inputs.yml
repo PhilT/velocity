@@ -14,23 +14,20 @@ category_id:
   prompt: type?
 
 when_id:
-  prefix: "needed "
+  prefix: "for "
   prompt: when?
 
 effort_id:
-  prompt: How much effort?
-  suffix: " job"
-  nil: unknown
+  prompt: effort?
+  nil: (effort)
 
 assigned_id:
-  prefix: "assigned to "
-  prompt: who will do this?
-  nil: nobody
+  prompt: unassign
+  nil: (unassigned)
 
 started:
   prefix: "started "
   suffix: " ago"
-  label: started?
 
 completed_on:
   prefix: "completed "
@@ -38,8 +35,7 @@ completed_on:
 
 related_id:
   prompt: relates to?
-  nil: no other
-  prefix: "related to "
+  nil: (not related)
 
 save:
   hint: Save

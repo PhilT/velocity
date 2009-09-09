@@ -1,4 +1,4 @@
-%ul.tasks{:class => heading.titleize.gsub(' ', '').underscore}
+%ul.tasks{:id => type}
   %li.task.heading{:id => ('add_new_task' if tasks.any? && tasks.first.new_record?)}
     %h3= heading
     %span.message
