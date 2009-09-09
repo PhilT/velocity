@@ -11,6 +11,15 @@ class TasksController < ApplicationController
     @completed_tasks = Task.completed
   end
 
+  def edit
+    @field, id = params[:id].split(/([0-9]+)/)
+    @field.gsub!(/_$/, '')
+    @task = Task.find(id)
+    respond_to do|format|
+      format.js{render :layout => false}
+    end
+  end
+
   def create
     @task = Task.create(params[:task].merge(:author => current_user))
     respond_to do|format|

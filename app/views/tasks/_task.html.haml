@@ -1,5 +1,5 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => task.category.name}
-  - form_for task, :builder => CustomFormBuilder do |f|
+  - form_for task, :builder => CustomFormBuilder, :edit => @field do |f|
     %ul.info
       %li
         - if !task.started?

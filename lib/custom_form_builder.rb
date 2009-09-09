@@ -22,11 +22,12 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def select(name, options = {})
     defaults(name, options)
-    if @object.new_record?
+    puts "FIELD IS: #{name}, EDIT FIELD: #{@field}"
+    if @object.new_record? || (!@options[:edit].blank? && @options[:edit] == name)
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
       content = decorate(@value)
-  else
+    else
       content = decorate(@defaults['nil'], :class => 'not_set')
     end
     wrap content, "#{name} #{@value}", options
@@ -58,7 +59,7 @@ private
   end
 
   def decorate(input, options = {})
-    input = link_to "#{input}", "/tasks/#{@id}/edit", :class => options[:class] unless @object.new_record? || options[:link] == false
+    input = link_to "#{input}", "/tasks/#{@id}/edit", :class => [options[:class], :get].join(' ') unless @object.new_record? || options[:link] == false
     "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
   end
 
