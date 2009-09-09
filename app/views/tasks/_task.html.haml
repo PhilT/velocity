@@ -1,4 +1,4 @@
-%li.task{:id => "task_#{task.id || 'new'}", :class => task.category.name}
+%li.task{:id => "task_#{task.id || 'new'}", :class => task.category.try(:name)}
   - form_for task, :builder => CustomFormBuilder, :edit => @field do |f|
     %ul.info
       %li

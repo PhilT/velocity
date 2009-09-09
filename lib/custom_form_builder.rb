@@ -22,8 +22,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def select(name, options = {})
     defaults(name, options)
-    puts "FIELD IS: #{name}, EDIT FIELD: #{@field}"
-    if @object.new_record? || (!@options[:edit].blank? && @options[:edit] == name)
+    if @object.new_record? || currently_editing?(name)
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
       content = decorate(@value)
@@ -36,7 +35,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   def text(name, options = {})
     defaults(name, options)
     value = @object.send(name)
-    if value.blank?
+    if value.blank? || currently_editing?(name)
       content = text_field(name, :id => @id, :title => @defaults['hint'])
     else
       value = value.gsub(/([.,"\(])/, '\1</strong>')
@@ -56,6 +55,11 @@ private
     @value = options[:value] || @object.send(name.to_s.gsub(/_id$/, ''))
     @value = @value.name if @value.kind_of?(ActiveRecord::Base) unless @value.blank?
     @id = "#{name}_#{@object.id || 'new'}"
+  end
+
+  def currently_editing?(name)
+    selected_field = @options[:edit].to_sym if @options[:edit]
+    (!selected_field.blank? && selected_field == name)
   end
 
   def decorate(input, options = {})
