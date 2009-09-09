@@ -1,13 +1,9 @@
 == $('.task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
-== task = $('#{escape_javascript(render @task)}').hide()
 - if @task.completed?
-  - section = '.completed_tasks .heading'
-  == task.insertAfter($('#{section}')).slideDown()
+  == #{render_hidden_task}.insertAfter($('.completed_tasks .heading')).slideDown()
 - else
   - if @task.started?
-    - section = '.tasks_currently_being_worked_on'
+    == #{render_hidden_task}.appendTo($('.tasks_currently_being_worked_on')).slideDown()
   - else
-    - do_when = {:now => '.tasks_that_need_doing_now', :soon => '.tasks_that_need_doing_next', :later => '.tasks_to_do_later'}
-    - section = do_when[@task.when.name]
-  == task.appendTo($('#{section}')).slideDown()
+    == #{render_hidden_task}.appendTo($('#{do_when(@task.when.name)}')).slideDown()
 

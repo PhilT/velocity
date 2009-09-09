@@ -6,8 +6,8 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   @@inputs = YAML::load(File.open(RAILS_ROOT + '/config/inputs.yml'))
 
-  def check(name, model, options = {})
-    defaults(name, model, options)
+  def check(name, options = {})
+    defaults(name, options)
     if (options[:show] == :input || @value == false) && options[:only].nil?
       wrap check_box(name, :id => @id) + add_label(options), name, options
     elsif !@value.blank?
@@ -15,45 +15,44 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def label(name, model, options = {})
-    defaults(name, model, options)
+  def label(name, options = {})
+    defaults(name, options)
     wrap decorate(@value, :link => false), name, options unless @value.blank?
   end
 
-  def select(name, model, options = {})
-    defaults(name, model, options)
-    if @model.new_record?
+  def select(name, options = {})
+    defaults(name, options)
+    if @object.new_record?
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
       content = decorate(@value)
-    else
+  else
       content = decorate(@defaults['nil'])
     end
     wrap content, "#{name} #{@value}", options
   end
 
-  def text(name, model, options = {})
-    defaults(name, model, options)
-    value = model.send(name)
+  def text(name, options = {})
+    defaults(name, options)
+    value = @object.send(name)
     content = value.blank? ? text_field(name, :id => @id, :title => @defaults['hint']) : decorate(value)
     wrap content, name, options
   end
 
-  def submit(model, options = {})
-    wrap super('create'), "submit", options if model.new_record?
+  def submit(options = {})
+    wrap super('create'), "submit", options if @object.new_record?
   end
 
 private
-  def defaults(name, model, options)
+  def defaults(name, options)
     @defaults = @@inputs[name.to_s]
-    @model = model
-    @value = options[:value] || model.send(name.to_s.gsub(/_id$/, ''))
+    @value = options[:value] || @object.send(name.to_s.gsub(/_id$/, ''))
     @value = @value.name if @value.kind_of?(ActiveRecord::Base) unless @value.blank?
-    @id = "#{name}_#{model.id || 'new'}"
+    @id = "#{name}_#{@object.id || 'new'}"
   end
 
   def decorate(input, options = {})
-    input = link_to "#{input}", "/tasks/#{@id}/edit" unless @model.new_record? || options[:link] == false
+    input = link_to "#{input}", "/tasks/#{@id}/edit" unless @object.new_record? || options[:link] == false
     "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
   end
 

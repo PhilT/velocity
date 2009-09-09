@@ -11,11 +11,11 @@ author_id:
   prefix: "by "
 
 category_id:
-  prompt: feature, bug?
+  prompt: type?
 
 when_id:
   prefix: "needed "
-  prompt: do this now? later?
+  prompt: when?
 
 effort_id:
   prompt: How much effort?

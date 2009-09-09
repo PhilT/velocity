@@ -20,7 +20,6 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    logger.info params.inspect
     @task.update_attributes(params[:task])
     respond_to do|format|
       format.js{render :layout => false}

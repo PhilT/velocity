@@ -1,7 +1,9 @@
 !border_color = #788
+
 !feature_color = #0c0
 !bug_color = #e00
 !change_color = #22e
+
 !text_color = #333
 !link_color = !text_color + #005
 !task_color = #edf5e1
@@ -38,11 +40,14 @@ h3
   :float right
   :margin-right 50px
 span.message
+  :background #ff8
+  :display none
   :float right
   :font-weight bold
+  :padding 2px 50px
 
 span.notice
-  :color= !feature_color
+  :color= !feature_color - 50
 span.error
   :color= !bug_color
 
@@ -61,17 +66,13 @@ h2
   h3:hover
     :color= !change_color
 
-.name,
-.detail
+.name
   input
     :border= 1px solid !border_color + 20
     :border-bottom-color white
     :border-right-color white
     :padding 2px
-
-.detail
-  input
-    :width 600px
+    :width 700px
 
 .id
   :font-size 11px

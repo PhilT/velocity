@@ -3,5 +3,5 @@
     %h3= heading
     %span.message
     - tasks.each do |task|
-      = render task
+      = render :partial => task.new_record? ? 'new_task' : 'task', :object => task
 
