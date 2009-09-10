@@ -16,6 +16,6 @@
       = f.select :assigned_id, :collection => @developers
       = f.check :started, :value => task.started_on, :edit => false if task.started?
       = f.check :completed_on, :only => :when_complete, :value => task.completed_on
-      = f.select :related_id, :collection => relateds(task)
+      = f.select :related_id, :collection => relateds(task), :include_id => true
       = f.submit
 

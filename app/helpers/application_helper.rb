@@ -12,6 +12,7 @@ module ApplicationHelper
 
   def relateds(task)
     @active_tasks.reject{|t| t == task}
+    [Task.new(:name => '(not related)')] + @active_tasks
   end
 
 end

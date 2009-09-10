@@ -3,21 +3,22 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::TextHelper
 
   @@inputs = YAML::load(File.open(RAILS_ROOT + '/config/inputs.yml'))
 
   def check(name, options = {})
     defaults(name, options)
     if (options[:show] == :input || @value == false) && options[:only].nil?
-      wrap check_box(name, :id => @id) + add_label(options), name, options
+      wrap check_box(name, :id => @id) + add_label(options), name
     elsif !@value.blank?
-      wrap decorate(time_ago(@value)), name, options
+      wrap decorate(time_ago(@value)), name
     end
   end
 
   def label(name, options = {})
     defaults(name, options)
-    wrap decorate(@value, :link => false), name, options unless @value.blank?
+    wrap decorate(@value, :link => false), name unless @value.blank?
   end
 
   def select(name, options = {})
@@ -25,11 +26,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     if @object.new_record? || currently_editing?(name)
       content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
     elsif !@value.blank?
-      content = decorate(@value)
+      content = decorate(include_id(options) + truncate(@value, :length => 30))
     else
       content = decorate(@defaults['nil'], :class => 'not_set')
     end
-    wrap content, "#{name} #{@value}", options
+    wrap content, "#{name} #{@value unless @value.nil? || @value.include?(' ')}"
   end
 
   def text(name, options = {})
@@ -42,11 +43,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
       value += '</strong>' unless value.include?('</strong>')
       content = decorate("<strong>#{value}")
     end
-    wrap content, name, options
+    wrap content, name
   end
 
   def submit(options = {})
-    wrap super('create'), "submit", options if @object.new_record?
+    wrap super('create'), "submit" if @object.new_record?
   end
 
 private
@@ -55,6 +56,10 @@ private
     @value = options[:value] || @object.send(name.to_s.gsub(/_id$/, ''))
     @value = @value.name if @value.kind_of?(ActiveRecord::Base) unless @value.blank?
     @id = "#{name}_#{@object.id || 'new'}"
+  end
+
+  def include_id(options)
+    options[:include_id] ? "#{@object.id}:" : ""
   end
 
   def currently_editing?(name)
@@ -71,7 +76,7 @@ private
     options[:label] == false ? "" : label_tag(@id, @defaults['label'])
   end
 
-  def wrap(content, klass, options)
+  def wrap(content, klass)
     content_tag(:li, content, :class => klass)
   end
 
