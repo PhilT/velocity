@@ -9,6 +9,10 @@ format.js {render :layout => false}
 end
 */
 
+/*
+Augmented with live to handle DOM changes
+*/
+
 jQuery.ajaxSetup({
     beforeSend: function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")},
     dataType: 'script'
@@ -44,7 +48,7 @@ Use the class ajaxForm in your form declaration
 */
 jQuery.fn.submitWithAjax = function() {
   this.unbind('submit', false);
-  this.submit(function() {
+  this.live('submit', function() {
     $.post(this.action, $(this).serialize(), null, "script");
     return false;
   })
@@ -59,7 +63,7 @@ Use the class get in your link declaration
 */
 jQuery.fn.getWithAjax = function() {
   this.unbind('click', false);
-  this.click(function() {
+  this.live('click', function() {
     $.get($(this).attr("href"), $(this).serialize(), null, "script");
     return false;
   })
@@ -73,7 +77,7 @@ Use the class post in your link declaration
 */
 jQuery.fn.postWithAjax = function() {
   this.unbind('click', false);
-  this.click(function() {
+  this.live('click', function() {
     $.post($(this).attr("href"), $(this).serialize(), null, "script");
     return false;
   })
@@ -87,7 +91,7 @@ Use the class put in your link declaration
 */
 jQuery.fn.putWithAjax = function() {
   this.unbind('click', false);
-  this.click(function() {
+  this.live('click', function() {
     $.put($(this).attr("href"), $(this).serialize(), null, "script");
     return false;
   })
@@ -102,7 +106,7 @@ Use the class delete in your link declaration
 jQuery.fn.deleteWithAjax = function() {
   this.removeAttr('onclick');
   this.unbind('click', false);
-  this.click(function() {
+  this.live('click', function() {
     $.delete_($(this).attr("href"), $(this).serialize(), null, "script");
     return false;
   })
@@ -160,7 +164,7 @@ $(function(){
   }
 
   function attachToStarted(){
-    $('input:checkbox').live('change', function(){
+    $('input:checkbox, select').live('change', function(){
       form = $(this).closest('form');
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;

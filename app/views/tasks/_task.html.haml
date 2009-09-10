@@ -1,5 +1,5 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => task.category.try(:name)}
-  - form_for task, :builder => CustomFormBuilder, :edit => @field do |f|
+  - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.info
       %li
         - if !task.started?

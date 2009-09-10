@@ -72,7 +72,7 @@ private
   end
 
   def wrap(content, klass, options)
-    content_tag(options[:wrap] == false ? :span : :li, content, :class => klass)
+    content_tag(:li, content, :class => klass)
   end
 
   def time_ago(time)
