@@ -1,4 +1,4 @@
-= render :partial => 'tasks', :object => @new_tasks, :locals => {:heading => 'Add a new task'}, :type => 'new_task'
+= render :partial => 'tasks', :object => @new_tasks, :locals => {:heading => 'Add a new task', :type => 'new_task'}
 = render :partial => 'tasks', :object => @started_tasks, :locals => {:heading => 'Tasks currently being worked on', :type => 'current'}
 = render :partial => 'tasks', :object => @now_tasks, :locals => {:heading => 'Tasks that need doing now', :type => 'now'}
 = render :partial => 'tasks', :object => @soon_tasks, :locals => {:heading => 'Tasks that need doing next', :type => 'soon'}

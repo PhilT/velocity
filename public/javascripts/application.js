@@ -152,14 +152,10 @@ $(function(){
   }
 
   function setupNewTaskForm(){
-    $('#task_new').hide();
-    $('#add_new_task span.message').hide();
-    $('#add_new_task').live('click', function(){
-      $('#task_new').slideToggle();
-    });
-    $('#new_task').submit(function(){
-      $.post($(this).attr('action'), $(this).serialize(), null, 'script');
-      return false;
+    $('.task_new').hide();
+    $('#new_task span.message').hide();
+    $('#new_task .heading').live('click', function(){
+      $('.task_new').slideToggle();
     });
   }
 

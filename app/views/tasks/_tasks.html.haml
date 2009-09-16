@@ -1,6 +1,6 @@
 %ul.tasks{:id => type}
   %li.task.heading
-    %h3= heading +" (#{tasks.count})"
+    %h3= heading +" (#{tasks.size})"
     %span.message
     - tasks.each do |task|
       = render :partial => task.new_record? ? 'new_task' : 'task', :object => task, :locals => {:field => nil}

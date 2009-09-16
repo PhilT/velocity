@@ -30,6 +30,7 @@ config.action_mailer.delivery_method = :test
 config.gem "ZenTest", :lib => "zentest"
 config.gem "rspec", :lib => false
 config.gem "rspec-rails", :lib => false
-config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
+config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 config.gem "webrat"
 config.gem "cucumber"
+
