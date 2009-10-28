@@ -4,8 +4,7 @@ Status: Currently under development (in other words not working yet!)
 
 Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers to easily view and add tasks.
 
-Default database is SQLite3.
+Default database is SQLite3. db/development.sqlite contains the todo's for bustle
 
-rake db:seed - populate the database with static data needed by Bustle (drops dev and test databases and migrates)
-rake db:seed EXAMPLE=true - same as above but adds a few example tasks and users
+rake db:setup
 

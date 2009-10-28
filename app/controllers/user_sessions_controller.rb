@@ -19,5 +19,10 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Successfully logged out."
     redirect_to new_user_session_url
   end
+
+  private
+  def login_required
+
+  end
 end
 

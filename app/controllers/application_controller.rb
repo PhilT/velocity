@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :login_required
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def login_required
+    redirect_to new_user_session_url unless current_user
   end
 end
 

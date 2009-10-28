@@ -151,6 +151,7 @@ $(function(){
     $('input[title!=""]').hint();
   }
 
+    //This used to change a task as well?
   function setupNewTaskForm(){
     $('.task_new').hide();
     $('#new_task span.message').hide();
