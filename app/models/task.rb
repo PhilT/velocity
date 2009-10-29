@@ -46,6 +46,9 @@ class Task < ActiveRecord::Base
      Boolean.parse(value) ? touch(:completed_on) : self.completed_on = nil
   end
 
+  def assign_to!(user)
+    update_attribute :assigned_id, user.id
+  end
 
 end
 

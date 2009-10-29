@@ -36,8 +36,8 @@ class TasksController < ApplicationController
     end
 
     @task.update_attributes(params[:task])
+    @task.assign_to!(current_user) if params[:task][:started].to_i == 1
     @task.reload
-    logger.info "\n\n#{@task.inspect}\n#{@task.when.name}\n\n"
     respond_to do|format|
       format.js{render :layout => false}
     end
