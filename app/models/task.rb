@@ -1,4 +1,8 @@
 class Task < ActiveRecord::Base
+  include AASM
+
+  before_create :set_initial_state
+
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
   belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
 
@@ -13,6 +17,27 @@ class Task < ActiveRecord::Base
   validates_presence_of :author
   validates_presence_of :category
   validates_presence_of :when
+
+  aasm_column :state
+  aasm_state :pending
+  aasm_state :started
+  aasm_state :completed
+  aasm_state :verified
+
+  aasm_event :start do
+    transitions :to => :started, :from => :pending
+  end
+  aasm_event :complete do
+    transitions :to => :completed, :from => :started
+  end
+  aasm_event :verify do
+    transitions :to => :verified, :from => :completed
+  end
+  aasm_event :next do
+    transitions :from => :pending, :to => :started
+    transitions :from => :started, :to => :completed
+    transitions :from => :completed, :to => :verified
+  end
 
   named_scope :active, :conditions => {:completed_on => nil}
   named_scope :now, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
@@ -48,6 +73,10 @@ class Task < ActiveRecord::Base
 
   def assign_to!(user)
     update_attribute :assigned_id, user.id
+  end
+
+  def set_initial_state
+    self.state = 'pending'
   end
 
 end
