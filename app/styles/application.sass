@@ -90,11 +90,11 @@ h2
   :margin-bottom 20px
 
 .task
-  :background= url(/images/edit.png) "no-repeat" 4px 22px !feature_background
+  :background !feature_background
   :border-top= 2px solid !feature_border
   :clear both
   :overflow auto
-  :padding 2px
+  :padding 1em 2px
   &.heading
     :background= !feature_border
     :padding-left 10px
@@ -112,6 +112,8 @@ h2
     :color= !bug_color
   .change a
     :color= !change_color
+  .author_id
+    :background= url(/images/edit.png) "center left no-repeat"
 
   a
     :color= !text_color

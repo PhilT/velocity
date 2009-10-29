@@ -29,7 +29,15 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    if !@task.started_on && params[:task][:when_id] && @task.when != @whens.find(params[:task][:when_id].to_i)
+      @append_or_replace = :append
+    else
+      @append_or_replace = :replace
+    end
+
     @task.update_attributes(params[:task])
+    @task.reload
+    logger.info "\n\n#{@task.inspect}\n#{@task.when.name}\n\n"
     respond_to do|format|
       format.js{render :layout => false}
     end
