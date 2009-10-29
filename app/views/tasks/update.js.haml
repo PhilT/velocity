@@ -2,7 +2,7 @@
 - if @task.completed?
   == #{render_hidden_task}.insertAfter($('#completed .heading')).slideDown()
 - else
-  - if @append_or_replace == :append
+  - if append_or_replace == :append
     == #{render_hidden_task}.appendTo($('##{section}')).slideDown()
   - else
     == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render @task)}")

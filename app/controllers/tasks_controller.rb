@@ -29,15 +29,11 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if !@task.started_on && params[:task][:when_id] && @task.when != @whens.find(params[:task][:when_id].to_i)
-      @append_or_replace = :append
-    else
-      @append_or_replace = :replace
-    end
 
     @task.update_attributes(params[:task])
     @task.assign_to!(current_user) if params[:task][:started].to_i == 1
     @task.reload
+
     respond_to do|format|
       format.js{render :layout => false}
     end
