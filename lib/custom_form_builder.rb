@@ -39,7 +39,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     if value.blank? || currently_editing?(name)
       content = text_field(name, :id => @id, :title => @defaults['hint'])
     else
-      value = value.gsub(/([.,"\(])/, '\1</strong>')
+      value = value.gsub(/(\. )/, '\1</strong>')
       value += '</strong>' unless value.include?('</strong>')
       content = decorate("<strong>#{value}")
     end
