@@ -26,7 +26,7 @@ assigned_id:
   prompt: unassign
   nil: (no one)
 
-started:
+started_on:
   prefix: "started "
   suffix: " ago"
 

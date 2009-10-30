@@ -12,7 +12,7 @@ module TasksHelper
   end
 
   def append_or_replace
-    params[:task][:started] || params[:task][:when_id] ? :append : :replace
+    @changed_state || params[:task][:when_id] ? :append : :replace
   end
 end
 

@@ -30,8 +30,15 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
 
+    if params[:task][:state]
+      @task.next_state
+      @changed_state = true
+      params[:task].delete(:state)
+    end
+
     @task.update_attributes(params[:task])
     @task.assign_to!(current_user) if params[:task][:started].to_i == 1
+
     @task.reload
 
     respond_to do|format|
