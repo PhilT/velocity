@@ -20,23 +20,27 @@ class Task < ActiveRecord::Base
 
   aasm_column :state
   aasm_state :pending
-  aasm_state :started
-  aasm_state :completed
+  aasm_state :started, :enter => :timestamp
+  aasm_state :completed, :enter => :timestamp
   aasm_state :verified
 
   aasm_event :start do
-    transitions :to => :started, :from => :pending
+    transitions :from => :pending, :to => :started
   end
   aasm_event :complete do
-    transitions :to => :completed, :from => :started
+    transitions :from => :started, :to => :completed
   end
   aasm_event :verify do
-    transitions :to => :verified, :from => :completed
+    transitions :from => :completed, :to => :verified
   end
-  aasm_event :next do
+  aasm_event :restart do
+    transitions :from => :verified, :to => :started
+  end
+  aasm_event :next_state do
     transitions :from => :pending, :to => :started
     transitions :from => :started, :to => :completed
     transitions :from => :completed, :to => :verified
+    transitions :from => :verified, :to => :started
   end
 
   named_scope :active, :conditions => {:completed_on => nil}
@@ -44,12 +48,7 @@ class Task < ActiveRecord::Base
   named_scope :soon, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
   named_scope :later, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
 
-  named_scope :started, :conditions => "started_on IS NOT NULL AND completed_on IS NULL"
   named_scope :completed, :conditions => ["completed_on IS NOT NULL AND ? <= completed_on", Date.today - 14.days], :order => 'completed_on DESC'
-
-  def started?
-    !self.started_on.blank?
-  end
 
   def started
     started?
@@ -59,12 +58,8 @@ class Task < ActiveRecord::Base
      Boolean.parse(value) ? touch(:started_on) : self.started_on = nil
   end
 
-  def completed?
-    !self.completed_on.blank?
-  end
-
   def completed
-    self.completed?
+    completed?
   end
 
   def completed=(value)
@@ -79,5 +74,12 @@ class Task < ActiveRecord::Base
     self.state = 'pending'
   end
 
+  def action
+    (aasm_events_for_current_state - [:next_state]).first
+  end
+
+  def timestamp
+    self.update_attribute "#{state}_on", Time.now rescue nil
+  end
 end
 
