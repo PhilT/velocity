@@ -161,7 +161,7 @@ $(function(){
   }
 
   function attachToStarted(){
-    $('input:checkbox, select').live('change', function(){
+    $('input:checkbox, .ajaxSelect').live('change', function(){
       form = $(this).closest('form');
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;

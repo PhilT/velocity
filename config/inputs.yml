@@ -1,5 +1,5 @@
 id:
-  suffix: ':'
+  prefix: 'Task '
 
 name:
   hint: "what's this about?"
@@ -22,8 +22,9 @@ effort_id:
   nil: (effort)
 
 assigned_id:
+  prefix: "assigned to "
   prompt: unassign
-  nil: (unassigned)
+  nil: (no one)
 
 started:
   prefix: "started "

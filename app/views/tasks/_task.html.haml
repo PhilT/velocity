@@ -1,21 +1,19 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => task.category.try(:name)}
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
-    %ul.info
-      %li
-        - if !task.started?
-          = f.check :started, :value => task.started_on, :edit => false, :label => false
-        - else
-          = f.check :completed, :show => :input, :label => false, :wrap => false
-        = f.label :id, :wrap => false
-        = f.text :name, :wrap => false
-    %ul.actions
+    %ul.title
+      = f.label :id
       = f.label :author_id
+      = f.select :assigned_id, :collection => @developers
+
+    %ul.actions
       = f.select :category_id, :collection => @categories
       = f.select :when_id, :collection => @whens
       = f.select :effort_id, :collection => @efforts
-      = f.select :assigned_id, :collection => @developers
       = f.check :started, :value => task.started_on, :edit => false if task.started?
       = f.check :completed_on, :only => :when_complete, :value => task.completed_on
       = f.select :related_id, :collection => relateds(task), :include_id => true
       = f.submit
+
+    %ul.description
+      = f.text :name
 

@@ -30,7 +30,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     else
       content = decorate(@defaults['nil'], :class => 'not_set')
     end
-    wrap content, "#{name} #{@value unless @value.nil? || @value.include?(' ')}"
+    wrap content, "#{name} #{@value unless @value.nil? || @value.include?(' ')} " + (options[:ajaxSelect] == false ? '' : 'ajaxSelect')
   end
 
   def text(name, options = {})

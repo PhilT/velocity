@@ -2,7 +2,7 @@
   - form_for new_task, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
     %ul.info
       %li
-        = f.select :category_id, :collection => @categories
-        = f.select :when_id, :collection => @whens
+        = f.select :category_id, :collection => @categories, :ajaxSelect => false
+        = f.select :when_id, :collection => @whens, :ajaxSelect => false
         = f.text :name
 

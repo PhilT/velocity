@@ -37,6 +37,7 @@ class Task < ActiveRecord::Base
     transitions :from => :pending, :to => :started
     transitions :from => :started, :to => :completed
     transitions :from => :completed, :to => :verified
+    transitions :from => :verified, :to => :started
   end
 
   named_scope :active, :conditions => {:completed_on => nil}
