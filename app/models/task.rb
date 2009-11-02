@@ -20,8 +20,8 @@ class Task < ActiveRecord::Base
 
   aasm_column :state
   aasm_state :pending
-  aasm_state :started, :enter => :timestamp
-  aasm_state :completed, :enter => :timestamp
+  aasm_state :started, :after_enter => :timestamp
+  aasm_state :completed, :after_enter => :timestamp
   aasm_state :verified
 
   aasm_event :start do
@@ -47,8 +47,8 @@ class Task < ActiveRecord::Base
   named_scope :now, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
   named_scope :soon, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
   named_scope :later, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
-
-  named_scope :completed, :conditions => ["completed_on IS NOT NULL AND ? <= completed_on", Date.today - 14.days], :order => 'completed_on DESC'
+  named_scope :completed, :conditions => {:state => 'completed'}, :order => 'completed_on DESC'
+  named_scope :verified, :conditions => ["state = 'verified' AND completed_on >= ?", Date.today - 14.days], :order => 'completed_on DESC'
 
   def started
     started?
@@ -79,7 +79,8 @@ class Task < ActiveRecord::Base
   end
 
   def timestamp
-    self.update_attribute "#{state}_on", Time.now rescue nil
+    puts '\n\n******** ' + self.state + '\n\n'
+    self.touch "#{self.state}_on"
   end
 end
 

@@ -6,13 +6,13 @@
       = f.select :assigned_id, :collection => @developers
 
     %ul.actions
+      = f.check :completed_on, :only => :when_complete, :value => task.completed_on
       = f.select :category_id, :collection => @categories
       = f.select :when_id, :collection => @whens
       = f.select :effort_id, :collection => @efforts
       = f.check :started_on, :value => task.started_on, :edit => false
-      = f.check :completed_on, :only => :when_complete, :value => task.completed_on
       = f.select :related_id, :collection => relateds(task), :include_id => true
-      = link_to task.action, task_path(task, 'task[state]' => true), :class => :put
+      %li= link_to task.action, task_path(task, 'task[state]' => true), :class => :put
       = f.submit
 
     %ul.description

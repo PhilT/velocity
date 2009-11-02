@@ -4,4 +4,5 @@
 = render :partial => 'tasks', :object => @soon_tasks, :locals => {:heading => 'Tasks that need doing next', :type => 'soon'}
 = render :partial => 'tasks', :object => @later_tasks, :locals => {:heading => 'Tasks to do later', :type => 'later'}
 = render :partial => 'tasks', :object => @completed_tasks, :locals => {:heading => 'Completed Tasks (last two weeks)', :type => 'completed'}
+= render :partial => 'tasks', :object => @verified_tasks, :locals => {:heading => 'Verified Tasks', :type => 'verified'}
 

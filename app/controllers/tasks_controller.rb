@@ -9,6 +9,7 @@ class TasksController < ApplicationController
     @soon_tasks = Task.soon
     @later_tasks = Task.later
     @completed_tasks = Task.completed
+    @verified_tasks = Task.verified
   end
 
   def edit
