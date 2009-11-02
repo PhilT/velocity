@@ -82,5 +82,6 @@ class Task < ActiveRecord::Base
     puts '\n\n******** ' + self.state + '\n\n'
     self.touch "#{self.state}_on"
   end
+
 end
 

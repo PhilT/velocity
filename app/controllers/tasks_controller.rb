@@ -35,10 +35,10 @@ class TasksController < ApplicationController
       @task.next_state
       @changed_state = true
       params[:task].delete(:state)
+      @task.assign_to!(current_user) if @task.started?
     end
 
     @task.update_attributes(params[:task])
-    @task.assign_to!(current_user) if params[:task][:started].to_i == 1
 
     @task.reload
 
