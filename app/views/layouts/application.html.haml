@@ -8,11 +8,12 @@
     %h1
       Bustle
       %sup= STRAPLINE
-    %div#session
+    %ul#session
       - if current_user
-        = link_to 'Logout', user_session_path(current_user), :method => :delete
+        %li= link_to 'Logout', user_session_path(current_user), :method => :delete
       - else
-        = link_to 'Login', new_user_session_path
+        %li= link_to 'Login', new_user_session_path
+        %li= link_to 'Register', new_user_path
     %div#messages
       %span.notice= flash[:notice]
       %span.error= flash[:error]

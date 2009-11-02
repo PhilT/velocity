@@ -146,6 +146,7 @@ $(function(){
   setHintsOnTextfields();
   setupNewTaskForm();
   attachToStarted();
+  hideFlashMessages();
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -166,6 +167,13 @@ $(function(){
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;
     });
+  }
+
+  function hideFlashMessages(){
+    $('#messages').animate({opacity: 1.0}, 4000)
+      .fadeOut('slow', function() {
+        $(this).remove();
+      });
   }
 
 })

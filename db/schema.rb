@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20091030171918) do
   end
 
   create_table "tasks", :force => true do |t|
-    t.text     "name",         :limit => 255
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "started_on"
