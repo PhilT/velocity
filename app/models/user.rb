@@ -7,5 +7,9 @@ class User < ActiveRecord::Base
   belongs_to :access_level, :class_name => 'EnumValue', :foreign_key => :access_level_id, :readonly => true
 
   named_scope :developers, :conditions => {:enum_values => {:name => 'developer'}}, :joins => :access_level
+
+  def admin
+    self.first
+  end
 end
 

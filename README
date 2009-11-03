@@ -4,5 +4,5 @@ Status: Beta
 
 Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers to easily view and add tasks.
 
-Default database is now MySQL
+Default database is now MySQL. Users can be added by other users. If no users are in the database Bustle allows the first one to be added without logging in.
 

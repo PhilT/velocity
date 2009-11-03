@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   private
   def login_required
-
+    super unless User.count == 0
   end
 end
 

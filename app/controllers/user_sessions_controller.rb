@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+
   def new
     @user_session = UserSession.new
   end
@@ -22,7 +23,7 @@ class UserSessionsController < ApplicationController
 
   private
   def login_required
-
+    redirect_to new_user_path if User.count == 0
   end
 end
 
