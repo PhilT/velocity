@@ -1,8 +1,8 @@
 !border_color = #788
 
-!feature_color = #0c0
-!bug_color = #e00
-!change_color = #22e
+!feature_color = green
+!bug_color = darkRed
+!change_color = darkBlue
 
 !feature_background = #ddd
 !feature_border = #ddd
@@ -111,11 +111,19 @@ h2
     :font-weight bold
 
   .feature a
-    :color= !feature_color
+    :background-color= !feature_color
   .bug a
-    :color= !bug_color
+    :background-color= !bug_color
   .change a
-    :color= !change_color
+    :background-color= !change_color
+  .action a
+    :background-color darkOrange
+    :font-size 1.3em
+
+  .feature a, .bug a, .change a, .action a
+    :color #fff
+    :padding 3px 5px
+    :text-decoration none
 
   a
     :color= !text_color
