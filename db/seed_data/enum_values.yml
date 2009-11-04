@@ -23,7 +23,7 @@ now:
   enum: when
 
 soon:
-  name: soon
+  name: this week
   description: If there is time complete in the current release
   position: 2
   enum: when
