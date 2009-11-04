@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091030171918) do
+ActiveRecord::Schema.define(:version => 20091104165358) do
 
   create_table "enum_values", :force => true do |t|
     t.string  "name"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(:version => 20091030171918) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.integer  "access_level_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "developer",         :default => false
   end
 
 end
