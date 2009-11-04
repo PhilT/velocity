@@ -72,6 +72,10 @@ class Task < ActiveRecord::Base
     update_attribute :assigned_id, user.id
   end
 
+  def verified_by!(user)
+    update_attribute :verified_by, user.id
+  end
+
   def set_initial_state
     self.state = 'pending'
   end

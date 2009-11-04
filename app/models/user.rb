@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :created_tasks, :class_name => 'Task', :foreign_key => :author_id
   has_many :assigned_tasks, :class_name => 'Task', :foreign_key => :assigned_id
+  has_many :verified_tasks, :class_name => 'Task', :foreign_key => :verified_by
 
   named_scope :developers, :conditions => {:developer => true}
 

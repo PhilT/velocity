@@ -36,6 +36,7 @@ class TasksController < ApplicationController
       @changed_state = true
       params[:task].delete(:state)
       @task.assign_to!(current_user) if @task.started?
+      @task.verified_by!(current_user) if @task.verified?
     end
 
     @task.update_attributes(params[:task])

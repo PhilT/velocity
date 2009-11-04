@@ -4,6 +4,8 @@
       = f.label :id
       = f.label :author_id
       = f.select :assigned_id, :collection => @developers
+      - if task.verified?
+        %li= " verified by #{task.verifier.name}"
 
     %ul.actions
       = f.check :completed_on, :only => :when_complete, :value => task.completed_on
