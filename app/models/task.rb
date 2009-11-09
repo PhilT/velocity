@@ -6,6 +6,8 @@ class Task < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
   belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
 
+  belongs_to :verifier, :class_name => 'User', :foreign_key => :verified_by
+
   belongs_to :related, :class_name => 'Task', :foreign_key => :related_id
   has_many :relateds, :class_name => 'Task', :foreign_key => :related_id
 
@@ -70,6 +72,10 @@ class Task < ActiveRecord::Base
     update_attribute :assigned_id, user.id
   end
 
+  def verified_by!(user)
+    update_attribute :verified_by, user.id
+  end
+
   def set_initial_state
     self.state = 'pending'
   end
@@ -79,7 +85,6 @@ class Task < ActiveRecord::Base
   end
 
   def timestamp
-    puts '\n\n******** ' + self.state + '\n\n'
     self.touch "#{self.state}_on"
   end
 
