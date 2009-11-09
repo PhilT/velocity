@@ -1,39 +1,3 @@
-feature:
-  name: feature
-  description: A new feature not previously implemented
-  position: 1
-  enum: category
-
-bug:
-  name: bug
-  description: A defect in the system that was not intended in the original design
-  position: 2
-  enum: category
-
-change:
-  name: change
-  description: A change in behaviour from the original design
-  position: 3
-  enum: category
-
-now:
-  name: now
-  description: Needs to be completed in the current release
-  position: 1
-  enum: when
-
-soon:
-  name: this week
-  description: If there is time complete in the current release
-  position: 2
-  enum: when
-
-later:
-  name: later
-  description: Will be scheduled in a future release
-  position: 3
-  enum: when
-
 one:
   name: small
   description: This is a simple task

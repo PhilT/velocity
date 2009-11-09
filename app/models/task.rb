@@ -16,9 +16,6 @@ class Task < ActiveRecord::Base
   belongs_to :effort, :class_name => 'EnumValue', :foreign_key => :effort_id
 
   validates_presence_of :name
-  validates_presence_of :author
-  validates_presence_of :category
-  validates_presence_of :when
 
   aasm_column :state
   aasm_state :pending
@@ -45,10 +42,9 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
   end
 
-  named_scope :active, :conditions => {:completed_on => nil}
-  named_scope :now, :conditions => {:started_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
-  named_scope :soon, :conditions => {:started_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
-  named_scope :later, :conditions => {:started_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
+  named_scope :active, :conditions => {:completed_on => nil}, :order => :position
+  named_scope :now, :conditions => {:now => true}, :order => :position
+  named_scope :other, :conditions => {:now => false}, :order => :position
   named_scope :verified, :conditions => ["state = 'verified' AND completed_on >= ?", Date.today - 14.days], :order => 'completed_on DESC'
 
   def started

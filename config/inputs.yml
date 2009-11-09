@@ -10,12 +10,8 @@ detail:
 author_id:
   prefix: "by "
 
-category_id:
-  prompt: type?
-
-when_id:
-  prefix: "for "
-  prompt: when?
+bug:
+  label: bug?
 
 effort_id:
   prompt: effort?

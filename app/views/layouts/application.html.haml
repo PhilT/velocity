@@ -11,6 +11,8 @@
         %sup= STRAPLINE
     %ul#session
       - if current_user
+        %li= link_to 'Tasks', tasks_path
+        %li= link_to 'Verified', verified_tasks_path
         %li= link_to 'Logout', user_session_path(current_user), :method => :delete
         %li= link_to 'Create User', new_user_path
       - else

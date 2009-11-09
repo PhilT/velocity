@@ -4,11 +4,11 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @new_tasks = [Task.new]
-    @started_tasks = Task.started
     @now_tasks = Task.now
-    @soon_tasks = Task.soon
-    @later_tasks = Task.later
-    @completed_tasks = Task.completed
+    @other_tasks = Task.other
+  end
+
+  def verified
     @verified_tasks = Task.verified
   end
 
@@ -52,8 +52,6 @@ class TasksController < ApplicationController
   def find_stuff
     @active_tasks = Task.active
     @developers = User.developers
-    @categories = Enum.find_by_name('Category').enum_values
-    @whens = Enum.find_by_name('When').enum_values
     @efforts = Enum.find_by_name('Effort').enum_values
   end
 end

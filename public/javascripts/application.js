@@ -154,11 +154,7 @@ $(function(){
 
     //This used to change a task as well?
   function setupNewTaskForm(){
-    $('.task_new').hide();
     $('#new_task span.message').hide();
-    $('#new_task .heading').live('click', function(){
-      $('.task_new').slideToggle();
-    });
   }
 
   function attachToStarted(){

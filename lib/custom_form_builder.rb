@@ -9,11 +9,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def check(name, options = {})
     defaults(name, options)
-    if (options[:show] == :input || @value == false) && options[:only].nil?
-      wrap check_box(name, :id => @id) + add_label(options), name
-    elsif !@value.blank?
-      wrap decorate(time_ago(@value)), name
-    end
+    wrap check_box(name, :id => @id) + add_label(options), name
   end
 
   def label(name, options = {})
@@ -78,10 +74,6 @@ private
 
   def wrap(content, klass)
     content_tag(:li, content, :class => klass)
-  end
-
-  def time_ago(time)
-    time_ago_in_words(time).gsub('about', '')
   end
 
 end
