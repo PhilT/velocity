@@ -22,8 +22,8 @@ class Task < ActiveRecord::Base
 
   aasm_column :state
   aasm_state :pending
-  aasm_state :started, :after_enter => :timestamp
-  aasm_state :completed, :after_enter => :timestamp
+  aasm_state :started, :after_enter => :mark_started
+  aasm_state :completed, :after_enter => :mark_completed
   aasm_state :verified
 
   aasm_event :start do
@@ -46,10 +46,9 @@ class Task < ActiveRecord::Base
   end
 
   named_scope :active, :conditions => {:completed_on => nil}
-  named_scope :now, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
-  named_scope :soon, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
-  named_scope :later, :conditions => {:started_on => nil, :completed_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
-  named_scope :completed, :conditions => {:state => 'completed'}, :order => 'completed_on DESC'
+  named_scope :now, :conditions => {:started_on => nil, :enum_values => {:name => 'now'}}, :joins => :when
+  named_scope :soon, :conditions => {:started_on => nil, :enum_values => {:name => 'soon'}}, :joins => :when
+  named_scope :later, :conditions => {:started_on => nil, :enum_values => {:name => 'later'}}, :joins => :when
   named_scope :verified, :conditions => ["state = 'verified' AND completed_on >= ?", Date.today - 14.days], :order => 'completed_on DESC'
 
   def started
@@ -84,8 +83,13 @@ class Task < ActiveRecord::Base
     (aasm_events_for_current_state - [:next_state]).first
   end
 
-  def timestamp
-    self.touch "#{self.state}_on"
+  def mark_started
+    self.touch :started_on unless self.completed_on
+    self.update_attribute(:completed_on, nil)
+  end
+
+  def mark_completed
+    self.touch :completed_on
   end
 
 end
