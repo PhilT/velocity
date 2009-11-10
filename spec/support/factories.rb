@@ -12,7 +12,7 @@ Factory.define :customer, :class => User do |f|
   f.email {Factory.next :email}
   f.password 'password'
   f.password_confirmation 'password'
-  f.access_level {EnumValue.find_by_name('customer')}
+  f.developer false
 end
 
 Factory.define :developer, :class => User do |f|
@@ -20,7 +20,7 @@ Factory.define :developer, :class => User do |f|
   f.email {Factory.next :email}
   f.password 'password'
   f.password_confirmation 'password'
-  f.access_level {EnumValue.find_by_name('developer')}
+  f.developer true
 end
 
 Factory.define :task do |f|
