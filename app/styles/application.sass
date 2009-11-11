@@ -1,8 +1,8 @@
 !border_color = #788
 
-!feature_color = green
-!bug_color = darkRed
-!change_color = darkBlue
+!feature_color = "green"
+!bug_color = "darkRed"
+!change_color = "darkBlue"
 
 !feature_background = #ddd
 !feature_border = #ddd
@@ -17,6 +17,80 @@
 !completed_task_color = #ddd
 !completed_task_border = #ddd - 30
 
+span.message
+  :background #ff8
+  :display none
+  :float right
+  :font-weight bold
+  :padding 2px 50px
+
+span.notice
+  :color= !feature_color - 50
+span.error
+  :color= !bug_color
+
+.blur
+  :color #777
+
+.name
+  input
+    :border= 1px "solid" !border_color + 20
+    :border-bottom-color white
+    :border-right-color white
+    :padding 2px
+    :width 700px
+
+.info
+  li
+    :float left
+    input,
+    select
+      :margin-right 10px
+
+.task
+  .id, .author_id, .assigned_id
+    :padding-right 5px
+
+  .actions a
+    :color= !link_color
+
+  .feature a
+    :background-color= !feature_color
+  .bug a
+    :background-color= !bug_color
+  .action a
+    :background-color darkOrange
+
+  .feature a, .bug a, .action a
+    :color #fff
+    :text-decoration none
+
+  a
+    :color= !text_color
+
+.title
+  :float left
+  li
+    :float left
+
+.description
+  :clear both
+  input
+    :width 99%
+  a
+    :text-decoration none
+
+.assigned_id select
+  :width 200px
+
+
+
+
+
+
+
+
+
 body
   :font 14px Lucida Grande,Helvetica,Arial,sans-serif !important
   :color= !text_color
@@ -27,6 +101,9 @@ body, ul, li
 
 body
   :margin 20px
+
+li
+  :list-style-type none
 
 #header h1
   :background url(/images/logo.png) no-repeat
@@ -41,131 +118,43 @@ body
     :color inherit
 
 h3
-  :margin 0
-  :float left
+  :border-top= 2px "solid" !feature_border
+  :clear both
+  :color #666
+  :display block
+  :font-size 12px
+  :font-weight normal
+  :position relative
+  :top -2px
+  :width 100%
 
 #session
   :float right
   :margin-right 50px
-span.message
-  :background #ff8
-  :display none
-  :float right
-  :font-weight bold
-  :padding 2px 50px
-
-span.notice
-  :color= !feature_color - 50
-span.error
-  :color= !bug_color
-
-li
-  :list-style-type none
-
-.blur
-  :color #777
-
-.name
-  input
-    :border= 1px solid !border_color + 20
-    :border-bottom-color white
-    :border-right-color white
-    :padding 2px
-    :width 700px
-
-.info
   li
     :float left
-    input,
-    select
-      :margin-right 10px
-
-.tasks
-  :margin-bottom 20px
-
-.task, .heading
-  :clear both
-  :overflow auto
-  :padding-bottom 1em
-
-.heading
-  :border-top= 2px solid !feature_border
-  h3
-    :color #666
-    :font-size 12px
-    :font-weight normal
-    :position relative
-    :top -2px
+    :padding 4px
 
 .task
-  .id, .author_id, .assigned_id
+  :clear both
+  :margin-top 5px
+  :height 50px
+  &:hover
+    :background #eee
+  .feature, .bug, .id, .author_id, .assigned_id, .completed_on, .started_on
+    :float left
     :padding-right 5px
 
-  .actions a
-    :color= !link_color
-    :font-weight bold
+  .feature a, .bug a
+    :display block
+    :padding-bottom 1px
+    :text-align center
+    :width 60px
 
-  .feature a
-    :background-color= !feature_color
-  .bug a
-    :background-color= !bug_color
-  .change a
-    :background-color= !change_color
-  .action a
-    :background-color darkOrange
-    :font-size 1.3em
+  .author_id, .assigned_id, .completed_on, .started_on
+    :border-right 1px solid #888
+    :margin-right 4px
+    :padding-top 2px
 
-  .feature a, .bug a, .change a, .action a
-    :color #fff
-    :padding 3px 5px
-    :text-decoration none
-
-  a
-    :color= !text_color
-
-.bug
-  :background-color= !bug_background
-  :border-color= !bug_border
-
-.change
-  :background-color= !change_background
-  :border-color= !change_border
-
-
-.title
-  :float left
-  li
-    :float left
-
-.actions
-  :float right
-  :padding-bottom 5px
-  li
-    :float left
-    :border 1px solid #ddd
-    :border-width 0 0 0 2px
-    :padding 5px 10px 0 10px
-    :font-size 11px
-    .assigned
-      select
-        :width 120px
-  .related_id
-    select
-      :width 230px
-  select
-    :font-size 11px
-  .submit
-    :padding-top 3px
-  a.not_set
-    :color #666
-
-.description
-  :clear both
-  input
-    :width 99%
-  a
-    :text-decoration none
-
-.assigned_id select
-  :width 200px
+.completed
 

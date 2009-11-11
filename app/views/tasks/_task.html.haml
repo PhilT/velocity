@@ -1,21 +1,19 @@
-%li.task{:id => "task_#{task.id || 'new'}", :class => task.category.try(:name)}
+%li.task{:id => "task_#{task.id || 'new'}", :class => task.state}
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
+      %li{:class => task.type}= link_to task.type, task_path(task, 'task[bug]' => true), :class => :put
       = f.label :id
+      = f.text :name
+
+    %ul.description
       = f.label :author_id
       = f.select :assigned_id, :collection => @developers
       - if task.verified?
         %li= " verified by #{task.verifier.name}"
+      = f.label :completed_on
+      = f.label :started_on
 
     %ul.actions
-      %li= time_ago(task.completed_on) unless task.completed_on.nil?
-      = f.check :bug, :collection => @categories
-      = f.select :effort_id, :collection => @efforts
-      %li= time_ago(task.started_on) unless task.started_on.nil?
-      %li.action
-        = link_to task.action, task_path(task, 'task[state]' => true), :class => :put
+      %li.action= button_to task.action, task_path(task, 'task[state]' => true), :class => :put
       = f.submit
-
-    %ul.description
-      = f.text :name
 

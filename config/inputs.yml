@@ -1,24 +1,14 @@
 id:
-  prefix: 'Task '
+  prefix: "#"
 
 name:
   hint: "what's this about?"
 
-detail:
-  hint: would you like to expand on that?
-
 author_id:
   prefix: "by "
 
-bug:
-  label: bug?
-
-effort_id:
-  prompt: effort?
-  nil: (effort)
-
 assigned_id:
-  prefix: "assigned to "
+  prefix: "assigned: "
   prompt: unassign
   nil: (no one)
 
@@ -29,6 +19,13 @@ started_on:
 completed_on:
   prefix: "completed "
   suffix: " ago"
+
+bug:
+  label: bug?
+
+effort_id:
+  prompt: effort?
+  nil: (effort)
 
 related_id:
   prompt: relates to?

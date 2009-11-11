@@ -15,9 +15,5 @@ module TasksHelper
     @changed_state || params[:task][:when_id] ? :append : :replace
   end
 
-  def time_ago(time)
-    time_ago_in_words(time).gsub('about', '')
-  end
-
 end
 

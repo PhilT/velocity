@@ -1,5 +1,5 @@
-= render :partial => 'tasks', :object => @now_tasks, :locals => {:heading => 'Tasks in current iteration', :now => true}
-= render :partial => 'tasks', :object => @other_tasks, :locals => {:heading => 'Other tasks', :now => false}
+= render :partial => 'tasks', :object => @now_tasks, :locals => {:heading => 'Tasks for the next release'}
+= render :partial => 'tasks', :object => @other_tasks, :locals => {:heading => 'Tasks for a future release'}
 
 = render :partial => 'tasks', :object => @new_tasks, :locals => {:heading => 'Add a new task', :type => 'new_task'}
 

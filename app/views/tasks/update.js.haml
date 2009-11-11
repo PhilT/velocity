@@ -1,10 +1,6 @@
-== $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
-- if %w(completed verified).include?(@task.state)
-  == #{render_hidden_task}.insertAfter($('##{@task.state} .heading')).slideDown()
-
+- if @task.state == 'verified'
+  == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
 - else
-  - if append_or_replace == :append
-    == #{render_hidden_task}.appendTo($('##{section}')).slideDown()
-  - else
-    == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render @task)}")
+  == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render @task)}")
+  == $('#task_#{@task.id}').effect("highlight", {}, 3000)
 

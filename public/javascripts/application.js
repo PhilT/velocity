@@ -147,6 +147,8 @@ $(function(){
   setupNewTaskForm();
   attachToStarted();
   hideFlashMessages();
+  hideTaskDetails();
+  $('.tasks').sortable();
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -170,6 +172,19 @@ $(function(){
       .fadeOut('slow', function() {
         $(this).remove();
       });
+  }
+
+  function hideTaskDetails(){
+    $('.completed').fadeTo('fast', 0.50);
+    $('.description, .actions').fadeTo('fast', 0.20);
+    $('.task').hover(
+      function(){
+        $(this).find('.description, .actions').fadeTo('slow', 1);
+      },
+      function(){
+        $(this).find('.description, .actions').fadeTo('slow', 0.20);
+      }
+    );
   }
 
 })

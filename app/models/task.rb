@@ -88,5 +88,9 @@ class Task < ActiveRecord::Base
     self.touch :completed_on
   end
 
+  def type
+    (self.bug? ? 'bug' : 'feature')
+  end
+
 end
 

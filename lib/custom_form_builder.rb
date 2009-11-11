@@ -64,8 +64,16 @@ private
   end
 
   def decorate(input, options = {})
-    input = link_to "#{input}", "/tasks/#{@id}/edit", :class => [options[:class], :get].join(' ') unless @object.new_record? || options[:link] == false
+    input = time_ago(input) if input.is_a?(ActiveSupport::TimeWithZone)
+    input = make_link(input, options)
     "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
+  end
+
+  def make_link(input, options)
+    unless @object.new_record? || options[:link] == false
+      input = link_to "#{input}", "/tasks/#{@id}/edit", :class => [options[:class], :get].join(' ')
+    end
+    input
   end
 
   def add_label(options)
@@ -74,6 +82,10 @@ private
 
   def wrap(content, klass)
     content_tag(:li, content, :class => klass)
+  end
+
+  def time_ago(time)
+    time_ago_in_words(time).gsub('about', '')
   end
 
 end

@@ -1,7 +1,5 @@
-%ul.tasks{:id => type}
-  %li.heading
-    %h3= heading
-    %span.message
-    - tasks.each do |task|
-      = render :partial => task.new_record? ? 'new_task' : 'task', :object => task, :locals => {:field => nil}
+%h3= heading
+%ul.tasks
+  - tasks.each do |task|
+    = render :partial => task.new_record? ? 'new_task' : 'task', :object => task, :locals => {:field => nil}
 
