@@ -16,17 +16,32 @@ describe Task do
     it "should handle started" do
       task = Factory :task
       task.started?.should == false
-      task.started = '1'
+      task.start
       task.started?.should == true
       task.started_on.should_not be_nil
     end
 
     it "should handle completed" do
-      task = Factory :task
+      task = Factory(:task)
+      task.update_attribute :state, 'started'
       task.completed?.should == false
-      task.completed = '1'
+      task.complete
       task.completed?.should == true
       task.completed_on.should_not be_nil
+    end
+
+    it "should handle restarting" do
+      task = Factory(:task)
+      task.start
+      task.complete
+      task.verify
+
+      first_started_on = task.started_on
+
+      task.restart
+      task.started?.should == true
+      task.completed_on.should be_nil
+      task.started_on.should == first_started_on
     end
   end
 end
