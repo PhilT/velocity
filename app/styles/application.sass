@@ -17,18 +17,6 @@
 !completed_task_color = #ddd
 !completed_task_border = #ddd - 30
 
-span.message
-  :background #ff8
-  :display none
-  :float right
-  :font-weight bold
-  :padding 2px 50px
-
-span.notice
-  :color= !feature_color - 50
-span.error
-  :color= !bug_color
-
 .blur
   :color #777
 
@@ -113,12 +101,16 @@ li
   :padding-left 50px
   sup
     :font-size 14px
-  a
-    :text-decoration none
-    :color inherit
+
+a
+  :text-decoration none
+  :color inherit
+
+h2
+  :clear both
 
 h3
-  :border-top= 2px "solid" !feature_border
+  :border-top= 1px "solid" !feature_border
   :clear both
   :color #666
   :display block
@@ -134,6 +126,13 @@ h3
   li
     :float left
     :padding 4px
+  a
+    &:hover
+      :text-decoration underline
+
+ul#now_tasks,
+ul#later_tasks
+  :min-height 20px
 
 .task
   :clear both
@@ -141,6 +140,8 @@ h3
   :height 50px
   &:hover
     :background #eee
+    .description, .actions
+      :opacity 1
   .feature, .bug, .id, .author_id, .assigned_id, .completed_on, .started_on
     :float left
     :padding-right 5px
@@ -156,5 +157,9 @@ h3
     :margin-right 4px
     :padding-top 2px
 
+  .description, .actions
+    :opacity .2
+
 .completed
+  :opacity .50
 

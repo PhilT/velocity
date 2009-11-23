@@ -12,7 +12,6 @@ Factory.define :customer, :class => User do |f|
   f.email {Factory.next :email}
   f.password 'password'
   f.password_confirmation 'password'
-  f.access_level {EnumValue.find_by_name('customer')}
 end
 
 Factory.define :developer, :class => User do |f|
@@ -20,14 +19,11 @@ Factory.define :developer, :class => User do |f|
   f.email {Factory.next :email}
   f.password 'password'
   f.password_confirmation 'password'
-  f.access_level {EnumValue.find_by_name('developer')}
 end
 
 Factory.define :task do |f|
   f.name 'This is a task'
-  f.category {EnumValue.find_by_name('feature')}
   f.association :author, :factory => :customer
-  f.when {EnumValue.find_by_name('now')}
 end
 
 ## This will copy the attributes from the parent factory to the current one with an ability to override them.

@@ -20,7 +20,9 @@ class ReplaceWhenConceptWithPositionAndNowFlag < ActiveRecord::Migration
     change_table :tasks do |t|
       t.remove :when_id
       t.remove :category_id
+      t.remove :effort_id
     end
+
   end
 
   def self.update(task)
@@ -38,6 +40,7 @@ class ReplaceWhenConceptWithPositionAndNowFlag < ActiveRecord::Migration
       t.remove :now
       t.column :when_id, :integer
       t.column :category_id, :integer
+      t.column :effort_id, :integer
     end
   end
 end

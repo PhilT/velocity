@@ -1,5 +1,5 @@
 %h3= heading
-%ul.tasks
+%ul.tasks{:id => id}
   - tasks.each do |task|
     = render :partial => task.new_record? ? 'new_task' : 'task', :object => task, :locals => {:field => nil}
 

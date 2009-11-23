@@ -146,9 +146,8 @@ $(function(){
   setHintsOnTextfields();
   setupNewTaskForm();
   attachToStarted();
-  hideFlashMessages();
-  hideTaskDetails();
-  $('.tasks').sortable();
+  $('#now_tasks').sortable({ connectWith: '#later_tasks', update: function(){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/sort?now=true'})}});
+  $('#later_tasks').sortable({ connectWith: '#now_tasks', update: function(){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/sort?now=false'})}});
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -165,26 +164,6 @@ $(function(){
       $.put(form.attr('action'), form.serialize(), null, 'script');
       return false;
     });
-  }
-
-  function hideFlashMessages(){
-    $('#messages').animate({opacity: 1.0}, 4000)
-      .fadeOut('slow', function() {
-        $(this).remove();
-      });
-  }
-
-  function hideTaskDetails(){
-    $('.completed').fadeTo('fast', 0.50);
-    $('.description, .actions').fadeTo('fast', 0.20);
-    $('.task').hover(
-      function(){
-        $(this).find('.description, .actions').fadeTo('slow', 1);
-      },
-      function(){
-        $(this).find('.description, .actions').fadeTo('slow', 0.20);
-      }
-    );
   }
 
 })

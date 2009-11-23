@@ -4,9 +4,7 @@ describe Task do
   before(:each) do
     @valid_attributes = {
       :name => 'a task',
-      :category => Enum.find_by_name('Category').enum_values.first,
       :author => Factory(:customer),
-      :when => Enum.find_by_name('When').enum_values.first
     }
   end
 

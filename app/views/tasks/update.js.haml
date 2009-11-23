@@ -1,6 +1,9 @@
-- if @task.state == 'verified'
+- if @task.state == 'verified' || @task_moved
   == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
 - else
   == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render @task)}")
   == $('#task_#{@task.id}').effect("highlight", {}, 3000)
+
+- if @task_moved
+  == #{render_hidden_task}.appendTo($('#now_tasks')).slideDown()
 

@@ -12,6 +12,19 @@ class TasksController < ApplicationController
     @verified_tasks = Task.verified
   end
 
+  def sort
+    tasks = Task.all
+    tasks.each do |task|
+      i = params['task'].index(task.id.to_s)
+      if i
+        task.position = i + 1
+        task.now = params['now']
+        task.save
+      end
+    end
+    render :nothing => true
+  end
+
   def edit
     @field, id = params[:id].split(/([0-9]+)/)
     @field.gsub!(/_$/, '')
@@ -31,15 +44,19 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
 
-    if params[:task][:state]
-      @task.next_state
-      @changed_state = true
-      params[:task].delete(:state)
-      @task.assign_to!(current_user) if @task.started?
-      @task.verified_by!(current_user) if @task.verified?
+    if params[:task].nil?
+      if !@task.now?
+        @task.update_attribute(:now, true)
+        @task.insert_at(Task.now.last.position + 1)
+        @task_moved = true
+      else
+        @task.next_state
+        @task.assign_to!(current_user) if @task.started? && !@task.assigned
+        @task.verified_by!(current_user) if @task.verified?
+      end
+    else
+      @task.update_attributes(params[:task])
     end
-
-    @task.update_attributes(params[:task])
 
     @task.reload
 
@@ -50,9 +67,7 @@ class TasksController < ApplicationController
 
   private
   def find_stuff
-    @active_tasks = Task.active
     @developers = User.developers
-    @efforts = Enum.find_by_name('Effort').enum_values
   end
 end
 

@@ -9,18 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091109142654) do
-
-  create_table "enum_values", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.integer "position"
-    t.integer "enum_id"
-  end
-
-  create_table "enums", :force => true do |t|
-    t.string "name"
-  end
+ActiveRecord::Schema.define(:version => 20091122221055) do
 
   create_table "tasks", :force => true do |t|
     t.text     "name"
@@ -31,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20091109142654) do
     t.integer  "author_id"
     t.integer  "assigned_id"
     t.integer  "related_id"
-    t.integer  "effort_id"
     t.string   "state",        :limit => 30
     t.integer  "verified_by"
     t.boolean  "bug",                        :default => false

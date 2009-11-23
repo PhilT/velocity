@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   include AASM
+  acts_as_list
 
   before_create :set_initial_state
 
@@ -10,10 +11,6 @@ class Task < ActiveRecord::Base
 
   belongs_to :related, :class_name => 'Task', :foreign_key => :related_id
   has_many :relateds, :class_name => 'Task', :foreign_key => :related_id
-
-  belongs_to :category, :class_name => 'EnumValue', :foreign_key => :category_id
-  belongs_to :when, :class_name => 'EnumValue', :foreign_key => :when_id
-  belongs_to :effort, :class_name => 'EnumValue', :foreign_key => :effort_id
 
   validates_presence_of :name
 
@@ -42,10 +39,10 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
   end
 
-  named_scope :active, :conditions => {:completed_on => nil}, :order => :position
-  named_scope :now, :conditions => {:now => true}, :order => :position
-  named_scope :other, :conditions => {:now => false}, :order => :position
-  named_scope :verified, :conditions => ["state = 'verified' AND completed_on >= ?", Date.today - 14.days], :order => 'completed_on DESC'
+  default_scope :conditions => "state != 'verified'", :order => :position
+  named_scope :now, :conditions => "now = true AND state != 'verified'", :order => :position
+  named_scope :other, :conditions => "now = false AND state != 'verified'", :order => :position
+  named_scope :verified, :conditions => {:state => 'verified'}, :order => 'completed_on DESC'
 
   def started
     started?
@@ -76,7 +73,7 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    (aasm_events_for_current_state - [:next_state]).first
+    now? ? ((aasm_events_for_current_state - [:next_state]).first) : 'next release'
   end
 
   def mark_started

@@ -11,14 +11,11 @@
         %sup= STRAPLINE
     %ul#session
       - if current_user
-        %li= link_to 'Tasks', tasks_path
-        %li= link_to 'Verified', verified_tasks_path
-        %li= link_to 'Logout', user_session_path(current_user), :method => :delete
-        %li= link_to 'Create User', new_user_path
+        %li= link_to '[Tasks]', tasks_path
+        %li= link_to '[Verified]', verified_tasks_path
+        %li= link_to '[Logout]', user_session_path(current_user), :method => :delete
+        %li= link_to '[Users]', new_user_path
       - else
-        %li= link_to 'Login', new_user_session_path
-    %div#messages
-      %span.notice= flash[:notice]
-      %span.error= flash[:error]
+        %li= link_to '[Login]', new_user_session_path
     = yield
 
