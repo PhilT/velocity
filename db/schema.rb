@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20091124222356) do
     t.integer  "assigned_id"
     t.string   "state",        :limit => 30
     t.integer  "verified_by"
-    t.boolean  "bug",                        :default => false
+    t.string   "category"
     t.integer  "position"
     t.boolean  "now",                        :default => false
   end

@@ -1,7 +1,7 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => task.state}
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
-      %li{:class => task.type}= link_to task.type, task_path(task, 'task[bug]' => (!task.bug?).to_s), :class => :put
+      %li{:class => task.category}= link_to task.category, task_path(task, 'task[category]' => true), :class => :put
       = f.label :id
       = f.text :name
 

@@ -81,8 +81,11 @@ class Task < ActiveRecord::Base
     self.touch :completed_on
   end
 
-  def type
-    (self.bug? ? 'bug' : 'feature')
+  def next_category!
+    categories = %w(feature bug refactor)
+    i = categories.index(self.category) + 1
+    i = 0 if i == categories.size
+    update_attribute(:category, categories[i])
   end
 
 end

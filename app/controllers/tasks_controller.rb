@@ -35,6 +35,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    params[:task][:category] = params[:bug] == '1' ? 'bug' : 'feature'
     @task = Task.create(params[:task].merge(:author => current_user))
     respond_to do|format|
       format.js{render :layout => false}
@@ -55,7 +56,11 @@ class TasksController < ApplicationController
         @task.verified_by!(current_user) if @task.verified?
       end
     else
-      @task.update_attributes(params[:task])
+      if params[:task][:category]
+        @task.next_category!
+      else
+        @task.update_attributes(params[:task])
+      end
     end
 
     @task.reload

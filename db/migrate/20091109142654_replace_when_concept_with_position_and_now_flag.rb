@@ -1,19 +1,19 @@
 class ReplaceWhenConceptWithPositionAndNowFlag < ActiveRecord::Migration
   def self.up
     change_table :tasks do |t|
-      t.column :bug, :boolean, :default => false
+      t.column :category, :string
       t.column :position, :integer
       t.column :now, :boolean, :default => false
     end
 
-    tasks = Task.all(:conditions => 'when_id = 286043344')
+    now_tasks = Task.all(:conditions => 'when_id = 286043344')
     @@position = 0
-    tasks.each do |task|
+    now_tasks.each do |task|
       update(task)
     end
 
-    tasks = Task.all(:conditions => 'when_id != 286043344')
-    tasks.each do |task|
+    later_tasks = Task.all(:conditions => 'when_id != 286043344')
+    later_tasks.each do |task|
       update(task)
     end
 
@@ -26,7 +26,7 @@ class ReplaceWhenConceptWithPositionAndNowFlag < ActiveRecord::Migration
   end
 
   def self.update(task)
-    task.bug = true if task.category_id = 898416404
+    task.category = {534213990 => 'feature', 1079508512 => 'refactor', 898416404 => 'bug', }[task.category_id]
     task.position = @@position
     task.now = true if task.when_id = 286043344
     @@position += 1
@@ -35,7 +35,7 @@ class ReplaceWhenConceptWithPositionAndNowFlag < ActiveRecord::Migration
 
   def self.down
     change_table :tasks do |t|
-      t.remove :bug
+      t.remove :category
       t.remove :position
       t.remove :now
       t.column :when_id, :integer
