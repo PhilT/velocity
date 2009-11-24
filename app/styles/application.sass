@@ -2,86 +2,12 @@
 
 !feature_color = "green"
 !bug_color = "darkRed"
-!change_color = "darkBlue"
+!refactor_color = "darkBlue"
 
-!feature_background = #ddd
-!feature_border = #ddd
+!section_border = #ddd
 !bug_background = #fff
-!bug_border = #ddd
-!change_background = #fff
-!change_border = #ddd
-
 
 !text_color = #333
-!link_color = !text_color + #005
-!completed_task_color = #ddd
-!completed_task_border = #ddd - 30
-
-.blur
-  :color #777
-
-.name
-  input
-    :border= 1px "solid" !border_color + 20
-    :border-bottom-color white
-    :border-right-color white
-    :padding 2px
-    :width 700px
-
-.info
-  li
-    :float left
-    input,
-    select
-      :margin-right 10px
-
-.task
-  .id, .author_id, .assigned_id
-    :padding-right 5px
-
-  .actions a
-    :color= !link_color
-
-  .feature a
-    :background-color= !feature_color
-  .bug a
-    :background-color= !bug_color
-  .action a
-    :background-color darkOrange
-
-  .feature a, .bug a, .action a
-    :color #fff
-    :text-decoration none
-
-  a
-    :color= !text_color
-
-.title
-  :float left
-  li
-    :float left
-
-.description
-  :clear both
-  input
-    :width 99%
-  a
-    :text-decoration none
-    &.link
-      :text-decoration underline
-      &:hover
-        :text-decoration none
-
-.assigned_id select
-  :width 200px
-
-
-
-
-
-
-
-
 
 body
   :font 14px Lucida Grande,Helvetica,Arial,sans-serif !important
@@ -114,7 +40,7 @@ h2
   :clear both
 
 h3
-  :border-top= 1px "solid" !feature_border
+  :border-top= 1px "solid" !section_border
   :clear both
   :color #666
   :display block
@@ -150,11 +76,19 @@ ul#later_tasks
     :float left
     :padding-right 5px
 
-  .feature a, .bug a
+  .feature a, .refactor a, .bug a
     :display block
     :padding-bottom 1px
     :text-align center
     :width 60px
+    :color white
+
+  .feature a
+    :background-color= !feature_color
+  .refactor a
+    :background-color= !refactor_color
+  .bug a
+    :background-color= !bug_color
 
   .author_id, .assigned_id, .completed_on, .started_on
     :border-right 1px solid #888

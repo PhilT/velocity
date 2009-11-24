@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091122221055) do
+ActiveRecord::Schema.define(:version => 20091124222356) do
 
   create_table "tasks", :force => true do |t|
     t.text     "name"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20091122221055) do
     t.datetime "completed_on"
     t.integer  "author_id"
     t.integer  "assigned_id"
-    t.integer  "related_id"
     t.string   "state",        :limit => 30
     t.integer  "verified_by"
     t.boolean  "bug",                        :default => false

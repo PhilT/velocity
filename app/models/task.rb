@@ -9,9 +9,6 @@ class Task < ActiveRecord::Base
 
   belongs_to :verifier, :class_name => 'User', :foreign_key => :verified_by
 
-  belongs_to :related, :class_name => 'Task', :foreign_key => :related_id
-  has_many :relateds, :class_name => 'Task', :foreign_key => :related_id
-
   validates_presence_of :name
 
   aasm_column :state
@@ -39,7 +36,6 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
   end
 
-  default_scope :conditions => "state != 'verified'", :order => :position
   named_scope :now, :conditions => "now = true AND state != 'verified'", :order => :position
   named_scope :other, :conditions => "now = false AND state != 'verified'", :order => :position
   named_scope :verified, :conditions => {:state => 'verified'}, :order => 'completed_on DESC'

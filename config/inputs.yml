@@ -27,10 +27,6 @@ effort_id:
   prompt: effort?
   nil: (effort)
 
-related_id:
-  prompt: relates to?
-  nil: (not related)
-
 save:
   hint: Save
 
