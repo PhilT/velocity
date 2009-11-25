@@ -1,4 +1,4 @@
-%li.task{:id => "task_#{task.id || 'new'}", :class => task.state}
+%li.task{:id => "task_#{task.id || 'new'}", :class => "#{task.state} #{current_user == task.assigned ? 'assigned' : 'other'}"}
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
       %li{:class => task.category}= link_to task.category, task_path(task, 'task[category]' => true), :class => :put

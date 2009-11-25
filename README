@@ -6,3 +6,18 @@ Bustle extends the to-do list concept with a few extra features to make it usefu
 
 Default database is now MySQL. Users can be added by other users. If no users are in the database Bustle allows the first one to be added without logging in.
 
+Features:
+* Inline editing of task details
+* Drag to re-order tasks
+* Current and future releases
+* Simple state transitions (move to current, start, complete, verify)
+* Task categories: feature, bug, refactor
+* Current users tasks are highlighted
+* See when a task was started/completed
+
+Coming up:
+* Mark a release as complete and email features/bug fix list to all users
+
+Issues:
+* Currently only a single project is supported
+

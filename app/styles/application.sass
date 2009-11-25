@@ -7,6 +7,7 @@
 !section_border = #ddd
 
 !text_color = #333
+!description_color = #666
 
 body
   :font 14px Lucida Grande,Helvetica,Arial,sans-serif !important
@@ -41,9 +42,9 @@ h2
 h3
   :border-top= 1px "solid" !section_border
   :clear both
-  :color #666
+  :color #444
   :display block
-  :font-size 12px
+  :font-size 110%
   :font-weight normal
   :position relative
   :top -2px
@@ -66,21 +67,20 @@ ul#later_tasks
 .task
   :clear both
   :margin-top 5px
-  :height 50px
+  :padding-top 4px
   &:hover
     :background #eee
-    .description, .actions
-      :opacity 1
   .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .started_on
     :float left
     :padding-right 5px
 
   .feature a, .refactor a, .bug a
     :display block
-    :padding-bottom 1px
+    :padding 1px
     :text-align center
     :width 60px
     :color white
+    :font-size 90%
 
   .feature a
     :background-color= !feature_color
@@ -93,10 +93,19 @@ ul#later_tasks
     :border-right 1px solid #888
     :margin-right 4px
     :padding-top 2px
+    :color= !description_color
+    :font-size 90%
+  input
+    :font-size 80%
 
-  .description, .actions
-    :opacity .2
+.other
+  :color= !description_color
 
 .completed
-  :opacity .50
+  .name
+    :text-decoration line-through
+
+.name
+  input
+    :width 500px
 

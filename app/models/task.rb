@@ -69,7 +69,7 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    now? ? ((aasm_events_for_current_state - [:next_state]).first) : 'next release'
+    now? ? ((aasm_events_for_current_state - [:next_state]).first) : 'move to current'
   end
 
   def mark_started
