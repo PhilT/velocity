@@ -66,11 +66,10 @@ ul#later_tasks
 
 .task
   :clear both
+  :overflow auto
   :margin-top 5px
   :padding-top 4px
-  &:hover
-    :background #eee
-  .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .started_on
+  .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .started_on, .action
     :float left
     :padding-right 5px
 
@@ -81,6 +80,15 @@ ul#later_tasks
     :width 60px
     :color white
     :font-size 90%
+
+  .description, .actions
+    :opacity 0
+
+  &:hover
+    :background #eee
+    .description, .actions
+      :opacity 1
+
 
   .feature a
     :background-color= !feature_color
@@ -94,9 +102,9 @@ ul#later_tasks
     :margin-right 4px
     :padding-top 2px
     :color= !description_color
-    :font-size 90%
-  input
     :font-size 80%
+  input
+    :font-size 70%
 
 .other
   :color= !description_color
