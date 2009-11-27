@@ -43,10 +43,6 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     wrap content, name
   end
 
-  def submit(options = {})
-    wrap super('create'), "submit" if @object.new_record?
-  end
-
 private
   def defaults(name, options)
     @defaults = @@inputs[name.to_s]
