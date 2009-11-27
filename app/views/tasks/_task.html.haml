@@ -5,6 +5,10 @@
       = f.label :id
       = f.text :name
 
+    %ul.actions
+      %li.action= button_to task.action, {}, :class => :put
+      = f.submit
+
     %ul.description
       = f.label :author_id
       = f.select :assigned_id, :collection => @developers
@@ -12,8 +16,4 @@
         %li= " verified by #{task.verifier.name}"
       = f.label :started_on
       = f.label :completed_on
-
-    %ul.actions
-      %li.action= button_to task.action, {}, :class => :put
-      = f.submit
 
