@@ -1,5 +1,7 @@
-%h3= heading
+%h3
+  %span= heading
+  %span.finished= button_to('finish release', finish_release_path(Release.current), :method => :put) if id == 'now_tasks'
 %ul.tasks{:id => id}
   - tasks.each do |task|
-    = render :partial => task.new_record? ? 'new_task' : 'task', :object => task, :locals => {:field => nil}
+    = render :partial => task.new_record? ? 'tasks/new_task' : 'tasks/task', :object => task, :locals => {:field => nil}
 

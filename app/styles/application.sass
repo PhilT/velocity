@@ -18,26 +18,28 @@ body, ul, li
   :padding 0
 
 body
-  :margin 20px
+  :margin 0
 
 li
   :list-style-type none
 
-#header h1
-  :background url(/images/logo.png) no-repeat
-  :float left
-  :margin-top 0
-  :line-height 30px
-  :padding-left 50px
-  sup
-    :font-size 14px
+#header
+  :background #ddd
+  :overflow auto
+  h1
+    :background url(/images/logo.png) no-repeat
+    :float left
+    :margin-top 0
+    :line-height 30px
+    :padding-left 50px
+  h2
+    :float left
+    :font-size 12px
+    :padding-left 10px
 
 a
   :text-decoration none
   :color inherit
-
-h2
-  :clear both
 
 h3
   :border-top= 1px "solid" !section_border
@@ -49,6 +51,8 @@ h3
   :position relative
   :top -2px
   :width 100%
+  span
+    :float left
 
 #session
   :float right
@@ -63,6 +67,7 @@ h3
 ul#now_tasks,
 ul#later_tasks
   :min-height 20px
+  :margin 10px
 
 .task
   :clear both

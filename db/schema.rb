@@ -9,7 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091124222356) do
+ActiveRecord::Schema.define(:version => 20091125230722) do
+
+  create_table "releases", :force => true do |t|
+    t.datetime "finished_at"
+  end
 
   create_table "tasks", :force => true do |t|
     t.text     "name"
@@ -23,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20091124222356) do
     t.integer  "verified_by"
     t.string   "category"
     t.integer  "position"
-    t.boolean  "now",                        :default => false
+    t.integer  "release_id"
   end
 
   create_table "users", :force => true do |t|

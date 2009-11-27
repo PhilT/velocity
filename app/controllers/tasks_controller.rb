@@ -4,21 +4,19 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @new_tasks = [Task.new]
-    @now_tasks = Task.now
-    @other_tasks = Task.other
-  end
-
-  def verified
-    @verified_tasks = Task.verified
+    @current_tasks = Task.current
+    @future_tasks = Task.future
   end
 
   def sort
     tasks = Task.all
+    current_release = Release.current
+    reordered_tasks = params['task']
     tasks.each do |task|
-      i = params['task'].index(task.id.to_s)
+      i = reordered_tasks.index(task.id.to_s)
       if i
         task.position = i + 1
-        task.now = params['now']
+        task.release = params[:now] ? current_release : nil
         task.save
       end
     end
@@ -46,14 +44,14 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     if params[:task].nil?
-      if !@task.now?
-        @task.update_attribute(:now, true)
-        @task.insert_at(Task.now.last.position + 1)
-        @task_moved = true
-      else
+      if @task.release
         @task.next_state
         @task.assign_to!(current_user) if @task.started? && !@task.assigned
         @task.verified_by!(current_user) if @task.verified?
+      else
+        @task.move_to_current!
+        @task.insert_at(Task.current.last.position + 1)
+        @task_moved = true
       end
     else
       if params[:task][:category]
@@ -70,7 +68,7 @@ class TasksController < ApplicationController
     end
   end
 
-  private
+private
   def find_stuff
     @developers = User.developers
   end

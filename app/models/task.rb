@@ -1,13 +1,13 @@
 class Task < ActiveRecord::Base
   include AASM
-  acts_as_list
+  acts_as_list :scope => :release
 
   before_create :set_initial_state
 
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
   belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
-
   belongs_to :verifier, :class_name => 'User', :foreign_key => :verified_by
+  belongs_to :release
 
   validates_presence_of :name
 
@@ -36,9 +36,8 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
   end
 
-  named_scope :now, :conditions => "now = true AND state != 'verified'", :order => :position
-  named_scope :other, :conditions => "now = false AND state != 'verified'", :order => :position
-  named_scope :verified, :conditions => {:state => 'verified'}, :order => 'completed_on DESC'
+  named_scope :current, :conditions => 'releases.finished_at IS NULL', :joins => [:release], :order => :position
+  named_scope :future, :conditions => "release_id IS NULL", :order => :position
 
   def started
     started?
@@ -69,7 +68,15 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    now? ? ((aasm_events_for_current_state - [:next_state]).first) : 'move to current'
+    self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'move to current'
+  end
+
+  def move_to_current!
+    update_attribute(:release, Release.current)
+  end
+
+  def move_out_of_current!
+    update_attribute(:release, nil)
   end
 
   def mark_started

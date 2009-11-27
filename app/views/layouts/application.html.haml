@@ -6,16 +6,15 @@
     = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery-ui.min', 'lib/jquery.delay', 'lib/jquery.hint', 'application'
   %body
     %div#header
-      %h1
-        = link_to :Bustle, root_path
-        %sup= STRAPLINE
-    %ul#session
-      - if current_user
-        %li= link_to '[Tasks]', tasks_path
-        %li= link_to '[Verified]', verified_tasks_path
-        %li= link_to '[Users]', new_user_path
-        %li= link_to '[Logout]', user_session_path(current_user), :method => :delete
-      - else
-        %li= link_to '[Login]', new_user_session_path
+      %h1= link_to :Bustle, root_path
+      %h2= STRAPLINE
+      %ul#session
+        - if current_user
+          %li= link_to '[Tasks]', tasks_path
+          %li= link_to '[Releases]', releases_path
+          %li= link_to '[Users]', new_user_path
+          %li= link_to '[Logout]', user_session_path(current_user), :method => :delete
+        - else
+          %li= link_to '[Login]', new_user_session_path
     = yield
 
