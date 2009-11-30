@@ -166,5 +166,13 @@ $(function(){
     });
   }
 
+  $('#filter').change(function(){
+    if($(this).attr('checked')){
+      $('.other').hide();
+    }
+    else{
+      $('.other').show();
+    }
+  });
 })
 
