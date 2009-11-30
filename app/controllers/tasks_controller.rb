@@ -16,7 +16,8 @@ class TasksController < ApplicationController
       i = reordered_tasks.index(task.id.to_s)
       if i
         task.position = i + 1
-        task.release = params[:now] ? current_release : nil
+        task.release = params[:now] == 'true' ? current_release : nil
+        logger.info "\n\n#{task.release}\n\n"
         task.save
       end
     end
