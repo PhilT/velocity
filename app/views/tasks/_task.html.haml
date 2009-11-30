@@ -3,11 +3,9 @@
     %ul.title
       %li{:class => task.category}
         = link_to '', task_path(task, 'task[category]' => true), :class => :put
-      = f.text :name, :hint => "what's this about?"
-
-    %ul.actions
       %li.action
         = f.submit(task.action)
+      = f.text :name, :hint => "what's this about?"
 
     %ul.description
       = f.label :author_id, :prefix => 'by '
