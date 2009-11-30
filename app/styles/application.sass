@@ -74,7 +74,7 @@ ul#later_tasks
   :overflow auto
   :margin-top 5px
   :padding-top 4px
-  .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .started_on, .action
+  .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .verifier, .started_on, .action
     :float left
     :padding-right 5px
 
@@ -102,7 +102,7 @@ ul#later_tasks
   .bug a
     :background-color= !bug_color
 
-  .author_id, .assigned_id, .completed_on, .started_on
+  .author_id, .assigned_id, .completed_on, .verifier, .started_on
     :border-right 1px solid #888
     :margin-right 4px
     :padding-top 2px
@@ -114,9 +114,12 @@ ul#later_tasks
 .other
   :color= !description_color
 
-.completed
+.completed, .verified
   .name
     :text-decoration line-through
+
+.verified
+  :color= !description_color
 
 .name
   input

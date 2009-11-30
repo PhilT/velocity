@@ -3,18 +3,17 @@
     %ul.title
       %li{:class => task.category}
         = link_to task.category, task_path(task, 'task[category]' => true), :class => :put
-      = f.label :id
-      = f.text :name
+      = f.label :id, :prefix => '#'
+      = f.text :name, :hint => "what's this about?"
 
     %ul.actions
       %li.action
         = f.submit(task.action)
 
     %ul.description
-      = f.label :author_id
-      = f.select :assigned_id, :collection => @developers
-      - if task.verified?
-        %li= " verified by #{task.verifier.name}"
-      = f.label :started_on
-      = f.label :completed_on
+      = f.label :author_id, :prefix => 'by '
+      = f.select :assigned_id, :collection => @developers, :prefix => 'assigned: ', :prompt => 'unassign', :nil => '(no one)'
+      = f.label :verifier, :prefix => 'verified by '
+      = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
+      = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
 

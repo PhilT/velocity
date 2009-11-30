@@ -5,8 +5,6 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
-  @@inputs = YAML::load(File.open(RAILS_ROOT + '/config/inputs.yml'))
-
   def check(name, options = {})
     defaults(name, options)
     wrap check_box(name, :id => @id) + add_label(options), name
@@ -14,17 +12,17 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def label(name, options = {})
     defaults(name, options)
-    wrap decorate(@value, :link => false), name unless @value.blank?
+    wrap decorate(@value, options.merge({:link => false})), name unless @value.blank?
   end
 
   def select(name, options = {})
     defaults(name, options)
     if @object.new_record? || currently_editing?(name)
-      content = collection_select(name, options[:collection], :id, :name, {:prompt => @defaults['prompt']}, {:id => @id})
+      content = collection_select(name, options[:collection], :id, :name, {:prompt => options[:prompt]}, {:id => @id})
     elsif !@value.blank?
-      content = decorate(include_id(options) + truncate(@value, :length => 30))
+      content = decorate(include_id(options) + truncate(@value, :length => 30), options)
     else
-      content = decorate(@defaults['nil'], :class => 'not_set')
+      content = decorate(options[:nil], options.merge({:class => 'not_set'}))
     end
     wrap content, "#{name} #{@value unless @value.nil? || @value.include?(' ')} " + (options[:ajaxSelect] == false ? '' : 'ajaxSelect')
   end
@@ -33,7 +31,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     defaults(name, options)
     value = @object.send(name)
     if value.blank? || currently_editing?(name)
-      content = text_field(name, :id => @id, :title => @defaults['hint'])
+      content = text_field(name, :id => @id, :title => options[:hint])
     else
       value = value.gsub(/(http:\/\/\S+[a-z0-9\/])/i, '<a href="\1" class="link" title="visit page">\1</a>')
       value = value.gsub(/(\. )/, '\1</strong>')
@@ -45,7 +43,6 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
 private
   def defaults(name, options)
-    @defaults = @@inputs[name.to_s]
     @value = options[:value] || @object.send(name.to_s.gsub(/_id$/, ''))
     @value = @value.name if @value.kind_of?(ActiveRecord::Base) unless @value.blank?
     @id = "#{name}_#{@object.id || 'new'}"
@@ -63,7 +60,7 @@ private
   def decorate(input, options = {})
     input = time_ago(input) if input.is_a?(ActiveSupport::TimeWithZone)
     input = make_link(input, options)
-    "#{@defaults['prefix']}#{input}#{@defaults['suffix']}"
+    "#{options[:prefix]}#{input}#{options[:suffix]}"
   end
 
   def make_link(input, options)
@@ -74,7 +71,7 @@ private
   end
 
   def add_label(options)
-    options[:label] == false ? "" : label_tag(@id, @defaults['label'])
+    options[:label] == false ? "" : label_tag(@id, options[:label])
   end
 
   def wrap(content, klass)
