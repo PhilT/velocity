@@ -68,7 +68,7 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'move to current'
+    self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'to current'
   end
 
   def move_to_current!

@@ -1,6 +1,10 @@
-%div
-  = check_box_tag 'filter'
-  = label_tag 'filter', 'your tasks only'
+%ul#filters
+  %li
+    = check_box_tag 'filter_yours'
+    = label_tag 'filter_yours', 'your tasks only'
+  %li
+    = check_box_tag 'filter_completed'
+    = label_tag 'filter_completed', "hide completed and verified tasks"
 = render :partial => 'tasks', :object => @current_tasks, :locals => {:heading => "Tasks for the current release (#{@current_tasks.size})", :id => 'now_tasks'}
 = render :partial => 'tasks', :object => @future_tasks, :locals => {:heading => "Tasks for a future release (#{@future_tasks.size})", :id => 'later_tasks'}
 

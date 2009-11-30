@@ -166,12 +166,31 @@ $(function(){
     });
   }
 
-  $('#filter').change(function(){
+  $('#filter_yours').change(function(){
     if($(this).attr('checked')){
       $('.other').hide();
     }
     else{
-      $('.other').show();
+      if($('#filter_completed')){
+        $('.pending.other, .started.other').show();
+      }
+      else{
+        $('.other').show();
+      }
+    }
+  });
+
+  $('#filter_completed').change(function(){
+    if($(this).attr('checked')){
+      $('.completed, .verified').hide();
+    }
+    else{
+      if($('#filter_yours').attr('checked')){
+        $('.completed.assigned, .verified.assigned').show();
+      }
+      else{
+        $('.completed,.verified').show();
+      }
     }
   });
 })
