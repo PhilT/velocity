@@ -17,7 +17,6 @@ class TasksController < ApplicationController
       if i
         task.position = i + 1
         task.release = params[:now] == 'true' ? current_release : nil
-        logger.info "\n\n#{task.release}\n\n"
         task.save
       end
     end
