@@ -2,8 +2,7 @@
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
       %li{:class => task.category}
-        = link_to task.category, task_path(task, 'task[category]' => true), :class => :put
-      = f.label :id, :prefix => '#'
+        = link_to '', task_path(task, 'task[category]' => true), :class => :put
       = f.text :name, :hint => "what's this about?"
 
     %ul.actions
