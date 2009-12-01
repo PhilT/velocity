@@ -177,7 +177,7 @@ $(function(){
   }
 
   function onlyShowUsersTasks(){
-    $('#filter_yours').change(function(){
+    $('#filter_yours').live('change', function(){
       if($(this).attr('checked')){
         $('.other').hide();
       }
@@ -193,7 +193,7 @@ $(function(){
   }
 
   function hideCompletedAndVerifiedTasks(){
-    $('#filter_completed').change(function(){
+    $('#filter_completed').live('change', function(){
       if($(this).attr('checked')){
         $('.completed, .verified').hide();
       }
@@ -210,9 +210,15 @@ $(function(){
 
   function showTaskInfo(){
     $('.info').live('click', function(){
-      $('.info').closest('.task').find('.description').fadeOut('fast');
       $(this).closest('.task').find('.description').fadeIn('fast');
-      $(this).attr('opacity', '1');
+      $('.open').closest('.task').find('.description').fadeOut('fast');
+      if($(this).hasClass('open')){
+        $('.open').removeClass('open');
+      }
+      else{
+        $('.open').removeClass('open');
+        $(this).addClass('open');
+      }
     });
   }
 })
