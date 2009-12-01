@@ -210,8 +210,8 @@ $(function(){
 
   function showTaskInfo(){
     $('.info').live('click', function(){
-      $(this).closest('.task').find('.description').fadeIn('fast');
-      $('.open').closest('.task').find('.description').fadeOut('fast');
+      $(this).closest('.task').find('.description').slideDown('fast');
+      $('.open').closest('.task').find('.description').slideUp('fast');
       if($(this).hasClass('open')){
         $('.open').removeClass('open');
       }
