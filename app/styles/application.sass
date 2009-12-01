@@ -1,10 +1,15 @@
 !border_color = #788
 
-!feature_color = "green"
-!bug_color = "darkRed"
-!refactor_color = "darkBlue"
+!feature_color = #0a0
+!bug_color = #d00
+!refactor_color = #00a
 
 !section_border = #ddd
+
+!pending_color = #a00
+!started_color = #aa0
+!completed_color = #0c0
+!verified_color = #888
 
 !text_color = #333
 !description_color = #666
@@ -74,21 +79,48 @@ ul#later_tasks
   :overflow auto
   :margin-top 5px
   :padding-top 4px
-  .feature, .bug, .refactor, .id, .author_id, .assigned_id, .completed_on, .verifier, .started_on, .action
+  .feature, .bug, .refactor, .id, .action, .handle, .info
     :float left
     :padding-right 5px
 
-  .feature a, .refactor a, .bug a
+  .feature a, .refactor a, .bug a, .handle, .info
     :display block
-    :padding 1px
     :text-align center
-    :width 13px
+    :width 16px
     :height 13px
     :color white
     :font-size 90%
+    :margin-top 2px
+    :padding-top 3px
+
+  .handle
+    :background url('/images/handle.png') no-repeat
+    :cursor pointer
+
+  .info
+    :background url('/images/info.png') no-repeat
+    :cursor pointer
+    :opacity .5
 
   .description
     :display none
+    :position absolute
+    :left 55px
+    :background #ddd
+    :border 1px solid #888
+    :padding 2px
+    :margin 2px
+    :opacity .85
+    li
+      :display block
+
+  .description.active
+    :display block
+    select
+      :font-size 80%
+
+  .assigned_id a
+    :text-decoration underline
 
   .feature a
     :background-color= !feature_color
@@ -97,23 +129,14 @@ ul#later_tasks
   .bug a
     :background-color= !bug_color
 
-  .author_id, .assigned_id, .completed_on, .verifier, .started_on
-    :border-right 1px solid #888
-    :margin-right 4px
-    :padding-top 2px
-    :color= !description_color
-    :font-size 80%
   input
     :font-size 70%
-    :width 50px
+    :width 55px
     :padding 0
 
 .completed, .verified
   .name
     :text-decoration line-through
-
-.verified
-  :color= !description_color
 
 .name
   input

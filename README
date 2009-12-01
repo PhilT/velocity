@@ -1,8 +1,9 @@
 == Bustle - To-do list with extra padding
 
 Status: Beta
+Still ironing out the interface. Trying to make it as simple as possible while keeping the bare minimum of features required.
 
-Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers to easily view and add tasks.
+Bustle extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers and developers to easily view and add tasks.
 
 Default database is now MySQL. Users can be added by other users. If no users are in the database Bustle allows the first one to be added without logging in.
 
@@ -10,13 +11,15 @@ Features:
 * Inline editing of task details
 * Drag to re-order tasks
 * Current and future releases
-* Simple state transitions (move to current, start, complete, verify)
-* Task categories: feature, bug, refactor
-* Current users tasks are highlighted
-* See when a task was started/completed
+* Simple state transitions (move to current release, start, complete, verify)
+* Simple categories: feature, bug, refactor
+* Filters: show only users tasks, hide completed tasks
+* Details view: Shows started/completed and verifier
+* Mark a release as complete
+* View tasks in previous release
 
-Coming up:
-* Mark a release as complete and email features/bug fix list to all users
+Planned:
+Email features/bug fix list of a release to all users
 
 Issues:
 * Currently only a single project is supported

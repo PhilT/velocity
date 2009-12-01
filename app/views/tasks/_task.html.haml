@@ -3,14 +3,16 @@
     %ul.title
       %li{:class => task.category}
         = link_to '', task_path(task, 'task[category]' => true), :class => :put
+      %li.handle
+      %li.info
       %li.action
-        = f.submit(task.action)
+        = f.submit(task.action, :id => "task_#{task.id}_submit")
       = f.text :name, :hint => "what's this about?"
 
-    %ul.description
-      = f.label :author_id, :prefix => 'by '
-      = f.select :assigned_id, :collection => @developers, :prefix => 'assigned: ', :prompt => 'unassign', :nil => '(no one)'
-      = f.label :verifier, :prefix => 'verified by '
-      = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
-      = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
+    %ul.description{:class => @field == 'assigned_id' ? 'active' : nil}
+      = f.label :author_id, :prefix => 'Author: '
+      = f.select :assigned_id, :collection => @developers, :prefix => 'Assigned to: ', :prompt => 'unassign', :nil => '(no one)'
+      = f.label :verifier, :prefix => 'Verified by '
+      = f.label :started_on, :prefix => 'Started ', :suffix => ' ago'
+      = f.label :completed_on, :prefix => 'Completed ', :suffix => ' ago'
 

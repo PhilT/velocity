@@ -144,18 +144,14 @@ $(document).ready(function() {
 $(function(){
 
   setHintsOnTextfields();
-  setupNewTaskForm();
   attachToStarted();
-  $('#now_tasks').sortable({ connectWith: '#later_tasks', update: function(){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/sort?now=true'})}});
-  $('#later_tasks').sortable({ connectWith: '#now_tasks', update: function(){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/sort?now=false'})}});
+  setupDraggableLists();
+  onlyShowUsersTasks();
+  hideCompletedAndVerifiedTasks();
+  showTaskInfo();
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
-  }
-
-    //This used to change a task as well?
-  function setupNewTaskForm(){
-    $('#new_task span.message').hide();
   }
 
   function attachToStarted(){
@@ -166,32 +162,58 @@ $(function(){
     });
   }
 
-  $('#filter_yours').change(function(){
-    if($(this).attr('checked')){
-      $('.other').hide();
-    }
-    else{
-      if($('#filter_completed')){
-        $('.pending.other, .started.other').show();
-      }
-      else{
-        $('.other').show();
-      }
-    }
-  });
+  function setupDraggableLists(){
+    $('#now_tasks').sortable({
+      handle: '.handle',
+      connectWith: '#later_tasks',
+      update: function(){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/sort?now=true'})}
+    });
 
-  $('#filter_completed').change(function(){
-    if($(this).attr('checked')){
-      $('.completed, .verified').hide();
-    }
-    else{
-      if($('#filter_yours').attr('checked')){
-        $('.completed.assigned, .verified.assigned').show();
+    $('#later_tasks').sortable({
+      handle: '.handle',
+      connectWith: '#now_tasks',
+      update: function(){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/sort?now=false'})}
+    });
+  }
+
+  function onlyShowUsersTasks(){
+    $('#filter_yours').change(function(){
+      if($(this).attr('checked')){
+        $('.other').hide();
       }
       else{
-        $('.completed,.verified').show();
+        if($('#filter_completed')){
+          $('.pending.other, .started.other').show();
+        }
+        else{
+          $('.other').show();
+        }
       }
-    }
-  });
+    });
+  }
+
+  function hideCompletedAndVerifiedTasks(){
+    $('#filter_completed').change(function(){
+      if($(this).attr('checked')){
+        $('.completed, .verified').hide();
+      }
+      else{
+        if($('#filter_yours').attr('checked')){
+          $('.completed.assigned, .verified.assigned').show();
+        }
+        else{
+          $('.completed,.verified').show();
+        }
+      }
+    });
+  }
+
+  function showTaskInfo(){
+    $('.info').live('click', function(){
+      $('.info').closest('.task').find('.description').fadeOut('fast');
+      $(this).closest('.task').find('.description').fadeIn('fast');
+      $(this).attr('opacity', '1');
+    });
+  }
 })
 
