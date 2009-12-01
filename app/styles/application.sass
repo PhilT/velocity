@@ -82,6 +82,8 @@ ul#later_tasks
   .feature, .bug, .refactor, .id, .action, .handle, .info
     :float left
     :padding-right 5px
+  &:hover
+    :background #eee
 
   .feature a, .refactor a, .bug a, .handle, .info
     :display block
@@ -103,15 +105,13 @@ ul#later_tasks
 
   .description
     :display none
-    :position absolute
     :left 70px
-    :background #ddd
-    :border 1px solid #888
-    :padding 5px
+    :padding 2px
     :margin 2px
-    :opacity .9
     li
-      :display block
+      :display inline
+      :border-right 1px solid silver
+      :padding-right 5px
 
   .description.active
     :display block
