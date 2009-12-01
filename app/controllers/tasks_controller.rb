@@ -32,6 +32,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def show
+    id = params[:id].split(/([0-9]+)/)[1]
+    @task = Task.find(id)
+    respond_to do|format|
+      format.js{render :action => :edit, :layout => false}
+    end
+  end
+
   def create
     params[:task][:category] = params[:bug] == '1' ? 'bug' : 'feature'
     @task = Task.create(params[:task].merge(:author => current_user))

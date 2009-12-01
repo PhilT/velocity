@@ -79,11 +79,16 @@ ul#later_tasks
   :overflow auto
   :margin-top 5px
   :padding-top 4px
+  .title
+    :clear both
+    :overflow auto
   .feature, .bug, .refactor, .id, .action, .handle, .info
     :float left
     :padding-right 5px
   &:hover
     :background #eee
+    .handle, .info
+      :opacity 1
 
   .feature a, .refactor a, .bug a, .handle, .info
     :display block
@@ -96,16 +101,17 @@ ul#later_tasks
     :padding-top 3px
 
   .handle
-    :background url('/images/handle.png') no-repeat
+    :background url('/images/icons/arrow_out.png') no-repeat
     :cursor move
+    :opacity 0
 
   .info
-    :background url('/images/info.png') no-repeat
+    :background url('/images/icons/information.png') no-repeat
     :cursor pointer
+    :opacity 0
 
   .description
     :display none
-    :left 70px
     :padding 2px
     :margin 2px
     li
@@ -122,11 +128,12 @@ ul#later_tasks
     :text-decoration underline
 
   .feature a
-    :background-color= !feature_color
+    :background= url('/images/icons/lightbulb.png') no-repeat
+
   .refactor a
-    :background-color= !refactor_color
+    :background= url('/images/icons/lightbulb_off.png') no-repeat
   .bug a
-    :background-color= !bug_color
+    :background= url('/images/icons/bug.png') no-repeat
 
   input
     :font-size 70%
@@ -140,6 +147,15 @@ ul#later_tasks
 .name
   input
     :width 500px
+    :float left
+  a.cancel
+    :background url('/images/icons/cancel.png') no-repeat
+    :display block
+    :margin-left 5px
+    :width 16px
+    :height 16px
+    :overflow auto
+    :text-indent -1000px
 
 #filters
   :overflow auto

@@ -1,10 +1,10 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => "#{task.state} #{current_user == task.assigned ? 'assigned' : 'other'}"}
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
-      %li{:class => task.category, :title => task.category}
-        = link_to '', task_path(task, 'task[category]' => true), :class => :put
       %li.handle{:title => 'drag to reorder'}
       %li.info{:title => 'click to see more'}
+      %li{:class => task.category, :title => task.category}
+        = link_to '', task_path(task, 'task[category]' => true), :class => :put
       %li.action
         = f.submit(task.action, :id => "task_#{task.id}_submit")
       = f.text :name, :hint => "what's this about?"
