@@ -36,8 +36,9 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
   end
 
-  named_scope :current, :conditions => 'releases.finished_at IS NULL', :joins => [:release], :order => :position
-  named_scope :future, :conditions => "release_id IS NULL", :order => :position
+  default_scope :order => :position
+  named_scope :current, :conditions => 'releases.finished_at IS NULL', :joins => [:release]
+  named_scope :future, :conditions => "release_id IS NULL"
   named_scope :features, :conditions => {:category => 'feature'}
   named_scope :bugs, :conditions => {:category => 'bug'}
   named_scope :refactorings, :conditions => {:category => 'refactor'}
