@@ -19,7 +19,7 @@ class TasksController < ApplicationController
         task.release = params[:now] == 'true' ? current_release : nil
         task.save
       end
-    end
+    end unless reordered_tasks.nil?
     render_task
   end
 
