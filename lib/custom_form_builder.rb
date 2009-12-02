@@ -31,10 +31,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     defaults(name, options)
     value = @object.send(name)
     if value.blank? || currently_editing?(name)
-      content = text_field(name, :id => @id, :title => options[:hint]) + (options[:cancel] == false ? '' : link_to('', "/tasks/#{@id}", :class => 'get cancel'))
+      content = text_field(name, :id => @id, :title => options[:hint]) + (options[:cancel] == false ? '' : link_to('cancel', "/tasks/#{@id}", :class => 'get cancel'))
     else
-      value = value.gsub(/(http:\/\/\S+[a-z0-9\/])/i, '<a href="\1" class="link" title="visit page">\1</a>')
-      content = decorate(value)
+      links = value.scan(/(http:\/\/\S+[a-z0-9\/])/i)
+      value.gsub!(/(http:\/\/\S+[a-z0-9\/])/i, '')
+      content = decorate(value) + add_links(links)
     end
     wrap content, name
   end
@@ -66,6 +67,14 @@ private
       input = link_to "#{input}", "/tasks/#{@id}/edit", :class => [options[:class], :get].join(' ')
     end
     input
+  end
+
+  def add_links(links)
+    a_tags = ""
+    links.flatten.each do |link|
+      a_tags += "<a href='#{link}' class='link_go' title='Visit #{link}'>link</a>"
+    end
+    a_tags
   end
 
   def add_label(options)

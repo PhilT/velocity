@@ -161,18 +161,27 @@ ul#later_tasks
 .name
   input
     :width 500px
+  a
     :float left
   a.cancel
-    :background url('/images/cancel.png') no-repeat
-    :display block
-    :margin-left 5px
-    :width 16px
-    :height 16px
-    :overflow auto
+    :color #44c
+    :margin-left 10px
+    :text-decoration underline
+    &:hover
+      :background #bbb
 
 #filters
   :overflow auto
   li
     :float left
     :padding-right 20px
+
+.link_go
+  :background url('/images/link_go.png') no-repeat
+  :display block
+  :width 16px
+  :height 16px
+  :overflow auto
+  :margin-left 5px
+  :text-indent -5000px
 

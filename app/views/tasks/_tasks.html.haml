@@ -1,6 +1,6 @@
 %h3
   %span= heading
-  %span.finished= button_to('finish release', finish_release_path(Release.current), :method => :put, :confirm => 'Are you sure you want to finish this release and email the feature and bug list?', :disabled => @current_tasks.outstanding.any?) if id == 'now_tasks'
+  = render :partial => 'finish_button' if id == 'now_tasks'
 %ul.tasks{:id => id}
   - tasks.each do |task|
     = render :partial => task.new_record? ? 'tasks/new_task' : 'tasks/task', :object => task, :locals => {:field => nil}
