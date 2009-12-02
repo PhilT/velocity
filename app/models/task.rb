@@ -38,6 +38,8 @@ class Task < ActiveRecord::Base
 
   named_scope :current, :conditions => 'releases.finished_at IS NULL', :joins => [:release], :order => :position
   named_scope :future, :conditions => "release_id IS NULL", :order => :position
+  named_scope :features, :conditions => {:category => 'feature'}
+  named_scope :bugs, :conditions => {:category => 'bug'}
 
   def started
     started?

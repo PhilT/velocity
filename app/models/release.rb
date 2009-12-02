@@ -12,6 +12,8 @@ class Release < ActiveRecord::Base
   end
 
   def finish!
+    ReleaseMailer.deliver_release_notification(User.all, self)
+
     touch :finished_at
     Release.create!
   end

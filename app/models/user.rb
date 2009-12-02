@@ -10,5 +10,9 @@ class User < ActiveRecord::Base
   def admin
     self.first
   end
+
+  def email_address_with_name
+    "#{name} <#{email}>"
+  end
 end
 
