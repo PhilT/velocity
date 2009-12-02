@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @new_tasks = [Task.new]
-    @current_tasks = Task.current
+    @current_tasks = Release.current.tasks
     @future_tasks = Task.future
   end
 
