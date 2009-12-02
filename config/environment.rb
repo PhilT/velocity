@@ -44,4 +44,3 @@ end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
 STRAPLINE = "Sprint your way to the next release..."
-
