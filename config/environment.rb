@@ -43,5 +43,5 @@ Rails::Initializer.run do |config|
 end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
-STRAPLINE = "The to-do list with extra padding"
+STRAPLINE = "The to-do list for development teams"
 
