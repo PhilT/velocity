@@ -31,7 +31,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     defaults(name, options)
     value = @object.send(name)
     if value.blank? || currently_editing?(name)
-      content = text_field(name, :id => @id, :title => options[:hint]) + link_to('', "/tasks/#{@id}", :class => 'get cancel')
+      content = text_field(name, :id => @id, :title => options[:hint]) + (options[:cancel] ? link_to('', "/tasks/#{@id}", :class => 'get cancel') : '')
     else
       value = value.gsub(/(http:\/\/\S+[a-z0-9\/])/i, '<a href="\1" class="link" title="visit page">\1</a>')
       content = decorate(value)
