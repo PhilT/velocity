@@ -20,7 +20,7 @@ class TasksController < ApplicationController
         task.save
       end
     end
-    render :nothing => true
+    render_task
   end
 
   def edit
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    render_task(false)
+    render_task
   end
 
   def create
