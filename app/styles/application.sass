@@ -25,22 +25,30 @@ body, ul, li
 body
   :margin 0
 
+h1,
+h2
+  :margin 0
+
 li
   :list-style-type none
 
 #header
-  :background #ddd
+  :background url(/images/header_gradient.png) repeat-x
+  :border-bottom 1px solid #c1c1c1
+  :margin-bottom 10px
   :overflow auto
+  :padding 10px 0 0 5px
   h1
-    :background url(/images/logo.png) no-repeat
+    :background url(/images/velocity.png) no-repeat
     :float left
-    :margin-top 0
-    :line-height 30px
-    :padding-left 50px
+    :margin-bottom 8px
+    a
+      :padding-left 250px
   h2
     :float left
     :font-size 12px
-    :padding-left 10px
+    :font-weight normal
+    :margin-top 18px
 
 a
   :text-decoration none
@@ -61,7 +69,7 @@ h3
 
 #session
   :float right
-  :margin-right 50px
+  :margin 10px 10px 0 0
   li
     :float left
     :padding 4px
