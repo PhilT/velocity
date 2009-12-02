@@ -40,6 +40,8 @@ class Task < ActiveRecord::Base
   named_scope :future, :conditions => "release_id IS NULL", :order => :position
   named_scope :features, :conditions => {:category => 'feature'}
   named_scope :bugs, :conditions => {:category => 'bug'}
+  named_scope :refactorings, :conditions => {:category => 'refactor'}
+  named_scope :outstanding, :conditions => 'state != "verified"'
 
   def started
     started?
