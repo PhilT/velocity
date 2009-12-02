@@ -1,4 +1,4 @@
-== Velocity - To-do list with extra padding
+== Velocity - Simple Release Management
 
 Status: Beta
 Still ironing out the interface. Trying to make it as simple as possible while keeping the bare minimum of features required.
@@ -15,11 +15,15 @@ Features:
 * Simple categories: feature, bug, refactor
 * Filters: show only users tasks, hide completed tasks
 * Details view: Shows started/completed and verifier
-* Mark a release as complete
+* Mark a release as complete - emails all users a feature and bug list
 * View tasks in previous release
+* Embed links in task descriptions
 
 Planned:
-Email features/bug fix list of a release to all users
+* Hoptoad Integration
+* Show velocity for previous releases (Velocity is very simply number of feature tasks completed)
+* Stats page
+* Live updates - When another user adds/changes a task it should be updated in your view
 
 Issues:
 * Currently only a single project is supported

@@ -24,20 +24,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @field, id = params[:id].split(/([0-9]+)/)
-    @field.gsub!(/_$/, '')
-    @task = Task.find(id)
-    respond_to do|format|
-      format.js{render :layout => false}
-    end
+    render_task(true)
   end
 
   def show
-    id = params[:id].split(/([0-9]+)/)[1]
-    @task = Task.find(id)
-    respond_to do|format|
-      format.js{render :action => :edit, :layout => false}
-    end
+    render_task(false)
   end
 
   def create
@@ -79,6 +70,15 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @developers = User.developers
+  end
+
+  def render_task(editing = false)
+    field, id = params[:id].split(/([0-9]+)/)
+    @field = field.gsub(/_$/, '') if editing
+    @task = Task.find(id)
+    respond_to do|format|
+      format.js{render :action => :edit, :layout => false}
+    end
   end
 end
 
