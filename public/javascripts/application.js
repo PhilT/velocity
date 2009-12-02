@@ -157,13 +157,13 @@ $(function(){
     $('#now_tasks').sortable({
       handle: '.handle',
       connectWith: '#later_tasks',
-      update: function(){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/sort?now=true'})}
+      update: function(event, ui){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})}
     });
 
     $('#later_tasks').sortable({
       handle: '.handle',
       connectWith: '#now_tasks',
-      update: function(){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/sort?now=false'})}
+      update: function(event, ui){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=false'})}
     });
   }
 
