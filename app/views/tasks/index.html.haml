@@ -6,6 +6,11 @@
     = check_box_tag 'filter_completed'
     = label_tag 'filter_completed', "hide completed and verified tasks"
 
+%ul#stats
+  %li
+    = label_tag 'velocity', 'Velocity:', :title => 'Features completed in last release'
+    = Release.previous.velocity
+
 = render :partial => 'tasks', :object => @current_tasks, :locals => {:heading => "Tasks for the current release (#{@current_tasks.size})", :id => 'now_tasks'}
 
 = render :partial => 'tasks', :object => @future_tasks, :locals => {:heading => "Tasks for a future release (#{@future_tasks.size})", :id => 'later_tasks'}
