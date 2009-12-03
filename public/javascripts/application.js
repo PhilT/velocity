@@ -144,6 +144,7 @@ $(document).ready(function() {
 $(function(){
 
   setHintsOnTextfields();
+  submitAssignedSelectOnChange();
   setupDraggableLists();
   onlyShowUsersTasks();
   hideCompletedAndVerifiedTasks();
@@ -151,6 +152,14 @@ $(function(){
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
+  }
+
+  function submitAssignedSelectOnChange(){
+    $('.ajaxSelect').live('change', function(){
+      form = $(this).closest('form');
+      $.put(form.attr('action'), form.serialize(), null, 'script');
+      return false;
+    });
   }
 
   function setupDraggableLists(){
