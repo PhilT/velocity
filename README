@@ -18,10 +18,10 @@ Features:
 * Mark a release as complete - emails all users a feature and bug list
 * View tasks in previous release
 * Embed links in task descriptions
+* Show velocity for previous releases (Velocity is very simply the number of features completed)
 
 Planned:
 * Hoptoad Integration
-* Show velocity for previous releases (Velocity is very simply number of feature tasks completed)
 * Stats page
 * Live updates - When another user adds/changes a task it should be updated in your view
 
