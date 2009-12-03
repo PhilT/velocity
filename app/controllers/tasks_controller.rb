@@ -2,9 +2,7 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
-    @tasks = Task.all
     @new_tasks = [Task.new]
-    @future_tasks = Task.future
   end
 
   def sort
@@ -69,6 +67,7 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @current_tasks = Release.current.tasks
+    @future_tasks = Task.future
     @developers = User.developers
   end
 

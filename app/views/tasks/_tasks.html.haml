@@ -1,5 +1,5 @@
 %h3
-  %span= heading
+  %span{:class => id}= heading
   = render :partial => 'finish_button' if id == 'now_tasks'
 %ul.tasks{:id => id}
   - tasks.each do |task|
