@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @new_tasks = [Task.new]
-    @current_tasks = Release.current.tasks
     @future_tasks = Task.future
   end
 
@@ -69,6 +68,7 @@ class TasksController < ApplicationController
 
 private
   def find_stuff
+    @current_tasks = Release.current.tasks
     @developers = User.developers
   end
 
@@ -77,7 +77,7 @@ private
     @field = field.gsub(/_$/, '') if editing
     @task = Task.find(id)
     respond_to do|format|
-      format.js{render :action => :edit, :layout => false}
+      format.js{render :action => :update, :layout => false}
     end
   end
 end
