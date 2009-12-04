@@ -1,10 +1,10 @@
 - @created_tasks.each do |task|
-  == $('#{render_hidden_task(task)}').appendTo($('#later_tasks')).slideDown()
+  == #{render_hidden_task(task)}.appendTo($('#later_tasks')).slideDown()
   == $('#task_#{task.id}').effect("highlight", {}, 30000)
 
 - @updated_tasks.each do |task|
   == $('#task_#{task.id}').remove()
-  == #{escape_javascript(render(task))}.appendTo($('##{task.release ? 'now_tasks' : 'later_tasks'}'))
+  == $('#{escape_javascript(render(task))}').appendTo($('##{task.release ? 'now_tasks' : 'later_tasks'}'))
   == $('#task_#{task.id}').effect("highlight", {}, 30000)
 
 == $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
