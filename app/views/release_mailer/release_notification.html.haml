@@ -1,12 +1,18 @@
-%h2 New website release!
+%h2 New release #{@release.finished_at.to_s}
 
 %h3 New features:
-%ul
-  - @release.tasks.features.each do |feature|
-    %li= feature.name
+- if @release.tasks.features.any?
+  %ul
+    - @release.tasks.features.each do |feature|
+      %li= feature.name
+- else
+  No new features.
 
 %h3 Bug fixes:
-%ul
-  - @release.tasks.bugs.each do |bug|
-    %li= bug.name
+- if @release.tasks.bugs.any?
+  %ul
+    - @release.tasks.bugs.each do |bug|
+      %li= bug.name
+- else
+  No bugs!
 

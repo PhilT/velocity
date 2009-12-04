@@ -19,11 +19,11 @@ Features:
 * View tasks in previous release
 * Embed links in task descriptions
 * Show velocity for previous releases (Velocity is very simply the number of features completed)
+* Live updates - When another user adds or changes a task it is updated in the users view
 
 Planned:
 * Hoptoad Integration
 * Stats page
-* Live updates - When another user adds/changes a task it should be updated in your view
 
 Issues:
 * Currently only a single project is supported

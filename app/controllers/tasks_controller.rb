@@ -64,6 +64,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def poll
+    @created_tasks = @future_tasks.created
+    @updated_tasks = @current_tasks.updated + @future_tasks.updated
+    respond_to do|format|
+      format.js{render :layout => false}
+    end
+  end
+
 private
   def find_stuff
     @current_tasks = Release.current.tasks
