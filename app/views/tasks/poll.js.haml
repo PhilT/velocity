@@ -1,5 +1,5 @@
 - @created_tasks.each do |task|
-  == #{render_hidden_task(task)}.appendTo($('#later_tasks')).slideDown()
+  == $('#{render_hidden_task(task)}').appendTo($('#later_tasks')).slideDown()
   == $('#task_#{task.id}').effect("highlight", {}, 30000)
 
 - @updated_tasks.each do |task|
