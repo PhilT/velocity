@@ -13,7 +13,7 @@
     (features per week)
     %div#info
       Taken from Release
-      = Release.last[0].finished_at.to_s
+      = Release.last[0].finished_at.to_s rescue "(none)"
 
 = render :partial => 'tasks', :object => @current_tasks, :locals => {:heading => now_tasks_heading, :id => 'now_tasks'}
 

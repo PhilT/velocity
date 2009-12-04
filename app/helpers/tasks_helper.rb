@@ -1,6 +1,6 @@
 module TasksHelper
-  def render_hidden_task
-    "$('#{escape_javascript(render(@task))}').hide()"
+  def render_hidden_task(task)
+    "$('#{escape_javascript(render(task))}').hide()"
   end
 
   def now_tasks_heading

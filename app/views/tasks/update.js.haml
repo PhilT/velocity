@@ -1,6 +1,6 @@
 - if @task_moved
   == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
-  == #{render_hidden_task}.appendTo($('#now_tasks')).slideDown()
+  == #{render_hidden_task(@task)}.appendTo($('#now_tasks')).slideDown()
 - else
   == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render(@task, :locals => {:field => @field}))}")
   == $('#task_#{@task.id}').effect("highlight", {}, 3000)

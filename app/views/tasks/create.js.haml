@@ -1,4 +1,4 @@
 - if @task.valid?
-  == #{render_hidden_task}.appendTo($('#later_tasks')).slideDown()
+  == #{render_hidden_task(@task)}.appendTo($('#later_tasks')).slideDown()
   == $('#new_task .name input').val('')
 

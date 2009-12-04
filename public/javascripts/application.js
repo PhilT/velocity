@@ -149,6 +149,7 @@ $(function(){
   onlyShowUsersTasks();
   hideCompletedAndVerifiedTasks();
   showTaskInfo();
+  liveUpdates();
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -222,5 +223,8 @@ $(function(){
     });
   }
 
+  function liveUpdates(){
+    setInterval('$.get("/tasks/poll");', 30000);
+  }
 })
 
