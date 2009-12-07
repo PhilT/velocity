@@ -1,14 +1,3 @@
-- @created_tasks.each do |task|
-  == #{render_hidden_task(task)}.appendTo($('#later_tasks')).slideDown()
-  == $('#task_#{task.id}').effect("highlight", {}, 30000)
-
-- @updated_tasks.each do |task|
-  == $('#task_#{task.id}').remove()
-  == $('#{escape_javascript(render(task))}').appendTo($('##{task.release ? 'now_tasks' : 'later_tasks'}'))
-  == $('#task_#{task.id}').effect("highlight", {}, 30000)
-
-== $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
-
-== $('.now_tasks').html("#{now_tasks_heading}")
-== $('.later_tasks').html("#{future_tasks_heading}")
+- if @created_tasks.any? || @updated_tasks.any?
+  == $.jGrowl("Other tasks have been added or updated. Refresh to see updates", { header: 'Updates Found', sticky: true });
 
