@@ -65,7 +65,7 @@ class TasksController < ApplicationController
   end
 
   def poll
-    @created_tasks = @future_tasks.created
+    @created_tasks = @future_tasks.created(current_user)
     @updated_tasks = @current_tasks.updated + @future_tasks.updated
     respond_to do|format|
       format.js{render :layout => false}

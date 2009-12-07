@@ -3,7 +3,6 @@
 
 - @updated_tasks.each do |task|
   == $('#task_#{task.id}').replaceWith('#{escape_javascript(render(task))}')
-  == $('#task_#{task.id}').effect("highlight", {}, 30000)
 
 == $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
 
