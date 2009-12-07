@@ -1,3 +1,12 @@
-- if @created_tasks.any? || @updated_tasks.any?
-  == $.jGrowl("Other tasks have been added or updated. Refresh to see updates", { header: 'Updates Found', sticky: true });
+- @created_tasks.each do |task|
+  == $.jGrowl("#{task.name}", { header: 'New task', sticky: true });
+
+- @updated_tasks.each do |task|
+  == $('#task_#{task.id}').replaceWith('#{escape_javascript(render(task))}')
+  == $('#task_#{task.id}').effect("highlight", {}, 30000)
+
+== $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
+
+== $('.now_tasks').html("#{now_tasks_heading}")
+== $('.later_tasks').html("#{future_tasks_heading}")
 
