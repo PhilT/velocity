@@ -43,8 +43,8 @@ class Task < ActiveRecord::Base
   named_scope :bugs, :conditions => {:category => 'bug'}
   named_scope :refactorings, :conditions => {:category => 'refactor'}
   named_scope :outstanding, :conditions => 'state != "verified"'
-  named_scope :created, :conditions => ["created_at > ?", DateTime.now - 29.seconds]
-  named_scope :updated, :conditions => ["updated_at > ?", DateTime.now - 29.seconds]
+  named_scope :created, lambda {{:conditions => ["created_at > ?", DateTime.now - 29.seconds]}}
+  named_scope :updated, lambda {{:conditions => ["updated_at > ?", DateTime.now - 29.seconds]}}
 
   def started
     started?
