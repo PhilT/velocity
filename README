@@ -19,10 +19,12 @@ Features:
 * View tasks in previous release
 * Embed links in task descriptions
 * Show velocity for previous releases (Velocity is very simply the number of features completed)
-* Live updates - When another user adds or changes a task it is updated in the users view
+
+Currently working on:
+* Live updates - Users are notified when new tasks are created, a task is assigned to them or tasks are reordered. If details or state of a task has changed then task is simply updated inline without notification.
+* Hoptoad Integration
 
 Planned:
-* Hoptoad Integration
 * Stats page
 
 Issues:
