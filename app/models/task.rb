@@ -67,7 +67,7 @@ class Task < ActiveRecord::Base
   end
 
   def assign_to!(user)
-    update_attribute :assigned_id, user.id
+    update_attributes(:assigned_id => user.id, :updated_field => 'assigned_id')
   end
 
   def verified_by!(user)
@@ -82,12 +82,8 @@ class Task < ActiveRecord::Base
     self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'to current'
   end
 
-  def move_to_current!
-    update_attribute(:release, Release.current)
-  end
-
-  def move_out_of_current!
-    update_attribute(:release, nil)
+  def move_to!(position, release)
+    update_attributes(:position => position, :release => release, :updated_field => 'position')
   end
 
   def mark_started

@@ -11,11 +11,7 @@ class TasksController < ApplicationController
     reordered_tasks = params['task']
     tasks.each do |task|
       i = reordered_tasks.index(task.id.to_s)
-      if i
-        task.position = i + 1
-        task.release = params[:now] == 'true' ? current_release : nil
-        task.save
-      end
+      task.move_to!(i + 1, params[:now] == 'true' ? current_release : nil) if i
     end unless reordered_tasks.nil?
     render_task
   end
@@ -45,9 +41,8 @@ class TasksController < ApplicationController
         @task.assign_to!(current_user) if @task.started? && !@task.assigned
         @task.verified_by!(current_user) if @task.verified?
       else
-        @task.move_to_current!
-        @task.insert_at(Task.current.last.position + 1)
-        @task_moved = true
+        @moved = true
+        @task.move_to!(Task.current.last.position + 1, Release.current)
       end
     else
       if params[:task][:category]
