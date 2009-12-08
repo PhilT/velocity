@@ -1,8 +1,12 @@
+- if @updated_tasks.map(&:updated_field).include?('position')
+  == $.jGrowl("Please refresh", { header: 'Tasks reordered', sticky: true });
+
 - @created_tasks.each do |task|
   == $.jGrowl("#{task.name}", { header: 'New task', sticky: true });
 
 - @updated_tasks.each do |task|
-  == $('#task_#{task.id}').replaceWith('#{escape_javascript(render(task))}')
+  - if task.updated_field != 'position'
+    == $('#task_#{task.id}').replaceWith('#{escape_javascript(render(task))}')
 
 == $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
 

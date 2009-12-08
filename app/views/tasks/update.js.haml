@@ -1,4 +1,4 @@
-- if @task_moved
+- if @moved
   == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
   == #{render_hidden_task(@task)}.appendTo($('#now_tasks')).slideDown()
 - else

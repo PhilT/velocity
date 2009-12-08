@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091203020736) do
+ActiveRecord::Schema.define(:version => 20091208075959) do
 
   create_table "releases", :force => true do |t|
     t.datetime "finished_at"
@@ -24,11 +24,12 @@ ActiveRecord::Schema.define(:version => 20091203020736) do
     t.datetime "completed_on"
     t.integer  "author_id"
     t.integer  "assigned_id"
-    t.string   "state",        :limit => 30
+    t.string   "state",         :limit => 30
     t.integer  "verified_by"
     t.string   "category"
     t.integer  "position"
     t.integer  "release_id"
+    t.string   "updated_field"
   end
 
   create_table "users", :force => true do |t|
