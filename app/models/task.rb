@@ -46,6 +46,19 @@ class Task < ActiveRecord::Base
   named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", DateTime.now - 29.seconds, user.id]}}
   named_scope :updated, lambda {{:conditions => ["updated_at > ?", DateTime.now - 29.seconds]}}
 
+  def self.other_updates?(user)
+    updated_tasks = Release.current.tasks.updated + self.future.updated
+    updated_tasks.each do |task|
+      return true if task.updated_field == 'position' && task.updated_by != user
+    end
+    return false
+  end
+
+  def self.assigned_to(user)
+    updated_tasks = Release.current.tasks.updated + self.future.updated
+    updated_tasks.reject{|task| task.updated_field != 'assigned' || task.updated_by != user}
+  end
+
   def started
     started?
   end
@@ -67,7 +80,7 @@ class Task < ActiveRecord::Base
   end
 
   def assign_to!(user)
-    update_attributes(:assigned_id => user.id, :updated_field => 'assigned_id')
+    update_attributes(:assigned => user, :updated_field => ['assigned', user.id].join(','))
   end
 
   def verified_by!(user)
@@ -82,8 +95,17 @@ class Task < ActiveRecord::Base
     self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'to current'
   end
 
-  def move_to!(position, release)
-    update_attributes(:position => position, :release => release, :updated_field => 'position')
+  def move_to!(position, release, user)
+    update_attributes(:position => position, :release => release, :updated_field => ['position', user.id].join(','))
+  end
+
+  def updated_field
+    self['updated_field'].split(',')[0]
+  end
+
+  def updated_by
+    user_id = self['updated_field'].split(',')[1]
+    User.find(user_id.to_i) unless user_id.blank?
   end
 
   def mark_started

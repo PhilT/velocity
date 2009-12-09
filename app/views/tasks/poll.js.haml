@@ -1,5 +1,8 @@
-- if @updated_tasks.map(&:updated_field).include?('position')
+- if Task.other_updates?(current_user)
   == $.jGrowl("Please refresh", { header: 'Tasks reordered', sticky: true });
+
+- Task.assigned_to(current_user).each do |task|
+  == $.jGrowl("'#{task.name}' has been assigned to you", { header: 'Task Assignment', sticky: true });
 
 - @created_tasks.each do |task|
   == $.jGrowl("#{task.name}", { header: 'New task', sticky: true });
