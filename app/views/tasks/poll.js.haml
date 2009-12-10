@@ -1,11 +1,12 @@
-- if Task.other_updates?(current_user)
-  == $.jGrowl("Please refresh", { header: 'Tasks reordered', sticky: true });
+- if @any_updates || @created_tasks.any? || @assigned_tasks.any?
+  == $('.only_one').remove()
+  == $.jGrowl("Tasks added, reordered or assigned to you", { group: 'only_one', header: 'Please Refresh', sticky: true, glue: 'before' })
 
-- Task.assigned_to(current_user).each do |task|
-  == $.jGrowl("'#{task.name}' has been assigned to you", { header: 'Task Assignment', sticky: true });
+- @assigned_tasks.each do |task|
+  == $.jGrowl("'#{task.name}' has been assigned to you", { header: 'Task Assignment', life: 30000 })
 
 - @created_tasks.each do |task|
-  == $.jGrowl("#{task.name}", { header: 'New task', sticky: true });
+  == $.jGrowl("#{task.name}", { header: 'New task', life: 30000 })
 
 - @updated_tasks.each do |task|
   - if task.updated_field != 'position'
