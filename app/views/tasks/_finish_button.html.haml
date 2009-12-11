@@ -1,2 +1,4 @@
-%span.finished= button_to('finish release', finish_release_path(Release.current), :method => :put, :confirm => 'Finish release and email features and bugs completed?', :disabled => (@current_tasks.outstanding.any? || @current_tasks.empty?))
+%span.finished
+  %span.error= flash[:error]
+  = button_to('Finish Release...', finish_release_path(Release.current), :method => :put, :confirm => 'Finish release and email features and bugs completed? This does not include incomplete tasks')
 
