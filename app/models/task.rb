@@ -45,6 +45,8 @@ class Task < ActiveRecord::Base
   named_scope :outstanding, :conditions => 'state != "verified"'
   named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", DateTime.now - 29.seconds, user.id]}}
   named_scope :updated, lambda {{:conditions => ["updated_at > ?", DateTime.now - 29.seconds]}}
+  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
+  named_scope :completed, :conditions => {:state => 'completed'}
 
   def self.other_updates?(user)
     updated_tasks = Release.current.tasks.updated + self.future.updated

@@ -13,10 +13,14 @@ class Release < ActiveRecord::Base
   end
 
   def finish!
-    ReleaseMailer.deliver_release_notification(User.all, self)
+    return false if tasks.completed.any?
 
     touch :finished_at
-    Release.create!
+    new_release = Release.create!
+    new_release.tasks = tasks.incomplete
+    new_release.save!
+
+    ReleaseMailer.deliver_release_notification(User.all, self)
   end
 
   def self.velocity
