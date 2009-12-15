@@ -42,7 +42,7 @@ class TasksController < ApplicationController
         @task.verified_by!(current_user) if @task.verified?
       else
         @moved = true
-        @task.move_to!(Task.current.last.position + 1, Release.current, current_user)
+        @task.move_to!((Task.current.last.position + 1 rescue 1), Release.current, current_user)
       end
     else
       if params[:task][:category]
