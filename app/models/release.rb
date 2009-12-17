@@ -1,5 +1,6 @@
 class Release < ActiveRecord::Base
   has_many :tasks
+  belongs_to :finished_by, :class_name => 'User', :foreign_key => :finished_by
 
   named_scope :previous, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC'
   named_scope :last, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC', :limit => 1
@@ -12,10 +13,11 @@ class Release < ActiveRecord::Base
     self.finished_at.nil?
   end
 
-  def finish!
+  def finish!(user)
     return false if tasks.completed.any?
 
     touch :finished_at
+    update_attribute :finished_by, user
     new_release = Release.create!
     new_release.tasks = tasks.incomplete
     new_release.save!

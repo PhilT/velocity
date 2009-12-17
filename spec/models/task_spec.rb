@@ -12,6 +12,7 @@ describe Task do
     Task.create!(@valid_attributes)
   end
 
+
   describe 'form helper methods' do
     it "should handle started" do
       task = Factory :task

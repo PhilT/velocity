@@ -15,18 +15,17 @@ Features:
 * Simple categories: feature, bug, refactor
 * Filters: show only users tasks, hide completed tasks
 * Details view: Shows started/completed and verifier
-* Mark a release as complete - emails all users a feature and bug list
+* Mark a release as complete - emails all users a feature and bug list. Fails if tasks have not been verified. Does not include any tasks that are incomplete
 * View tasks in previous release
 * Embed links in task descriptions
 * Show velocity for previous releases (Velocity is very simply the number of features completed)
+* Live updates - Users are notified when new tasks are created, a task is assigned to them or tasks are reordered or a release is finished. If details or state of a task has changed then the task is simply updated inline without notification.
+* Mark a task invalid. Gets included when a release is completed
 
 Currently working on:
-* Live updates - Users are notified when new tasks are created, a task is assigned to them or tasks are reordered. If details or state of a task has changed then task is simply updated inline without notification.
 * Hoptoad Integration
 
 Planned:
 * Stats page
-
-Issues:
-* Currently only a single project is supported
+* Multi-project support
 
