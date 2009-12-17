@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
   aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
   aasm_state :verified
+  aasm_state :invalid
 
   aasm_event :start do
     transitions :from => :pending, :to => :started
@@ -29,11 +30,18 @@ class Task < ActiveRecord::Base
   aasm_event :restart do
     transitions :from => :verified, :to => :started
   end
+  aasm_event :mark_invalid do
+    transitions :from => [:pending, :started, :completed], :to => :invalid
+  end
+  aasm_event :mark_valid do
+    transitions :from => :invalid, :to => :pending
+  end
   aasm_event :next_state do
     transitions :from => :pending, :to => :started
     transitions :from => :started, :to => :completed
     transitions :from => :completed, :to => :verified
     transitions :from => :verified, :to => :started
+    transitions :from => :invalid, :to => :pending
   end
 
   default_scope :order => :position
@@ -43,10 +51,14 @@ class Task < ActiveRecord::Base
   named_scope :bugs, :conditions => {:category => 'bug'}
   named_scope :refactorings, :conditions => {:category => 'refactor'}
   named_scope :outstanding, :conditions => 'state != "verified"'
-  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", DateTime.now - 29.seconds, user.id]}}
-  named_scope :updated, lambda {{:conditions => ["updated_at > ?", DateTime.now - 29.seconds]}}
+  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
+  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
   named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
   named_scope :completed, :conditions => {:state => 'completed'}
+
+  def self.last_poll
+    DateTime.now - 29.seconds
+  end
 
   def self.other_updates?(user)
     updated_tasks = Release.current.tasks.updated + self.future.updated
@@ -94,7 +106,7 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    self.release ? ((aasm_events_for_current_state - [:next_state]).first) : 'to current'
+    self.release ? (aasm_events_for_current_state - [:mark_invalid, :next_state]).first.to_s.gsub('_', ' ') : 'to current'
   end
 
   def move_to!(position, release, user)
@@ -111,12 +123,12 @@ class Task < ActiveRecord::Base
   end
 
   def mark_started
-    self.touch :started_on unless self.completed_on
-    self.update_attribute(:completed_on, nil)
+    self.started_on = current_time_from_proper_timezone
+    self.completed_on = nil
   end
 
   def mark_completed
-    self.touch :completed_on
+    self.completed_on = current_time_from_proper_timezone
   end
 
   def next_category!

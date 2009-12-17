@@ -32,22 +32,29 @@ class TasksController < ApplicationController
     end
   end
 
+  #TODO: move into model
   def update
     @task = Task.find(params[:id])
-
-    if params[:task].nil?
-      if @task.release
-        @task.next_state
+    if params[:task].nil? #state was changed
+      @task.update_attribute :updated_field, ""
+      if params[:state] == 'invalid' #marked invalid
+        @task.mark_invalid!
+        if @task.release.nil? #not in current release
+          @moved = true
+          @task.move_to!(Task.current.last.position + 1, Release.current, current_user)
+        end
+      elsif @task.release #is in current release
+        @task.next_state!
         @task.assign_to!(current_user) if @task.started? && !@task.assigned
         @task.verified_by!(current_user) if @task.verified?
-      else
+      else #not in current release
         @moved = true
         @task.move_to!(Task.current.last.position + 1, Release.current, current_user)
       end
-    else
-      if params[:task][:category]
+    else #something else was changed (other than state)
+      if params[:task][:category] #category was changed
         @task.next_category!
-      else
+      else #something other than category was changed
         @task.update_attributes(params[:task])
         @task.assign_to!(User.find(params[:task][:assigned_id])) if params[:task][:assigned_id]
       end
@@ -65,6 +72,7 @@ class TasksController < ApplicationController
     @updated_tasks = @current_tasks.updated + @future_tasks.updated
     @assigned_tasks = Task.assigned_to(current_user)
     @any_updates = Task.other_updates?(current_user)
+    @new_release = Release.current.created_at > Task.last_poll && Release.last[0].finished_by != current_user
     respond_to do|format|
       format.js{render :layout => false}
     end

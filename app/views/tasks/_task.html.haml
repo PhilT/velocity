@@ -10,6 +10,9 @@
       = f.text :name, :hint => "what's this about?"
 
     %ul.description{:class => @field == 'assigned_id' ? 'active' : nil}
+      - if task.state != 'invalid'
+        %li.action
+          = link_to 'invalid', task_path(task, :state => :invalid), :class => 'put mark_invalid', :title => 'mark this task as invalid'
       = f.label :author_id, :prefix => 'by '
       = f.select :assigned_id, :collection => @developers, :prefix => 'assigned to ', :prompt => 'unassign', :nil => '(no one)'
       = f.label :verifier, :prefix => 'verified by '

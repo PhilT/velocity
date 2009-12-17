@@ -12,7 +12,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def label(name, options = {})
     defaults(name, options)
-    wrap decorate(@value, options.merge({:link => false})), name unless @value.blank?
+    wrap decorate(@value, options.merge({:link => false})), "#{name} #{options[:class]}" unless @value.blank?
   end
 
   def select(name, options = {})

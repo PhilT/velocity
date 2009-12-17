@@ -1,3 +1,5 @@
+- if @new_release
+  == $.jGrowl("Finished Release!", { header: 'Please Refresh', sticky: true, glue: 'before' })
 - if @any_updates || @created_tasks.any? || @assigned_tasks.any?
   == $('.only_one').remove()
   == $.jGrowl("Tasks added, reordered or assigned to you", { group: 'only_one', header: 'Please Refresh', sticky: true, glue: 'before' })

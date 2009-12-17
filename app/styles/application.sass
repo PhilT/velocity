@@ -155,7 +155,7 @@ ul#released_tasks
     :display none
     :padding 2px
     :margin 2px
-    :margin-left 125px
+    :margin-left 70px
     li
       :display inline
       :border-right 1px solid silver
@@ -192,12 +192,15 @@ ul#released_tasks
     :background none
 
 
-.completed, .verified
+.completed, .verified, .invalid
   .name
     :text-decoration line-through
 
 .verified
   :color #777
+
+.invalid
+  :color #d77
 
 .name
   input
@@ -215,6 +218,20 @@ ul#released_tasks
       :border-radius 4px
       :-webkit-border-radius 4px
       :background #bbb
+
+.mark_invalid
+  :color #333
+  :background #ddd
+  :border 1px solid #888
+  :-moz-border-radius 7px
+  :border-radius 7px
+  :-webkit-border-radius 7px
+  :float left
+  :padding 1px 4px
+  :margin 1px 4px 0 0
+  :font-size 80%
+  &:hover
+    :background #f88
 
 #filters, #stats
   :float left
