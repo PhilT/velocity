@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     if params[:task].nil? #state was changed
       @task.update_attribute :updated_field, ""
       if params[:state] == 'invalid' #marked invalid
-        @task.mark_invalid!
+        @task.invalidate!(current_user)
         if @task.release.nil? #not in current release
           @moved = true
           @task.move_to!(Task.current.last.position + 1, Release.current, current_user)

@@ -73,6 +73,11 @@ class Task < ActiveRecord::Base
     updated_tasks.reject{|task| task.updated_field != 'assigned' || task.updated_by != user}
   end
 
+  def invalidate!(user)
+    self.mark_invalid
+    update_attribute(:assigned, user)
+  end
+
   def started
     started?
   end
