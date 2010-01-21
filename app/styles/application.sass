@@ -183,9 +183,13 @@ ul#released_tasks
     :padding 0
 
 #released_tasks
+  .name
+    :text-decoration none
+  .verified
+    .name
+      :color= !text_color
   .description
     :margin-left 65px
-
 
 .task_new
   &:hover

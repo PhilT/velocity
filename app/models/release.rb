@@ -26,12 +26,14 @@ class Release < ActiveRecord::Base
   end
 
   def self.velocity
-    begin
-      release = last[0]
+    last[0].velocity
+  end
 
-      distance_in_minutes = (((release.finished_at - release.created_at).abs)/60)
+  def velocity
+    begin
+      distance_in_minutes = (((self.finished_at - self.created_at).abs)/60)
       days = (distance_in_minutes / 1440)
-      tasks_per_week = release.tasks.features.count / days * 7
+      tasks_per_week = self.tasks.features.count / days * 7
       tasks_per_week > 1 ? tasks_per_week.round : 'less than 1'
     rescue
       '(none)'
