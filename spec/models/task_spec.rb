@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Task do
   before(:each) do
@@ -43,6 +43,16 @@ describe Task do
       task.started?.should == true
       task.completed_on.should be_nil
       task.started_on.to_s.should == first_started_on.to_s
+    end
+  end
+
+  describe 'update' do
+    it 'change state when no task details' do
+      pending
+    end
+
+    it 'be marked invalid when ' do
+      pending
     end
   end
 end
