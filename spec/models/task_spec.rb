@@ -42,7 +42,7 @@ describe Task do
       task.restart
       task.started?.should == true
       task.completed_on.should be_nil
-      task.started_on.should == first_started_on
+      task.started_on.to_s.should == first_started_on.to_s
     end
   end
 end
