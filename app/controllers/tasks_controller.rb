@@ -41,7 +41,7 @@ class TasksController < ApplicationController
         @task.invalidate!(current_user)
         if @task.release.nil? #not in current release
           @moved = true
-          @task.move_to!(Task.current.last.position + 1, Release.current, current_user)
+          @task.move_to!((Task.current.last.try(:position) || 0) + 1, Release.current, current_user)
         end
       elsif @task.release #is in current release
         @task.next_state!

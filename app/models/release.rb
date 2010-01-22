@@ -26,7 +26,7 @@ class Release < ActiveRecord::Base
   end
 
   def self.velocity
-    last[0].velocity
+    last[0].try(:velocity) || 0
   end
 
   def velocity
