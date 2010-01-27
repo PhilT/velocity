@@ -1,0 +1,77 @@
+html
+  padding: 0.5em
+  font: 13px Lucida Grande,Helvetica,Arial,sans-serif
+  background: #EDEBD5
+
+
+li
+  list-style-type: none
+
+
+.focused
+  background-color: #F4F2E4
+
+  *
+    opacity: 1.0
+
+
+h1, h2, p
+  opacity: 0.4
+
+
+.describes
+  padding-left: 0
+
+  h1
+    font-size: 1.1em
+    color: #877C21
+    line-height: 1.8em
+    margin: 0pt 0pt 0.6em
+    border-bottom: 1px solid transparent
+
+    &:hover
+      cursor: pointer
+      color: #000
+      background-color: #F4F2E4
+      border-bottom: 1px solid #9A8E51
+
+  .describe
+    margin-left: 0.6em
+    padding-left: 0.6em
+    border: 1px dashed #999
+
+    .its .it
+      list-style-type: decimal
+      list-style-position: outside
+
+      h2
+        font-weight: normal
+        font-style: italic
+        padding-left: 0.5em
+        font-size: 1.0em
+        color: #877C21
+        line-height: 1.8em
+        margin: 0 2em 0.5em 0
+        border-bottom: 1px solid transparent
+
+      &.enqueued h2
+        background-color: #CC6600
+        color: white !important
+
+      &.passed h2
+        background-color: #090
+        color: white !important
+
+      &.failed
+        h2
+          background-color: #993300
+          color: white !important
+
+        p
+          margin-left: 1em
+          color: #993300
+
+      h2:hover
+        cursor: pointer
+        color: #000 !important
+        border-bottom: 1px solid #9A8E51
