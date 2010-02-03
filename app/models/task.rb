@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
   belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
   belongs_to :verifier, :class_name => 'User', :foreign_key => :verified_by
   belongs_to :release
+  belongs_to :story
 
   validates_presence_of :name
 
