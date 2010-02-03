@@ -10,3 +10,5 @@
 == $('.now_tasks').html("#{now_tasks_heading}")
 == $('.later_tasks').html("#{future_tasks_heading}")
 
+== $('.release_border').remove();
+== $("ul#later_tasks li:nth-child(#{Release.velocity})").append("#{escape_javascript(render :partial => 'release_border')}");

@@ -2,6 +2,7 @@
   %span{:class => id}= heading
   = render :partial => 'finish_button' if id == 'now_tasks'
 %ul.tasks{:id => id}
-  - tasks.each do |task|
+  - tasks.each_with_index do |task, index|
     = render :partial => task.new_record? ? 'tasks/new_task' : 'tasks/task', :object => task, :locals => {:field => nil}
-
+    - if Release.velocity.to_i > 0 && index == Release.velocity - 1
+      = render :partial => 'release_border'
