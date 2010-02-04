@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   include AASM
-  acts_as_list :scope => :release
+  acts_as_list :scope => :story
 
   before_create :set_initial_state
 
