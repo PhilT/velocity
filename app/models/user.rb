@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   named_scope :developers, :conditions => {:developer => true}
 
+  has_and_belongs_to_many :stories
+
   def admin
     self.first
   end
