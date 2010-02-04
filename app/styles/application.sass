@@ -110,10 +110,10 @@ ul#released_tasks
   :min-height 20px
   :margin 10px
 
-.tasks
+.tasks, .stories
   :margin-bottom 10px
 
-.task
+.task, .story
   :clear both
   :overflow auto
   :padding 3px 4px
@@ -123,14 +123,6 @@ ul#released_tasks
   .feature, .bug, .refactor, .id, .action, .handle, .info
     :float left
     :padding-right 5px
-  &:hover
-    :background #e7e7e7
-    :-moz-border-radius 10px
-    :border-radius 10px
-    :-webkit-border-radius 10px
-    .handle, .info
-      :opacity 1
-
   .feature a, .refactor a, .bug a, .handle, .info
     :display block
     :text-align center
@@ -181,6 +173,24 @@ ul#released_tasks
     :font-size 70%
     :width 60px
     :padding 0
+
+.task
+  &:hover
+    :background #e7e7e7
+    :-moz-border-radius 10px
+    :border-radius 10px
+    :-webkit-border-radius 10px
+    .handle, .info
+      :opacity 1
+
+.story 
+  .title:hover
+    :background #e7e7e7
+    :-moz-border-radius 10px
+    :border-radius 10px
+    :-webkit-border-radius 10px
+    .handle, .info 
+      :opacity 1
 
 #released_tasks
   .verified

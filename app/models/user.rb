@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :verified_tasks, :class_name => 'Task', :foreign_key => :verified_by
 
   named_scope :developers, :conditions => {:developer => true}
+  named_scope :non_developers, :conditions => { :developer => false }
 
   has_and_belongs_to_many :stories
 

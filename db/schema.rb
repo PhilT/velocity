@@ -9,12 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091217022845) do
+ActiveRecord::Schema.define(:version => 20100204173223) do
 
   create_table "releases", :force => true do |t|
     t.datetime "finished_at"
     t.datetime "created_at"
     t.integer  "finished_by"
+  end
+
+  create_table "stakeholders_stories", :id => false, :force => true do |t|
+    t.integer "stakeholder_id"
+    t.integer "story_id"
+  end
+
+  create_table "stories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "customers",       :limit => 500
+    t.date     "due_on"
+    t.date     "soft_release_on"
+    t.integer  "release_id"
+    t.integer  "position"
   end
 
   create_table "tasks", :force => true do |t|
@@ -31,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20091217022845) do
     t.integer  "position"
     t.integer  "release_id"
     t.string   "updated_field"
+    t.integer  "story_id"
   end
 
   create_table "users", :force => true do |t|

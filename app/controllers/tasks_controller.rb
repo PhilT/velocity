@@ -80,9 +80,10 @@ class TasksController < ApplicationController
 
 private
   def find_stuff
-    @current_tasks = Release.current.tasks
+    @current_stories = Release.current.stories
     @future_tasks = Task.future
     @developers = User.developers
+    @non_developers = User.non_developers
   end
 
   def render_task(editing = false)

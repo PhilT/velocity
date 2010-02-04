@@ -165,14 +165,22 @@ $(function(){
 
   function setupDraggableLists(){
     $('#now_tasks').sortable({
-      handle: '.handle',
-      connectWith: '#later_tasks',
+      handle: '.story_handle',
+      helper: 'clone',
+      scrollSensivity: 40,
+      tolerance: 'pointer',
       update: function(event, ui){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})},
       axis: 'y'
     });
 
-    $('#later_tasks').sortable({
+    $('.tasks').sortable({
       handle: '.handle',
+      containment: '.tasks',
+      axis: 'y'
+    });
+
+    $('#later_tasks').sortable({
+      handle: '.story .handle',
       connectWith: '#now_tasks',
       update: function(event, ui){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=false'})},
       axis: 'y'

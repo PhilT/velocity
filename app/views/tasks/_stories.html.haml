@@ -1,0 +1,6 @@
+%h3
+  %span{:class => id}= heading
+  = render :partial => 'finish_button' if id == 'now_tasks'
+%ul.stories{:id => id}
+  - stories.each do |story|
+    = render :partial => 'stories/story', :object => story, :locals => {:field => nil}
