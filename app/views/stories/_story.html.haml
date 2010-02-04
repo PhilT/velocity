@@ -1,0 +1,11 @@
+%li.story{:id => "story_#{story.id || 'new'}", :class => "#{story.state}"}
+  %ul.title
+    %li.handle.story_handle{:title => 'drag to reorder'}
+    %li.info{:title => 'click to see more'}
+    %li.action
+      = story.state
+    = story.name
+
+  %ul.tasks
+    - story.tasks.each do |task|
+      = render :partial => 'tasks/task', :object => task
