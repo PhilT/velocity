@@ -176,6 +176,7 @@ $(function(){
     $('.tasks').sortable({
       handle: '.handle',
       containment: '.tasks',
+      update: function(event, ui){$.ajax({type: 'put', data: $('.tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})},
       axis: 'y'
     });
 
@@ -234,7 +235,7 @@ $(function(){
   }
 
   function liveUpdates(){
-    setInterval('$.get("/tasks/poll");', 30000);
+//    setInterval('$.get("/tasks/poll");', 30000);
   }
 })
 
