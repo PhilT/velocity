@@ -169,7 +169,7 @@ $(function(){
       helper: 'clone',
       scrollSensivity: 40,
       tolerance: 'pointer',
-      update: function(event, ui){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})},
+      update: function(event, ui){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/stories/' + ui.item.attr('id') + '/sort?now=true'})},
       axis: 'y'
     });
 
