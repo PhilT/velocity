@@ -8,4 +8,8 @@ class Story < ActiveRecord::Base
   def state
     'pending'
   end
+
+  def move_to!(position, release, user)
+    update_attributes(:position => position, :release => release)
+  end
 end

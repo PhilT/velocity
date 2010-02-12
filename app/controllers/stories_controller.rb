@@ -24,4 +24,15 @@ class StoriesController < ApplicationController
       render :action => 'edit'
     end
   end
+
+  def sort
+    stories = Story.all
+    current_release = Release.current
+    reordered_stories = params['story']
+    stories.each do |story|
+      i = reordered_stories.index(story.id.to_s)
+      story.move_to!(i + 1, params[:now] == 'true' ? current_release : nil, current_user) if i
+    end unless reordered_stories.nil?
+#    render_story
+  end
 end
