@@ -9,7 +9,7 @@
         = f.submit(task.action, :id => "task_#{task.id}_submit") unless task.previous_release?
       = f.text :name, :hint => "what's this about?"
 
-    %ul.description{:class => @field == 'assigned_id' ? 'active' : nil}
+    %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
       - if !%w(invalid verified).include?(task.state)
         %li.action
           = link_to 'invalidate', task_path(task, :state => :invalid), :class => 'put mark_invalid', :title => 'mark this task as invalid'
@@ -18,4 +18,4 @@
       = f.label :verifier, :prefix => 'verified by '
       = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
       = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
-
+      = f.select :story_id, :collection => @stories, :prefix => 'Story: ', :prompt => 'no story', :nil => '(no story)'

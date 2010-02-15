@@ -54,7 +54,10 @@ class TasksController < ApplicationController
     else #something else was changed (other than state)
       if params[:task][:category] #category was changed
         @task.next_category!
-      else #something other than category was changed
+      elsif params[:task][:story_id] # story_id was changed
+        @task.update_attributes(params[:task].merge({:release_id => Story.find(params[:task][:story_id]).release_id}))
+        @moved = true
+      else #something other than category and story_id was changed
         @task.update_attributes(params[:task])
         @task.assign_to!(User.find(params[:task][:assigned_id])) if params[:task][:assigned_id]
       end
@@ -81,6 +84,7 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @current_stories = Release.current.stories
+    @stories = Story.open
     @future_tasks = Task.future
     @developers = User.developers
     @non_developers = User.non_developers
