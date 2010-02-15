@@ -3,7 +3,8 @@
     %li.handle.story_handle{:title => 'drag to reorder'}
     %li.info{:title => 'click to see more'}
     %li.action
-      = story.state
+      - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
+        = f.submit story.state, :disabled => true
     = story.name
 
   %ul.tasks
