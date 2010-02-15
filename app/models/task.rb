@@ -144,5 +144,9 @@ class Task < ActiveRecord::Base
     update_attribute(:category, categories[i])
   end
 
+  def has_story?
+    !self.story_id.nil?    
+  end
+
 end
 
