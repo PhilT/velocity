@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      Release.create! unless Release.count > 0
       redirect_to root_url
     else
       render :action => 'new'

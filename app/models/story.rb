@@ -15,3 +15,4 @@ class Story < ActiveRecord::Base
     update_attributes(:position => position, :release => release)
   end
 end
+
