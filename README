@@ -1,7 +1,9 @@
-== Velocity - Simple Release Management
+Velocity - Simple Release Management
+====================================
 
-Status: Beta
-Still ironing out the interface. Trying to make it as simple as possible while keeping the bare minimum of features required.
+Status: *Beta*
+
+As we work we find features we use and those we don't. Some filtering has been removed and we are now working on story support.
 
 Velocity extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear interface. It comes from my need to manage a small team of developers and allow our customers and developers to easily view and add tasks.
 
@@ -23,9 +25,10 @@ Features:
 * Mark a task invalid. Gets included when a release is completed
 
 Currently working on:
-* Hoptoad Integration
+* Stories
 
 Planned:
+* Hoptoad Integration
 * Stats page
 * Multi-project support
 
