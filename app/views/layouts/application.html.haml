@@ -3,7 +3,7 @@
   %head
     %title== Velocity - #{STRAPLINE}
     = stylesheet_link_tag 'lib/jquery.jgrowl', 'application'
-    = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery-ui.min', 'lib/jquery.delay', 'lib/jquery.hint', "lib/#{RAILS_ENV}/jquery.jgrowl", 'application'
+    = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery-ui.min', 'lib/jquery.delay', 'lib/jquery.hint', "lib/#{RAILS_ENV}/jquery.jgrowl", 'lib/application', 'application'
   %body
     %div#header
       %h1= link_to '&nbsp;', root_path
