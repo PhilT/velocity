@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
   has_and_belongs_to_many :stakeholders, :class_name => 'User', :foreign_key => :stakeholder_id
   belongs_to :release
 
-  named_scope :open, :conditions => ['release_id = ? OR release_id IS NULL', Release.current.id]
+  named_scope :future, :conditions => ['release_id IS NULL']
 
   def state
     'pending'

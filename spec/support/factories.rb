@@ -23,6 +23,14 @@ Factory.define :developer, :class => User do |f|
   f.developer true
 end
 
+Factory.define :release do |f|
+end
+
+Factory.define :story do |f|
+ f.name 'Story'
+ f.description 'Story description'
+end
+
 Factory.define :task do |f|
   f.name 'This is a task'
   f.association :author, :factory => :customer
@@ -36,4 +44,3 @@ Factory.define :future_task, :class => Task do |f|
   f.release nil
   f.state 'pending'
 end
-
