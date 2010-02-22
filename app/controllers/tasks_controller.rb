@@ -84,7 +84,8 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @current_stories = Release.current.stories
-    @stories = Story.open
+    @current_tasks = Release.current.tasks - @current_stories.map(&:tasks).flatten
+    @stories = Story.future
     @future_tasks = Task.future
     @developers = User.developers
     @non_developers = User.non_developers
