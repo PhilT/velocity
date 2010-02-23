@@ -10,5 +10,10 @@ module TasksHelper
   def future_tasks_heading
     "Tasks for a future release (#{@future_tasks.size})"
   end
+
+  def submit_button(f, task)
+    disabled = task.release.blank? && ['feature', 'refactoring'].include?(task.category)
+    f.submit(task.action, :id => "task_#{task.id}_submit", :disabled => disabled)
+  end
 end
 
