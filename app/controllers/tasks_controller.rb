@@ -85,7 +85,8 @@ private
   def find_stuff
     @current_stories = Release.current.stories
     @current_tasks = Release.current.tasks - @current_stories.map(&:tasks).flatten
-    @stories = Story.future
+    @future_stories = Story.future
+    @stories = @current_stories + @future_stories
     @future_tasks = Task.future
     @developers = User.developers
     @non_developers = User.non_developers
