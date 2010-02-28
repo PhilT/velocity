@@ -56,6 +56,7 @@ class Task < ActiveRecord::Base
   named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
   named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
   named_scope :completed, :conditions => {:state => 'completed'}
+  named_scope :without_story, :conditions => 'story_id IS NULL'
 
   def self.last_poll
     DateTime.now - 29.seconds
