@@ -12,7 +12,7 @@ module TasksHelper
   end
 
   def task_submit_button(f, task)
-    disabled = task.release.blank? && ['feature', 'refactor'].include?(task.category)
+    disabled = task.release.blank? && (['feature', 'refactor'].include?(task.category) || task.story.present?)
     f.submit(task.action, :id => "task_#{task.id}_submit", :disabled => disabled)
   end
 end
