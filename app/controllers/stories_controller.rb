@@ -18,10 +18,15 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    if @story.update_attributes(params[:story])
-      redirect_to tasks_url
+    if params[:story].nil?
+      @story.move_to!((Release.current.stories.last.position + 1 rescue 1), Release.current, current_user)
+      # TODO render response
     else
-      render :action => 'edit'
+      if @story.update_attributes(params[:story])
+        redirect_to tasks_url
+      else
+        render :action => 'edit'
+      end
     end
   end
 
