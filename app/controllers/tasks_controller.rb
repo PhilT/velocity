@@ -86,10 +86,10 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @current_stories = Release.current.stories
-    @current_tasks = Release.current.tasks - @current_stories.map(&:tasks).flatten
+    @current_tasks = Release.current.tasks.all(:conditions => 'story_id IS NULL')
     @future_stories = Story.future
     @stories = @current_stories + @future_stories
-    @future_tasks = Task.future
+    @future_tasks = Task.future.all(:conditions => 'story_id IS NULL')
     @developers = User.developers
     @non_developers = User.non_developers
   end
