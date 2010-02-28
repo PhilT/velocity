@@ -29,6 +29,7 @@ end
 Factory.define :story do |f|
  f.name 'Story'
  f.description 'Story description'
+ f.release {Release.current}
 end
 
 Factory.define :task do |f|
