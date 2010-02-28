@@ -4,7 +4,7 @@
     %li.info{:title => 'click to see more'}
     %li.action
       - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
-        = f.submit story.state, :disabled => true
+        = story_submit_button(f, story)
     = story.name
 
   %ul.tasks

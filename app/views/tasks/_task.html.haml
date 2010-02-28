@@ -7,7 +7,7 @@
         = link_to '', task_path(task, 'task[category]' => true), :class => :put
       %li.action
         - unless task.previous_release?
-          = submit_button(f, task)
+          = task_submit_button(f, task)
       = f.text :name, :hint => "what's this about?"
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
