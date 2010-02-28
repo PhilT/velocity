@@ -6,6 +6,8 @@ class Release < ActiveRecord::Base
   named_scope :previous, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC'
   named_scope :last, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC', :limit => 1
 
+  delegate :features, :bugs, :refactorings, :to => :tasks
+
   def self.current
     find_by_finished_at(nil)
   end

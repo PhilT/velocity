@@ -7,7 +7,7 @@
       Taken from Release
       = Release.last[0].finished_at.to_s rescue "(none)"
 
-= render :partial => 'items',:locals => {:heading => current_stories_heading, :id => 'now_tasks', :stories => @current_stories, :tasks => @current_tasks}
+= render :partial => 'items',:locals => {:heading => current_tasks_heading, :id => 'now_tasks', :stories => @current_stories, :tasks => @current_tasks}
 
 = render :partial => 'items', :locals => {:heading => future_tasks_heading, :id => 'later_tasks', :stories => @future_stories, :tasks => @future_tasks}
 
