@@ -21,7 +21,12 @@ class Story < ActiveRecord::Base
   end
 
   def move_to!(position, release, user)
-    update_attributes(:position => position, :release => release)
+    if self.release != release
+      self.tasks.each_with_index do |task, index|
+        task.move_to!(index, release, user)
+      end
+    end
+    self.update_attributes(:position => position, :release => release)
   end
 end
 
