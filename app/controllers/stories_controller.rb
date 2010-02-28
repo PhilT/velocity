@@ -26,13 +26,12 @@ class StoriesController < ApplicationController
   end
 
   def sort
-    stories = Story.all
-    current_release = Release.current
+    @story = Story.find(params[:id])
+    release = @story.release
     reordered_stories = params['story']
-    stories.each do |story|
-      i = reordered_stories.index(story.id.to_s)
-      story.move_to!(i + 1, params[:now] == 'true' ? current_release : nil, current_user) if i
-    end unless reordered_stories.nil?
+    reordered_stories.each_with_index do |story_id, index|
+      Story.find(story_id.to_i).move_to!(index + 1, release, current_user)
+    end
 #    render_story
   end
 end
