@@ -19,18 +19,18 @@ $(function(){
   }
 
   function setupDraggableLists(){
-    $('#now_tasks').sortable({
+    $('.stories').sortable({
       handle: '.story_handle',
       helper: 'clone',
       scrollSensivity: 40,
-      tolerance: 'pointer',
-      update: function(event, ui){$.ajax({type: 'put', data: $('#now_tasks').sortable('serialize'), url: '/stories/' + ui.item.attr('id') + '/sort?now=true'})},
+      connectWith: '#later_tasks',
+      update: function(event, ui){$.ajax({type: 'put', data: $('.stories').sortable('serialize'), url: '/stories/' + ui.item.attr('id').substr(6) + '/sort?now=true'})},
       axis: 'y'
     });
 
     $('.tasks').sortable({
       handle: '.handle',
-      containment: '.tasks',
+      containment: 'parent',
       update: function(event, ui){$.ajax({type: 'put', data: $('.tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})},
       axis: 'y'
     });
