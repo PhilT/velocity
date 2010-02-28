@@ -1,4 +1,4 @@
-%ul.tasks{:id => id}
+%ul.tasks
   - tasks.each_with_index do |task, index|
     = render :partial => task.new_record? ? 'tasks/new_task' : 'tasks/task', :object => task, :locals => {:field => nil}
     - if Release.velocity.to_i > 0 && id == 'later_tasks' && index == Release.velocity - 1
