@@ -26,7 +26,8 @@ class TasksController < ApplicationController
 
   def create
     params[:task][:category] = params[:bug] == '1' ? 'bug' : 'feature'
-    @task = Task.create(params[:task].merge(:author => current_user))
+    story = extract_story(params[:task][:name])
+    @task = Task.create(params[:task].merge(:author => current_user, :story => story, :release => story.try(:release)))
     respond_to do|format|
       format.js{render :layout => false}
     end
@@ -99,6 +100,12 @@ private
     @task = Task.find(id)
     respond_to do|format|
       format.js{render :action => :update, :layout => false}
+    end
+  end
+  
+  def extract_story(task_name)
+    if task_name =~ /^(.+?):/
+      Story.find_by_name($1)
     end
   end
 end
