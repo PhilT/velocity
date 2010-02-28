@@ -32,7 +32,7 @@ describe TasksController do
       assigns[:moved].should == true
     end
 
-    describe 'current release' do
+    describe 'current release tasks' do
       it 'should mark a pending task as started when in current release' do
         put :update, :id => @task.id
         assigns[:task].state.should == 'started'
@@ -48,16 +48,22 @@ describe TasksController do
       end
       it 'should assign to a story' do
         story = Factory(:story)
-        put :update, :id => @task, :task => {:story_id => story}
+        put :update, :id => @task, :task => {:story_id => story.id}
         assigns[:task].story.should == story
       end
     end
 
-    describe 'future releases' do
-      it 'should move bugs into current release without a story'
-      it 'should move features and refactorings into current release with a story'
-      it 'should not move features or refactorings into current release without a story'
-      it 'should not move invalid tasks into current release when assigned to a story'
+    describe 'future release tasks' do
+      it 'should not move invalid tasks into current release when assigned to a story' do
+        @task.story = Factory(:story, :release => nil)
+        @task.release = nil
+        @task.save!
+
+        put :update, :id => @task, :state => 'invalid'
+
+        @task.reload.release.should be_nil
+        @task.story.release.should be_nil        
+      end
     end
   end
 

@@ -39,7 +39,7 @@ class TasksController < ApplicationController
       @task.update_attribute :updated_field, ""
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)
-        if @task.release.nil? #not in current release
+        if @task.release.nil? && @task.story.nil? #not in current release
           @moved = true
           @task.move_to!((Task.current.last.try(:position) || 0) + 1, Release.current, current_user)
         end
@@ -72,7 +72,8 @@ class TasksController < ApplicationController
 
   def poll
     @created_tasks = @future_tasks.created(current_user)
-    @updated_tasks = @current_tasks.updated + @future_tasks.updated
+    # FIXME
+    # @updated_tasks = @current_tasks.updated + @future_tasks.updated
     @assigned_tasks = Task.assigned_to(current_user)
     @any_updates = Task.other_updates?(current_user)
     @new_release = Release.current.created_at > Task.last_poll && Release.last[0].finished_by != current_user
