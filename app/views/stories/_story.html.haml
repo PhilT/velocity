@@ -6,6 +6,8 @@
       - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
         = story_submit_button(f, story)
     = story.name
+    %span.short_description
+      = truncate(story.description, :length => 50)
 
   %ul.tasks
     - story.tasks.each do |task|
