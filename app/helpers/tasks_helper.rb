@@ -3,8 +3,8 @@ module TasksHelper
     "$('#{escape_javascript(render(task))}').hide()"
   end
 
-  def now_tasks_heading
-    "Tasks for the current release (features: #{@current_tasks.features.count}, bugs: #{@current_tasks.bugs.count}, refactorings: #{@current_tasks.refactorings.count})"
+  def current_tasks_heading
+    "Tasks for the current release (features: #{Release.current.features.count}, bugs: #{Release.current.bugs.count}, refactorings: #{Release.current.refactorings.count})"
   end
 
   def future_tasks_heading
