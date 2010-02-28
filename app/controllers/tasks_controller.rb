@@ -73,8 +73,7 @@ class TasksController < ApplicationController
 
   def poll
     @created_tasks = @future_tasks.created(current_user)
-    # FIXME
-    # @updated_tasks = @current_tasks.updated + @future_tasks.updated
+    @updated_tasks = Task.updated.all(:conditions => ['release_id = ? OR release_id IS NULL', Release.current.id])
     @assigned_tasks = Task.assigned_to(current_user)
     @any_updates = Task.other_updates?(current_user)
     @new_release = Release.current.created_at > Task.last_poll && Release.last[0].finished_by != current_user
@@ -86,10 +85,10 @@ class TasksController < ApplicationController
 private
   def find_stuff
     @current_stories = Release.current.stories
-    @current_tasks = Release.current.tasks.all(:conditions => 'story_id IS NULL')
+    @current_tasks = Release.current.tasks.without_story
     @future_stories = Story.future
     @stories = @current_stories + @future_stories
-    @future_tasks = Task.future.all(:conditions => 'story_id IS NULL')
+    @future_tasks = Task.future.without_story
     @developers = User.developers
     @non_developers = User.non_developers
   end
