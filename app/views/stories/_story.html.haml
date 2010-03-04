@@ -1,14 +1,5 @@
 %li.story{:id => "story_#{story.id || 'new'}", :class => "#{story.state}"}
-  %ul.title
-    %li.handle.story_handle{:title => 'drag to reorder'}
-    %li.info{:title => 'click to see more'}
-    %li.action
-      - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
-        = story_submit_button(f, story)
-    = story.name
-    %span.short_description
-      = truncate(story.description, :length => 50)
-
+  = render :partial => 'stories/story_title', :locals => {:story => story}
   %ul.tasks
     - story.tasks.each do |task|
       = render :partial => 'tasks/task', :object => task
