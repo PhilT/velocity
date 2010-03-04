@@ -82,15 +82,6 @@ class TasksController < ApplicationController
   end
 
 private
-  def find_stuff
-    @current_stories = Release.current.stories
-    @current_tasks = Release.current.tasks.without_story
-    @future_stories = Story.future.all(:order => :position)
-    @stories = @current_stories + @future_stories
-    @future_tasks = Task.future.without_story
-    @developers = User.developers
-    @non_developers = User.non_developers
-  end
 
   def render_task(editing = false)
     field, id = params[:id].split(/([0-9]+)/)

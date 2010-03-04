@@ -1,4 +1,6 @@
 class StoriesController < ApplicationController
+  before_filter :find_stuff, :only => :update
+
   def new
     @story = Story.new
   end
@@ -19,8 +21,9 @@ class StoriesController < ApplicationController
   def update
     @story = Story.find(params[:id])
     if params[:story].nil?
+      @moved = true
       @story.move_to!((Release.current.stories.last.position + 1 rescue 1), Release.current, current_user)
-      # TODO render response
+      render_story
     else
       if @story.update_attributes(params[:story])
         redirect_to tasks_url
@@ -38,5 +41,12 @@ class StoriesController < ApplicationController
       Story.find(story_id.to_i).move_to!(index + 1, release, current_user)
     end
     render :nothing => true
+  end
+
+private
+  def render_story
+    respond_to do|format|
+      format.js{render :action => :update, :layout => false}
+    end
   end
 end
