@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   acts_as_list :scope => :story
 
   before_create :set_initial_state
+  before_create :remove_story_name
 
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
   belongs_to :assigned, :class_name => 'User', :foreign_key => :assigned_id
@@ -146,8 +147,11 @@ class Task < ActiveRecord::Base
   end
 
   def has_story?
-    !self.story_id.nil?    
+    !self.story_id.nil?
   end
 
+  def remove_story_name
+    self.name.gsub!(/^#{story.name}: /, '') if self.story
+  end
 end
 
