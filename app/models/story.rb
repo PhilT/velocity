@@ -15,7 +15,7 @@ class Story < ActiveRecord::Base
       'completed'
     elsif task_states == ['verified']
       'verified'
-    else 
+    else
       'started'
     end
   end
@@ -27,6 +27,10 @@ class Story < ActiveRecord::Base
       end
     end
     self.update_attributes(:position => position, :release => release)
+  end
+
+  def incomplete?
+    ['pending', 'started'].include?(self.state)
   end
 end
 

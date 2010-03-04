@@ -17,12 +17,16 @@ class Release < ActiveRecord::Base
   end
 
   def finish!(user)
-    return false if tasks.completed.any?
+    return false if tasks.without_story.completed.any?
 
     touch :finished_at
     update_attribute :finished_by, user
     new_release = Release.create!
-    new_release.tasks = tasks.incomplete
+    new_release.tasks = tasks.without_story.incomplete
+    index = 0
+    stories.each do |story|
+      story.move_to!(index += 1, new_release, user) if story.incomplete?
+    end
     new_release.save!
 
     ReleaseMailer.deliver_release_notification(User.all, self)
