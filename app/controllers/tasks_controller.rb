@@ -9,9 +9,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     release = @task.release
     reordered_tasks = params['task']
-#    reordered_tasks.each_with_index do |task_id, index|
-#      Task.find(task_id).move_to!(index + 1, release, current_user)
-#    end
+    reordered_tasks.each_with_index do |task_id, index|
+      Task.find(task_id).move_to!(index + 1, release, current_user)
+    end
     render_task
   end
 
@@ -85,7 +85,7 @@ private
   def find_stuff
     @current_stories = Release.current.stories
     @current_tasks = Release.current.tasks.without_story
-    @future_stories = Story.future
+    @future_stories = Story.future.all(:order => :position)
     @stories = @current_stories + @future_stories
     @future_tasks = Task.future.without_story
     @developers = User.developers
