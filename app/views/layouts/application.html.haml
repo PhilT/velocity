@@ -10,6 +10,7 @@
       %h2= STRAPLINE
       %ul#session
         - if current_user
+          %li= link_to 'New Story', new_story_path
           %li= link_to 'Tasks', tasks_path
           %li= link_to 'Releases', releases_path
           %li= link_to 'Users', new_user_path
