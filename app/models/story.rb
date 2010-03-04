@@ -32,5 +32,9 @@ class Story < ActiveRecord::Base
   def incomplete?
     ['pending', 'started'].include?(self.state)
   end
+
+  def completed?
+    self.state == 'completed'
+  end
 end
 
