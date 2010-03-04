@@ -35,12 +35,6 @@ $(function(){
       axis: 'y'
     });
 
-    $('#later_tasks').sortable({
-      handle: '.story .handle',
-      connectWith: '#now_tasks',
-      update: function(event, ui){$.ajax({type: 'put', data: $('#later_tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=false'})},
-      axis: 'y'
-    });
   }
 
   function showTaskInfo(){
