@@ -23,15 +23,15 @@ $(function(){
       handle: '.story_handle',
       helper: 'clone',
       scrollSensivity: 40,
-      connectWith: '#later_tasks',
-      update: function(event, ui){$.ajax({type: 'put', data: $('.stories').sortable('serialize'), url: '/stories/' + ui.item.attr('id').substr(6) + '/sort?now=true'})},
+      update: function(event, ui){$.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/stories/' + ui.item.attr('id').substr(6) + '/sort'})},
       axis: 'y'
     });
 
     $('.tasks').sortable({
       handle: '.handle',
       containment: 'parent',
-      update: function(event, ui){$.ajax({type: 'put', data: $('.tasks').sortable('serialize'), url: '/tasks/' + ui.item.attr('id') + '/sort?now=true'})},
+      tolerance: 'pointer',
+      update: function(event, ui){$.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/tasks/' + ui.item.attr('id').substr(5) + '/sort'})},
       axis: 'y'
     });
 

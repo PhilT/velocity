@@ -1,6 +1,6 @@
 class Release < ActiveRecord::Base
   has_many :tasks
-  has_many :stories, :order => :position
+  has_many :stories
   belongs_to :finished_by, :class_name => 'User', :foreign_key => :finished_by
 
   named_scope :previous, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC'

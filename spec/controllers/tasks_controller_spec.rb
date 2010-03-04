@@ -38,7 +38,7 @@ describe TasksController do
         assigns[:task].state.should == 'started'
         assigns[:moved].should == nil
       end
-      
+
       it 'should assign to current user when starting task' do
         @task.started?.should be_false
         put :update, :id => @task
@@ -62,7 +62,36 @@ describe TasksController do
         put :update, :id => @task, :state => 'invalid'
 
         @task.reload.release.should be_nil
-        @task.story.release.should be_nil        
+        @task.story.release.should be_nil
+      end
+    end
+
+    describe 'sort' do
+      before do
+        @task.destroy
+      end
+
+      it 'should reorder tasks in current release' do
+        @tasks = []
+        3.times do
+          @tasks << Factory(:task)
+        end
+        put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
+
+        Task.all.map(&:release).uniq.should == [Release.current]
+        Release.current.tasks.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
+      end
+
+      it 'should reorder tasks in future release' do
+        @tasks = []
+        3.times do
+          @tasks << Factory(:task, :release => nil)
+        end
+
+        put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
+
+        Task.all.map(&:release).uniq.should == [nil]
+        Task.future.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
       end
     end
   end
