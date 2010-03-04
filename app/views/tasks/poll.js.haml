@@ -5,7 +5,7 @@
   == $.jGrowl("Tasks added, reordered or assigned to you", { group: 'only_one', header: 'Please Refresh', sticky: true, glue: 'before' })
 
 - @assigned_tasks.each do |task|
-  == $.jGrowl("'#{task.name}' has been assigned to you", { header: 'Task Assignment', life: 30000 })
+  == $.jGrowl("'#{escape_javascript(task.name)}' has been assigned to you", { header: 'Task Assignment', life: 30000 })
 
 - @created_tasks.each do |task|
   == $.jGrowl("#{task.name}", { header: 'New task', life: 30000 })
