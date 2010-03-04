@@ -6,13 +6,12 @@ class TasksController < ApplicationController
   end
 
   def sort
-    tasks = Task.all
-    current_release = Release.current
+    @task = Task.find(params[:id])
+    release = @task.release
     reordered_tasks = params['task']
-    tasks.each do |task|
-      i = reordered_tasks.index(task.id.to_s)
-      task.move_to!(i + 1, params[:now] == 'true' ? current_release : nil, current_user) if i
-    end unless reordered_tasks.nil?
+    reordered_tasks.each_with_index do |task_id, index|
+      Task.find(task_id).move_to!(index + 1, release, current_user)
+    end
     render_task
   end
 
@@ -101,7 +100,7 @@ private
       format.js{render :action => :update, :layout => false}
     end
   end
-  
+
   def extract_story(task_name)
     if task_name =~ /^(.+?):/
       Story.find_by_name($1)
