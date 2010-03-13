@@ -1,5 +1,7 @@
 %ul.title
   %li.handle.story_handle{:title => 'drag to reorder'}
+  %li.toggle.open{:title => 'show/hide tasks'}
+    –
   %li.info{:title => 'click to see more'}
   %li.action
     - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
