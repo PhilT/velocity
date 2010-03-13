@@ -113,6 +113,9 @@ ul#released_tasks
 .tasks, .stories
   :margin-bottom 10px
 
+.task
+  :margin-left 16px
+
 .task, .story
   :clear both
   :overflow auto
@@ -120,10 +123,10 @@ ul#released_tasks
   .title
     :clear both
     :overflow auto
-  .feature, .bug, .refactor, .id, .action, .handle, .info
+  .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle
     :float left
     :padding-right 5px
-  .feature a, .refactor a, .bug a, .handle, .info
+  .feature a, .refactor a, .bug a, .handle, .info, .toggle
     :display block
     :text-align center
     :width 16px
@@ -137,6 +140,15 @@ ul#released_tasks
     :background url('/images/arrow_out.png') no-repeat
     :cursor move
     :opacity 0
+
+  .toggle
+    :cursor pointer
+    :opacity 0
+    :line-height 16px
+    :color black
+    :font-size 16px
+    :padding-top 0
+    :margin-top 0
 
   .info
     :background url('/images/information.png') no-repeat
@@ -189,7 +201,7 @@ ul#released_tasks
     :-moz-border-radius 10px
     :border-radius 10px
     :-webkit-border-radius 10px
-    .handle, .info 
+    .handle, .info, .toggle
       :opacity 1
   .short_description
     :font-style italic

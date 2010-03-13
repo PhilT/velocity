@@ -4,6 +4,7 @@ $(function(){
   submitAssignedSelectOnChange();
   setupDraggableLists();
   showTaskInfo();
+  toggleStoryTasks();
   liveUpdates();
 
   function setHintsOnTextfields(){
@@ -47,6 +48,21 @@ $(function(){
       else{
         $('.open').removeClass('open');
         $(this).addClass('open');
+      }
+    });
+  }
+
+  function toggleStoryTasks() {
+    $('.toggle').live('click', function() {
+      if($(this).hasClass('open')) {
+        $(this).closest('.title').siblings('.tasks').hide();
+        $(this).removeClass('open');
+        $(this).html('+');
+      }
+      else {
+        $(this).closest('.title').siblings('.tasks').show();
+        $(this).addClass('open');
+        $(this).html('&ndash;');
       }
     });
   }
