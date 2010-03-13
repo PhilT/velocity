@@ -4,9 +4,9 @@ describe Release do
   before do
     @release = Release.current || Factory(:release)
     Factory(:task, :state => 'verified')
-    story = Factory(:story, :name => 'completed story')
+    story = Factory(:story, :name => 'verified story')
     Factory(:task, :story => story).update_attribute :state, 'verified'
-    story.state.should == 'completed'
+    story.state.should == 'verified'
 
     story = Factory(:story, :name => 'incomplete story')
     Factory(:task, :story => story).update_attribute :state, 'verified'

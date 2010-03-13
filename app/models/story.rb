@@ -8,16 +8,20 @@ class Story < ActiveRecord::Base
   named_scope :future, :conditions => ['release_id IS NULL']
 
   def state
-    task_states = self.tasks.map(&:state).uniq
+    task_states = self.task_states
     if task_states == ['pending']
       'pending'
-    elsif task_states - ['completed', 'verified'] == []
-      'completed'
-    elsif task_states == ['verified']
+    elsif (task_states - ['verified', 'invalid']).empty?
       'verified'
+    elsif (task_states - ['completed', 'verified', 'invalid']).empty?
+      'completed'
     else
       'started'
     end
+  end
+
+  def task_states
+    self.tasks.map(&:state).uniq
   end
 
   def move_to!(position, release, user)
