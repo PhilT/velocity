@@ -11,11 +11,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def find_stuff
-    @current_stories = Release.current.stories
-    @current_tasks = Release.current.tasks.without_story
-    @future_stories = Story.future.all(:order => :position)
-    @stories = @current_stories + @future_stories
-    @future_tasks = Task.future.without_story
+    @stories = Story.current
+    @bugs = Task.current.bugs
+    @future_tasks = Task.current.without_story - @bugs
     @developers = User.developers
     @non_developers = User.non_developers
   end

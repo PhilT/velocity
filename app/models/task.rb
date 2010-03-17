@@ -47,7 +47,7 @@ class Task < ActiveRecord::Base
   end
 
   default_scope :order => :position
-  named_scope :current, :conditions => 'releases.finished_at IS NULL', :joins => [:release]
+  named_scope :current, :conditions => 'release_id IS NULL'
   named_scope :future, :conditions => "release_id IS NULL"
   named_scope :features, :conditions => {:category => 'feature'}
   named_scope :bugs, :conditions => {:category => 'bug'}

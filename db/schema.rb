@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218194929) do
+ActiveRecord::Schema.define(:version => 20100317081611) do
 
   create_table "releases", :force => true do |t|
     t.datetime "finished_at"
