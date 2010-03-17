@@ -64,7 +64,7 @@ class Task < ActiveRecord::Base
   end
 
   def self.other_updates?(user)
-    updated_tasks = Release.current.tasks.updated + self.future.updated
+    updated_tasks = Task.current.updated
     updated_tasks.each do |task|
       return true if task.updated_field == 'position' && task.updated_by != user
     end
@@ -72,7 +72,7 @@ class Task < ActiveRecord::Base
   end
 
   def self.assigned_to(user)
-    updated_tasks = Release.current.tasks.updated + self.future.updated
+    updated_tasks = Task.current.updated
     updated_tasks.reject{|task| task.updated_field != 'assigned' || task.updated_by != user}
   end
 
@@ -114,7 +114,7 @@ class Task < ActiveRecord::Base
   end
 
   def action
-    self.release ? (aasm_events_for_current_state - [:mark_invalid, :next_state]).first.to_s.gsub('_', ' ') : 'to current'
+    (aasm_events_for_current_state - [:mark_invalid, :next_state]).first.to_s.gsub('_', ' ')
   end
 
   def move_to!(position, release, user)
@@ -152,6 +152,10 @@ class Task < ActiveRecord::Base
 
   def remove_story_name
     self.name.gsub!(/^#{story.name}: /, '') if self.story
+  end
+
+  def add_to_release!(release)
+    self.update_attribute :release_id, release.id
   end
 end
 
