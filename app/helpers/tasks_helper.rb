@@ -4,7 +4,7 @@ module TasksHelper
   end
 
   def current_tasks_heading
-    "Tasks for the current release (features: #{Release.current.features.count}, bugs: #{Release.current.bugs.count}, refactorings: #{Release.current.refactorings.count})"
+    "Tasks for the current release"
   end
 
   def future_tasks_heading

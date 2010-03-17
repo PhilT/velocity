@@ -5,7 +5,8 @@ class ReleasesController < ApplicationController
   end
 
   def finish
-    release = Release.find(params[:id])
+    release = Release.create!
+    # TODO assign verified tasks and stories to this release
     if !release.finish!(current_user)
       flash[:error] = 'Cannot finish release. Some tasks have not been verified.'
     end

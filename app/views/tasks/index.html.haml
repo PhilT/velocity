@@ -11,15 +11,11 @@
   %span{:class => 'now_tasks'}
     = current_tasks_heading
   = render :partial => 'finish_button'
-%div{:id => 'now_tasks'}
-  = render :partial => 'tasks', :object => @current_tasks
-  = render :partial => 'stories', :object => @current_stories
-
-%h3
-  %span{:class => 'later_tasks'}
-    = future_tasks_heading
-%div{:id => 'later_tasks'}
-  = render :partial => 'stories', :object => @future_stories
+%div{:id => 'bugs'}
+  = render :partial => 'tasks', :object => @bugs
+%div{:id => 'stories'}
+  = render :partial => 'stories', :object => @stories
+%div{:id => 'future'}
   = render :partial => 'tasks', :object => @future_tasks
 
 %h3
