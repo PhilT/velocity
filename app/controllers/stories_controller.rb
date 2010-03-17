@@ -22,7 +22,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     if params[:story].nil?
       @moved = true
-      @story.move_to!((Release.current.stories.last.position + 1 rescue 1), Release.current, current_user)
+      @story.move_to!((Story.current.last.position + 1 rescue 1), nil, current_user)
       render_story
     else
       if @story.update_attributes(params[:story])

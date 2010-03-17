@@ -7,6 +7,8 @@ class Story < ActiveRecord::Base
 
   named_scope :current, :conditions => ['release_id IS NULL']
 
+  default_scope :order => :position
+
   def state
     task_states = self.task_states
     if task_states == ['pending']
@@ -18,6 +20,10 @@ class Story < ActiveRecord::Base
     else
       'started'
     end
+  end
+
+  def self.verified
+    self.current.select {|story| story.state == 'verified'}
   end
 
   def task_states
@@ -39,6 +45,10 @@ class Story < ActiveRecord::Base
 
   def completed?
     self.state == 'completed'
+  end
+
+  def add_to_release!(release)
+    self.update_attribute :release_id, release.id
   end
 end
 

@@ -8,14 +8,10 @@ module StoriesHelper
   end
 
   def submit_disabled?(story)
-    story.release ? !story.completed? : false
+    !story.completed?
   end
 
   def submit_name(story)
-    if story.release
-      story.completed? ? 'verify' : story.state
-    else
-      'to current'
-    end
+    story.completed? ? 'verify' : story.state
   end
 end

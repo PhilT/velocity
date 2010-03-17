@@ -2,7 +2,7 @@ require 'spec/spec_helper'
 
 describe Release do
   before do
-    @release = Release.current || Factory(:release)
+    @release = Factory(:release)
     Factory(:task, :state => 'verified')
     story = Factory(:story, :name => 'verified story')
     Factory(:task, :story => story).update_attribute :state, 'verified'

@@ -18,20 +18,6 @@ describe TasksController do
       assigns[:moved].should == nil
     end
 
-    it 'should move invalid task to current release' do
-      task = Factory(:future_task)
-      put :update, :id => task.id, :state => 'invalid'
-      assigns[:task].release.should == Release.current
-      assigns[:moved].should == true
-    end
-
-    it 'should move a task to the current release when not in it' do
-      task = Factory(:future_task)
-      put :update, :id => task.id
-      assigns[:task].release.should == Release.current
-      assigns[:moved].should == true
-    end
-
     describe 'current release tasks' do
       it 'should mark a pending task as started when in current release' do
         put :update, :id => @task.id
@@ -78,8 +64,8 @@ describe TasksController do
         end
         put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
 
-        Task.all.map(&:release).uniq.should == [Release.current]
-        Release.current.tasks.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
+        Task.all.map(&:release).uniq.should == [nil]
+        Task.current.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
       end
 
       it 'should reorder tasks in future release' do

@@ -8,26 +8,19 @@ class Release < ActiveRecord::Base
 
   delegate :features, :bugs, :refactorings, :to => :tasks
 
-  def self.current
-    find_by_finished_at(nil)
-  end
-
-  def current?
-    self.finished_at.nil?
-  end
-
   def finish!(user)
-    return false if tasks.without_story.completed.any?
+    return false unless can_complete_release? 
+
+    Task.current.without_story.verified.each do |task| 
+      task.add_to_release!(self)
+    end
+    Story.current.verified.each do |story| 
+      story.add_to_release!(self)
+      story.tasks.each {|task| task.add_to_release!(self)}
+    end
 
     touch :finished_at
     update_attribute :finished_by, user
-    new_release = Release.create!
-    new_release.tasks = tasks.without_story.incomplete
-    index = 0
-    stories.each do |story|
-      story.move_to!(index += 1, new_release, user) if story.incomplete?
-    end
-    new_release.save!
 
     ReleaseMailer.deliver_release_notification(User.all, self)
   end
@@ -45,6 +38,10 @@ class Release < ActiveRecord::Base
     rescue
       '(none)'
     end
+  end
+
+  def can_complete_release?
+    !(Task.current.without_story.completed.any?)
   end
 
 end
