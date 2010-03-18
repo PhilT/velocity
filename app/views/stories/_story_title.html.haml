@@ -3,6 +3,7 @@
   %li.toggle.open{:title => 'show/hide tasks'}
     –
   %li.info{:title => 'click to see more'}
+    = link_to '', edit_story_path(story)
   %li.action
     - form_for story, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
       = story_submit_button(f, story)
