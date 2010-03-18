@@ -1,3 +1,6 @@
 - @releases.each do |release|
-  = render :partial => 'tasks/tasks', :object => release.tasks, :locals => {:heading => "Tasks released #{release.finished_at.to_s} - Velocity: #{release.velocity} (features per week)", :type => 'released', :id => 'released_tasks'}
+  %h3
+    %span
+      = "Tasks released #{release.finished_at.to_s} - Velocity: #{release.velocity} (features per week)"
+  = render :partial => 'tasks/tasks', :object => release.tasks
 

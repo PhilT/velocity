@@ -86,7 +86,7 @@ class Task < ActiveRecord::Base
   end
 
   def previous_release?
-    release_id && !release.current?
+    release_id
   end
 
   def started=(value)
