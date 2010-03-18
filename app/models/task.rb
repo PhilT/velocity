@@ -117,8 +117,8 @@ class Task < ActiveRecord::Base
     (aasm_events_for_current_state - [:mark_invalid, :next_state]).first.to_s.gsub('_', ' ')
   end
 
-  def move_to!(position, release, user)
-    update_attributes(:position => position, :release => release, :updated_field => ['position', user.id].join(','))
+  def move_to!(position, user)
+    update_attributes(:position => position, :updated_field => ['position', user.id].join(','))
   end
 
   def updated_field

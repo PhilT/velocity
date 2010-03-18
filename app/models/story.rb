@@ -30,13 +30,8 @@ class Story < ActiveRecord::Base
     self.tasks.map(&:state).uniq
   end
 
-  def move_to!(position, release, user)
-    if self.release != release
-      self.tasks.each_with_index do |task, index|
-        task.move_to!(index, release, user)
-      end
-    end
-    self.update_attributes(:position => position, :release => release)
+  def move_to!(position, user)
+    self.update_attributes(:position => position)
   end
 
   def incomplete?
