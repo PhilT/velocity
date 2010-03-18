@@ -81,6 +81,5 @@ describe TasksController do
       end
     end
   end
-
 end
 
