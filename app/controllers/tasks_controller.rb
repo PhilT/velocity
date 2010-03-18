@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     release = @task.release
     reordered_tasks = params['task']
     reordered_tasks.each_with_index do |task_id, index|
-      Task.find(task_id).move_to!(index + 1, release, current_user)
+      Task.find(task_id).move_to!(index + 1, current_user)
     end
     render_task
   end
