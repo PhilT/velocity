@@ -45,6 +45,33 @@ describe Task do
       task.started_on.to_s.should == first_started_on.to_s
     end
   end
+  
+  it 'should return created tasks' do
+    user = Factory(:developer)
+    task = Factory(:task)
+    
+    created_tasks = Task.created(user)
+    created_tasks.size.should == 1
+    created_tasks.should include(task)
+  end
+  it 'should return updated tasks' do
+    time = Time.now - 1.day
+    task = Factory(:task, :created_at => time)
+    task.created_at.should == time
+
+    updated_tasks = Task.updated
+    updated_tasks.size.should == 1
+    updated_tasks.should include(task)
+  end
+  it 'should return tasks assigned to user' do
+    user = Factory(:developer)
+    task = Factory(:task)
+    task.assign_to!(user)
+    
+    assigned_tasks = Task.assigned_to(user)
+    assigned_tasks.size.should == 1
+    assigned_tasks.should include(task)
+  end
 
   describe 'update' do
     it 'change state when no task details' do
