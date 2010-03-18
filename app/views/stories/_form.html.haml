@@ -1,19 +1,16 @@
 %p
   = f.label :name
-  %br
   = f.text_field :name
+
+%p
+  = f.label :due_on
+  = f.text_field :due_on
+
+%p
+  = f.label :soft_release_on
+  = f.text_field :soft_release_on
 
 %p
   = f.label :description
   %br
   = f.text_area :description
-
-%p
-  = f.label :due_on
-  %br
-  = f.text_field :due_on
-
-%p
-  = f.label :soft_release_on
-  %br
-  = f.text_field :soft_release_on

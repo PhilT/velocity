@@ -1,6 +1,7 @@
-%h2 
-  Edit Story
+%div#story_form
+  %h2 
+    Edit Story
 
-- form_for @story do |f|
-  = render :partial => 'form', :locals => {:f => f}
-  = f.submit 'Update'
+  - form_for @story do |f|
+    = render :partial => 'form', :locals => {:f => f}
+    = f.submit 'Update'
