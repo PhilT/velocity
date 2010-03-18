@@ -1,17 +1,17 @@
 %h2 New release #{@release.finished_at.to_s}
 
 %h3 New features:
-- if @release.tasks.features.any?
+- if @release.tasks.features.verified.any?
   %ul
-    - @release.tasks.features.each do |feature|
+    - @release.tasks.features.verified.each do |feature|
       %li= feature.name
 - else
   No new features.
 
 %h3 Bug fixes:
-- if @release.tasks.bugs.any?
+- if @release.tasks.bugs.verified.any?
   %ul
-    - @release.tasks.bugs.each do |bug|
+    - @release.tasks.bugs.verified.each do |bug|
       %li= bug.name
 - else
   No bugs!
