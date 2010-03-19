@@ -2,5 +2,5 @@
   == $('#story_#{@story.id}').slideUp("normal", function(){$(this).remove();})
   == #{render_hidden_story(@story)}.appendTo($('#now_tasks .stories')).slideDown()
 
-== $('.now_tasks').html("#{current_tasks_heading}")
-== $('.later_tasks').html("#{future_tasks_heading}")
+== $('.release_border').remove();
+== updateReleaseBorder(#{Release.velocity});

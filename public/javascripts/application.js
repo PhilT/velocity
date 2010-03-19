@@ -72,3 +72,19 @@ $(function(){
   }
 })
 
+function updateReleaseBorder(velocity) {
+  var count = 0;
+  var length = 0;
+  $('#stories .story').each(function(story) {
+    length = $(this).find('.feature').length;
+    count += length;
+    if(count > velocity)  {
+      drawReleaseBorder(this);
+      return false;
+    }
+  });
+}
+
+function drawReleaseBorder(story) {
+  $(story).before('<li class="release_border">(End of next release)</li>');
+}
