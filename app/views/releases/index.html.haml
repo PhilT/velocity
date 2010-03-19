@@ -2,5 +2,13 @@
   %h3
     %span
       = "Tasks released #{release.finished_at.to_s} - Velocity: #{release.velocity} (features per week)"
-  = render :partial => 'tasks/tasks', :object => release.tasks
-
+  - if release.stories.any?
+    %div
+      = render :partial => 'tasks/tasks', :object => release.tasks.bugs
+    %div
+      = render :partial => 'tasks/stories', :object => release.stories
+    %div
+      = render :partial => 'tasks/tasks', :object => release.tasks.without_story - release.tasks.bugs
+  - else
+    = render :partial => 'tasks/tasks', :object => release.tasks
+    
