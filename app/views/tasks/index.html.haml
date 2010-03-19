@@ -23,3 +23,5 @@
     Add a new task
 = render :partial => 'tasks', :object => @new_tasks
 
+%script
+  = "updateReleaseBorder(#{Release.velocity});"

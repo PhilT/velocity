@@ -40,7 +40,7 @@ class StoriesController < ApplicationController
     reordered_stories.each_with_index do |story_id, index|
       Story.find(story_id.to_i).move_to!(index + 1, current_user)
     end
-    render :nothing => true
+    render_story
   end
 
 private
