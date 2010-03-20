@@ -6,6 +6,9 @@ $(function(){
   showTaskInfo();
   toggleStoryTasks();
   liveUpdates();
+  $('.story').each(function() {
+    // hide if in cookie
+  });
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -55,20 +58,30 @@ $(function(){
   function toggleStoryTasks() {
     $('.toggle').live('click', function() {
       if($(this).hasClass('open')) {
-        $(this).closest('.title').siblings('.tasks').hide();
-        $(this).removeClass('open');
-        $(this).html('+');
+        hideStoryTasks(this);
       }
       else {
-        $(this).closest('.title').siblings('.tasks').show();
-        $(this).addClass('open');
-        $(this).html('&ndash;');
+        showStoryTasks(this);
       }
     });
   }
 
+  function hideStoryTasks(story) {
+    $(story).closest('.title').siblings('.tasks').hide();
+    $(story).removeClass('open');
+    $(story).html('+');
+    // set cookie
+  }
+  function showStoryTasks(story) {
+    $(story).closest('.title').siblings('.tasks').show();
+    $(story).addClass('open');
+    $(story).html('&ndash;');
+    // clear cookie
+  }
+
+
   function liveUpdates(){
-    setInterval('$.get("/tasks/poll");', 30000);
+//    setInterval('$.get("/tasks/poll");', 30000);
   }
 })
 
@@ -76,7 +89,7 @@ function updateReleaseBorder(velocity) {
   var count = 0;
   var length = 0;
   $('#stories .story').each(function(story) {
-    length = $(this).find('.feature').length;
+    length = $(this).find('.feature').length - $(this).find('.invalid .feature').length;
     count += length;
     if(count > velocity)  {
       drawReleaseBorder(this);
