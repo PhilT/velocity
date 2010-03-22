@@ -20,16 +20,10 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    if params[:story].nil?
-      @moved = true
-      @story.move_to!((Story.current.last.position + 1 rescue 1), current_user)
-      render_story
+    if @story.update_attributes(params[:story])
+      redirect_to tasks_url
     else
-      if @story.update_attributes(params[:story])
-        redirect_to tasks_url
-      else
-        render :action => 'edit'
-      end
+      render :action => 'edit'
     end
   end
 
@@ -38,7 +32,7 @@ class StoriesController < ApplicationController
     release = @story.release
     reordered_stories = params['story']
     reordered_stories.each_with_index do |story_id, index|
-      Story.find(story_id.to_i).move_to!(index + 1, current_user)
+      Story.find(story_id).move_to!(index + 1, current_user)
     end
     render_story
   end
