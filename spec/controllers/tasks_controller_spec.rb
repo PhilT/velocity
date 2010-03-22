@@ -67,18 +67,6 @@ describe TasksController do
         Task.all.map(&:release).uniq.should == [nil]
         Task.current.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
       end
-
-      it 'should reorder tasks in future release' do
-        @tasks = []
-        3.times do
-          @tasks << Factory(:task, :release => nil)
-        end
-
-        put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
-
-        Task.all.map(&:release).uniq.should == [nil]
-        Task.future.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
-      end
     end
   end
 end

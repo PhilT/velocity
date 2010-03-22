@@ -28,4 +28,18 @@ describe Release do
 
     @release.finish!(@developer).should be_false
   end
+
+  it 'should calculate velocity' do
+    release = Factory(:release)
+    task = Factory(:task)
+    task.category = 'feature'
+    task.state = 'verified'
+    task.save!
+    release.tasks << task
+    release.finished_at = Time.now
+    release.created_at = Time.now - 1.day
+    release.save!
+
+    release.velocity.should == 7
+  end
 end
