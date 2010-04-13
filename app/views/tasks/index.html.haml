@@ -1,5 +1,5 @@
 %ul#stats
-  %li#velocity
+  %li#velocity{:title => Release.velocity.round}
     = label_tag 'velocity', 'Velocity:'
     = display_velocity(Release.velocity)
     %div#info
@@ -21,6 +21,3 @@
   %span{:class => 'new_tasks'}
     Add a new task
 = render :partial => 'tasks', :object => @new_tasks
-
-%script
-  = "updateReleaseBorder(#{Release.velocity});"

@@ -83,6 +83,8 @@ $(function(){
   function liveUpdates(){
 //    setInterval('$.get("/tasks/poll");', 30000);
   }
+  
+  updateReleaseBorder($('#velocity').attr('title'));
 })
 
 function updateReleaseBorder(velocity) {
