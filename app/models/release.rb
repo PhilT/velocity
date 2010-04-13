@@ -33,8 +33,7 @@ class Release < ActiveRecord::Base
     begin
       distance_in_minutes = (((self.finished_at - self.created_at).abs)/60)
       days = (distance_in_minutes / 1440)
-      tasks_per_week = self.tasks.features.verified.count / days * 7
-      tasks_per_week > 1 ? tasks_per_week.round : 'less than 1'
+      self.tasks.features.verified.count / days * 7
     rescue
       '(none)'
     end
