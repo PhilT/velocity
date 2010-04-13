@@ -1,8 +1,7 @@
 %ul#stats
   %li#velocity
     = label_tag 'velocity', 'Velocity:'
-    = Release.velocity
-    (features per week)
+    = display_velocity(Release.velocity)
     %div#info
       Taken from Release
       = Release.last[0].finished_at.to_s rescue "(none)"
