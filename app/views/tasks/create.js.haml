@@ -1,4 +1,4 @@
 - if @task.valid?
-  == #{render_hidden_task(@task)}.appendTo($('#{@task.story ? "#story_#{@task.story_id}" : '#later_tasks'} .tasks')).slideDown()
+  == #{render_hidden_task(@task)}.appendTo($('#{@task.story ? "#story_#{@task.story_id}" : '#future'} .tasks')).slideDown()
   == $('#new_task .name input').val('')
 
