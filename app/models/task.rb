@@ -150,6 +150,10 @@ class Task < ActiveRecord::Base
     !self.story_id.nil?
   end
 
+  def bug?
+    self.category == 'bug'
+  end
+
   def remove_story_name
     self.name.gsub!(/^#{story.name}: /, '') if self.story
   end
