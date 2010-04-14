@@ -15,9 +15,9 @@ module TasksHelper
     disabled = task.story.blank? && ['feature', 'refactor'].include?(task.category) && task.action != 'mark valid'
     f.submit(task.action, :id => "task_#{task.id}_submit", :disabled => disabled)
   end
-  
+
   def display_velocity(velocity)
-    display = velocity < 1 ? 'less than one' : velocity.round
+    display = velocity < 1 ? 'less than one' : velocity.round.to_s
     display += ' (features per week)'
   end
 end
