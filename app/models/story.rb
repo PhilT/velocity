@@ -8,6 +8,7 @@ class Story < ActiveRecord::Base
   named_scope :current, :conditions => ['release_id IS NULL']
 
   default_scope :order => :position
+  validates_uniqueness_of :name, :scope => :release_id
 
   def state
     task_states = self.task_states
