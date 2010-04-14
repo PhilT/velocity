@@ -1,7 +1,7 @@
 - @releases.each do |release|
   %h3
     %span
-      = "Tasks released #{release.finished_at.to_s} - Velocity: #{release.velocity} (features per week)"
+      = "Tasks released #{release.finished_at.to_s} - Velocity: #{display_velocity(release.velocity)}"
   - if release.stories.any?
     %div
       = render :partial => 'tasks/tasks', :object => release.tasks.bugs
@@ -11,4 +11,4 @@
       = render :partial => 'tasks/tasks', :object => release.tasks.without_story - release.tasks.bugs
   - else
     = render :partial => 'tasks/tasks', :object => release.tasks
-    
+
