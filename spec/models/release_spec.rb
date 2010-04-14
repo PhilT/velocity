@@ -40,6 +40,6 @@ describe Release do
     release.created_at = Time.now - 1.day
     release.save!
 
-    release.velocity.should == 7
+    release.velocity.round.should == 7
   end
 end
