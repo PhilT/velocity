@@ -6,6 +6,8 @@ class Story < ActiveRecord::Base
   belongs_to :release
 
   named_scope :current, :conditions => ['release_id IS NULL']
+  named_scope :created, lambda {{:conditions => ["created_at > ?", Task.last_poll]}}
+  named_scope :updated, lambda {{:conditions => ["updated_at > ?", Task.last_poll]}}
 
   default_scope :order => :position
   validates_uniqueness_of :name, :scope => :release_id
