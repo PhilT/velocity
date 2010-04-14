@@ -10,6 +10,28 @@ describe TasksController do
     @task = Factory(:task)
   end
 
+  describe 'create' do
+    it 'should assign task to a story in a current release' do
+      Factory(:story, :release => Release.first)
+      story = Factory(:story)
+      post :create, :task => {:name => 'Story: New task'}
+
+      response.should be_success
+      Task.count.should == 2
+      assigns(:task).story.should == story
+      assigns(:task).name.should == 'New task'
+    end
+
+    it 'should create a task without a story' do
+      post :create, :task => {:name => 'Story: New task'}
+
+      response.should be_success
+      Task.count.should == 2
+      assigns(:task).story.should be_nil
+      assigns(:task).name.should == 'Story: New task'
+    end
+  end
+
   describe 'update' do
     it 'should mark task invalid with current user when state invalid' do
       put :update, :id => @task.id, :state => 'invalid'
