@@ -1,7 +1,7 @@
 %h2 Login
 
-%ol
-  - form_for @user_session do |f|
+- form_for @user_session do |f|
+  %ol
     %li= f.error_messages
     %li
       = f.label :email
