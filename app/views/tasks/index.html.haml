@@ -17,7 +17,6 @@
 %div{:id => 'future'}
   = render :partial => 'tasks', :object => @future_tasks
 
-%h3
-  %span{:class => 'new_tasks'}
-    Add a new task
-= render :partial => 'tasks', :object => @new_tasks
+%div.new_task
+  = render :partial => 'tasks', :object => @new_tasks
+  = link_to 'New Story', new_story_path, :class => 'new_story_link'
