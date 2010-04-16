@@ -110,6 +110,24 @@ ul#released_tasks
   :min-height 20px
   :margin 10px
 
+.new_task
+  :position fixed
+  :bottom 0
+  :background-color #e0e0e0
+  :width 100%
+  :padding 5px 0 10px
+  :border-top 1px solid #333
+  ul.tasks
+    :padding 0
+    :margin 0
+    :display inline
+    li
+      :display inline
+
+  .new_story_link
+    :float right
+    :padding-right 10px
+
 .tasks, .stories
   :margin-bottom 10px
 
@@ -195,7 +213,7 @@ ul#released_tasks
     .handle, .info
       :opacity 1
 
-.story 
+.story
   .title:hover
     :background #e7e7e7
     :-moz-border-radius 10px
