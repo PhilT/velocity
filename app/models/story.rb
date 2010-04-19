@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
 
   def state
     task_states = self.task_states
-    if task_states == ['pending']
+    if task_states == ['pending'] || self.tasks.empty?
       'pending'
     elsif (task_states - ['verified', 'invalid']).empty?
       'verified'
