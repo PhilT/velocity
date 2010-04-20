@@ -4,7 +4,7 @@
     = display_velocity(Release.velocity)
     %div#info
       Taken from Release
-      = Release.last[0].finished_at.to_s rescue "(none)"
+      = Release.last.finished_at.to_s rescue "(none)"
 
 %h3
   %span{:class => 'now_tasks'}
