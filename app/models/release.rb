@@ -4,17 +4,16 @@ class Release < ActiveRecord::Base
   belongs_to :finished_by, :class_name => 'User', :foreign_key => :finished_by
 
   named_scope :previous, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC'
-  named_scope :last, :conditions => 'finished_at IS NOT NULL', :order => 'finished_at DESC', :limit => 1
 
   delegate :features, :bugs, :refactorings, :to => :tasks
 
   def finish!(user)
-    return false unless can_complete_release? 
+    return false unless can_complete_release?
 
-    Task.current.without_story.verified.each do |task| 
+    Task.current.without_story.verified.each do |task|
       task.add_to_release!(self)
     end
-    Story.current.verified.each do |story| 
+    Story.current.verified.each do |story|
       story.add_to_release!(self)
       story.tasks.each {|task| task.add_to_release!(self)}
     end
@@ -26,7 +25,7 @@ class Release < ActiveRecord::Base
   end
 
   def self.velocity
-    last[0].try(:velocity) || 0
+    last.try(:velocity) || 0
   end
 
   def velocity
