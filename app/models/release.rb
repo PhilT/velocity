@@ -30,7 +30,8 @@ class Release < ActiveRecord::Base
 
   def velocity
     begin
-      distance_in_minutes = (((self.finished_at - self.created_at).abs)/60)
+      releases = Release.all(:limit => 2, :order => 'created_at DESC')
+      distance_in_minutes = (((releases[0].created_at - releases[1].created_at).abs)/60)
       days = (distance_in_minutes / 1440)
       self.tasks.features.verified.count / days * 7
     rescue
