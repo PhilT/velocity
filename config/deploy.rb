@@ -5,7 +5,7 @@ set :scm, :git
 set :branch, 'master'
 
 set :user, 'ubuntu'
-set :deploy_to, "/data/#{application}"
+set :deploy_to, nil
 
 set :use_sudo, true
 set :keep_releases, 3
@@ -23,6 +23,15 @@ role :db,  "velocity.puresolo.com", :primary => true # This is where Rails migra
 
 after "deploy:update_code", "gems:install"
 after "deploy:update_code", "copy_db_config"
+
+before "deploy", "check_env"
+
+task :check_env do
+  unless deploy_to
+    puts "Think again!"
+    exit
+  end
+end
 
 task :velocity do
   set :deploy_to, '/data/velocity'
