@@ -35,7 +35,7 @@ class Release < ActiveRecord::Base
       days = (distance_in_minutes / 1440)
       self.tasks.features.verified.count / days * 7
     rescue
-      '(none)'
+      0
     end
   end
 
