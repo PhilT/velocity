@@ -13,6 +13,9 @@ class Release < ActiveRecord::Base
     Task.current.without_story.verified.each do |task|
       task.add_to_release!(self)
     end
+    Task.current.without_story.invalid.each do |task|
+      task.add_to_release!(self)
+    end
     Story.current.verified.each do |story|
       story.add_to_release!(self)
       story.tasks.each {|task| task.add_to_release!(self)}
