@@ -24,6 +24,7 @@ describe Story do
     end
     it 'should be verified when all tasks are verified or invalid' do
       @story.stub!(:task_states).and_return(['verified'])
+      @story.stub_chain(:tasks, :empty? => false)
       @story.state.should == 'verified'
 
       @story.stub!(:task_states).and_return(['verified', 'invalid'])
@@ -31,6 +32,7 @@ describe Story do
     end
     it 'should be completed when tasks are completed or verified or invalid' do
       @story.stub!(:task_states).and_return(['completed'])
+      @story.stub_chain(:tasks, :empty? => false)
       @story.state.should == 'completed'
 
       @story.stub!(:task_states).and_return(['completed', 'verified'])
@@ -44,6 +46,7 @@ describe Story do
     end
     it 'should be started when at least one task is started or invalid' do
       @story.stub!(:task_states).and_return(['pending', 'invalid'])
+      @story.stub_chain(:tasks, :empty? => false)
       @story.state.should == 'started'
 
       @story.stub!(:task_states).and_return(['started', 'invalid'])
