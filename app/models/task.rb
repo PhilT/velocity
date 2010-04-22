@@ -17,6 +17,7 @@ class Task < ActiveRecord::Base
   aasm_state :pending
   aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
+  aasm_state :merged
   aasm_state :verified
   aasm_state :invalid
 
@@ -26,8 +27,11 @@ class Task < ActiveRecord::Base
   aasm_event :complete do
     transitions :from => :started, :to => :completed
   end
+  aasm_event :merge do
+    transitions :from => :completed, :to => :merged
+  end
   aasm_event :verify do
-    transitions :from => :completed, :to => :verified
+    transitions :from => :merged, :to => :verified
   end
   aasm_event :restart do
     transitions :from => :verified, :to => :started
@@ -41,7 +45,8 @@ class Task < ActiveRecord::Base
   aasm_event :next_state do
     transitions :from => :pending, :to => :started
     transitions :from => :started, :to => :completed
-    transitions :from => :completed, :to => :verified
+    transitions :from => :completed, :to => :merged
+    transitions :from => :merged, :to => :verified
     transitions :from => :verified, :to => :started
     transitions :from => :invalid, :to => :pending
   end
