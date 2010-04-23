@@ -35,10 +35,12 @@ task :check_env do
 end
 
 task :velocity do
+  set :application, "velocity"
   set :deploy_to, '/data/velocity'
 end
 
 task :todo do
+  set :application, "todo"
   set :deploy_to, '/data/todo'
 end
 
