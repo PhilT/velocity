@@ -12,8 +12,7 @@ module TasksHelper
   end
 
   def task_submit_button(f, task)
-    disabled = task.story.blank? && ['feature', 'refactor'].include?(task.category) && task.action != 'mark valid'
-    f.submit(task.action, :id => "task_#{task.id}_submit", :disabled => disabled)
+    f.submit task.action, :id => "task_#{task.id}_submit"
   end
 
   def display_velocity(velocity)
