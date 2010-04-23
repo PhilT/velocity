@@ -23,6 +23,7 @@ role :db,  "velocity.puresolo.com", :primary => true # This is where Rails migra
 
 after "deploy:update_code", "gems:install"
 after "deploy:update_code", "copy_db_config"
+after "deploy:symlink", "deploy:update_crontab"
 
 before "deploy", "check_env"
 
@@ -58,4 +59,10 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
+  end
 end
+

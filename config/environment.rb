@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'db2s3'
   config.gem 'capistrano'
   config.gem 'haml'
+  config.gem 'whenever', :lib => false
 end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
