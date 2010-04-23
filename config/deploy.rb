@@ -51,6 +51,7 @@ end
 
 task :copy_db_config do
   run "cp #{deploy_to}/shared/database.yml #{current_release}/config/database.yml"
+  run "cp #{deploy_to}/shared/s3_backup.rb #{current_release}/config/initializers/s3_backup.rb"
 end
 
 namespace :deploy do
