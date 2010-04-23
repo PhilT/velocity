@@ -15,18 +15,30 @@ describe Release do
 
     @developer = Factory(:developer)
   end
-  it 'should finish release' do
-    ReleaseMailer.should_receive(:deliver_release_notification).and_return(true)
+  describe 'finish release' do
+    it 'should finish release' do
+      ReleaseMailer.should_receive(:deliver_release_notification).and_return(true)
 
-    @release.finish!(@developer).should be_true
-    @release.reload
-    @release.stories.size.should == 1
-    @release.tasks.size.should == 1
-  end
-  it 'should not finish release if has unverified tasks' do
-    Factory(:task).update_attribute :state, 'completed'
+      @release.finish!(@developer).should be_true
+      @release.reload
+      @release.stories.size.should == 1
+      @release.tasks.size.should == 1
+    end
+    it 'should not finish release if has unverified tasks' do
+      Factory(:task).update_attribute :state, 'completed'
 
-    @release.finish!(@developer).should be_false
+      @release.finish!(@developer).should be_false
+    end
+    it 'should include invalid tasks' do
+      task = Factory(:task)
+      task.update_attribute :state, 'verified'
+      invalid_task = Factory(:task)
+      invalid_task.update_attribute :state, 'invalid'
+
+      @release.finish!(@developer).should be_true
+      @release.reload
+      @release.tasks.should include(task, invalid_task)
+    end
   end
 
   it 'should calculate velocity' do
