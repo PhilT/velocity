@@ -1,9 +1,9 @@
 - if @moved
   == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
   - if @task.has_story?
-    == #{render_hidden_task(@task)}.appendTo($('#story_#{@task.story_id} ul.tasks')).slideDown()
+    == #{render_hidden(@task)}.appendTo($('#story_#{@task.story_id} ul.tasks')).slideDown()
   - else
-    == #{render_hidden_task(@task)}.appendTo($('#now_tasks .tasks')).slideDown()
+    == #{render_hidden(@task)}.appendTo($('#now_tasks .tasks')).slideDown()
 - else
   == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render(@task, :locals => {:field => @field}))}")
   == $('#task_#{@task.id}').effect("highlight", {}, 3000)
@@ -15,3 +15,4 @@
 
 == $('.release_border').remove();
 == updateReleaseBorder(#{Release.velocity});
+
