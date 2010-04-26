@@ -1,3 +1,4 @@
 %ul.stories
   - stories.each do |story|
-    = render :partial => 'stories/story', :object => story, :locals => {:field => nil}
+    %li= story.name
+

@@ -1,0 +1,205 @@
+@import _colors.sass
+@import buttons.sass
+@import columns.sass
+
+#container
+  :overflow hidden
+  :padding-right= !sidebar_width + 25px
+  :clear both
+
+#content
+  :width 100%
+  :margin-left 5px
+  :border 0
+  :border-right= (!sidebar_width + 20px) "solid" #fff
+  :margin-right= (-!sidebar_width - 15px)
+  :float left
+  .release
+    :margin-bottom 100px
+    :border 1px solid #ccc
+    h2
+      :font-size 110%
+      +set-gradient(#fff)
+      input[type=submit]
+        +button
+      :display block
+      :padding 10px
+      .finished
+        :float right
+        form
+          :float left
+
+
+.new_task
+  :position fixed
+  :bottom 0
+  +set-gradient(#444)
+  :width 100%
+  :padding 5px 0 10px
+  :color #eee
+
+  .task_new, .group_new
+    :border none
+    :float left
+    :overflow auto
+
+  .group_new
+    :float right
+
+.task
+  :border-bottom 1px solid #ddd
+  :clear both
+  :overflow hidden
+  .action
+    :margin 0 10px
+    input[type=submit]
+      +button
+      +small
+      +set-button-gradients(#ffd700)
+      :width 70px
+
+  .title
+    :clear both
+    :overflow hidden
+  .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle
+    :float left
+  .feature a, .refactor a, .bug a, .handle, .info, .toggle
+    :margin-top 3px
+    :margin-left 3px
+    :display block
+    :width 16px
+    :height 16px
+    :color white
+
+  .handle
+    :background url('/images/arrow_out.png') no-repeat
+    :cursor move
+    :opacity 0
+
+  .toggle
+    :cursor pointer
+    :opacity 0
+    :line-height 16px
+    :color black
+    :font-size 16px
+    :padding-top 0
+    :margin-top 0
+
+  .info
+    :background url('/images/information.png') no-repeat
+    :cursor pointer
+    :opacity 0
+
+  .description
+    :display none
+    :padding 2px
+    :margin 2px
+    :margin-left 70px
+    li
+      :display inline
+      :border-right 1px solid silver
+      :padding-right 5px
+
+  .description.active
+    :display block
+    select
+      :font-size 80%
+
+  .assigned_id a
+    :text-decoration underline
+
+  .feature a
+    :background= url('/images/lightbulb.png') "no-repeat"
+
+  .refactor a
+    :background= url('/images/lightbulb_off.png') "no-repeat"
+  .bug a
+    :background= url('/images/bug.png') "no-repeat"
+
+.task
+  &:hover
+    :background #fff9b4
+    .handle, .info
+      :opacity 1
+
+#released_tasks
+  .verified
+    .name
+      :text-decoration none
+      :color= !text_color
+  .description
+    :margin-left 65px
+
+.task_new
+  &:hover
+    :background none
+
+
+.completed, .verified, .invalid
+  :color #777
+
+.completed
+  .action
+    input[type=submit]
+      +set-button-gradients(#6495ed)
+
+.verified, .invalid
+  .action
+    input[type=submit]
+      :color #aaa
+      +set-button-gradients(#eee)
+
+
+.verified
+  .name
+    :font-size 75%
+
+.started
+  .action
+    input[type=submit]
+      +green
+
+.invalid
+  :color #b86
+
+.name
+  :overflow auto
+  input
+    :width 500px
+    :float left
+    :padding 0
+  a
+    :display block
+    :float left
+    :font-size 80%
+  a.cancel
+    :display block
+    :margin-top 2px
+    +button
+    +small
+    +red
+
+.mark_invalid
+  :color #333
+  :background #ddd
+  :float left
+  :padding 1px 4px
+  :margin 1px 4px 0 0
+  :font-size 80%
+  &:hover
+    :background #ecc
+
+.link_go
+  :background url('/images/link_go.png') no-repeat
+  :display block
+  :width 16px
+  :height 16px
+  :overflow auto
+  :margin-left 5px
+  :text-indent -5000px
+
+.release_border
+  :border-top 1px solid grey
+  :font-style italic
+  :padding 2px 0 0 45px
+
