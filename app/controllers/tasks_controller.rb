@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
-    @new_tasks = [Task.new]
+    @task = Task.new
+    @group = Story.new
   end
 
   def sort

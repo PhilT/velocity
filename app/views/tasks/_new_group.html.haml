@@ -1,0 +1,5 @@
+
+%div.group_new
+  - form_for @group, :html => {:class => 'ajaxForm'} do |f|
+    = f.text_field :name, :title => 'new group'
+

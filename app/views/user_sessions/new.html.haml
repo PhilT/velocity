@@ -1,16 +1,15 @@
-%h2 Login
+%div#login_box
+  %h2 Existing Users
 
-- form_for @user_session do |f|
-  %ol
-    %li= f.error_messages
-    %li
-      = f.label :email
-      = f.text_field :email
+  - form_for @user_session do |f|
+    %ol
+      %li= f.error_messages
+      %li
+        = f.text_field :email, :title => 'Email'
 
-    %li
-      = f.label :password
-      = f.password_field :password
+      %li
+        = f.password_field :password, :title => 'Password'
 
-    %li
-      = f.submit "Login"
+      %li
+        = f.submit "Login"
 

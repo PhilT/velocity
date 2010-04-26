@@ -1,0 +1,50 @@
+=set-gradient(!from, !amount = -50)
+  !to = !from + !amount
+  :background= !to
+  :background= -moz-linear-gradient(top, !from, !to)
+  :background= -webkit-gradient(linear, 0% 0%, 0% 100%, from(!from), to(!to))
+
+=set-button-gradients(!color)
+  +set-gradient(!color)
+  &:hover
+    +set-gradient(!color + 50)
+
+=button
+  +set-button-gradients(#333)
+  :display inline-block
+  :padding 5px 10px 6px
+  :color #fff
+  :text-decoration none
+  :font-weight bold
+  :line-height 1
+  :-moz-border-radius 5px
+  :-webkit-border-radius 5px
+  :-moz-box-shadow 0 1px 3px rgba(0, 0, 0, 0.5)
+  :-webkit-box-shadow 0 1px 3px #999
+  :text-shadow 0 -1px 1px #222
+  :border-bottom 1px solid rgba(0, 0, 0, 0.5)
+  :position relative
+  :cursor pointer
+  :border 0 none
+  :margin 0
+
+=orange
+  +set-button-gradients(orange)
+
+=green
+  +set-button-gradients(#0d0)
+
+=red
+  +set-button-gradients(#d00)
+
+=blue
+  +set-button-gradients(#00d)
+
+=grey
+  +set-button-gradients(#999)
+
+=small
+  :text-shadow none
+  :padding 2px 3px
+  :font-size 75%
+

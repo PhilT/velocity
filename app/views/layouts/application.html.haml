@@ -2,20 +2,17 @@
 %html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xml:lang' => 'en'}
   %head
     %title== Velocity - #{STRAPLINE}
-    = stylesheet_link_tag 'lib/jquery.jgrowl', 'application'
+    = stylesheet_link_tag 'lib/jquery.jgrowl', 'application', 'header', 'menu', 'login', 'buttons', 'tasks', 'groups'
     = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery-ui.min', 'lib/jquery.delay', 'lib/jquery.hint', "lib/#{RAILS_ENV}/jquery.jgrowl", 'lib/application', 'application'
   %body
     %div#header
-      %h1= link_to '&nbsp;', root_path
-      %h2= STRAPLINE
-      %ul#session
+      %h1= link_to '<span class="offscreen">Velocity</span>', root_path
+      %ul#menu
         - if current_user
-          %li= link_to 'New Story', new_story_path
-          %li= link_to 'Tasks', tasks_path
+          %li= link_to 'Tasks', tasks_path, :class => 'current'
           %li= link_to 'Releases', releases_path
           %li= link_to 'Users', new_user_path
           %li= link_to 'Logout', user_session_path(current_user), :method => :delete
-        - else
-          %li= link_to 'Login', new_user_session_path
-    = yield
+    %div#main
+      = yield
 
