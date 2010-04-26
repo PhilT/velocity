@@ -1,8 +1,4 @@
 module TasksHelper
-  def render_hidden_task(task)
-    "$('#{escape_javascript(render(task))}').hide()"
-  end
-
   def current_tasks_heading
     "Tasks for the current release"
   end
@@ -16,8 +12,7 @@ module TasksHelper
   end
 
   def display_velocity(velocity)
-    display = velocity < 1 ? 'less than one' : velocity.round.to_s
-    display += ' (features per week)'
+    "#{velocity.round} (features per week)"
   end
 
   def select_list_for(task)

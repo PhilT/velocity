@@ -10,5 +10,9 @@ module ApplicationHelper
     end
   end
 
+  def render_hidden(element)
+    "$('#{escape_javascript(render(story))}').hide()"
+  end
+
 end
 
