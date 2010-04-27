@@ -1,5 +1,4 @@
-%li.story{:id => "story_#{story.id || 'new'}", :class => "#{story.state}"}
-  = render :partial => 'stories/story_title', :locals => {:story => story}
-  %ul.tasks
-    - story.tasks.each do |task|
-      = render :partial => 'tasks/task', :object => task
+%li.story{:id => "story_#{story.id || 'new'}"}
+  %span{:class => "group color_#{color_index(story)}"}
+    = story.name
+
