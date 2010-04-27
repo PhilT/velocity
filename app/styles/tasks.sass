@@ -47,6 +47,7 @@
     float: right
 
 .task
+  font-size: 80%
   border-bottom: 1px solid #ddd
   clear: both
   overflow: hidden
@@ -57,6 +58,8 @@
       +small
       +set-button-gradients(#ffd700)
       width: 70px
+      font-size: 85%
+      margin-top: 2px
 
   .title
     clear: both
@@ -141,28 +144,31 @@
 .completed
   .action
     input[type=submit]
-      +set-button-gradients(#6495ed)
+      +set-button-gradients(#B1C1E0)
 
 .verified, .invalid
   .action
     input[type=submit]
-      color: #aaa
-      +set-button-gradients(#eee)
-
+      color: #999
+      +set-gradient(#ccc, 20)
+      &:hover
+        +set-gradient(#ddd, -20)
 
 .verified
   .name
-    font-size: 75%
+    font-size: 90%
+    color: #aaa
 
 .started
   .action
     input[type=submit]
-      +green
+      +set-button-gradients(#91ea6a)
 
 .invalid
   color: #b86
 
 .name
+  line-height: 20px
   overflow: auto
   input
     width: 500px
@@ -171,7 +177,6 @@
   a
     display: block
     float: left
-    font-size: 80%
   a.cancel
     display: block
     margin-top: 2px
