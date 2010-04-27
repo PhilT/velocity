@@ -6,11 +6,11 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new(params[:story])
-    if @story.save
-      redirect_to tasks_url
-    else
-      render :action => 'new'
+    @group = Story.new(params[:story])
+    if @group.save
+      respond_to do|format|
+        format.js{render :layout => false}
+      end
     end
   end
 
@@ -44,3 +44,4 @@ private
     end
   end
 end
+
