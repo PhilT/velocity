@@ -1,4 +1,4 @@
 %li.story{:id => "story_#{story.id || 'new'}"}
-  %span{:class => "group color_#{color_index(story)}"}
+  %span{:class => "group color_#{story.id % 38}"}
     = story.name
 

@@ -4,10 +4,10 @@
   :background= -moz-linear-gradient(top, !from, !to)
   :background= -webkit-gradient(linear, 0% 0%, 0% 100%, from(!from), to(!to))
 
-=set-button-gradients(!color)
-  +set-gradient(!color)
+=set-button-gradients(!color, !amount = -50)
+  +set-gradient(!color, !amount)
   &:hover
-    +set-gradient(!color + 50)
+    +set-gradient(!color + 50, !amount)
 
 =button
   +set-button-gradients(#333)
@@ -30,21 +30,31 @@
 
 =orange
   +set-button-gradients(orange)
+  color: #222
 
 =green
   +set-button-gradients(#0d0)
+  color: #222
 
 =red
   +set-button-gradients(#d00)
+  color: #222
 
 =blue
   +set-button-gradients(#00d)
+  color: #ccc
 
 =grey
   +set-button-gradients(#999)
+  color: #222
 
 =small
   text-shadow: none
+  color: #333
   padding: 2px 3px
-  font-size: 75%
+  font:
+    size: 75%
+    weight: normal
+  -moz-box-shadow: none
+  -webkit-box-shadow: none
 
