@@ -36,7 +36,10 @@ class TasksController < ApplicationController
   #TODO: move into model
   def update
     @task = Task.find(params[:id])
-    if params[:task].nil? #state was changed
+    if params[:group_id] # group changed
+      @task.update_attribute :story_id, params[:group_id]
+      return render :partial => 'change_group', :layout => false
+    elsif params[:task].nil? #state was changed
       @task.update_attribute :updated_field, ""
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)

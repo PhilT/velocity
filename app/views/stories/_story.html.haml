@@ -1,5 +1,4 @@
 - if story
-  %li.story{:id => "story_#{story.id || 'new'}"}
-    %span{:class => "group color_#{story.id % 38}"}
-      = story.name
+  %span{:id => "group_#{story.id}", :class => "group color_#{story.id % 38}"}
+    = story.name
 
