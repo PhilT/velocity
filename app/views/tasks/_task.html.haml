@@ -8,7 +8,7 @@
       %li.action
         - unless task.previous_release?
           = task_submit_button(f, task)
-      = render :partial => 'stories/story', :object => task.story
+      %li.story= render :partial => 'stories/story', :object => task.story
       = f.text :name, :hint => "what's this about?"
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}

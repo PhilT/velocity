@@ -103,3 +103,4 @@ function updateReleaseBorder(velocity) {
 function drawReleaseBorder(story) {
   $(story).before('<li class="release_border">(End of next release)</li>');
 }
+
