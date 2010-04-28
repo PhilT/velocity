@@ -1,4 +1,5 @@
 - if @group.valid?
   == $('#story_name').val('')
-  == #{render_hidden(@group)}.appendTo($('.groups')).slideDown()
+  == #{render_li(@group)}.appendTo($('.groups')).slideDown()
+  == $("#group_" + #{@group.id}).draggableGroup();
 
