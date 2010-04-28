@@ -43,6 +43,10 @@
     float: left
     overflow: auto
 
+  .task_new
+    input[type=text]
+      width: 500px
+
   .group_new
     float: right
 
@@ -124,6 +128,8 @@
     background: #fff9b4
     .handle, .info
       opacity: 1
+  .group
+    float: left
 
 #released_tasks
   .verified
@@ -168,6 +174,7 @@
   color: #b86
 
 .name
+  float: left
   line-height: 20px
   overflow: auto
   input
@@ -195,13 +202,10 @@
     background: #ecc
 
 .link_go
-  background: url('/images/link_go.png') no-repeat
+  background: url(/images/link_go.png) no-repeat
   display: block
   width: 16px
   height: 16px
-  overflow: auto
-  margin-left: 5px
-  text-indent: -5000px
 
 .release_border
   border-top: 1px solid grey

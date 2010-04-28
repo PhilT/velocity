@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   def find_stuff
     @stories = Story.current
     @groups = @stories
-    @bugs = Task.current.bugs.without_story
-    @future_tasks = Task.current.without_story - @bugs
+    @bugs = Task.current.bugs
+    @future_tasks = Task.current - @bugs
     @developers = User.developers
     @non_developers = User.non_developers
   end

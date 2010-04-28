@@ -72,7 +72,7 @@ private
   def add_links(links)
     a_tags = ""
     links.flatten.each do |link|
-      a_tags += "<a href='#{link}' class='link_go' title='Visit #{link}'>link</a>"
+      a_tags += "<a href='#{link}' class='link_go' title='Visit #{link}'></a>"
     end
     a_tags
   end

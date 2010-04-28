@@ -8,6 +8,7 @@
       %li.action
         - unless task.previous_release?
           = task_submit_button(f, task)
+      = render :partial => 'stories/story', :object => task.story
       = f.text :name, :hint => "what's this about?"
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
@@ -20,3 +21,4 @@
       = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
       = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
       = f.select :story_id, :collection => @stories, :prefix => 'Story: ', :prompt => 'no story', :nil => '(no story)'
+
