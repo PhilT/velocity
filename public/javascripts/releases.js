@@ -1,5 +1,5 @@
 $(function(){
-  $('a').click(function(){
+  $('#releases a').click(function(){
     return false;
   })
 })
