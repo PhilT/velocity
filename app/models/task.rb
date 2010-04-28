@@ -48,9 +48,7 @@ class Task < ActiveRecord::Base
 
   default_scope :order => :position
   named_scope :current, :conditions => 'release_id IS NULL'
-  named_scope :future, :conditions => "release_id IS NULL"
   named_scope :features, :conditions => {:category => 'feature'}
-  named_scope :bugs, :conditions => {:category => 'bug'}
   named_scope :refactorings, :conditions => {:category => 'refactor'}
   named_scope :outstanding, :conditions => 'state != "verified"'
   named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}

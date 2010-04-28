@@ -1,4 +1,5 @@
 - if @task.valid?
-  == #{render_hidden(@task)}.appendTo($('#{select_list_for(@task)}')).slideDown()
+  == #{render_hidden(@task)}.appendTo($('.tasks')).slideDown()
   == $('#task_name').val('')
+  == $("#task_" + #{@task.id}).droppableTask();
 
