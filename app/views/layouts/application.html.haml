@@ -10,10 +10,10 @@
       %h1= link_to '<span class="offscreen">Velocity</span>', root_path
       %ul#menu
         - if current_user
-          %li= link_to 'Tasks', tasks_path, :class => 'current'
-          %li= link_to 'Releases', releases_path
-          %li= link_to 'Users', new_user_path
-          %li= link_to 'Logout', user_session_path(current_user), :method => :delete
+          %li= link_to_unless_current '<span>Tasks</span>', tasks_path
+          %li= link_to_unless_current '<span>Releases</span>', releases_path
+          %li= link_to_unless_current '<span>Users</span>', new_user_path
+          %li= link_to_unless_current '<span>Logout</span>', user_session_path(current_user), :method => :delete
     %div#main
       = yield
 
