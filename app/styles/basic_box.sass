@@ -1,0 +1,42 @@
+@import buttons.sass
+
+.basic_box
+  background: #eee
+  margin: 100px auto
+  border: 8px solid #e0e0e0
+  width: 350px
+  -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1)
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1)
+  h2
+    margin: 5px 15px
+
+  form
+    width: 350px
+    ol
+      padding: 0
+      margin: 0
+      li
+        margin: auto
+        width: 268px
+        input
+          margin: 3px 0
+          &[type=text],
+          &[type=password]
+            width: 260px
+        input[type=submit]
+          float: right
+          font-size: 100%
+          margin: 5px
+          +button
+          +green
+          color: #eee
+        input[type=checkbox], label
+          margin: 6px
+          display: block
+          float: left
+        label
+          margin: 3px
+        &.submit
+          +clearfix
+          margin: 5px auto
+
