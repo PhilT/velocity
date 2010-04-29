@@ -51,7 +51,6 @@
 .task
   font-size: 80%
   border-bottom: 1px solid #ddd
-  clear: both
   overflow: hidden
   .action
     margin: 0 10px
@@ -65,8 +64,8 @@
       margin-top: 2px
 
   .title
-    clear: both
     overflow: hidden
+    width: 5000px
   .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle
     float: left
   .feature a, .refactor a, .bug a, .handle, .info, .toggle
@@ -76,6 +75,13 @@
     width: 16px
     height: 16px
     color: white
+
+  .fade
+    float: right
+    position: relative
+    background: url('/images/fade_white.png') repeat-y
+    width: 37px
+    height: 21px
 
   .handle
     background: url('/images/arrow_out.png') no-repeat
@@ -130,6 +136,8 @@
     background: #fff9b4
     .handle, .info
       opacity: 1
+    .fade
+      background: url('/images/fade_yellow.png') repeat-y
   .group
     float: left
 
@@ -179,7 +187,6 @@
 .name
   float: left
   line-height: 20px
-  overflow: auto
   input
     width: 500px
     float: left

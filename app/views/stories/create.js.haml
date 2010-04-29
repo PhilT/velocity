@@ -1,5 +1,7 @@
+== $('#story_name').val('')
 - if @group.valid?
-  == $('#story_name').val('')
   == #{render_li(@group)}.appendTo($('.groups')).slideDown()
   == $("#group_" + #{@group.id}).draggableGroup();
+- else
+  == $("#group_#{Story.find_by_name(@group.name).id}").effect('pulsate')
 

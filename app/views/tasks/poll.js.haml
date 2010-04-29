@@ -3,9 +3,6 @@
 - if @any_updates || @created_tasks.any? || @assigned_tasks.any?
   == $('.only_one').remove()
   == $.jGrowl("Tasks added, reordered or assigned to you", { group: 'only_one', header: 'Please Refresh', sticky: true, glue: 'before' })
-- if @created_stories.any?
-  == $('.only_one').remove()
-  == $.jGrowl("Stories added or reordered", { group: 'only_one', header: 'Please Refresh', sticky: true, glue: 'before' })
 
 
 - @assigned_tasks.each do |task|

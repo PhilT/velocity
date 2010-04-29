@@ -1,4 +1,5 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => "#{task.state} #{current_user == task.assigned ? 'assigned' : 'other'}"}
+  %div.fade
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
       %li.handle{:title => 'drag to reorder'}
