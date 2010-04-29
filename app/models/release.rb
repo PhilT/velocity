@@ -36,7 +36,7 @@ class Release < ActiveRecord::Base
       releases = Release.all(:limit => 2, :order => 'created_at DESC')
       distance_in_minutes = (((releases[0].created_at - releases[1].created_at).abs)/60)
       days = (distance_in_minutes / 1440)
-      self.tasks.features.verified.count / days * 7
+      (self.tasks.features.verified.count / days * 7).to_i
     rescue
       0
     end
