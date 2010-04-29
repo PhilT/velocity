@@ -5,8 +5,7 @@ class ReleasesController < ApplicationController
   end
 
   def finish
-    release = Release.create!
-    if !release.finish!(current_user)
+    if !Release.finish!(current_user)
       flash[:error] = 'Cannot finish release. Some tasks have not been verified.'
     end
     redirect_to tasks_path

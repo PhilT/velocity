@@ -84,10 +84,6 @@ class Task < ActiveRecord::Base
     started?
   end
 
-  def previous_release?
-    release_id
-  end
-
   def started=(value)
      Boolean.parse(value) ? touch(:started_on) : self.started_on = nil
   end

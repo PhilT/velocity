@@ -35,6 +35,7 @@ Factory.define :task do |f|
   f.name 'This is a task'
   f.association :author, :factory => :customer
   f.state 'pending'
+  f.category 'feature'
 end
 
 Factory.define :future_task, :class => Task do |f|
@@ -43,3 +44,4 @@ Factory.define :future_task, :class => Task do |f|
   f.release nil
   f.state 'pending'
 end
+
