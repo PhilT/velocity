@@ -207,14 +207,10 @@
     padding: 4px 10px
 
 .mark_invalid
-  color: #333
-  background: #ddd
-  float: left
-  padding: 1px 4px
-  margin: 1px 4px 0 0
-  font-size: 80%
-  &:hover
-    background: #ecc
+  +button
+  +small
+  +set-button-gradients(#ec5151)
+  padding: 3px 5px
 
 .link_go
   background: url(/images/link_go.png) no-repeat

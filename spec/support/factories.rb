@@ -28,7 +28,6 @@ end
 
 Factory.define :story do |f|
  f.name 'Story'
- f.description 'Story description'
 end
 
 Factory.define :task do |f|

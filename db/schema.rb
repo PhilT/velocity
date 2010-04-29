@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100429030821) do
   create_table "stories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
+    t.integer  "release_id"
   end
 
   create_table "tasks", :force => true do |t|
