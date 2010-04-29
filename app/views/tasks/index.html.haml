@@ -1,6 +1,6 @@
 %div#stats
   %div#velocity
-    Velocity: #{display_velocity(Release.velocity)}
+    Velocity: #{Release.velocity} (features per week)
     %span#info
       Taken from Release
       = Release.last.finished_at.to_s rescue "(none)"
@@ -12,10 +12,6 @@
         %span.now_tasks Current Release
         = render :partial => 'finish_button'
       %div= render :partial => 'tasks', :object => @tasks
-    %div.release
-      %h2
-        %span.future_tasks Future Release
-      %div= render :partial => 'tasks'
 
   %div#groups
     = render :partial => 'stories/groups'
