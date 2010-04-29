@@ -44,7 +44,6 @@ describe TasksController do
       it 'should mark a pending task as started when in current release' do
         put :update, :id => @task.id
         assigns[:task].state.should == 'started'
-        assigns[:moved].should == nil
       end
 
       it 'should assign to current user when starting task' do
@@ -56,7 +55,7 @@ describe TasksController do
       end
       it 'should assign to a story' do
         story = Factory(:story)
-        put :update, :id => @task, :task => {:story_id => story.id}
+        put :update, :id => @task, :group_id => story.id
         assigns[:task].story.should == story
       end
     end
@@ -64,8 +63,7 @@ describe TasksController do
     describe 'future release tasks' do
       it 'should not move invalid tasks into current release when assigned to a story' do
         @task.story = Factory(:story, :release => nil)
-        @task.release = nil
-        @task.save!
+        @task.save
 
         put :update, :id => @task, :state => 'invalid'
 

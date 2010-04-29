@@ -1,8 +1,7 @@
 class Task < ActiveRecord::Base
   include AASM
-  acts_as_list :scope => :story
+  acts_as_list :scope => :release
 
-  before_create :set_initial_state
   before_create :remove_story_name
 
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
@@ -14,6 +13,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :name
 
   aasm_column :state
+  aasm_initial_state :pending
   aasm_state :pending
   aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
@@ -75,6 +75,13 @@ class Task < ActiveRecord::Base
     return false
   end
 
+  def advance!(user)
+    next_state!
+    assign_to!(user) if started? && !assigned
+    verified_by!(user) if verified?
+    position > Release.velocity
+  end
+
   def self.assigned_to(user)
     updated_tasks = Task.current.updated
     updated_tasks.reject{|task| task.updated_field != 'assigned' || task.updated_by != user}
@@ -107,10 +114,6 @@ class Task < ActiveRecord::Base
 
   def verified_by!(user)
     update_attribute :verified_by, user.id
-  end
-
-  def set_initial_state
-    self.state = 'pending'
   end
 
   def action

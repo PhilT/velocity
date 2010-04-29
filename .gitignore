@@ -5,3 +5,5 @@ tmp/*
 *.sqlite3
 .*.swp
 *~
+s3_backup.rb
+
