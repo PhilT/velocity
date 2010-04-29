@@ -5,7 +5,6 @@ class RemoveColumnsFromStory < ActiveRecord::Migration
       t.remove :updated_at
       t.remove :soft_release_on
       t.remove :position
-      t.remove :release_id
       t.remove :description
     end
   end

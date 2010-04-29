@@ -122,7 +122,7 @@ class Task < ActiveRecord::Base
   end
 
   def updated_field
-    self['updated_field'].split(',')[0]
+    self['updated_field'].split(',')[0] if self['updated_field']
   end
 
   def updated_by

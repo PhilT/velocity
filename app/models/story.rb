@@ -1,7 +1,10 @@
 class Story < ActiveRecord::Base
-  named_scope :created, lambda {{:conditions => ["created_at > ?", Task.last_poll]}}
+  has_many :tasks
 
   default_scope :order => :name
+  named_scope :created, lambda {{:conditions => ["created_at > ?", Task.last_poll]}}
+  named_scope :current, :conditions => ['release_id IS NULL']
+
   validates_uniqueness_of :name, :scope => :release_id
 end
 
