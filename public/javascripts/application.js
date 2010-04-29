@@ -83,14 +83,12 @@ $(function(){
   function liveUpdates(){
     setInterval('$.get("/tasks/poll");', 30000);
   }
-
-  updateReleaseBorder($('#velocity').attr('title'));
 })
 
 function updateReleaseBorder(velocity) {
   var count = 0;
   var length = 0;
-  $('#stories .story').each(function(story) {
+  $('.task').each(function(story) {
     length = $(this).find('.feature').length - $(this).find('.invalid .feature').length;
     count += length;
     if(count > velocity)  {
@@ -101,6 +99,6 @@ function updateReleaseBorder(velocity) {
 }
 
 function drawReleaseBorder(story) {
-  $(story).before('<li class="release_border">(End of next release)</li>');
+  $(story).before('<h2 class="release_border"><span>End of Release</span></h2>');
 }
 
