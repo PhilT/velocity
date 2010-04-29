@@ -15,12 +15,5 @@ module TasksHelper
     task.story ? "#story_#{task.story_id} .tasks" : "#{task.bug? ? '#bugs' : '#future'} .tasks"
   end
 
-  def release_full?(count)
-    if !@release_full && Release.velocity == (count + 1)
-      @release_full = true
-    else
-      false
-    end
-  end
 end
 
