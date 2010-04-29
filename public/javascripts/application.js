@@ -6,9 +6,7 @@ $(function(){
   showTaskInfo();
   toggleStoryTasks();
   liveUpdates();
-  $('.story').each(function() {
-    // hide if in cookie
-  });
+  updateReleaseBorder($('#velocity').attr('title'));
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();

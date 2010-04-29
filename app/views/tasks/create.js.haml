@@ -1,5 +1,8 @@
 - if @task.valid?
-  == #{render_hidden(@task)}.appendTo($('.tasks')).slideDown()
+  - if @task.bug?
+    == #{render_hidden(@task)}.prependTo($('.tasks')).slideDown()
+  - else
+    == #{render_hidden(@task)}.appendTo($('.tasks')).slideDown()
   == $('#task_name').val('')
   == $("#task_" + #{@task.id}).droppableTask();
 
