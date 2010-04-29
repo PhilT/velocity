@@ -7,8 +7,7 @@
       %li{:class => task.category, :title => task.category}
         = link_to '', task_path(task, 'task[category]' => true), :class => :put
       %li.action
-        - unless task.previous_release?
-          = task_submit_button(f, task)
+        = task_submit_button(f, task)
       %li.story= render :partial => 'stories/story', :object => task.story
       = f.text :name, :hint => "what's this about?"
 
