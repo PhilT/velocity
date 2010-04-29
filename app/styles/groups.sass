@@ -1,5 +1,6 @@
 @import columns.sass
 @import buttons.sass
+@import css3.sass
 
 h2#group_title
   background: #eee
@@ -15,6 +16,9 @@ h2#group_title
   border: 5px solid #eee
   text-align: right
   font-size: 75%
+  ul
+    height: 700px
+    overflow: auto
 
 .story
   display: block
@@ -27,8 +31,7 @@ h2#group_title
   text-align: center
   margin: 3px
   border: 1px solid #777
-  -moz-border-radius: 2px
-  -webkit-border-radius: 2px
+  +border-radius(3px)
   color: #fff
   &:hover
     cursor: pointer

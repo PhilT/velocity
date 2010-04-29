@@ -38,15 +38,17 @@
 
   .task_new, .group_new
     border: none
-    float: left
     overflow: auto
 
   .task_new
+    float: left
     input[type=text]
       width: 500px
 
   .group_new
     float: right
+    input[type=text]
+      width: 200px
 
 .task
   font-size: 80%
@@ -166,9 +168,10 @@
   .action
     input[type=submit]
       color: #999
-      +set-gradient(#ccc, 20)
+      +set-gradient(#eee)
       &:hover
-        +set-gradient(#ddd, -20)
+        +set-gradient(#ccc)
+        color: #777
 
 .verified
   .name
@@ -180,8 +183,8 @@
     input[type=submit]
       +set-button-gradients(#91ea6a)
 
-.invalid
-  color: #b86
+.invalid .name
+  color: #ddd
   text-decoration: line-through
 
 .name
