@@ -35,6 +35,7 @@ describe Task do
       task = Factory(:task)
       task.start
       task.complete
+      task.merge
       task.verify
 
       first_started_on = task.started_on
