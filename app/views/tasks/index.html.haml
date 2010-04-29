@@ -11,8 +11,11 @@
       %h2
         %span.now_tasks Current Release
         = render :partial => 'finish_button'
-      %div
-        = render :partial => 'tasks', :object => @tasks
+      %div= render :partial => 'tasks', :object => @tasks
+    %div.release
+      %h2
+        %span.future_tasks Future Release
+      %div= render :partial => 'tasks'
 
   %div#groups
     = render :partial => 'stories/groups'
