@@ -8,9 +8,6 @@
   == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render(@task, :locals => {:field => @field}))}")
   == $('#task_#{@task.id}').effect("highlight", {}, 3000)
 
-- if @task.has_story?
-  == $('#story_#{@task.story_id} > .title').replaceWith("#{escape_javascript(render :partial => 'stories/story_title', :locals => {:story => @task.story})}")
-
 == $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
 
 == $('.release_border').remove();
