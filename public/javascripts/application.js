@@ -84,19 +84,10 @@ $(function(){
 })
 
 function updateReleaseBorder(velocity) {
-  var count = 0;
-  var length = 0;
-  $('.task').each(function(story) {
-    length = $(this).find('.feature').length - $(this).find('.invalid .feature').length;
-    count += length;
-    if(count > velocity)  {
-      drawReleaseBorder(this);
-      return false;
-    }
-  });
-}
-
-function drawReleaseBorder(story) {
-  $(story).before('<h2 class="release_border"><span>End of Release</span></h2>');
+  tasks = $('.task.pending');
+  if(tasks.length > velocity)  {
+    tasks.eq(velocity).before('<li><h2 class="release_border"><span>End of Release</span></h2></li>');
+    return false;
+  }
 }
 
