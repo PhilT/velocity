@@ -46,11 +46,11 @@ describe Task do
       task.started_on.to_s.should == first_started_on.to_s
     end
   end
-  
+
   it 'should return created tasks' do
     user = Factory(:developer)
     task = Factory(:task)
-    
+
     created_tasks = Task.created(user)
     created_tasks.size.should == 1
     created_tasks.should include(task)
@@ -68,20 +68,11 @@ describe Task do
     user = Factory(:developer)
     task = Factory(:task)
     task.assign_to!(user)
-    
+
     assigned_tasks = Task.assigned_to(user)
     assigned_tasks.size.should == 1
     assigned_tasks.should include(task)
   end
 
-  describe 'update' do
-    it 'change state when no task details' do
-      pending
-    end
-
-    it 'be marked invalid when ' do
-      pending
-    end
-  end
 end
 

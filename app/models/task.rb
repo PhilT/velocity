@@ -12,6 +12,17 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :name
 
+  default_scope :order => :position
+  named_scope :current, :conditions => 'release_id IS NULL'
+  named_scope :features, :conditions => {:category => 'feature'}
+  named_scope :bugs, :conditions => {:category => 'bug'}
+  named_scope :refactorings, :conditions => {:category => 'refactor'}
+  named_scope :outstanding, :conditions => 'state != "verified"'
+  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
+  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
+  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
+  named_scope :without_story, :conditions => 'story_id IS NULL'
+
   aasm_column :state
   aasm_initial_state :pending
   aasm_state :pending
@@ -50,18 +61,6 @@ class Task < ActiveRecord::Base
     transitions :from => :verified, :to => :started
     transitions :from => :invalid, :to => :pending
   end
-
-  default_scope :order => :position
-  named_scope :current, :conditions => 'release_id IS NULL'
-  named_scope :features, :conditions => {:category => 'feature'}
-  named_scope :bugs, :conditions => {:category => 'bug'}
-  named_scope :refactorings, :conditions => {:category => 'refactor'}
-  named_scope :outstanding, :conditions => 'state != "verified"'
-  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
-  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
-  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
-  named_scope :completed, :conditions => {:state => 'completed'}
-  named_scope :without_story, :conditions => 'story_id IS NULL'
 
   def self.last_poll
     DateTime.now - 29.seconds

@@ -3,21 +3,24 @@ class Release < ActiveRecord::Base
   has_many :stories
   belongs_to :finished_by, :class_name => 'User', :foreign_key => :finished_by
 
+  validates_presence_of :finished_by
+
   named_scope :previous, :order => 'created_at DESC'
 
   delegate :features, :bugs, :refactorings, :to => :tasks
 
-  def self.finish!(user)
-    return false unless can_complete_release?
-    release = Release.create(:finished_by => user)
-    Task.current.without_story.verified.each do |task|
-      task.add_to_release!(release)
-    end
-    Task.current.without_story.invalid.each do |task|
-      task.add_to_release!(release)
-    end
+  def initialize(attributes = {})
+    super
+    self.tasks = Task.current.verified + Task.current.invalid
+  end
 
-    ReleaseMailer.deliver_release_notification(User.all, release)
+  def validate
+    errors.add 'tasks', 'merged but not verified' if Task.current.merged.any?
+    errors.add 'tasks', 'not verified' unless self.tasks.any?
+  end
+
+  def after_create
+    ReleaseMailer.deliver_release_notification(User.all, self)
   end
 
   def self.velocity
@@ -33,10 +36,6 @@ class Release < ActiveRecord::Base
     rescue
       0
     end
-  end
-
-  def self.can_complete_release?
-    !(Task.current.without_story.completed.any?)
   end
 
 end
