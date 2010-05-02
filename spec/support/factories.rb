@@ -24,6 +24,7 @@ Factory.define :developer, :class => User do |f|
 end
 
 Factory.define :release do |f|
+  f.finished_by {Factory :developer}
 end
 
 Factory.define :story do |f|

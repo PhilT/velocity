@@ -2,41 +2,50 @@ require 'spec/spec_helper'
 
 describe Release do
   before do
-    task = Factory(:task)
-    task.update_attribute(:state, 'verified')
     @developer = Factory(:developer)
   end
 
-  describe 'finish release' do
-    it 'should finish release' do
-      ReleaseMailer.should_receive(:deliver_release_notification).and_return(true)
+  def create_release
+    Release.create(:finished_by => @developer)
+  end
 
-      Release.finish!(@developer).should be_true
-      release = Release.last
-      release.tasks.size.should == 1
-    end
+  it 'should not be created when finished_by not specified' do
+    Factory(:task, :state => 'verified')
+    Release.create.errors.full_messages.should == ["Finished by can't be blank"]
+  end
 
-    it 'should not finish release if has unverified tasks' do
-      Factory(:task).update_attribute :state, 'completed'
+  it 'should not be created when no tasks verified' do
+    Task.all.should be_empty
+    create_release.should_not be_valid
+  end
 
-      Release.finish!(@developer).should be_false
-    end
+  it 'should not be created even when tasks exist in other releases' do
+    Factory(:release, :tasks => [Factory(:task, :state => 'verified')])
+    create_release.should_not be_valid
+  end
 
-    it 'should include invalid tasks' do
-      task = Factory(:task)
-      task.update_attribute :state, 'verified'
-      invalid_task = Factory(:task)
-      invalid_task.update_attribute :state, 'invalid'
+  it 'should not be created with merged tasks' do
+    %w(merged verified).each {|state| Factory(:task, :state => state)}
+    create_release.should_not be_valid
+  end
 
-      Release.finish!(@developer).should be_true
-      Release.last.tasks.should include(task, invalid_task)
-    end
+  it 'should move all verified and invalid tasks into release' do
+    %w(pending started completed verified invalid).each {|state| Factory(:task, :state => state)}
+    release = create_release
+    release.should be_valid
+    release.tasks.size.should == 2
+  end
+
+  it 'should send email' do
+    %w(verified).each {|state| Factory(:task, :state => state)}
+    ReleaseMailer.should_receive(:deliver_release_notification).and_return(true)
+    create_release
   end
 
   it 'should calculate velocity' do
-    task = Factory(:task)
-    task.update_attribute(:state, 'verified')
+    task = Factory(:task, :state => 'verified')
     Factory(:release, :created_at => Time.now - 2.days)
+    task = Factory(:task, :state => 'verified')
     Factory(:release, :tasks => [task], :created_at => Time.now - 1.day)
 
     Release.velocity.should == 7

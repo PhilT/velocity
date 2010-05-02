@@ -6,13 +6,11 @@ describe TasksController do
     activate_authlogic
     @logged_in_user = Factory(:developer)
     UserSession.create(@logged_in_user)
-    Factory(:release)
     @task = Factory(:task)
   end
 
   describe 'create' do
     it 'should assign task to a story in a current release' do
-      Factory(:story, :release => Release.first)
       story = Factory(:story)
       post :create, :task => {:name => 'Story: New task'}
 
