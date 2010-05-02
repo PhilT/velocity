@@ -7,7 +7,7 @@
     = javascript_include_tag (controller_name == 'releases' ? 'releases' : 'lib/jquery-ui.min', 'lib/application', 'application', 'groups')
   %body
     %div#header
-      %h1= link_to '<span class="offscreen">Velocity</span>', root_path
+      %h1= link_to '<span class="offscreen">Velocity</span>', tasks_path
       %ul#menu
         - if current_user
           %li= link_to_unless_current '<span>Tasks</span>', tasks_path
