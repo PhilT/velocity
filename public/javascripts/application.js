@@ -21,14 +21,6 @@ $(function(){
   }
 
   function setupDraggableLists(){
-    $('.stories').sortable({
-      handle: '.story_handle',
-      helper: 'clone',
-      scrollSensivity: 40,
-      update: function(event, ui){$.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/stories/' + ui.item.attr('id').substr(6) + '/sort'})},
-      axis: 'y'
-    });
-
     $('.tasks').sortable({
       handle: '.handle',
       containment: 'parent',

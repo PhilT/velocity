@@ -1,4 +1,4 @@
 - if story
-  %span{:id => "group_#{story.id}", :class => "group color_#{story.id % 38}"}
+  %span{:class => "group color_#{story.id % 38} group_#{story.id}"}
     = story.name
 
