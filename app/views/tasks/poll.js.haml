@@ -14,6 +14,7 @@
 - @updated_tasks.each do |task|
   - if task.updated_field != 'position'
     == $('#task_#{task.id}').replaceWith('#{escape_javascript(render(task))}')
+    == $("#task_" + #{task.id}).droppableTask();
 
 == $('.finished').replaceWith("#{escape_javascript(render :partial => 'finish_button')}")
 
