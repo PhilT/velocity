@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'db2s3'
   config.gem 'haml'
   config.gem 'whenever', :lib => false
+  config.gem 'redirect_routing'
 end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
