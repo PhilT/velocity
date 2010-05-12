@@ -9,23 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317081611) do
+ActiveRecord::Schema.define(:version => 20100429030821) do
+
+  create_table "enum_values", :force => true do |t|
+    t.string  "name"
+    t.text    "description"
+    t.integer "position"
+    t.integer "enum_id"
+  end
+
+  create_table "enums", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "releases", :force => true do |t|
-    t.datetime "finished_at"
     t.datetime "created_at"
     t.integer  "finished_by"
   end
 
   create_table "stories", :force => true do |t|
     t.string   "name"
-    t.text     "description"
     t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "due_on"
-    t.date     "soft_release_on"
     t.integer  "release_id"
-    t.integer  "position"
   end
 
   create_table "tasks", :force => true do |t|

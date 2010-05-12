@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session].merge(:remember_me => true))
     if @user_session.save
-      redirect_to root_url
+      redirect_to tasks_url
     else
       render :action => 'new'
     end

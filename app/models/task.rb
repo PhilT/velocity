@@ -1,8 +1,7 @@
 class Task < ActiveRecord::Base
   include AASM
-  acts_as_list :scope => :story
+  acts_as_list :scope => :release
 
-  before_create :set_initial_state
   before_create :remove_story_name
 
   belongs_to :author, :class_name => 'User', :foreign_key => :author_id
@@ -13,10 +12,23 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :name
 
+  default_scope :order => :position
+  named_scope :current, :conditions => 'release_id IS NULL'
+  named_scope :features, :conditions => {:category => 'feature'}
+  named_scope :bugs, :conditions => {:category => 'bug'}
+  named_scope :refactorings, :conditions => {:category => 'refactor'}
+  named_scope :outstanding, :conditions => 'state != "verified"'
+  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
+  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
+  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
+  named_scope :without_story, :conditions => 'story_id IS NULL'
+
   aasm_column :state
+  aasm_initial_state :pending
   aasm_state :pending
   aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
+  aasm_state :merged
   aasm_state :verified
   aasm_state :invalid
 
@@ -26,8 +38,11 @@ class Task < ActiveRecord::Base
   aasm_event :complete do
     transitions :from => :started, :to => :completed
   end
+  aasm_event :merge do
+    transitions :from => :completed, :to => :merged
+  end
   aasm_event :verify do
-    transitions :from => :completed, :to => :verified
+    transitions :from => :merged, :to => :verified
   end
   aasm_event :restart do
     transitions :from => :verified, :to => :started
@@ -41,23 +56,11 @@ class Task < ActiveRecord::Base
   aasm_event :next_state do
     transitions :from => :pending, :to => :started
     transitions :from => :started, :to => :completed
-    transitions :from => :completed, :to => :verified
+    transitions :from => :completed, :to => :merged
+    transitions :from => :merged, :to => :verified
     transitions :from => :verified, :to => :started
     transitions :from => :invalid, :to => :pending
   end
-
-  default_scope :order => :position
-  named_scope :current, :conditions => 'release_id IS NULL'
-  named_scope :future, :conditions => "release_id IS NULL"
-  named_scope :features, :conditions => {:category => 'feature'}
-  named_scope :bugs, :conditions => {:category => 'bug'}
-  named_scope :refactorings, :conditions => {:category => 'refactor'}
-  named_scope :outstanding, :conditions => 'state != "verified"'
-  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
-  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
-  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
-  named_scope :completed, :conditions => {:state => 'completed'}
-  named_scope :without_story, :conditions => 'story_id IS NULL'
 
   def self.last_poll
     DateTime.now - 29.seconds
@@ -69,6 +72,13 @@ class Task < ActiveRecord::Base
       return true if task.updated_field == 'position' && task.updated_by != user
     end
     return false
+  end
+
+  def advance!(user)
+    next_state!
+    assign_to!(user) if started? && !assigned
+    verified_by!(user) if verified?
+    position > Release.velocity
   end
 
   def self.assigned_to(user)
@@ -83,10 +93,6 @@ class Task < ActiveRecord::Base
 
   def started
     started?
-  end
-
-  def previous_release?
-    release_id
   end
 
   def started=(value)
@@ -109,10 +115,6 @@ class Task < ActiveRecord::Base
     update_attribute :verified_by, user.id
   end
 
-  def set_initial_state
-    self.state = 'pending'
-  end
-
   def action
     (aasm_events_for_current_state - [:mark_invalid, :next_state]).first.to_s.gsub('_', ' ')
   end
@@ -122,7 +124,7 @@ class Task < ActiveRecord::Base
   end
 
   def updated_field
-    self['updated_field'].split(',')[0]
+    self['updated_field'].split(',')[0] if self['updated_field']
   end
 
   def updated_by

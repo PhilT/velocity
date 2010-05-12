@@ -1,0 +1,5 @@
+%h2#group_title Groups
+%ul.groups
+  - groups.each do |group|
+    %li= render :partial => 'stories/story', :object => group
+

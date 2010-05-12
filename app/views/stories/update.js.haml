@@ -1,6 +1,0 @@
-- if @moved
-  == $('#story_#{@story.id}').slideUp("normal", function(){$(this).remove();})
-  == #{render_hidden_story(@story)}.appendTo($('#now_tasks .stories')).slideDown()
-
-== $('.release_border').remove();
-== updateReleaseBorder(#{Release.velocity});

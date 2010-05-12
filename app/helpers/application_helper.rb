@@ -10,5 +10,13 @@ module ApplicationHelper
     end
   end
 
+  def render_hidden(element)
+    "$('#{escape_javascript(render(element))}').hide()"
+  end
+
+  def render_li(element)
+    "$('#{escape_javascript('<li>' + render(element) + '</li>')}').hide()"
+  end
+
 end
 

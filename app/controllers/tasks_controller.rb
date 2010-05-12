@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
-    @new_tasks = [Task.new]
+    @task = Task.new
+    @group = Story.new
   end
 
   def sort
@@ -35,14 +36,15 @@ class TasksController < ApplicationController
   #TODO: move into model
   def update
     @task = Task.find(params[:id])
-    if params[:task].nil? #state was changed
+    if params[:group_id] # group changed
+      @task.update_attribute :story_id, params[:group_id].scan(/group_([0-9]+)($| )/)[0][0]
+      return render :partial => 'change_group', :layout => false
+    elsif params[:task].nil? #state was changed
       @task.update_attribute :updated_field, ""
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)
       else
-        @task.next_state!
-        @task.assign_to!(current_user) if @task.started? && !@task.assigned
-        @task.verified_by!(current_user) if @task.verified?
+        @moved = @task.advance!(current_user)
       end
     else #something else was changed (other than state)
       if params[:task][:category] #category was changed
@@ -68,9 +70,8 @@ class TasksController < ApplicationController
     @updated_tasks = Task.current.updated
     @assigned_tasks = Task.assigned_to(current_user)
     @created_stories = Story.current.created(current_user)
-    @updated_stories = Story.current.updated
     @any_updates = Task.other_updates?(current_user)
-    @new_release = Release.last.finished_at > Task.last_poll && Release.last.finished_by != current_user
+    @new_release = Release.last.created_at > Task.last_poll && Release.last.created_by != current_user
     respond_to do|format|
       format.js{render :layout => false}
     end
