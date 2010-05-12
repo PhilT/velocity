@@ -74,5 +74,15 @@ describe Task do
     assigned_tasks.should include(task)
   end
 
+  it 'should cleanup when restarting a task' do
+    task = Factory(:task)
+    user = Factory(:developer)
+
+    5.times {task.advance!(user)}
+
+    task.reload
+    task.verified_by.should be_nil
+    task.completed_on.should be_nil
+  end
 end
 

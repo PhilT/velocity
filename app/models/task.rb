@@ -26,7 +26,7 @@ class Task < ActiveRecord::Base
   aasm_column :state
   aasm_initial_state :pending
   aasm_state :pending
-  aasm_state :started, :after_enter => :mark_started
+  aasm_state :started, :after_enter => [:mark_started, :cleanup!]
   aasm_state :completed, :after_enter => :mark_completed
   aasm_state :merged
   aasm_state :verified
@@ -162,6 +162,11 @@ class Task < ActiveRecord::Base
 
   def add_to_release!(release)
     self.update_attribute :release_id, release.id
+  end
+
+  def cleanup!
+    self.update_attribute :completed_on, nil
+    self.update_attribute :verified_by, nil
   end
 end
 
