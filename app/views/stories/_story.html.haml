@@ -1,4 +1,3 @@
 - if story
-  %span{:class => "group color_#{story.id % 38} group_#{story.id}"}
+  %span{:class => "group color_#{story.id % 38} group_#{story.id}", :title => pluralize(story.tasks.count, 'task')}
     = story.name
-
