@@ -5,6 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :releases, :only => :index, :collection => {:finish => :put}
   map.resources :stories, :member => {:sort => :put}
 
-  map.root :controller => 'tasks'
+  map.redirect '/', :controller => 'tasks'
 end
 

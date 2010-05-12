@@ -1,0 +1,68 @@
+@import css3.sass
+
+=clearfix
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+=set-gradient(!from, !amount = -50)
+  !to = !from + !amount
+  :background= !to
+  :background= -moz-linear-gradient(top, !from, !to)
+  :background= -webkit-gradient(linear, 0% 0%, 0% 100%, from(!from), to(!to))
+
+=set-button-gradients(!color, !amount = -50)
+  +set-gradient(!color, !amount)
+  &:hover
+    +set-gradient(!color + 50, !amount)
+
+=button
+  +set-button-gradients(#333)
+  display: inline-block
+  padding: 5px 10px 6px
+  color: #fff
+  text-decoration: none
+  font-weight: bold
+  line-height: 1
+  +border-radius(5px)
+  +box-shadow(0, 1px, 3px, rgba(0, 0, 0, 0.5))
+  text-shadow: 0 -1px 1px #222
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5)
+  position: relative
+  cursor: pointer
+  border: 0 none
+  margin: 0
+
+=orange
+  +set-button-gradients(orange)
+  color: #222
+
+=green
+  +set-button-gradients(#0d0)
+  color: #222
+
+=red
+  +set-button-gradients(#e66)
+  color: #222
+
+=blue
+  +set-button-gradients(#00d)
+  color: #ccc
+
+=grey
+  +set-button-gradients(#999)
+  color: #222
+
+=small
+  text-shadow: none
+  color: #333
+  padding: 2px 3px
+  font:
+    size: 75%
+    weight: normal
+  -moz-box-shadow: none
+  -webkit-box-shadow: none
+

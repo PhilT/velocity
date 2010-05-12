@@ -1,0 +1,221 @@
+@import colors.sass
+@import buttons.sass
+@import columns.sass
+
+#container
+  overflow: hidden
+  padding-right= !sidebar_width + 25px
+  clear: both
+
+#content
+  width: 100%
+  margin-left: 5px
+  border: 0
+  border-right= (!sidebar_width + 20px) "solid" #fff
+  margin-right= (-!sidebar_width - 15px)
+  float: left
+  .release
+    margin-bottom: 100px
+    border: 1px solid #ccc
+    h2
+      font-size: 110%
+      +set-gradient(#fff)
+      display: block
+      padding: 10px
+      .finished
+        float: right
+        input[type=submit]
+          +button
+          padding: 2px 5px
+
+.new_task
+  position: fixed
+  bottom: 0
+  +set-gradient(#444)
+  width: 100%
+  padding: 5px 0 10px
+  color: #eee
+
+  .task_new, .group_new
+    border: none
+    overflow: auto
+
+  .task_new
+    float: left
+    input[type=text]
+      width: 500px
+
+  .group_new
+    float: right
+    input[type=text]
+      width: 200px
+
+.task
+  font-size: 80%
+  border-bottom: 1px solid #ddd
+  overflow: hidden
+  .action
+    margin: 0 10px
+    input[type=submit]
+      +button
+      +small
+      +set-button-gradients(#ffd700)
+      width: 70px
+      height: 18px
+      font-size: 10px
+      margin-top: 2px
+      padding: 0
+
+  .title
+    overflow: hidden
+    width: 5000px
+  .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle
+    float: left
+  .feature a, .refactor a, .bug a, .handle, .info, .toggle
+    margin-top: 3px
+    margin-left: 3px
+    display: block
+    width: 16px
+    height: 16px
+    color: white
+
+  .fade
+    float: right
+    position: relative
+    background: url('/images/fade_white.png') repeat-y
+    width: 37px
+    height: 21px
+
+  .handle
+    background: url('/images/arrow_out.png') no-repeat
+    cursor: move
+    opacity: 0
+
+  .toggle
+    cursor: pointer
+    opacity: 0
+    line-height: 16px
+    color: black
+    font-size: 16px
+    padding-top: 0
+    margin-top: 0
+
+  .info
+    background: url('/images/information.png') no-repeat
+    cursor: pointer
+    opacity: 0
+
+  .description
+    display: none
+    padding: 2px
+    margin: 2px
+    margin-left: 70px
+    li
+      display: inline
+      border-right: 1px solid silver
+      padding-right: 5px
+
+  .description.active
+    display: block
+    select
+      font-size: 80%
+
+  .assigned_id a
+    text-decoration: underline
+
+  .feature a
+    background= url('/images/lightbulb.png') "no-repeat"
+
+  .refactor a
+    background= url('/images/lightbulb_off.png') "no-repeat"
+  .bug a
+    background= url('/images/bug.png') "no-repeat"
+
+  &.drop_here
+    background: #fff9b4
+
+.task
+  &:hover
+    background: #fff9b4
+    .handle, .info
+      opacity: 1
+    .fade
+      background: url('/images/fade_yellow.png') repeat-y
+  .group
+    float: left
+
+#released_tasks
+  .verified
+    .name
+      text-decoration: none
+      color= !text_color
+  .description
+    margin-left: 65px
+
+.task_new
+  &:hover
+    background: none
+
+
+.completed, .verified, .invalid
+  color: #777
+
+.completed
+  .action
+    input[type=submit]
+      +set-button-gradients(#B1C1E0)
+
+.verified, .invalid
+  .action
+    input[type=submit]
+      color: #999
+      +set-gradient(#eee)
+      &:hover
+        +set-gradient(#ccc)
+        color: #777
+
+.verified
+  .name
+    font-size: 90%
+    color: #aaa
+
+.started
+  .action
+    input[type=submit]
+      +set-button-gradients(#91ea6a)
+
+.invalid .name
+  color: #ddd
+  text-decoration: line-through
+
+.name
+  float: left
+  line-height: 20px
+  input
+    width: 500px
+    float: left
+    padding: 0
+  a
+    display: block
+    float: left
+  a.cancel
+    display: block
+    +button
+    +small
+    +red
+    margin-top: 3px
+    padding: 4px 10px
+
+.mark_invalid
+  +button
+  +small
+  +set-button-gradients(#ec5151)
+  padding: 3px 5px
+  color: #ddd
+
+.link_go
+  background: url(/images/link_go.png) no-repeat
+  display: block
+  width: 16px
+  height: 16px
+

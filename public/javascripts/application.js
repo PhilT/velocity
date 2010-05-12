@@ -6,9 +6,7 @@ $(function(){
   showTaskInfo();
   toggleStoryTasks();
   liveUpdates();
-  $('.story').each(function() {
-    // hide if in cookie
-  });
+  updateReleaseBorder($('#velocity').attr('title'));
 
   function setHintsOnTextfields(){
     $('input[title!=""]').hint();
@@ -23,14 +21,6 @@ $(function(){
   }
 
   function setupDraggableLists(){
-    $('.stories').sortable({
-      handle: '.story_handle',
-      helper: 'clone',
-      scrollSensivity: 40,
-      update: function(event, ui){$.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/stories/' + ui.item.attr('id').substr(6) + '/sort'})},
-      axis: 'y'
-    });
-
     $('.tasks').sortable({
       handle: '.handle',
       containment: 'parent',
@@ -83,23 +73,13 @@ $(function(){
   function liveUpdates(){
     setInterval('$.get("/tasks/poll");', 30000);
   }
-
-  updateReleaseBorder($('#velocity').attr('title'));
 })
 
 function updateReleaseBorder(velocity) {
-  var count = 0;
-  var length = 0;
-  $('#stories .story').each(function(story) {
-    length = $(this).find('.feature').length - $(this).find('.invalid .feature').length;
-    count += length;
-    if(count > velocity)  {
-      drawReleaseBorder(this);
-      return false;
-    }
-  });
+  tasks = $('.task.pending');
+  if(tasks.length > velocity)  {
+    tasks.eq(velocity).before('<li><h2 class="release_border"><span>End of Release</span></h2></li>');
+    return false;
+  }
 }
 
-function drawReleaseBorder(story) {
-  $(story).before('<li class="release_border">(End of next release)</li>');
-}

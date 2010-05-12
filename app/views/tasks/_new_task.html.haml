@@ -1,8 +1,6 @@
-%li.task{:class => "task_new"}
-  - form_for new_task, :builder => CustomFormBuilder, :html => {:class => 'ajaxForm'} do |f|
-    %ul
-      %li.bug
-        = check_box_tag 'bug'
-        = label_tag 'bug', 'bug?'
-        = f.text :name, :cancel => false
+%div.task_new
+  - form_for @task, :html => {:class => 'ajaxForm'} do |f|
+    = check_box_tag 'bug'
+    = label_tag 'bug', 'bug?'
+    = f.text_field :name, :title => 'new task'
 

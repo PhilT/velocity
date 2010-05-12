@@ -1,4 +1,3 @@
 %span.finished
-  %span.error= flash[:error]
   = button_to('Finish Release...', finish_releases_path, :method => :put, :confirm => RELEASE_CONFIRMATION_MESSAGE)
 

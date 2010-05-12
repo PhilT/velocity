@@ -1,4 +1,5 @@
 %li.task{:id => "task_#{task.id || 'new'}", :class => "#{task.state} #{current_user == task.assigned ? 'assigned' : 'other'}"}
+  %div.fade
   - form_for task, :builder => CustomFormBuilder, :edit => @field, :html => {:class => 'ajaxForm'} do |f|
     %ul.title
       %li.handle{:title => 'drag to reorder'}
@@ -6,8 +7,8 @@
       %li{:class => task.category, :title => task.category}
         = link_to '', task_path(task, 'task[category]' => true), :class => :put
       %li.action
-        - unless task.previous_release?
-          = task_submit_button(f, task)
+        = task_submit_button(f, task)
+      %li.story= render :partial => 'stories/story', :object => task.story
       = f.text :name, :hint => "what's this about?"
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
@@ -19,4 +20,4 @@
       = f.label :verifier, :prefix => 'verified by '
       = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
       = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
-      = f.select :story_id, :collection => @stories, :prefix => 'Story: ', :prompt => 'no story', :nil => '(no story)'
+
