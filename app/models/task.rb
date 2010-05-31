@@ -26,7 +26,7 @@ class Task < ActiveRecord::Base
   aasm_column :state
   aasm_initial_state :pending
   aasm_state :pending
-  aasm_state :started, :after_enter => [:mark_started, :cleanup!]
+  aasm_state :started, :after_enter => [:mark_started]
   aasm_state :completed, :after_enter => :mark_completed
   aasm_state :merged
   aasm_state :verified
@@ -133,12 +133,13 @@ class Task < ActiveRecord::Base
   end
 
   def mark_started
-    self.started_on = current_time_from_proper_timezone
-    self.completed_on = nil
+    touch :started_on
+    update_attribute :completed_on, nil
+    update_attribute :verified_by, nil
   end
 
   def mark_completed
-    self.completed_on = current_time_from_proper_timezone
+    touch :completed_on
   end
 
   def next_category!
@@ -164,9 +165,5 @@ class Task < ActiveRecord::Base
     self.update_attribute :release_id, release.id
   end
 
-  def cleanup!
-    self.update_attribute :completed_on, nil
-    self.update_attribute :verified_by, nil
-  end
 end
 

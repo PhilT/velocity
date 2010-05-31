@@ -18,6 +18,8 @@
       = f.label :author_id, :prefix => 'by '
       = f.select :assigned_id, :collection => @developers, :prefix => 'assigned to ', :prompt => 'unassign', :nil => '(no one)'
       = f.label :verifier, :prefix => 'verified by '
-      = f.label :started_on, :prefix => 'started ', :suffix => ' ago'
-      = f.label :completed_on, :prefix => 'completed ', :suffix => ' ago'
+      - if task.completed_on
+        %li= "completed #{time_ago(task.completed_on)}"
+      - elsif task.started_on
+        %li= "started #{time_ago(task.started_on)}"
 
