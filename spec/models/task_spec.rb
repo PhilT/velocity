@@ -12,7 +12,6 @@ describe Task do
     Task.create!(@valid_attributes)
   end
 
-
   describe 'form helper methods' do
     it "should handle started" do
       task = Factory :task
@@ -29,21 +28,6 @@ describe Task do
       task.complete
       task.completed?.should == true
       task.completed_on.should_not be_nil
-    end
-
-    it "should handle restarting" do
-      task = Factory(:task)
-      task.start
-      task.complete
-      task.merge
-      task.verify
-
-      first_started_on = task.started_on
-
-      task.restart
-      task.started?.should == true
-      task.completed_on.should be_nil
-      task.started_on.to_s.should == first_started_on.to_s
     end
   end
 
@@ -64,6 +48,7 @@ describe Task do
     updated_tasks.size.should == 1
     updated_tasks.should include(task)
   end
+
   it 'should return tasks assigned to user' do
     user = Factory(:developer)
     task = Factory(:task)
@@ -74,15 +59,22 @@ describe Task do
     assigned_tasks.should include(task)
   end
 
-  it 'should cleanup when restarting a task' do
-    task = Factory(:task)
+  it 'should cleanup when going from verified to pending' do
     user = Factory(:developer)
+    task = Factory(:task, :state => 'verified', :verified_by => user.id, :completed_on => DateTime.now)
 
-    5.times {task.advance!(user)}
+    task.advance!(user)
 
-    task.reload
     task.verified_by.should be_nil
     task.completed_on.should be_nil
+  end
+
+  it 'should return correct action' do
+    Factory(:task, :state => 'pending').action.should == 'start'
+    Factory(:task, :state => 'started').action.should == 'complete'
+    Factory(:task, :state => 'completed').action.should == 'merge'
+    Factory(:task, :state => 'merged').action.should == 'verify'
+    Factory(:task, :state => 'verified').action.should == 'stop'
   end
 end
 
