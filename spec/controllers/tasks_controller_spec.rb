@@ -31,6 +31,12 @@ describe TasksController do
   end
 
   describe 'update' do
+    it 'should remove a group' do
+      @task.update_attribute(:story, Factory(:story))
+      put :update, :id => @task.id, :group_id => 'group_'
+      @task.reload.story_id.should be_nil
+    end
+
     it 'should mark task invalid with current user when state invalid' do
       put :update, :id => @task.id, :state => 'invalid'
       assigns[:task].state.should == 'invalid'
