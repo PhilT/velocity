@@ -1,5 +1,5 @@
 - if story
-  %span{:class => "group color_#{story.id % 38} group_#{story.id}", :title => pluralize(story.tasks.count, 'task')}
+  %span{:class => "group color_#{story.id % 38} group_#{story.id}"}
     - if defined?(task)
       %span= link_to 'x', task_path(task, :group_id => 'group_'), :class => 'delete_group put'
     = story.name
