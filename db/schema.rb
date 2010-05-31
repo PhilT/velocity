@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100429030821) do
+ActiveRecord::Schema.define(:version => 20100531162543) do
 
   create_table "enum_values", :force => true do |t|
     t.string  "name"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20100429030821) do
     t.integer  "assigned_id"
     t.string   "state",         :limit => 30
     t.integer  "verified_by"
-    t.string   "category"
+    t.string   "category",                    :default => "feature"
     t.integer  "position"
     t.integer  "release_id"
     t.string   "updated_field"
