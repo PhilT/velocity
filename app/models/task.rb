@@ -75,10 +75,11 @@ class Task < ActiveRecord::Base
   end
 
   def advance!(user)
+    move = state == 'pending' && Task.pending.find_index(self) > Release.velocity
     next_state!
     assign_to!(user) if started? && !assigned
     verified_by!(user) if verified?
-    position > Release.velocity
+    move
   end
 
   def self.assigned_to(user)
