@@ -25,8 +25,8 @@ class Task < ActiveRecord::Base
 
   aasm_column :state
   aasm_initial_state :pending
-  aasm_state :pending
-  aasm_state :started, :after_enter => [:mark_started]
+  aasm_state :pending, :after_enter => :clear_verified_by
+  aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
   aasm_state :merged
   aasm_state :verified
@@ -44,8 +44,8 @@ class Task < ActiveRecord::Base
   aasm_event :verify do
     transitions :from => :merged, :to => :verified
   end
-  aasm_event :restart do
-    transitions :from => :verified, :to => :started
+  aasm_event :stop do
+    transitions :from => :verified, :to => :pending
   end
   aasm_event :mark_invalid do
     transitions :from => [:pending, :started, :completed], :to => :invalid
@@ -58,7 +58,7 @@ class Task < ActiveRecord::Base
     transitions :from => :started, :to => :completed
     transitions :from => :completed, :to => :merged
     transitions :from => :merged, :to => :verified
-    transitions :from => :verified, :to => :started
+    transitions :from => :verified, :to => :pending
     transitions :from => :invalid, :to => :pending
   end
 
@@ -133,10 +133,13 @@ class Task < ActiveRecord::Base
     User.find(user_id.to_i) unless user_id.blank?
   end
 
+  def clear_verified_by
+    update_attribute :verified_by, nil
+    update_attribute :completed_on, nil
+  end
+
   def mark_started
     touch :started_on
-    update_attribute :completed_on, nil
-    update_attribute :verified_by, nil
   end
 
   def mark_completed
