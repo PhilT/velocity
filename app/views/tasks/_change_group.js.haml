@@ -1,3 +1,4 @@
 == $("#task_#{@task.id} .story").html("#{escape_javascript(render :partial => 'stories/story', :object => @task.story)}")
-== $(".group_" + #{@task.story.id}).draggableGroup();
+- if @task.story
+  == $(".group_" + #{@task.story.id}).draggableGroup();
 
