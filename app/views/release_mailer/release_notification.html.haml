@@ -4,7 +4,7 @@
 - if @release.tasks.features.verified.any?
   %ul
     - @release.tasks.features.verified.each do |feature|
-      %li= feature.name
+      %li= "[#{feature.story}] #{feature.name}"
 - else
   No new features.
 
@@ -12,7 +12,7 @@
 - if @release.tasks.bugs.verified.any?
   %ul
     - @release.tasks.bugs.verified.each do |bug|
-      %li= bug.name
+      %li= "[#{bug.story}] #{bug.name}"
 - else
   No bugs!
 

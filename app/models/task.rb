@@ -153,6 +153,10 @@ class Task < ActiveRecord::Base
     !self.story_id.nil?
   end
 
+  def remove_group
+    update_attribute(:story_id, nil)
+  end
+
   def bug?
     self.category == 'bug'
   end

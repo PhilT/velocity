@@ -4,7 +4,7 @@
     %title== Velocity - #{STRAPLINE}
     = stylesheet_link_tag 'lib/jquery.jgrowl', 'application', 'header', 'menu', 'basic_box', 'buttons', 'tasks', 'groups', 'releases'
     = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery.delay', 'lib/jquery.hint', "lib/#{RAILS_ENV}/jquery.jgrowl"
-    = javascript_include_tag (controller_name == 'releases' ? 'releases' : 'lib/jquery-ui.min', 'lib/application', 'application', 'groups')
+    = javascript_include_tag (controller_name == 'releases' ? 'releases' : 'lib/jquery-ui.min', 'lib/application', 'application', 'groups', 'tasks')
   %body
     %div#header
       %h1= link_to '<span class="offscreen">Velocity</span>', tasks_path
