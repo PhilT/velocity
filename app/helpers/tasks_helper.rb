@@ -15,5 +15,9 @@ module TasksHelper
     task.story ? "#story_#{task.story_id} .tasks" : "#{task.bug? ? '#bugs' : '#future'} .tasks"
   end
 
+  def time_ago time
+    (distance_of_time_in_words_to_now(time).gsub('about ', '') + ' ago').gsub('less than a minute ago', 'just now')
+  end
+
 end
 
