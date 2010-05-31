@@ -4,7 +4,8 @@ class ReleasesController < ApplicationController
     @releases = Release.previous
   end
 
-  def finish
+  def create
+    Story.remove_orphans
     release = Release.create(:finished_by => current_user)
     if !release.valid?
       flash[:error] = 'Cannot finish release. ' + release.errors.full_messages.join('. ')

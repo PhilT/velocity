@@ -12,7 +12,7 @@ describe TasksController do
   describe 'create' do
     it 'should assign task to a story in a current release' do
       story = Factory(:story)
-      post :create, :task => {:name => 'Story: New task'}
+      post :create, :task => {:name => "#{story.name}: New task"}
 
       response.should be_success
       Task.count.should == 2

@@ -5,6 +5,10 @@ Factory.sequence :email do |n|
   "user#{n}@example.com"
 end
 
+Factory.sequence :story_name do |n|
+  "Story #{n}"
+end
+
 
 # Factories (Alphabetical order)
 
@@ -29,7 +33,7 @@ Factory.define :release do |f|
 end
 
 Factory.define :story do |f|
- f.name 'Story'
+ f.name {Factory.next :story_name}
 end
 
 Factory.define :task do |f|
