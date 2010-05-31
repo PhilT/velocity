@@ -1,14 +1,18 @@
 %div#stats
   %div#velocity{:title => Release.velocity}
-    Velocity: #{Release.velocity} (features per week)
-    %span#info
+    Velocity: #{Release.velocity}
+    %span.info
+      (features per week)
+    %div.info
       Taken from Release
-      = Release.last.finished_at.to_s rescue "(none)"
+      = Release.last.created_at.to_s rescue "(none)"
 
 %div#container
   %div#content
     - if flash[:error]
       %div.error= flash[:error]
+    - if flash[:notice]
+      %div.notice= flash[:notice]
 
     %div.release
       %h2
