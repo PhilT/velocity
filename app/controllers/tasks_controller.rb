@@ -65,6 +65,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @task = Task.find(params[:id])
+    @task.remove_group
+    respond_to do|format|
+      format.js{render :action => :update, :layout => false}
+    end
+  end
+
   def poll
     @created_tasks = Task.current.created(current_user)
     @updated_tasks = Task.current.updated

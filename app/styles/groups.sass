@@ -36,6 +36,19 @@ h2#group_title
   color: #fff
   &:hover
     cursor: pointer
+    .delete
+      display: block
+  position: relative
+  .delete
+    background: rgba(255, 255, 255, 0.5)
+    color: black
+    position: absolute
+    right: 0
+    padding: 0 3px
+    +border-radius(2px)
+    display: none
+    &:hover
+      background: rgba(255, 255, 255, 1)
 
   &.color_1
     background: #7787c5
