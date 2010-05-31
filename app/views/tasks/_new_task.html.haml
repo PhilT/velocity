@@ -1,6 +1,7 @@
 %div.task_new
   - form_for @task, :html => {:class => 'ajaxForm'} do |f|
-    = check_box_tag 'bug'
-    = label_tag 'bug', 'bug?'
-    = f.text_field :name, :title => 'new task'
+    %li{:class => "category #{@task.category}"}
+      = link_to '', '#', :class => :put
+      = f.hidden_field :category
+    %li= f.text_field :name, :title => 'new task'
 

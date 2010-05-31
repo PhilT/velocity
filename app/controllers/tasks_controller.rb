@@ -25,7 +25,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    params[:task][:category] = params[:bug] == '1' ? 'bug' : 'feature'
     story = extract_story(params[:task][:name])
     @task = Task.create(params[:task].merge(:author => current_user, :story => story, :release => story.try(:release)))
     respond_to do|format|

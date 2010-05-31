@@ -73,16 +73,6 @@
       position: relative
       .group
         position: absolute
-  .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle
-    float: left
-  .feature a, .refactor a, .bug a, .handle, .info, .toggle
-    margin-top: 3px
-    margin-left: 3px
-    display: block
-    width: 16px
-    height: 16px
-    color: white
-
   .fade
     float: right
     position: relative
@@ -127,6 +117,10 @@
   .assigned_id a
     text-decoration: underline
 
+  &.drop_here
+    background: #fff9b4
+
+.task_new, .task
   .feature a
     background= url('/images/lightbulb.png') "no-repeat"
 
@@ -135,8 +129,19 @@
   .bug a
     background= url('/images/bug.png') "no-repeat"
 
-  &.drop_here
-    background: #fff9b4
+  .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle, li
+    float: left
+  .feature a, .refactor a, .bug a, .handle, .info, .toggle
+    margin-top: 3px
+    margin-left: 3px
+    display: block
+    width: 16px
+    height: 16px
+    color: white
+.task_new
+  .category
+    margin-top: 5px
+
 
 .task
   &:hover

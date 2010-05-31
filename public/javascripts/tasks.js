@@ -5,6 +5,8 @@ $(function(){
   showTaskInfo();
   liveUpdates();
   updateReleaseBorder($('#velocity').attr('title'));
+  allowRemoveGroup();
+  setCategoryForNewTasks();
 
   function submitAssignedTo(){
     $('.ajaxSelect').live('change', function(){
@@ -43,9 +45,23 @@ $(function(){
     setInterval('$.get("/tasks/poll");', 30000);
   }
 
-  $('.task .group .delete_group').click(function(){
-    $(this).closest('.group').effect('explode');
-  })
+  function allowRemoveGroup(){
+    $('.task .group .delete_group').click(function(){
+      $(this).closest('.group').effect('explode');
+    });
+  }
+
+  function setCategoryForNewTasks(){
+    $('.task_new .category a').click(function(){
+      var li = $(this).closest('li');
+      var categories = ['feature', 'bug', 'refactor'];
+      var category = li.attr('class').replace('category ', '');
+      var next = (categories.indexOf(category) + 1) % 3;
+      li.addClass(categories[next]);
+      li.removeClass(category);
+      li.find('#task_category').attr('value', categories[next]);
+    });
+  }
 })
 
 function updateReleaseBorder(velocity) {
