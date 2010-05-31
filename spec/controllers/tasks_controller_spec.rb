@@ -51,9 +51,10 @@ describe TasksController do
         @task.reload.started?.should be_true
         @task.assigned.should == @logged_in_user
       end
+
       it 'should assign to a story' do
         story = Factory(:story)
-        put :update, :id => @task, :group_id => story.id
+        put :update, :id => @task, :group_id => "group_#{story.id}"
         assigns[:task].story.should == story
       end
     end
