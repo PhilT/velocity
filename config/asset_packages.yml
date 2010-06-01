@@ -1,0 +1,37 @@
+---
+javascripts:
+- lib:
+  - lib/jquery
+  - lib/jquery.delay
+  - lib/jquery.hint
+  - lib/jquery.jgrowl
+- base:
+  - lib/jquery-ui/jquery.ui.core
+  - lib/jquery-ui/jquery.ui.widget
+  - lib/jquery-ui/jquery.ui.mouse
+  - lib/jquery-ui/jquery.ui.position
+  - lib/jquery-ui/jquery.ui.draggable
+  - lib/jquery-ui/jquery.ui.sortable
+  - lib/jquery-ui/jquery.ui.droppable
+  - lib/jquery-ui/jquery.effects.core
+  - lib/jquery-ui/jquery.effects.highlight
+  - lib/jquery-ui/jquery.effects.slide
+  - lib/jquery-ui/jquery.effects.explode
+  - lib/jquery-ui/jquery.effects.pulsate
+  - lib/application
+  - application
+  - groups
+  - tasks
+- releases:
+  - releases
+
+stylesheets:
+- base:
+  - groups
+  - basic_box
+  - menu
+  - tasks
+  - header
+  - application
+  - releases
+

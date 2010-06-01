@@ -2,9 +2,9 @@
 %html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xml:lang' => 'en'}
   %head
     %title== Velocity - #{STRAPLINE}
-    = stylesheet_link_tag 'lib/jquery.jgrowl', 'application', 'basic_box', 'groups', 'header', 'menu', 'releases', 'tasks'
-    = javascript_include_tag "lib/#{RAILS_ENV}/jquery", 'lib/jquery.delay', 'lib/jquery.hint', "lib/#{RAILS_ENV}/jquery.jgrowl"
-    = javascript_include_tag (controller_name == 'releases' ? 'releases' : 'lib/jquery-ui.min', 'lib/application', 'application', 'groups', 'tasks')
+    = javascript_include_merged :lib
+    = javascript_include_merged controller_name == 'releases' ? :releases : :base
+    = stylesheet_link_merged :base, 'media' => 'all'
   %body
     %div#header
       %h1= link_to '<span class="offscreen">Velocity</span>', tasks_path
