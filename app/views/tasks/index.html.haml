@@ -21,7 +21,7 @@
       %div= render :partial => 'tasks', :object => @tasks
 
   %div#groups
-    = render :partial => 'stories/groups'
+    = render :partial => 'stories/groups', :object => @groups
 
 %div.new_task
   = render :partial => 'new_task'

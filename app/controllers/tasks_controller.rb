@@ -71,7 +71,6 @@ class TasksController < ApplicationController
     @assigned_tasks = Task.assigned_to(current_user)
     @created_stories = Story.current.created(current_user)
     @any_updates = Task.other_updates?(current_user)
-    @new_release = Release.last.created_at > Task.last_poll && Release.last.created_by != current_user
     respond_to do|format|
       format.js{render :layout => false}
     end

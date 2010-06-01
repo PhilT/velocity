@@ -60,6 +60,7 @@ $(function(){
       li.addClass(categories[next]);
       li.removeClass(category);
       li.find('#task_category').attr('value', categories[next]);
+      return false;
     });
   }
 })
