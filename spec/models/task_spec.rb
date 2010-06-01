@@ -61,12 +61,13 @@ describe Task do
 
   it 'should cleanup when going from verified to pending' do
     user = Factory(:developer)
-    task = Factory(:task, :state => 'verified', :verified_by => user.id, :completed_on => DateTime.now)
+    task = Factory(:task, :state => 'verified', :verified_by => user.id, :completed_on => DateTime.now, :started_on => DateTime.now)
 
     task.advance!(user)
 
     task.verified_by.should be_nil
     task.completed_on.should be_nil
+    task.started_on.should be_nil
   end
 
   it 'should return correct action' do

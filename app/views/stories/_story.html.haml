@@ -3,4 +3,6 @@
     - if defined?(task)
       %span= link_to 'x', task_path(task, :group_id => 'group_'), :class => 'delete_group put'
     = story.name
+- else
+  %span{:class => 'group none'}
 

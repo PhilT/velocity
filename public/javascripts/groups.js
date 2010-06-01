@@ -1,6 +1,6 @@
 $(function(){
   $.fn.draggableGroup = function(){
-    $(this).draggable({revertDuration: 300, revert: 'invalid', helper: 'clone'});
+    $(this).draggable({revertDuration: 300, revert: 'invalid', helper: 'clone', zIndex: 5000});
   }
 
   $.fn.droppableTask = function(){

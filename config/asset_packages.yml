@@ -27,6 +27,7 @@ javascripts:
 
 stylesheets:
 - base:
+  - lib/jquery.jgrowl
   - groups
   - basic_box
   - menu

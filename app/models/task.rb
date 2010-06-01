@@ -25,7 +25,7 @@ class Task < ActiveRecord::Base
 
   aasm_column :state
   aasm_initial_state :pending
-  aasm_state :pending, :after_enter => :clear_verified_by
+  aasm_state :pending, :after_enter => :clear_fields
   aasm_state :started, :after_enter => :mark_started
   aasm_state :completed, :after_enter => :mark_completed
   aasm_state :merged
@@ -133,8 +133,9 @@ class Task < ActiveRecord::Base
     User.find(user_id.to_i) unless user_id.blank?
   end
 
-  def clear_verified_by
+  def clear_fields
     update_attribute :verified_by, nil
+    update_attribute :started_on, nil
     update_attribute :completed_on, nil
   end
 
