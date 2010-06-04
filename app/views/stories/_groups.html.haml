@@ -2,6 +2,6 @@
 %ul.groups
   - groups.each do |group|
     %li
-      %span.group_count= group.tasks.count
+      %span.group_count= group.tasks.current.count
       = render :partial => 'stories/story', :object => group
 
