@@ -1,5 +1,5 @@
 - if story
-  %span{:class => "group color_#{story.id % 31} group_#{story.id}"}
+  %span{:class => "group color_#{story.id % 30 + 1} group_#{story.id}"}
     - if defined?(task)
       %span= link_to 'x', task_path(task, :group_id => 'group_'), :class => 'delete_group put'
     = story.name
