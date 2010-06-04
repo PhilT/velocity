@@ -11,17 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20100531162543) do
 
-  create_table "enum_values", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.integer "position"
-    t.integer "enum_id"
-  end
-
-  create_table "enums", :force => true do |t|
-    t.string "name"
-  end
-
   create_table "releases", :force => true do |t|
     t.datetime "created_at"
     t.integer  "finished_by"
