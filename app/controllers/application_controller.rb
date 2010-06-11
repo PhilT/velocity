@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     @non_developers = User.non_developers
   end
 
+  def qunit
+    render :template => "/qunit/#{controller_name}", :layout => false
+  end
+
   private
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
@@ -29,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-    redirect_to new_user_session_url unless current_user
+    redirect_to new_user_session_url unless (current_user || action_name == 'qunit')
   end
 end
 
