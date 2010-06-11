@@ -1,0 +1,16 @@
+!!!strict
+%html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xml:lang' => 'en'}
+  %head
+    %title Velocity - Qunit Test Suite
+    = javascript_include_tag 'lib/jquery', 'test/qunit', 'test/qunit_helper', 'test/tasks'
+    = stylesheet_link_tag '/javascripts/test/qunit'
+  %body
+    %h1#qunit-header
+    %h2#qunit-banner
+    %div#qunit-testrunner-toolbar
+    %h2#qunit-userAgent
+    %ol#qunit-tests
+
+    %div#factories{:style => 'display: none;'}
+      %input#input{:title => 'something'}
+

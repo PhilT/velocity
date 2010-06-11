@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.qunit ':controller/qunit', :action => 'qunit'
+
   map.resources :users
   map.resources :user_sessions
   map.resources :tasks, :collection => {:verified => :get, :poll => :get}, :member => {:sort => :put}
