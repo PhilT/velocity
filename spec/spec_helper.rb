@@ -6,7 +6,6 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'db/seeds'
 require "authlogic/test_case"
-require 'factories'
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
