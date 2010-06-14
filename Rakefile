@@ -9,3 +9,8 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
+begin
+  require 'db2s3/tasks'
+rescue MissingSourceFile
+end
+
