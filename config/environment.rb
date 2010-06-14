@@ -10,6 +10,7 @@ Rails::Initializer.run do |config|
   config.gem 'aasm'
   config.gem 'acts_as_list'
   config.gem 'authlogic'
+  config.gem 'db2s3'
   config.gem 'haml'
   config.gem 'whenever', :lib => false
   config.gem 'redirect_routing'
