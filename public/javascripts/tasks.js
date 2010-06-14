@@ -21,7 +21,9 @@ $(function(){
       handle: '.handle',
       containment: 'parent',
       tolerance: 'pointer',
-      update: function(event, ui){$.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/tasks/' + ui.item.attr('id').substr(5) + '/sort'})},
+      update: function(event, ui) {
+        $.ajax({type: 'put', data: $(this).sortable('serialize'), url: '/tasks/' + ui.item.attr('id').substr(5) + '/sort'})
+      },
       axis: 'y'
     });
 
