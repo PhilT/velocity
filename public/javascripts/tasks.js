@@ -67,6 +67,18 @@ $(function(){
   }
 })
 
+function scrollIntoView(task_id){
+  var taskPosition = $(task_id).position().top;
+  var viewHeight = $(window).height() - $('.new_task').height();
+  var scrollPosition = $(document).scrollTop();
+
+  var shouldScroll = (scrollPosition > taskPosition || scrollPosition + viewHeight < taskPosition);
+
+  if(shouldScroll) {
+    $(document).scrollTop(taskPosition);
+  }
+}
+
 function updateReleaseBorder(velocity) {
   tasks = $('.task.pending');
   if(tasks.length > velocity)  {

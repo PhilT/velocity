@@ -1,6 +1,7 @@
 - if @moved
   == $('#task_#{@task.id}').slideUp("normal", function(){$(this).remove();})
   == #{render_hidden(@task)}.insertBefore($('.release_border')).slideDown()
+  == scrollIntoView('#task_#{@task.id}');
 - else
   == $('#task_#{@task.id}').replaceWith("#{escape_javascript(render(@task, :locals => {:field => @field}))}")
   == $('#task_#{@task.id}').effect("highlight", {}, 3000)
