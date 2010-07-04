@@ -5,6 +5,7 @@ javascripts:
   - lib/jquery.delay
   - lib/jquery.hint
   - lib/jquery.jgrowl
+  - lib/jquery.flot.min
 - base:
   - lib/jquery-ui/jquery.ui.core
   - lib/jquery-ui/jquery.ui.widget
@@ -24,6 +25,8 @@ javascripts:
   - tasks
 - releases:
   - releases
+- stats:
+  - stats
 
 stylesheets:
 - base:
@@ -35,4 +38,5 @@ stylesheets:
   - header
   - application
   - releases
+  - stats
 

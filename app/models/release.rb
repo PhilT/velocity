@@ -38,5 +38,9 @@ class Release < ActiveRecord::Base
     end
   end
 
+  def created_at_in_ms
+    self.created_at.to_i * 1000
+  end
+
 end
 
