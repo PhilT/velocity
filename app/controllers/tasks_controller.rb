@@ -36,12 +36,16 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if params[:group_id] # group changed
+      @updated_groups = []
+      @updated_groups << @task.story if @task.story
       if params[:group_id] == 'remove'
         group_id = 'remove'
       else
         group_id = params[:group_id].scan(/group_([0-9]+)($| )/)[0][0] rescue nil
+        @updated_groups << Story.find(group_id)
       end
       @task.update_attribute(:story_id, group_id == 'remove' ? nil : group_id) unless group_id == nil
+      @task.reload
       return render :partial => 'change_group', :layout => false
     elsif params[:task].nil? #state was changed
       @task.update_attribute :updated_field, ""
