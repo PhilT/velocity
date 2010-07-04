@@ -1,7 +1,7 @@
 class ReleasesController < ApplicationController
 
   def index
-    @releases = Release.previous
+    @releases = Release.previous.paginate(:page => params[:page], :per_page => 5)
   end
 
   def create
