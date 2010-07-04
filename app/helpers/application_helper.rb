@@ -18,5 +18,8 @@ module ApplicationHelper
     "$('#{escape_javascript('<li>' + render(element) + '</li>')}').hide()"
   end
 
+  def js_pack
+    ['releases', 'stats'].include?(controller_name) ? controller_name : :base
+  end
 end
 
