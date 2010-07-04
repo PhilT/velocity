@@ -50,5 +50,17 @@ describe Release do
 
     Release.velocity.should == 7
   end
+
+  it 'calculates velocity for a previous release' do
+    task = Factory(:task, :state => 'verified')
+    tasks = []
+    5.times {tasks << Factory(:task, :state => 'verified')}
+    
+    Factory(:release, :created_at => Time.now - 3.days)
+    release = Factory(:release, :tasks => [task], :created_at => Time.now - 2.day)
+    Factory(:release, :tasks => tasks, :created_at => Time.now)
+
+    release.velocity.should == 7
+  end
 end
 
