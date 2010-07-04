@@ -4,3 +4,4 @@
       = "Tasks released #{release.created_at.to_s} - Velocity: #{release.velocity}"
   %div#releases= render :partial => 'tasks/tasks', :object => release.tasks
 
+= will_paginate @releases
