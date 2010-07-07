@@ -1,4 +1,3 @@
-puts caller
 # Sequences (Alphabetical order)
 
 Factory.sequence :email do |n|
