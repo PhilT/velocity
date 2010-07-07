@@ -33,7 +33,7 @@ describe TasksController do
   describe 'update' do
     it 'should remove a group' do
       @task.update_attribute(:story, Factory(:story))
-      put :update, :id => @task.id, :group_id => 'group_'
+      put :update, :id => @task.id, :group_id => 'remove'
       @task.reload.story_id.should be_nil
     end
 
