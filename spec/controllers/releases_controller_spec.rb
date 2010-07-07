@@ -7,10 +7,23 @@ describe ReleasesController do
     UserSession.create(@logged_in_user)
   end
 
+  it 'lists all releases' do
+    get :index
+    response.should be_success
+  end
+
   describe 'create' do
     it 'should remove orphaned stories' do
       Story.should_receive :remove_orphans
       post :create
+    end
+
+    it 'creates a valid release' do
+      Factory(:task, :state => 'verified')
+
+      post :create
+      response.should redirect_to tasks_path
+      response.flash[:notice].should == 'Released! Velocity is now 0'
     end
   end
 end
