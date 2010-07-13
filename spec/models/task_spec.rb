@@ -39,6 +39,7 @@ describe Task do
     created_tasks.size.should == 1
     created_tasks.should include(task)
   end
+
   it 'should return updated tasks' do
     time = Time.now - 1.day
     task = Factory(:task, :created_at => time)
