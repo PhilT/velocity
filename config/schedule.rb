@@ -1,8 +1,10 @@
+=begin
 every 12.hours do
-  rake 'db2s3:backup:full'
+  rake 'db:backup'
 end
 
 every 1.week do
-  rake 'db2s3:backup:clean'
+  rake 'db:clean'
 end
+=end
 
