@@ -9,8 +9,11 @@ gem 'authlogic'
 gem 'haml'
 gem 'redirect_routing'
 gem 's3'
-gem 'whenever'
 gem 'will_paginate'
+
+group :staging, :production do
+  gem 'whenever'
+end
 
 group :test do
   gem "ZenTest", :require => "zentest"
