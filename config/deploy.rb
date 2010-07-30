@@ -10,7 +10,7 @@ set :initial_deploy, false
 set :use_sudo, false
 set :keep_releases, 3
 
-set :target_env, 'production'
+set :target_env, 'staging'
 server "todo.puresolo.com", :app, :web, :db, :primary => true
 
 ssh_options[:user] = "www"
@@ -42,10 +42,7 @@ task :todo do
   set :deploy_to, '/data/todo'
 end
 
-
-
 namespace :gems do
-
   desc "Install bundler"
   task :setup, :roles => :app do
     run "gem install bundler"
@@ -59,7 +56,7 @@ end
 
 namespace :db do
   task :setup do
-    run "cd #{current_path} && rake db:setup && rake db:restore FROM_ENV=production"
+    run "cd #{current_path} && rake db:setup && rake db:restore FROM_ENV=staging"
   end
 
   task :migrate do
