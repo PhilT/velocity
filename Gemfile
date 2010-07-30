@@ -8,6 +8,7 @@ gem 'acts_as_list'
 gem 'authlogic'
 gem 'haml'
 gem 'redirect_routing'
+gem 's3'
 gem 'whenever'
 gem 'will_paginate'
 

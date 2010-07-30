@@ -92,14 +92,6 @@ class Task < ActiveRecord::Base
     update_attribute(:assigned, user)
   end
 
-  def started
-    started?
-  end
-
-  def started=(value)
-     Boolean.parse(value) ? touch(:started_on) : self.started_on = nil
-  end
-
   def completed
     completed?
   end
