@@ -2,34 +2,33 @@ set :application, "velocity"
 set :repository,  "git://github.com/PhilT/velocity.git"
 
 set :scm, :git
-set :branch, 'master'
-
-set :user, 'ubuntu'
+set :user, 'www'
 set :deploy_to, nil
-
-set :use_sudo, true
+set :branch, ENV['BRANCH']
+set :deploy_via, :remote_cache
+set :initial_deploy, false
+set :use_sudo, false
 set :keep_releases, 3
 
 set :target_env, 'production'
+server "velocity.com", :app, :web, :db, :primary => true
 
-set :ssh_options, {:forward_agent => true}
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "default.key")]
+ssh_options[:user] = "www"
+ssh_options[:forward_agent] = true
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_server.key")]
 
 after 'deploy', 'deploy:cleanup'
-
-role :web, "velocity.puresolo.com"                          # Your HTTP server, Apache/etc
-role :app, "velocity.puresolo.com"                          # This may be the same as your `Web` server
-role :db,  "velocity.puresolo.com", :primary => true # This is where Rails migrations will run
-
-after "deploy:update_code", "gems:install"
-after "deploy:update_code", "copy_db_config"
+after "deploy:update", "gems:install", "db:copy_config", "db:migrate"
 after "deploy:symlink", "deploy:update_crontab"
+after "deploy:setup", "gems:setup"
+after "deploy:initial", "deploy"
 
-before "deploy", "check_env"
+before "deploy", "check_env", "deploy:web:disable", "stop_delayed_job"
+after "deploy:restart", "deploy:web:enable"
 
 task :check_env do
-  unless deploy_to
-    puts "Think again!"
+  unless deploy_to && branch
+    puts "You must do 'cap <velocity|todo> deploy BRANCH=<branch>'"
     exit
   end
 end
@@ -44,19 +43,40 @@ task :todo do
   set :deploy_to, '/data/todo'
 end
 
+
+
 namespace :gems do
+
+  desc "Install bundler"
+  task :setup, :roles => :app do
+    run "gem install bundler"
+  end
+
   desc "Install gems"
   task :install, :roles => :app do
-    run "cd #{current_release} && #{sudo} rake gems:install"
+    run "cd #{release_path} && bundle install"
   end
 end
 
-task :copy_db_config do
-  run "cp #{deploy_to}/shared/database.yml #{current_release}/config/database.yml"
-  run "cp #{deploy_to}/shared/s3_backup.rb #{current_release}/config/initializers/s3_backup.rb"
+namespace :db do
+  task :setup do
+    run "cd #{current_path} && rake db:setup && rake db:restore FROM_ENV=production"
+  end
+
+  task :migrate do
+    run "cd #{release_path} && rake db:migrate db:seed" unless initial_deploy
+  end
+
+  task :copy_config do
+    run "cp #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
 end
 
 namespace :deploy do
+  task :initial do
+    set :initial_deploy, true
+  end
+
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -65,7 +85,18 @@ namespace :deploy do
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
-    run "cd #{release_path} && whenever --update-crontab #{application}"
+    run "cp /data/s3_backup.rb #{current_release}/config/initializers/s3_backup.rb"
+    run "cd #{release_path} && whenever --update-crontab #{application}" unless initial_deploy || target_env == 'staging'
+  end
+
+  namespace :web do
+    task :disable do
+      run "cp #{current_path}/deploy/maintenance.html #{shared_path}/system/maintenance.html" unless initial_deploy
+    end
+
+    task :enable do
+      run "rm #{shared_path}/system/maintenance.html" unless initial_deploy
+    end
   end
 end
 
