@@ -11,7 +11,7 @@ set :use_sudo, false
 set :keep_releases, 3
 
 set :target_env, 'production'
-server "velocity.com", :app, :web, :db, :primary => true
+server "todo.puresolo.com", :app, :web, :db, :primary => true
 
 ssh_options[:user] = "www"
 ssh_options[:forward_agent] = true
@@ -23,8 +23,7 @@ after "deploy:symlink", "deploy:update_crontab"
 after "deploy:setup", "gems:setup"
 after "deploy:initial", "deploy"
 
-before "deploy", "check_env", "deploy:web:disable", "stop_delayed_job"
-after "deploy:restart", "deploy:web:enable"
+before "deploy", "check_env"
 
 task :check_env do
   unless deploy_to && branch
@@ -89,14 +88,5 @@ namespace :deploy do
     run "cd #{release_path} && whenever --update-crontab #{application}" unless initial_deploy || target_env == 'staging'
   end
 
-  namespace :web do
-    task :disable do
-      run "cp #{current_path}/deploy/maintenance.html #{shared_path}/system/maintenance.html" unless initial_deploy
-    end
-
-    task :enable do
-      run "rm #{shared_path}/system/maintenance.html" unless initial_deploy
-    end
-  end
 end
 
