@@ -75,7 +75,8 @@ class Task < ActiveRecord::Base
   end
 
   def advance!(user)
-    move = state == 'pending' && Task.pending.find_index(self) > Release.velocity
+    move = state == 'pending' && !in_current_release && Release.velocity > 0
+    insert_at(Release.velocity + 1) if move
     next_state!
     assign_to!(user) if started? && !assigned
     verified_by!(user) if verified?
@@ -164,6 +165,15 @@ class Task < ActiveRecord::Base
 
   def add_to_release!(release)
     self.update_attribute :release_id, release.id
+  end
+
+  def self.last_started
+    self.last(:conditions => {:state => 'started'}) # nil!
+  end
+
+private
+  def in_current_release
+    position <= Release.velocity
   end
 
 end

@@ -8,6 +8,32 @@ describe Task do
     }
   end
 
+  describe 'moving tasks' do
+    it 'does not move task when the velocity is zero' do
+      Release.stub!(:velocity => 0)
+      done_task = Factory(:task, :state => 'completed')
+      task_to_move = Factory(:task, :state => 'pending', :assigned_id => Factory(:developer).id)
+      task_to_move.advance!(nil)
+      done_task = done_task.reload
+      task_to_move.position.should == 2
+    end
+
+    it 'does not move task when the only one' do
+      Release.stub!(:velocity => 1)
+      task_to_move = Factory(:task, :state => 'pending', :assigned_id => Factory(:developer).id)
+      task_to_move.advance!(nil).should be_false
+    end
+
+    it 'moves task to current releases when started' do
+      Release.stub!(:velocity => 1)
+      done_task = Factory(:task, :state => 'completed')
+      other_task = Factory(:task, :state => 'pending')
+      task_to_move = Factory(:task, :state => 'pending', :assigned_id => Factory(:developer).id)
+      task_to_move.advance!(nil)
+      task_to_move.position.should == 2
+    end
+  end
+
   it "should create a new instance given valid attributes" do
     Task.create!(@valid_attributes)
   end
@@ -78,5 +104,10 @@ describe Task do
     Factory(:task, :state => 'merged').action.should == 'verify'
     Factory(:task, :state => 'verified').action.should == 'stop'
   end
+
+  it 'return the last started task' do
+    pending
+  end
+
 end
 
