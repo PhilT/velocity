@@ -11,5 +11,12 @@ describe User do
     customer = Factory :customer
     User.developers.should_not include(customer)
   end
+
+  it "#initials" do
+    user = Factory.build(:developer, :name => 'Rick Astley')
+    user.initials.should == 'RA'
+    user.name = 'Rick Quentin Astley'
+    user.initials.should == 'RQA'
+  end
 end
 

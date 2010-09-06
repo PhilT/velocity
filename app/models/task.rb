@@ -104,6 +104,10 @@ class Task < ActiveRecord::Base
     update_attributes(:assigned => user, :updated_field => ['assigned', user.id].join(','))
   end
 
+  def assigned?
+    !self.assigned.blank?
+  end
+
   def verified_by!(user)
     update_attribute :verified_by, user.id
   end
