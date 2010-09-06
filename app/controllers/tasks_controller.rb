@@ -52,7 +52,7 @@ class TasksController < ApplicationController
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)
       else
-        @moved = @task.advance!(current_user)
+        @task.advance!(current_user)
       end
     else #something else was changed (other than state)
       if params[:task][:category] #category was changed
