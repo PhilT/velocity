@@ -17,5 +17,9 @@ class User < ActiveRecord::Base
   def email_address_with_name
     "#{name} <#{email}>"
   end
+
+  def initials
+    self.name.split(' ').map{|word| word.chars.first}.join
+  end
 end
 

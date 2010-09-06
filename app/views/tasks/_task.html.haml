@@ -10,6 +10,9 @@
         = task_submit_button(f, task)
       %li.story= render :partial => 'stories/story', :object => task.story, :locals => {:task => task}
       = f.text :name, :hint => "what's this about?"
+      - if task.assigned?
+        %li.assigned{:title => task.assigned.name}
+          (#{task.assigned.initials})
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
       - if !%w(invalid verified).include?(task.state)
