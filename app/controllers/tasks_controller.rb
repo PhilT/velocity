@@ -2,6 +2,9 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
+    if params[:user_id]
+      @tasks = Task.current.for_user(User.find(params[:user_id]))
+    end
     @task = Task.new
     @group = Story.new
   end

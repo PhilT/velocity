@@ -22,6 +22,7 @@ class Task < ActiveRecord::Base
   named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
   named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
   named_scope :without_story, :conditions => 'story_id IS NULL'
+  named_scope :for_user, lambda {|user| {:conditions => {:assigned_id => user.id}}}
 
   aasm_column :state
   aasm_initial_state :pending
