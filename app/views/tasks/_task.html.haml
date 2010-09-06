@@ -11,8 +11,8 @@
       %li.story= render :partial => 'stories/story', :object => task.story, :locals => {:task => task}
       = f.text :name, :hint => "what's this about?"
       - if task.assigned?
-        %li.assigned{:title => task.assigned.name}
-          (#{task.assigned.initials})
+        %li.assigned_initials{:title => task.assigned.name}
+          (#{link_to task.assigned.initials, user_tasks_path(task.assigned)})
 
     %ul.description{:class => ['assigned_id', 'story_id'].include?(@field) ? 'active' : nil}
       - if !%w(invalid verified).include?(task.state)
