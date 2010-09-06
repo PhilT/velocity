@@ -80,7 +80,7 @@ function scrollIntoView(task_id){
 }
 
 function updateReleaseBorder(velocity) {
-  tasks = $('.task.pending');
+  var tasks = $('.task').has('li.feature');
   if(tasks.length > velocity)  {
     tasks.eq(velocity).before('<li><h2 class="release_border"><span>End of Release</span></h2></li>');
     return false;
