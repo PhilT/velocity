@@ -90,5 +90,5 @@ function updateReleaseBorder(velocity) {
 }
 
 function shouldUploadReleaseBorder() {
-  return window.location.pathname.match(/^\/tasks/);
+  return window.location.pathname.match(/^\/(?:tasks)$/);
 }
