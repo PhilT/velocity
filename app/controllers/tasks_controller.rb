@@ -2,6 +2,9 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
+    if params[:user_id]
+      @tasks = Task.current.for_user(User.find(params[:user_id]))
+    end
     @task = Task.new
     @group = Story.new
   end
@@ -36,26 +39,27 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if params[:group_id] # group changed
+      @updated_groups = []
+      @updated_groups << @task.story if @task.story
       if params[:group_id] == 'remove'
         group_id = 'remove'
       else
         group_id = params[:group_id].scan(/group_([0-9]+)($| )/)[0][0] rescue nil
+        @updated_groups << Story.find(group_id)
       end
       @task.update_attribute(:story_id, group_id == 'remove' ? nil : group_id) unless group_id == nil
+      @task.reload
       return render :partial => 'change_group', :layout => false
     elsif params[:task].nil? #state was changed
       @task.update_attribute :updated_field, ""
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)
       else
-        @moved = @task.advance!(current_user)
+        @task.advance!(current_user)
       end
     else #something else was changed (other than state)
       if params[:task][:category] #category was changed
         @task.next_category!
-      elsif params[:task][:story_id] # story_id was changed
-        @task.update_attributes(params[:task].merge({:release_id => Story.find(params[:task][:story_id]).release_id}))
-        @moved = true
       else #something other than category and story_id was changed
         @task.update_attributes(params[:task])
         @task.assign_to!(User.find(params[:task][:assigned_id])) if params[:task][:assigned_id]

@@ -22,6 +22,7 @@ class Task < ActiveRecord::Base
   named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
   named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
   named_scope :without_story, :conditions => 'story_id IS NULL'
+  named_scope :for_user, lambda {|user| {:conditions => {:assigned_id => user.id}}}
 
   aasm_column :state
   aasm_initial_state :pending
@@ -92,14 +93,6 @@ class Task < ActiveRecord::Base
     update_attribute(:assigned, user)
   end
 
-  def started
-    started?
-  end
-
-  def started=(value)
-     Boolean.parse(value) ? touch(:started_on) : self.started_on = nil
-  end
-
   def completed
     completed?
   end
@@ -110,6 +103,10 @@ class Task < ActiveRecord::Base
 
   def assign_to!(user)
     update_attributes(:assigned => user, :updated_field => ['assigned', user.id].join(','))
+  end
+
+  def assigned?
+    !self.assigned.blank?
   end
 
   def verified_by!(user)

@@ -1,3 +1,9 @@
+=set-gradient(!from, !amount = -50)
+  !to = !from + !amount
+  :background= !from - !amount / 2
+  :background= -moz-linear-gradient(top, !from, !to)
+  :background= -webkit-gradient(linear, 0% 0%, 0% 100%, from(!from), to(!to))
+
 =box-shadow(!x, !y, !size, !color = 0)
   box-shadow= !x !y !size !color
   -moz-box-shadow= !x !y !size !color

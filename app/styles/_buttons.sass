@@ -8,12 +8,6 @@
     clear: both
     visibility: hidden
 
-=set-gradient(!from, !amount = -50)
-  !to = !from + !amount
-  :background= !to
-  :background= -moz-linear-gradient(top, !from, !to)
-  :background= -webkit-gradient(linear, 0% 0%, 0% 100%, from(!from), to(!to))
-
 =set-button-gradients(!color, !amount = -50)
   +set-gradient(!color, !amount)
   &:hover
