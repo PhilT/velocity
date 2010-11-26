@@ -9,6 +9,19 @@ describe TasksController do
     @task = Factory(:task)
   end
 
+  it 'lists tasks' do
+    get :index
+    response.should be_success
+  end
+  it 'edits a task' do
+    get :edit, :id => "name_#{@task.id}"
+    response.should be_success
+  end
+  it 'shows a task' do
+    get :show, :id => "name_#{@task.id}"
+    response.should be_success
+  end
+
   describe 'create' do
     it 'should assign task to a story in a current release' do
       story = Factory(:story)
@@ -33,7 +46,7 @@ describe TasksController do
   describe 'update' do
     it 'should remove a group' do
       @task.update_attribute(:story, Factory(:story))
-      put :update, :id => @task.id, :group_id => 'group_'
+      put :update, :id => @task.id, :group_id => 'remove'
       @task.reload.story_id.should be_nil
     end
 
@@ -42,6 +55,17 @@ describe TasksController do
       assigns[:task].state.should == 'invalid'
       assigns[:task].assigned.should == @logged_in_user
       assigns[:moved].should == nil
+    end
+
+    it 'changes category' do
+      put :update, :id => @task.id, :task => {:category => 'true'}
+      assigns[:task].category.should == 'bug'
+    end
+
+    it 'changes task name' do
+      put :update, :id => @task.id, :task => {:name => 'My task'}
+      response.should be_success
+      assigns[:task].name.should == 'My task'
     end
 
     describe 'current release tasks' do
@@ -76,22 +100,29 @@ describe TasksController do
         @task.story.release.should be_nil
       end
     end
+  end
 
-    describe 'sort' do
-      before do
-        @task.destroy
+  describe 'poll' do
+    it 'polls for updates' do
+      get :poll
+      response.should be_success
+    end
+  end
+
+  describe 'sort' do
+    before do
+      @task.destroy
+    end
+
+    it 'should reorder tasks in current release' do
+      @tasks = []
+      3.times do
+        @tasks << Factory(:task)
       end
+      put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
 
-      it 'should reorder tasks in current release' do
-        @tasks = []
-        3.times do
-          @tasks << Factory(:task)
-        end
-        put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
-
-        Task.all.map(&:release).uniq.should == [nil]
-        Task.current.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
-      end
+      Task.all.map(&:release).uniq.should == [nil]
+      Task.current.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
     end
   end
 end

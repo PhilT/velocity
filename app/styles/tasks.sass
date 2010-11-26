@@ -72,12 +72,12 @@
   .fade
     float: right
     position: relative
-    background: url('/images/fade_white.png') repeat-y
+    background: url("/images/fade_white.png") repeat-y
     width: 37px
     height: 21px
 
   .handle
-    background: url('/images/arrow_out.png') no-repeat
+    background: url("/images/arrow_out.png") no-repeat
     cursor: move
     opacity: 0
 
@@ -91,7 +91,7 @@
     margin-top: 0
 
   .info
-    background: url('/images/information.png') no-repeat
+    background: url("/images/information.png") no-repeat
     cursor: pointer
     opacity: 0
 
@@ -118,12 +118,12 @@
 
 .task_new, .task
   .feature a
-    background= url('/images/lightbulb.png') "no-repeat"
+    background= url("/images/lightbulb.png") "no-repeat"
 
   .refactor a
-    background= url('/images/lightbulb_off.png') "no-repeat"
+    background= url("/images/lightbulb_off.png") "no-repeat"
   .bug a
-    background= url('/images/bug.png') "no-repeat"
+    background= url("/images/bug.png") "no-repeat"
 
   .feature, .bug, .refactor, .id, .action, .handle, .info, .toggle, li
     float: left
@@ -145,7 +145,7 @@
     .handle, .info
       opacity: 1
     .fade
-      background: url('/images/fade_yellow.png') repeat-y
+      background: url("/images/fade_yellow.png") repeat-y
   .group
     width: 80px
 
@@ -197,6 +197,14 @@
 .invalid .name
   color: #ddd
   text-decoration: line-through
+
+.assigned_initials
+  line-height: 20px
+  padding-left: 5px
+  a
+    &:hover
+      text-decoration: underline
+      color: blue
 
 .name
   float: left

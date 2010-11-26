@@ -7,17 +7,10 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'aasm'
-  config.gem 'acts_as_list'
-  config.gem 'authlogic'
-  config.gem 'db2s3'
-  config.gem 'haml'
-  config.gem 'whenever', :lib => false
-  config.gem 'will_paginate'
-  config.gem 'redirect_routing'
 end
 
 Sass::Plugin.options[:template_location] = RAILS_ROOT + '/app/styles' if defined?(Sass)
 STRAPLINE = "Simple Release Management"
 RELEASE_CONFIRMATION_MESSAGE = 'Finish release and email features and bugs completed? This does not include incomplete tasks'
+S3FILE = S3File.new(S3_CONFIG) if defined?(S3)
 
