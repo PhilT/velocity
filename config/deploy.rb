@@ -1,11 +1,11 @@
 set :application, "velocity"
-set :repository,  "git://github.com/PhilT/velocity.git"
+set :repository,  "git://github.com/squil/velocity.git"
 
 set :scm, :git
 set :user, 'www'
 set :deploy_to, nil
 set :branch, ENV['BRANCH']
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :initial_deploy, false
 set :use_sudo, false
 set :keep_releases, 3
