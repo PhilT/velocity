@@ -32,7 +32,8 @@ Factory.define :release do |f|
 end
 
 Factory.define :story do |f|
- f.name {Factory.next :story_name}
+  f.name {Factory.next :story_name}
+  f.active true
 end
 
 Factory.define :task do |f|
