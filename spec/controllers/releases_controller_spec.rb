@@ -14,6 +14,8 @@ describe ReleasesController do
 
   describe 'create' do
     it 'should remove orphaned stories' do
+      mock_release = mock_model(Release, :valid? => true)
+      Release.stub(:create).and_return(mock_release)
       Story.should_receive :remove_orphans
       post :create
     end

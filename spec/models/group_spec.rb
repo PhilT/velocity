@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe 'Group' do
   describe '#orphaned' do
-    it 'should remove stories not assigned to any tasks' do
+    it 'deactivates stories not assigned to current tasks' do
       story = Factory(:story)
       task = Factory(:task, :story => Factory(:story))
       task_without_story = Factory(:task)
       story2 = task.story
-      lambda{Story.remove_orphans}.should change(Story, :count).by -1
+      Story.remove_orphans
+      Story.count.should == 2
+      Story.current.count.should == 1
     end
   end
 
