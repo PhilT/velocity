@@ -17,8 +17,8 @@ end
 
 group :test do
   gem "ZenTest", :require => "zentest"
-  gem "rspec"
-  gem "rspec-rails"
+  gem "rspec", '1.3.0'
+  gem "rspec-rails", '1.3.2'
   gem "factory_girl", '1.2.4'
   gem "webrat"
 end
