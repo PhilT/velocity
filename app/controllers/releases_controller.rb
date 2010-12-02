@@ -5,9 +5,9 @@ class ReleasesController < ApplicationController
   end
 
   def create
-    Story.remove_orphans
     release = Release.create(:finished_by => current_user)
     if release.valid?
+      Story.remove_orphans
       flash[:notice] = "Released! Velocity is now #{Release.velocity}"
     else
       flash[:error] = 'Cannot finish release. ' + release.errors.full_messages.join('. ')
