@@ -97,7 +97,7 @@ private
 
   def extract_story(task_name)
     if task_name =~ /^(.+?):/
-      Story.first(:conditions => {:name => $1, :release_id => nil})
+      Story.first(:conditions => {:name => $1, :active => true})
     end
   end
 end
