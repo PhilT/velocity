@@ -1,0 +1,8 @@
+var velocity = []
+var features = []
+var bugs = []
+
+- @releases.each_with_index do |release, index|
+  velocity.push([#{release.created_at_in_ms}, #{release.velocity}]);
+  features.push([#{index}, #{release.tasks.bugs.size + release.tasks.features.size}, #{release.tasks.bugs.size}]);
+  bugs.push([#{index}, #{release.tasks.bugs.size}, 0]);

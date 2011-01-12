@@ -3,7 +3,7 @@
   %head
     %title== Velocity - #{STRAPLINE}
     = javascript_include_merged :lib
-    = javascript_include_merged controller_name == 'releases' ? :releases : :base
+    = javascript_include_merged js_pack 
     = stylesheet_link_merged :base, 'media' => 'all'
   %body
     %div#header
@@ -12,6 +12,7 @@
         - if current_user
           %li= link_to_unless_current '<span>Tasks</span>', tasks_path
           %li= link_to_unless_current '<span>Releases</span>', releases_path
+          %li= link_to_unless_current '<span>Stats</span>', stats_path
           %li= link_to_unless_current '<span>Users</span>', new_user_path
           %li= link_to_unless_current '<span>Logout</span>', user_session_path(current_user), :method => :delete
     %div#main

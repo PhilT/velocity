@@ -2,6 +2,9 @@ class TasksController < ApplicationController
   before_filter :find_stuff
 
   def index
+    if params[:user_id]
+      @tasks = Task.current.for_user(User.find(params[:user_id]))
+    end
     @task = Task.new
     @group = Story.new
   end
@@ -52,7 +55,7 @@ class TasksController < ApplicationController
       if params[:state] == 'invalid' #marked invalid
         @task.invalidate!(current_user)
       else
-        @moved = @task.advance!(current_user)
+        @task.advance!(current_user)
       end
     else #something else was changed (other than state)
       if params[:task][:category] #category was changed
@@ -94,7 +97,7 @@ private
 
   def extract_story(task_name)
     if task_name =~ /^(.+?):/
-      Story.first(:conditions => {:name => $1, :release_id => nil})
+      Story.first(:conditions => {:name => $1, :active => true})
     end
   end
 end
