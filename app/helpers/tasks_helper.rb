@@ -19,5 +19,9 @@ module TasksHelper
     (distance_of_time_in_words_to_now(time).gsub('about ', '') + ' ago').gsub('less than a minute ago', 'just now')
   end
 
+  def description_for(task)
+    story_name = task.story ? "[#{task.story.name}] " : ''
+    "#{story_name}#{task.name}"
+  end
 end
 
