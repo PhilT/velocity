@@ -4,7 +4,7 @@
 - if @release.tasks.features.verified.any?
   %ul
     - @release.tasks.features.verified.each do |feature|
-      %li= "[#{feature.story.try(:name)}] #{feature.name}"
+      %li= description_for(feature)
 - else
   No new features.
 
@@ -12,7 +12,7 @@
 - if @release.tasks.bugs.verified.any?
   %ul
     - @release.tasks.bugs.verified.each do |bug|
-      %li= "[#{bug.story}] #{bug.name}"
+      %li= description_for(bug)
 - else
   No bugs!
 
