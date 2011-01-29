@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe 'release_mailer/release_notification.html.haml' do
   it 'renders view' do
