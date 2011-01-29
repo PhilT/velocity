@@ -77,7 +77,7 @@ class TasksController < ApplicationController
     @created_tasks = Task.current.created(current_user)
     @updated_tasks = Task.current.updated
     @assigned_tasks = Task.assigned_to(current_user)
-    @created_stories = Story.current.created(current_user)
+    @created_stories = Story.current.created
     @any_updates = Task.other_updates?(current_user)
     respond_to do|format|
       format.js{render :layout => false}

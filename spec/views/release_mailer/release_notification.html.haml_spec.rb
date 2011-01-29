@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe 'release_mailer/release_notification.html.haml' do
   it 'renders view' do
@@ -12,15 +12,15 @@ describe 'release_mailer/release_notification.html.haml' do
     mock_release.stub_chain(:tasks, :features, :verified).and_return([mock_feature, mock_feature_no_story])
     mock_release.stub_chain(:tasks, :bugs, :verified).and_return([mock_bug, mock_bug_no_story])
 
-    assigns[:release] = mock_release
+    assign(:release, mock_release)
 
     render
-    response.body.should include 'New release'
-    response.body.should include 'New features'
-    response.should have_tag 'li', '[Videos] Integrate videos'
-    response.should have_tag 'li', 'Allow login'
-    response.body.should include 'Bug fixes'
-    response.should have_tag 'li', '[Videos] Fix styling'
-    response.should have_tag 'li', 'Correct typos'
+    rendered.should contain 'New release'
+    rendered.should contain 'New features'
+    rendered.should contain '[Videos] Integrate videos'
+    rendered.should contain 'Allow login'
+    rendered.should contain 'Bug fixes'
+    rendered.should contain '[Videos] Fix styling'
+    rendered.should contain 'Correct typos'
   end
 end
