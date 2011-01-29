@@ -14,18 +14,18 @@ describe TasksController do
     response.should be_success
   end
   it 'edits a task' do
-    get :edit, :id => "name_#{@task.id}"
+    get :edit, :id => "name_#{@task.id}", :format => 'js'
     response.should be_success
   end
   it 'shows a task' do
-    get :show, :id => "name_#{@task.id}"
+    get :show, :id => "name_#{@task.id}", :format => 'js'
     response.should be_success
   end
 
   describe 'create' do
     it 'should assign task to a story in a current release' do
       story = Factory(:story)
-      post :create, :task => {:name => "#{story.name}: New task"}
+      post :create, :task => {:name => "#{story.name}: New task"}, :format => 'js'
 
       response.should be_success
       Task.count.should == 2
@@ -34,7 +34,7 @@ describe TasksController do
     end
 
     it 'should create a task without a story' do
-      post :create, :task => {:name => 'Story: New task'}
+      post :create, :task => {:name => 'Story: New task'}, :format => 'js'
 
       response.should be_success
       Task.count.should == 2
@@ -46,37 +46,37 @@ describe TasksController do
   describe 'update' do
     it 'should remove a group' do
       @task.update_attribute(:story, Factory(:story))
-      put :update, :id => @task.id, :group_id => 'remove'
+      put :update, :id => @task.id, :group_id => 'remove', :format => 'js'
       @task.reload.story_id.should be_nil
     end
 
     it 'should mark task invalid with current user when state invalid' do
-      put :update, :id => @task.id, :state => 'invalid'
+      put :update, :id => @task.id, :state => 'invalid', :format => 'js'
       assigns[:task].state.should == 'invalid'
       assigns[:task].assigned.should == @logged_in_user
       assigns[:moved].should == nil
     end
 
     it 'changes category' do
-      put :update, :id => @task.id, :task => {:category => 'true'}
+      put :update, :id => @task.id, :task => {:category => 'true'}, :format => 'js'
       assigns[:task].category.should == 'bug'
     end
 
     it 'changes task name' do
-      put :update, :id => @task.id, :task => {:name => 'My task'}
+      put :update, :id => @task.id, :task => {:name => 'My task'}, :format => 'js'
       response.should be_success
       assigns[:task].name.should == 'My task'
     end
 
     describe 'current release tasks' do
       it 'should mark a pending task as started when in current release' do
-        put :update, :id => @task.id
+        put :update, :id => @task.id, :format => 'js'
         assigns[:task].state.should == 'started'
       end
 
       it 'should assign to current user when starting task' do
         @task.started?.should be_false
-        put :update, :id => @task
+        put :update, :id => @task, :format => 'js'
 
         @task.reload.started?.should be_true
         @task.assigned.should == @logged_in_user
@@ -84,7 +84,7 @@ describe TasksController do
 
       it 'should assign to a story' do
         story = Factory(:story)
-        put :update, :id => @task, :group_id => "group_#{story.id}"
+        put :update, :id => @task, :group_id => "group_#{story.id}", :format => 'js'
         assigns[:task].story.should == story
       end
     end
@@ -94,7 +94,7 @@ describe TasksController do
         @task.story = Factory(:story, :release => nil)
         @task.save
 
-        put :update, :id => @task, :state => 'invalid'
+        put :update, :id => @task, :state => 'invalid', :format => 'js'
 
         @task.reload.release.should be_nil
         @task.story.release.should be_nil
@@ -104,7 +104,7 @@ describe TasksController do
 
   describe 'poll' do
     it 'polls for updates' do
-      get :poll
+      get :poll, :format => 'js'
       response.should be_success
     end
   end
@@ -119,7 +119,7 @@ describe TasksController do
       3.times do
         @tasks << Factory(:task)
       end
-      put :sort, :id => @tasks.first.id, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id]
+      put :sort, :id => @tasks.first.id.to_s, :task => [@tasks[1].id, @tasks[2].id, @tasks[0].id].map(&:to_s), :format => 'js'
 
       Task.all.map(&:release).uniq.should == [nil]
       Task.current.map(&:id).should == [@tasks[1].id, @tasks[2].id, @tasks[0].id]
