@@ -3,7 +3,7 @@
 # exit
 
 common: &common
-  adapter: mysql
+  adapter: mysql2
   username: velocity
   password: velocity
   host: localhost
