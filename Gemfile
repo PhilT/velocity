@@ -15,11 +15,15 @@ group :staging, :production do
   gem 'whenever'
 end
 
+group :development, :test do
+  gem "rspec-rails", '2.4.0'
+end
+
 group :test do
   gem "ZenTest", :require => "zentest"
-  gem "rspec", '1.3.0'
-  gem "rspec-rails", '1.3.2'
-  gem "factory_girl", '1.2.4'
+  gem "rspec", '2.4.0'
+  gem "factory_girl", '1.3.2'
+  gem "factory_girl_rails"
   gem "webrat"
 end
 
