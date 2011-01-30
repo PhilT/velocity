@@ -82,7 +82,7 @@ private
   end
 
   def wrap(content, klass)
-    content_tag(:li, content, :class => klass)
+    content_tag(:li, content.html_safe, :class => klass)
   end
 
   def time_ago(time)
