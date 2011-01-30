@@ -38,7 +38,8 @@ describe Release do
 
   it 'should send email' do
     %w(verified).each {|state| Factory(:task, :state => state)}
-    ReleaseMailer.should_receive(:deliver_release_notification).and_return(true)
+    ReleaseMailer.should_receive(:release_notification).and_return(ReleaseMailer)
+    ReleaseMailer.should_receive(:deliver).and_return(true)
     create_release
   end
 

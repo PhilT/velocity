@@ -3,6 +3,6 @@ class StatsController < ApplicationController
   end
 
   def graph_data
-    @releases = Release.all(:order => :created_at)
+    @releases = Release.order(:created_at)
   end
 end

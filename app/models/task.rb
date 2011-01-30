@@ -13,16 +13,16 @@ class Task < ActiveRecord::Base
   validates_presence_of :name
 
   default_scope :order => :position
-  named_scope :current, :conditions => 'release_id IS NULL'
-  named_scope :features, :conditions => {:category => 'feature'}
-  named_scope :bugs, :conditions => {:category => 'bug'}
-  named_scope :refactorings, :conditions => {:category => 'refactor'}
-  named_scope :outstanding, :conditions => 'state != "verified"'
-  named_scope :created, lambda {|user|{:conditions => ["created_at > ? AND author_id != ?", last_poll, user.id]}}
-  named_scope :updated, lambda {{:conditions => ["updated_at > ?", last_poll]}}
-  named_scope :incomplete, :conditions => {:state => ['pending', 'started']}
-  named_scope :without_story, :conditions => 'story_id IS NULL'
-  named_scope :for_user, lambda {|user| {:conditions => {:assigned_id => user.id}}}
+  scope :current, where('release_id IS NULL')
+  scope :features, where(:category => 'feature')
+  scope :bugs, where(:category => 'bug')
+  scope :refactorings, where(:category => 'refactor')
+  scope :outstanding, where('state != "verified"')
+  scope :created, lambda {|user| where(["created_at > ? AND author_id != ?", last_poll, user.id])}
+  scope :updated, lambda {where(["updated_at > ?", last_poll])}
+  scope :incomplete, where(:state => ['pending', 'started'])
+  scope :without_story, where('story_id IS NULL')
+  scope :for_user, lambda {|user| where(:assigned_id => user.id)}
 
   aasm_column :state
   aasm_initial_state :pending

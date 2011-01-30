@@ -25,7 +25,7 @@ describe ReleasesController do
 
       post :create
       response.should redirect_to tasks_path
-      response.flash[:notice].should == 'Released! Velocity is now 0'
+      request.flash[:notice].should == 'Released! Velocity is now 0'
     end
   end
 end
