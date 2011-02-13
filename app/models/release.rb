@@ -4,23 +4,26 @@ class Release < ActiveRecord::Base
   belongs_to :finished_by, :class_name => 'User', :foreign_key => :finished_by
 
   validates_presence_of :finished_by
+  validate :tasks_state
 
-  named_scope :previous, :order => 'created_at DESC'
+  scope :previous, order('created_at DESC')
 
   delegate :features, :bugs, :refactorings, :to => :tasks
+
+  after_create :send_notification
 
   def initialize(attributes = {})
     super
     self.tasks = Task.current.verified + Task.current.invalid
   end
 
-  def validate
+  def tasks_state
     errors.add 'tasks', 'merged but not verified' if Task.current.merged.any?
     errors.add 'tasks', 'not verified' unless self.tasks.any?
   end
 
-  def after_create
-    ReleaseMailer.deliver_release_notification(User.all, self)
+  def send_notification
+    ReleaseMailer.release_notification(User.all, self).deliver
   end
 
   def self.velocity
@@ -29,7 +32,7 @@ class Release < ActiveRecord::Base
 
   def velocity
     begin
-      releases = Release.previous.all(:conditions => ['created_at <= ?', self.created_at], :limit => 2)
+      releases = Release.previous.where(['created_at <= ?', self.created_at]).limit(2)
       distance_in_minutes = (((releases[0].created_at - releases[1].created_at).abs)/60)
       days = (distance_in_minutes / 1440)
       (self.tasks.features.verified.count / days * 7).to_i

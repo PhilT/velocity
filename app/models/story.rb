@@ -3,9 +3,9 @@ class Story < ActiveRecord::Base
   belongs_to :release
 
   default_scope :order => :name
-  named_scope :created, lambda {{:conditions => ["created_at > ?", Task.last_poll]}}
-  named_scope :current, :conditions => {:active => true}
-  named_scope :orphaned, :conditions => ['id NOT IN (SELECT story_id FROM tasks WHERE story_id IS NOT NULL AND release_id IS NULL)']
+  scope :created, lambda { where(["created_at > ?", Task.last_poll]) }
+  scope :current, where(:active => true)
+  scope :orphaned, where('id NOT IN (SELECT story_id FROM tasks WHERE story_id IS NOT NULL AND release_id IS NULL)')
 
   validates_uniqueness_of :name
 

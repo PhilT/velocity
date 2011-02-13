@@ -2,19 +2,19 @@
 %html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xml:lang' => 'en'}
   %head
     %title== Velocity - #{STRAPLINE}
-    = javascript_include_merged :lib
-    = javascript_include_merged js_pack 
-    = stylesheet_link_merged :base, 'media' => 'all'
+    = raw javascript_include_merged :lib
+    = raw javascript_include_merged js_pack
+    = raw stylesheet_link_merged :base, 'media' => 'all'
   %body
     %div#header
-      %h1= link_to '<span class="offscreen">Velocity</span>', tasks_path
+      %h1= link_to '<span class="offscreen">Velocity</span>'.html_safe, tasks_path
       %ul#menu
         - if current_user
-          %li= link_to_unless_current '<span>Tasks</span>', tasks_path
-          %li= link_to_unless_current '<span>Releases</span>', releases_path
-          %li= link_to_unless_current '<span>Stats</span>', stats_path
-          %li= link_to_unless_current '<span>Users</span>', new_user_path
-          %li= link_to_unless_current '<span>Logout</span>', user_session_path(current_user), :method => :delete
+          %li= link_to_unless_current '<span>Tasks</span>'.html_safe, tasks_path
+          %li= link_to_unless_current '<span>Releases</span>'.html_safe, releases_path
+          %li= link_to_unless_current '<span>Stats</span>'.html_safe, stats_path
+          %li= link_to_unless_current '<span>Users</span>'.html_safe, new_user_path
+          %li= link_to_unless_current '<span>Logout</span>'.html_safe, user_session_path(current_user), :method => :delete
     %div#main
       = yield
 
