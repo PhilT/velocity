@@ -27,6 +27,6 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-config.action_mailer.default_url_options = { :host => "todo.puresolo.com" }
+config.action_mailer.default_url_options = { :host => "todo.example.com" }
 ActionMailer::Base.delivery_method = :smtp
 

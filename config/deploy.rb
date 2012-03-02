@@ -11,7 +11,7 @@ set :use_sudo, false
 set :keep_releases, 3
 
 set :target_env, 'staging'
-server "todo.puresolo.com", :app, :web, :db, :primary => true
+server "todo.example.com", :app, :web, :db, :primary => true
 
 ssh_options[:user] = "www"
 ssh_options[:forward_agent] = true

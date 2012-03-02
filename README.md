@@ -11,7 +11,9 @@ What is Velocity?
 --------------------
 **Todo on steroids!**
 
-Velocity extends the to-do list concept with a few extra features to make it useful to manage small projects with a handful of people. It tries to keep it simple with a clear single page main interface. It comes from my need to manage a small team of developers and allow our customers and developers to easily view and add tasks.
+Velocity extends the to-do list concept with a few extra features to make it useful to manage small projects
+with a handful of people. It tries to keep it simple with a clear single page main interface. It comes from
+starting with tadalist.com but quickly running into issues managing large lists with state.
 
 Usage
 -------------------
