@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require File.expand_path('../../lib/s3_file', __FILE__)
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -49,3 +48,4 @@ end
 
 STRAPLINE = "Simple Release Management"
 RELEASE_CONFIRMATION_MESSAGE = 'Finish release and email features and bugs completed? This does not include incomplete tasks'
+
