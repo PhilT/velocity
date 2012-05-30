@@ -1,4 +1,0 @@
-%ul.tasks
-  - tasks.each_with_index do |task, count|
-    = render :partial => task.new_record? ? 'tasks/new_task' : 'tasks/task', :object => task, :locals => {:field => nil}
-

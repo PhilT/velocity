@@ -1,0 +1,54 @@
+%html
+  %body
+    %header
+      %h1
+        Velocity
+        %sub Simple Task Tracking
+
+    %nav
+      %ul
+        %li Tasks
+        %li Releases
+        %li Stats
+        %li Users
+        %li Log out
+
+    %aside
+      Current velocity: 10 FPW
+      %details
+        FPW (Features Per Week)
+        taken from last release
+
+    %article
+      %ol
+        %li.release
+          %h2
+            Current Release
+          %form
+            %submit{:value => 'Finish release...'}
+        %li.task
+          %ul
+            %li drag
+            %li more
+            %li type (bug, feature, refactor)
+            %li state
+            %li description
+            %li mark invalid
+            %li author
+            %li assigned to
+            %li verified by
+        %li.release
+          %h2 End of Release
+        %li.task#new_task
+          %form
+            %ul
+              %li type
+              %li description
+              %li group
+              %li= submit('create')
+
+    %section#groups
+      %ul
+        %li redesign
+        %li framework
+

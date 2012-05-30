@@ -1,4 +1,21 @@
-# This file is used by Rack-based servers to start the application.
+use Sass::Plugin::Rack
+Sass::Plugin.options[:template_location] = 'app/assets/stylesheets'
 
-require ::File.expand_path('../config/environment',  __FILE__)
-run Velocity::Application
+run Renee {
+  path('projects') do
+    get do
+      @projects = Project.all
+      render! "projects/index", :layout => 'layout'
+    end
+
+    post do
+      Project.create(request.params)
+      redirect! "/projects"
+    end
+
+    path('new') do
+      get { render! 'projects/new', :layout => 'layout' }
+    end
+  end
+}
+

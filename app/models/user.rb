@@ -1,25 +1,15 @@
-class User < ActiveRecord::Base
-  acts_as_authentic
+class User
+  include DataMapper::Resource
+  property :id, Serial
+  property :name, String
+  property :created_at, DateTime
+  property :updated_at, DateTime
+  property :email, String
+  property :developer, Boolean, :default => false
 
-  has_many :created_tasks, :class_name => 'Task', :foreign_key => :author_id
-  has_many :assigned_tasks, :class_name => 'Task', :foreign_key => :assigned_id
-  has_many :verified_tasks, :class_name => 'Task', :foreign_key => :verified_by
 
-  scope :developers, where(:developer => true)
-  scope :non_developers, where(:developer => false)
-
-  has_and_belongs_to_many :stories
-
-  def admin
-    self.first
-  end
-
-  def email_address_with_name
-    "#{name} <#{email}>"
-  end
-
-  def initials
-    self.name.split(' ').map{|word| word.chars.first}.join
-  end
+  has n, :created_tasks, 'Task', :child_key => :author_id
+  has n, :assigned_tasks, 'Task', :child_key => :assigned_id
+  has n, :verified_tasks, 'Task', :child_key => :verified_by
 end
 

@@ -1,7 +1,0 @@
-%div.task_new
-  = form_for @task, :html => {:class => 'ajaxForm'} do |f|
-    %li{:class => "category #{@task.category}"}
-      = link_to '', '#', :class => :put
-      = f.hidden_field :category
-    %li= f.text_field :name, :title => 'new task'
-
