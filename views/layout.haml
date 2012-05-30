@@ -1,0 +1,14 @@
+!!!5
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{"http-equiv"=>"X-UA-Compatible", :content=>"IE=8"}
+    %title Velocity
+    %link{:href => '/stylesheets/base.css', :rel => 'stylesheet', :type => 'text/css'}
+    /[if lt IE 9]
+      = javascript_include_tag "javascripts/html5shiv.js"
+  %body
+    %h1 Velocity
+
+    = yield
+

@@ -1,6 +1,0 @@
-== $("#task_#{@task.id} .story").html("#{escape_javascript(render :partial => 'stories/story', :object => @task.story)}")
--  @updated_groups.each do |group|
-  == $('.groups .group_#{group.id}').siblings('.group_count').html(#{group.tasks.current.size});
-- if @task.story
-  == $(".group_" + #{@task.story.id}).draggableGroup();
-

@@ -1,10 +1,11 @@
-class Release
+class Group
   include DataMapper::Resource
   property :id, Serial
+  property :name, String
   property :created_at, DateTime
+  property :active, Boolean
 
   has n, :tasks
-  has n, :groups
-  belongs_to :finished_by, 'User'
+  belongs_to :release
 end
 
