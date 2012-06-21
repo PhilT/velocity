@@ -10,7 +10,7 @@ gem 'haml'
 gem 'renee'
 gem 'sass'
 gem 'shotgun'
-gem 'sprokets'
+gem 'sprockets'
 
 group :development, :test do
   gem 'guard'
