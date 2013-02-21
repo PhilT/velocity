@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "rails", "3.0.3"
+gem "rails", "~> 3.0.3"
 gem "mysql2", '0.2.6'
 
 gem 'aasm', '2.2.0'
@@ -17,6 +17,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", '2.4.0'
+  gem "rake"
 end
 
 group :test do
