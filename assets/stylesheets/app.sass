@@ -1,0 +1,87 @@
+@import bourbon
+@import colours
+@import base
+
+header
+  padding-top: 0
+  #logo
+    padding-top: 8px
+  #name
+    font-size: 28px
+    font-family: 'Comfortaa', sans-serif
+    font-weight: bold
+    color: darken($tertiary, 10%)
+    vertical-align: top
+    line-height: 25px
+    margin: 0
+  nav
+    margin: 0
+  li a
+    display: inline-block
+    padding: 10px 6px 2px
+    border-radius: 0
+    &:hover
+      background: $tertiary_light
+    &.current
+      background: $tertiary_light
+
+section
+  margin-top: 0
+
+h1
+  display: inline-block
+  border-bottom: 1px solid $primary_light
+  margin-top: $grid-size
+  font-size: $font-size * 1.25
+  width: 100%
+  letter-spacing: 0
+  position: relative
+  span.actions
+    position: absolute
+    font-size: $font-size
+    right: -4px
+    top: -8px
+
+li.task
+  font-size: 90%
+  padding: 4px
+  padding-left: 15px
+  margin: 2px
+  background: lighten($primary, 2%)
+  &:hover
+    background: lighten($primary, 6%) url(/graphics/grabber.svg) no-repeat 6px 6px
+    ul.details
+      display: block
+
+  .action, .group, .type
+    height: 20px
+    margin: 0 10px
+    padding: 0 5px
+
+  .feature
+    background: $green_dark
+
+  .bug
+    background: $red
+
+  .refactor
+    background: $blue
+
+  .group
+    background: $blue
+
+  ul.details
+    padding-top: 4px
+    display: none
+    overflow: hidden
+  li
+    margin-left: 15px
+    float: left
+    abbr
+      display: inline-block
+      border-bottom: none
+      width: 18px
+      height: 15px
+
+  li,strong
+    color: lighten($primary_light, 5%)

@@ -1,0 +1,16 @@
+svg width=50 height=24 xmlns='http://www.w3.org/2000/svg' version='1.1'
+  defs
+    sass:
+      @import colours
+      polyline
+        fill: none
+        stroke: $secondary
+        stroke-width: 1.2
+        &.lighter
+          stroke: lighten($tertiary, 10%)
+        &.lightest
+          stroke: lighten($tertiary, 20%)
+    link src='logo.css'
+  polyline.lightest points='0,0 2,2 0,4' transform='translate(5, 2), scale(5)'
+  polyline.lighter points='0,0 2,2 0,4' transform='translate(20, 2), scale(5)'
+  polyline points='0,0 2,2 0,4' transform='translate(35, 2), scale(5)'

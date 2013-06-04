@@ -1,21 +1,16 @@
-use Sass::Plugin::Rack
-Sass::Plugin.options[:template_location] = 'app/assets/stylesheets'
+require 'bundler/setup'
+require 'sinatra'
+require './lib/app'
+require 'slim'
 
-run Renee {
-  path('projects') do
-    get do
-      @projects = Project.all
-      render! "projects/index", :layout => 'layout'
-    end
+configure :development do
+  require 'rake-pipeline'
+  require 'rake-pipeline/middleware'
+  use Rake::Pipeline::Middleware, 'Assetfile'
+  require 'rack-livereload'
+  use Rack::LiveReload, no_swf: true
+end
 
-    post do
-      Project.create(request.params)
-      redirect! "/projects"
-    end
-
-    path('new') do
-      get { render! 'projects/new', :layout => 'layout' }
-    end
-  end
-}
-
+map '/' do
+  run Sinatra::Application
+end

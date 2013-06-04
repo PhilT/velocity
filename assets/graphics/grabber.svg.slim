@@ -1,0 +1,7 @@
+- x_count = 2
+- y_count = 12
+- spacing = 3
+svg width=(x_count * spacing) height=(y_count * spacing) xmlns='http://www.w3.org/2000/svg' version='1.1'
+  - x_count.times do |x|
+    - y_count.times do |y|
+      rect x=0 y=0 width=2 height=2 transform="translate(#{x * spacing}, #{y * spacing})" fill='rgba(0, 0, 0, 0.3)' stroke='none'

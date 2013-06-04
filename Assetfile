@@ -1,0 +1,76 @@
+require 'rake-pipeline-web-filters'
+require 'slim'
+require 'sass'
+require 'tilt'
+require 'cssminify'
+
+Sass.load_paths << 'bourbon' << 'assets/stylesheets'
+
+module Rake::Pipeline::Web::Filters
+  class CssMinifyFilter < Rake::Pipeline::Filter
+    include Rake::Pipeline::Web::Filters::FilterWithDependencies
+    attr_reader :options
+    def initialize(options={}, &block)
+      block ||= proc { |input|
+        if input =~ %r{min.css$}
+          input
+        else
+          input.sub /\.css$/, '.min.css'
+        end
+      }
+
+      super(&block)
+      @options = options
+    end
+
+    def generate_output(inputs, output)
+      compressor = CSSminify.new
+      inputs.each do |input|
+        if input.path !~ /min\.css/
+          output.write compressor.compress(input.read)
+        else
+          output.write input.read
+        end
+      end
+    end
+
+  private
+    def external_dependencies
+      [ 'cssminify' ]
+    end
+  end
+
+  module PipelineHelpers
+    def css_minify(*args, &block)
+      filter(Rake::Pipeline::Web::Filters::CssMinifyFilter, *args, &block)
+    end
+
+    def production?
+      !defined?(Sinatra) || Sinatra::Base.production?
+    end
+  end
+end
+
+output 'public'
+
+input 'assets' do
+  match 'graphics/**/*.svg.slim' do
+    tilt do |input|
+      input.sub(/\.slim$/, '')
+    end
+  end
+
+  match 'javascripts/**/*.js' do
+    concat 'application.js'
+  end
+
+  match /stylesheets\/[^_]*.sass/ do
+    tilt do |input|
+      input.sub(/\.sass$/, '.css')
+    end
+    if production?
+      css_minify
+    end
+    concat 'application.css'
+  end
+end

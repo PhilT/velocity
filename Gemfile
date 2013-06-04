@@ -1,19 +1,16 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
-gem 'activemodel'
-gem 'datamapper'
-gem 'dm-active_model'
-gem 'dm-is-list'
-gem 'dm-is-state_machine'
-gem 'dm-sqlite-adapter'
-gem 'haml'
-gem 'renee'
-gem 'sass'
-gem 'shotgun'
-gem 'sprockets'
+gem 'sinatra'
+gem 'slim'
+gem 'thin'
 
-group :development, :test do
-  gem 'guard'
-  gem 'minitest'
+group :development do
+  gem 'cssminify'
+  gem 'bourbon'
+  gem 'guard-livereload'
+  gem 'jasmine'
+  gem 'rack-livereload'
+  gem 'rake-pipeline'
+  gem 'rake-pipeline-web-filters'
+  gem 'sass'
 end
-

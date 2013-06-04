@@ -1,0 +1,83 @@
+doctype 5
+html
+  head
+    title Velocity - Manage Projects, Simply.
+    meta charset='UTF-8'
+    link href='http://fonts.googleapis.com/css?family=Ropa+Sans|Comfortaa' rel='stylesheet' type='text/css'
+    link href='application.css' rel='stylesheet' type='text/css'
+  body
+    header
+      object#logo type='image/svg+xml' data='/graphics/logo.svg'
+      span#name Velocity
+      nav
+        ul
+          li
+            a href='#' PROJECTS
+          li
+            a.current href='#' TASKS
+          li
+            a href='#' RELEASES
+          li
+            a href='#' STATS
+          li
+            a href='#' USERS
+          li
+            a href='#' LOGOUT
+          li#velocity
+            a href='#' Velocity: 0
+
+    section
+      h1
+        span Current Release
+        span.actions
+          button Finish Release...
+      ul.tasks
+        - 2.times
+          li.task
+            span.type.feature &nbsp;
+            span.group design
+            span.status pending
+            button.action start
+            span.description Mockup of Velocity task list
+            ul.details
+              li.author author: <strong>Phil Thompson</strong>
+              li.assigned_to assigned to: <strong>Phil Thompson</strong>
+              li.verifier verified by: <strong>Phil Thompson</strong>
+              li.completed completed 4 hours ago
+
+        li.task
+          span.type.bug &nbsp;
+          span.group design
+          span.status pending
+          button.action start
+          span.description Something needs fixing
+          ul.details
+            li.author author: <strong>Phil Thompson</strong>
+            li.assigned_to assigned to: <strong>Phil Thompson</strong>
+            li.verifier verified by: <strong>Phil Thompson</strong>
+            li.completed
+
+        li.task
+          span.type.bug &nbsp;
+          span.group design
+          span.status pending
+          button.action start
+          span.description Something needs fixing
+          ul.details
+            li.author
+              abbr title='Author'
+                object type='image/svg+xml' data='/graphics/author.svg'
+              span Phil Thompson
+            li.assigned_to
+              abbr title='Assigned to'
+                object type='image/svg+xml' data='/graphics/assigned.svg'
+              span Phil Thompson
+            li.verifier
+              abbr title='Verified by'
+                object type='image/svg+xml' data='/graphics/verifier.svg'
+              span Phil Thompson
+            li.completed
+
+    section
+      h1 Task Queue
+      ul.tasks

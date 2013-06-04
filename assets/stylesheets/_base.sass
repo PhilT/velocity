@@ -1,0 +1,307 @@
+// http://www.google.com/fonts
+// http://idlefingers.co.uk/
+// http://railscasts.com/about
+// http://bourbon.io/docs/
+// http://colorschemedesigner.com/
+// http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html
+// http://html5doctor.com/
+
+$heading-font: Comfortaa, Helvetica, Arial, sans-serif
+$standard-font: Helvetica, Arial, sans-serif
+$font-size: 14px
+$grid-size: 18px
+
+h1, h2, h3
+  font-family: $heading-font
+
+h1
+  font-size: $font-size * 2
+  margin-left: $grid-size
+  margin-top: $grid-size * 2
+  margin-bottom: ($grid-size * 2) - ($font-size * 2)
+  color: $tertiary
+  letter-spacing: 2px
+
+section
+  margin: $grid-size
+  h1, h2, h3
+    font-weight: normal
+    margin-left: 0
+    color: $secondary_light
+
+  h2
+    font-size: 20px
+  h3
+    font-size: 16px
+
+header
+  display: inline-block
+  background: $primary_lightest
+  width: 100%
+  padding: 16px 0
+  border-bottom: 8px solid $primary_light
+  #logo
+    display: block
+    float: left
+    padding-left: 20px
+  #name
+    display: block
+    float: left
+    font-size: $grid-size * 2
+    font-family: 'Julius Sans One', sans-serif
+    color: darken($tertiary, 30%)
+    line-height: 40px
+    margin: 0
+    padding: 8px 0
+  nav, li
+    display: inline-block
+  nav
+    float: right
+    vertical-align: top
+    margin: 7px
+  ul
+    margin: 0
+  li a
+    text-decoration: none
+    color: $primary
+    margin: 0 10px
+    padding: 4px 6px
+    background: darken($primary_lightest, 10%)
+    border-radius: 4px
+    &:hover
+      background: $secondary_light
+
+table.colours
+  margin: 0 auto
+  width: auto
+  tr
+    border: none
+  td
+    color: $text
+    text-shadow: 0px 0px 3px $primary_darkest, 0px 0px 5px $primary_darkest
+    border: 1px solid $primary
+    width: 5em
+    height: 2em
+    text-align: center
+
+//
+// Section
+//
+
+body
+  font-family: $standard-font
+  font-size: $font-size
+  line-height: $grid-size
+  margin: 0
+  padding: 0
+  color: $text
+  background: $background
+
+article
+  margin: 20px
+
+.multicolumn
+  text-align: justify
+  +column-width(15em)
+  +column-gap(2em)
+  p
+    margin: 0 0 1em 0
+
+//
+// Grouping
+//
+p
+  margin: ($grid_size / 2) 0
+blockquote
+  p
+    margin: 0
+  small
+    color: $less-important
+
+ul, ol
+  list-style-type: none
+  padding: 0
+  ul, ol
+    padding-left: 20px
+
+ul.bulleted
+  list-style-type: disc
+  ul.bulleted
+    list-style-type: circle
+
+ol.numbered
+  list-style-type: decimal
+
+ul.bulleted, ol.numbered
+  padding-left: 20px
+
+dt
+  font-weight: bold
+dd
+  margin-bottom: 5px
+
+pre
+  padding: 10px
+  border-radius: 8px
+
+pre, code
+  color: $code
+
+//
+// Tables
+//
+table
+  width: 100%
+  border-collapse: collapse
+td, th
+  padding: 10px
+  text-align: left
+tr
+  border-bottom: 2px solid $table-border
+thead
+  tr
+    background: $primary_light
+caption
+  text-align: left
+  font-size: small
+  color: $text
+
+//
+// Forms
+//
+$form-width: 700px
+$inner-form-width: $form-width - 10px
+$label-width: 250px
+$input-width: $inner-form-width - $label-width - 30px
+
+form
+  background: $primary
+  width: $form-width
+  padding: 20px 0
+  margin: 5px 0
+  border-radius: 10px
+
+  li
+    overflow: hidden
+    margin: 4px 0
+    ul
+      display: inline-block
+      padding: 0
+      li
+        margin: 0
+      label
+        width: auto
+
+
+fieldset
+  border: none
+
+legend
+  visibility: hidden
+
+input, textarea, select
+  padding: 8px
+
+label
+  display: inline-block
+  height: $grid_size
+  width: $label-width - 20px
+  text-align: right
+  vertical-align: top
+  margin: 8px
+
+label.checkbox
+  text-align: left
+
+input, textarea, select, option
+  width: $input-width - 10px - 2px
+  background-color: lighten($primary, 10%)
+  border: 1px solid $primary_dark
+  border-radius: 2px
+  color: $text
+  margin: 0
+  &:focus
+    outline: none
+    border: 1px solid $tertiary
+    padding: 8px
+
+input[type='checkbox'],
+input[type='radio']
+  display: inline-block
+  margin: 8px 0
+  padding: 0
+  width: $grid-size
+  height: $grid-size
+  cursor: pointer
+  &:checked
+    +linear-gradient($primary_lightest, white)
+    border: 4px solid lighten($primary, 10%)
+
+input[type='radio']
+  border-radius: 10px
+
+ul.actions
+  text-align: right
+
+input[type='submit'], button
+  color: $tertiary_light
+  +linear-gradient(lighten($tertiary_dark, 5%), $tertiary_dark)
+  width: auto
+  cursor: pointer
+  padding: 6px 10px
+  font-size: 105%
+  border-radius: 3px
+  border: 1px solid darken($tertiary_dark, 10%)
+  &:hover
+    color: $tertiary_lightest
+    background: $tertiary
+    +linear-gradient(lighten($tertiary, 10%), $tertiary)
+
+select
+  width: $input-width
+
+textarea
+  height: 100px
+  font-family: $standard-font
+  resize: none
+
+form.search
+  text-align: center
+
+form.inline
+  padding: 4px
+  ol
+    text-align: center
+  li
+    display: inline
+  input, label
+    width: auto
+//
+// Embedded
+//
+
+//
+// Text-level
+//
+
+a
+  color: $tertiary
+  &:visited
+    color: $secondary
+
+abbr
+  color: $tertiary
+  border-bottom: 1px dotted $tertiary
+  cursor: help
+  text-decoration: none
+
+address
+  font-style: normal
+
+strong
+  color: $secondary_light
+
+.lead
+  margin-bottom: 0
+  font-size: larger
+
