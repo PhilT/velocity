@@ -23,7 +23,6 @@ h1
   letter-spacing: 2px
 
 section
-  margin: $grid-size
   h1, h2, h3
     font-weight: normal
     margin-left: 0
@@ -44,7 +43,7 @@ header
     display: block
     float: left
     padding-left: 20px
-  #name
+  h1
     display: block
     float: left
     font-size: $grid-size * 2
@@ -88,13 +87,17 @@ table.colours
 // Section
 //
 
-body
+html, body
   font-family: $standard-font
   font-size: $font-size
   line-height: $grid-size
   margin: 0
   padding: 0
   color: $text
+  background: $primary_dark
+  height: 100%
+
+#main
   background: $background
 
 article
@@ -244,18 +247,17 @@ ul.actions
   text-align: right
 
 input[type='submit'], button
-  color: $tertiary_light
-  +linear-gradient(lighten($tertiary_dark, 5%), $tertiary_dark)
+  color: $primary_dark
+  vertical
+  +linear-gradient($primary_lightest, darken($primary_lightest, 30%))
   width: auto
   cursor: pointer
   padding: 6px 10px
   font-size: 105%
   border-radius: 3px
-  border: 1px solid darken($tertiary_dark, 10%)
+  border: 1px solid darken($primary_light, 10%)
   &:hover
-    color: $tertiary_lightest
-    background: $tertiary
-    +linear-gradient(lighten($tertiary, 10%), $tertiary)
+    +linear-gradient(darken($primary_lightest, 5%), darken($primary_lightest, 10%))
 
 select
   width: $input-width
@@ -279,6 +281,8 @@ form.inline
 //
 // Embedded
 //
+object
+  padding: 0
 
 //
 // Text-level

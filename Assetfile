@@ -4,7 +4,7 @@ require 'sass'
 require 'tilt'
 require 'cssminify'
 
-Sass.load_paths << 'bourbon' << 'assets/stylesheets'
+Sass.load_paths << 'bourbon' << 'neat' << 'assets/stylesheets'
 
 module Rake::Pipeline::Web::Filters
   class CssMinifyFilter < Rake::Pipeline::Filter

@@ -1,12 +1,25 @@
 @import bourbon
+@import neat
 @import colours
 @import base
+@import grid_settings
+
+$scale: 3.5
+$width: 5px
+$scaled_width: $width * $scale
+
+$task_font_size: 11px
+$description_font_size: 14px
 
 header
   padding-top: 0
   #logo
-    padding-top: 8px
-  #name
+    margin: 8px 5px
+    padding: 0
+    background: url(/graphics/logo.svg)
+    width: 50px
+    height: 26px
+  h1
     font-size: 28px
     font-family: 'Comfortaa', sans-serif
     font-weight: bold
@@ -28,35 +41,100 @@ header
 section
   margin-top: 0
 
-h1
-  display: inline-block
-  border-bottom: 1px solid $primary_light
-  margin-top: $grid-size
-  font-size: $font-size * 1.25
+main
+  display: block
+  padding-bottom: 30px
+
+footer.groups
+  position: fixed
+  height: 18px
   width: 100%
-  letter-spacing: 0
-  position: relative
-  span.actions
-    position: absolute
-    font-size: $font-size
-    right: -4px
-    top: -8px
+  bottom: 0
+  margin: 0
+  padding: 0
+  border-top: 2px solid $grey_dark
+  input
+    float: left
+    width: auto
+    height: 18px
+  h1
+    width: auto
+    display: block
+    border-bottom: none
+    font: $task_font_size bold $standard-font
+    background: $grey
+    line-height: 18px
+    color: white
+  h1, ul, li, button
+    margin: 0
+    padding: 0 5px
+    float: left
+  li
+    border-right: 4px solid $grey_dark
+    opacity: 0.5
+  ul
+    padding: 0
+  &:hover
+    li
+      opacity: 1
+
+section.tasks
+  +outer-container
+  section.current
+    +span-columns(6)
+
+  section.queue
+    +span-columns(6)
+
+
+section
+  h1
+    display: inline-block
+    border-bottom: 1px solid $primary_light
+    margin-top: $grid-size
+    font-size: $font-size * 1.25
+    width: 100%
+    letter-spacing: 0
+    position: relative
+    span.actions
+      position: absolute
+      font-size: $font-size
+      right: -4px
+      top: -8px
+
 
 li.task
-  font-size: 90%
-  padding: 4px
-  padding-left: 15px
+  border-radius: 0 0 10px 0
+  font-size: $task_font_size
   margin: 2px
   background: lighten($primary, 2%)
   &:hover
-    background: lighten($primary, 6%) url(/graphics/grabber.svg) no-repeat 6px 6px
-    ul.details
+    background: lighten($primary, 6%) url(/graphics/grabber.svg) no-repeat 1px 6px
+    ul.details, .action
       display: block
+    .status
+      display: none
 
-  .action, .group, .type
-    height: 20px
-    margin: 0 10px
+  .type, .status, .action, .group
+    float: left
+    margin: 0 5px
     padding: 0 5px
+    height: 20px
+
+  .type
+    margin: 0
+
+  button
+    margin: 0
+    padding: 0 5px
+    height: 20px
+
+  .status, .action
+    display: block
+    width: 60px
+
+  .action
+    display: none
 
   .feature
     background: $green_dark
@@ -67,21 +145,53 @@ li.task
   .refactor
     background: $blue
 
-  .group
-    background: $blue
+  .description
+    font-size: $description_font_size
+
+  ul.summary
+    padding-left: 0
+    overflow: hidden
 
   ul.details
+    clear: both
     padding-top: 4px
-    display: none
     overflow: hidden
-  li
-    margin-left: 15px
-    float: left
-    abbr
-      display: inline-block
-      border-bottom: none
-      width: 18px
-      height: 15px
+    li
+      margin-right: 5px
+      float: left
+      abbr
+        display: inline-block
+        border-bottom: none
+        width: 18px
+        height: 15px
+      &.author
+        abbr
+          background: url(/graphics/author.svg) 0px 0px
+      &.assigned
+        abbr
+          background: url(/graphics/author.svg) $scaled_width 0px
+      &.verifier
+        abbr
+          background: url(/graphics/author.svg) ($scaled_width * 2) 0px
 
-  li,strong
-    color: lighten($primary_light, 5%)
+    li, strong
+      color: lighten($primary_light, 5%)
+
+.group
+  font-size: $task_font_size
+  margin: 2px 0
+  padding: 0 5px
+  &.a
+    background: $blue_dark
+  &.b
+    background: $red_dark
+  &.c
+    background: $green_dark
+  &.d
+    background: $purple_dark
+  &.e
+    background: $orange_dark
+  &.f
+    background: $grey_light
+  &.g
+    background: $cyan_dark

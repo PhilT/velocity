@@ -8,7 +8,7 @@ configure :development do
   require 'rake-pipeline/middleware'
   use Rake::Pipeline::Middleware, 'Assetfile'
   require 'rack-livereload'
-  use Rack::LiveReload, no_swf: true
+  use Rack::LiveReload
 end
 
 map '/' do

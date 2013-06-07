@@ -1,83 +1,101 @@
-doctype 5
-html
-  head
-    title Velocity - Manage Projects, Simply.
-    meta charset='UTF-8'
-    link href='http://fonts.googleapis.com/css?family=Ropa+Sans|Comfortaa' rel='stylesheet' type='text/css'
-    link href='application.css' rel='stylesheet' type='text/css'
-  body
-    header
-      object#logo type='image/svg+xml' data='/graphics/logo.svg'
-      span#name Velocity
-      nav
-        ul
-          li
-            a href='#' PROJECTS
-          li
-            a.current href='#' TASKS
-          li
-            a href='#' RELEASES
-          li
-            a href='#' STATS
-          li
-            a href='#' USERS
-          li
-            a href='#' LOGOUT
-          li#velocity
-            a href='#' Velocity: 0
-
-    section
+main
+  section.tasks
+    section.current
       h1
         span Current Release
         span.actions
           button Finish Release...
       ul.tasks
         - 2.times
-          li.task
-            span.type.feature &nbsp;
-            span.group design
-            span.status pending
-            button.action start
-            span.description Mockup of Velocity task list
+          li.task.feature
+            ul.summary
+              li.status.pending pending
+              li.action.start
+                button start
+              li.group.a design
+              li.description Mockup of Velocity task list
             ul.details
-              li.author author: <strong>Phil Thompson</strong>
-              li.assigned_to assigned to: <strong>Phil Thompson</strong>
-              li.verifier verified by: <strong>Phil Thompson</strong>
-              li.completed completed 4 hours ago
+              li.author
+                abbr title='Author'
+                span Phil Thompson
+              li.assigned
+                abbr title='Assigned to'
+                span Phil Thompson
+              li.verifier
+                abbr title='Verified by'
+                span Phil Thompson
+              li.completed
 
-        li.task
-          span.type.bug &nbsp;
-          span.group design
-          span.status pending
-          button.action start
-          span.description Something needs fixing
-          ul.details
-            li.author author: <strong>Phil Thompson</strong>
-            li.assigned_to assigned to: <strong>Phil Thompson</strong>
-            li.verifier verified by: <strong>Phil Thompson</strong>
-            li.completed
-
-        li.task
-          span.type.bug &nbsp;
-          span.group design
-          span.status pending
-          button.action start
-          span.description Something needs fixing
+        li.task.bug
+          ul.summary
+            li.status.started started
+            li.action.complete
+              button finish
+            li.group.b code
+            li.description Something needs fixing
           ul.details
             li.author
               abbr title='Author'
-                object type='image/svg+xml' data='/graphics/author.svg'
               span Phil Thompson
-            li.assigned_to
+            li.assigned
               abbr title='Assigned to'
-                object type='image/svg+xml' data='/graphics/assigned.svg'
               span Phil Thompson
             li.verifier
               abbr title='Verified by'
-                object type='image/svg+xml' data='/graphics/verifier.svg'
               span Phil Thompson
             li.completed
 
-    section
+        li.task.bug
+          ul.summary
+            li.status.pending pending
+            li.action.start
+              button start
+            li.group.b code
+            li.description Something needs fixing
+          ul.details
+            li.author
+              abbr title='Author'
+              span Phil Thompson
+            li.assigned
+              abbr title='Assigned to'
+              span Phil Thompson
+            li.verifier
+              abbr title='Verified by'
+              span Phil Thompson
+            li.completed
+
+    section.queue
       h1 Task Queue
       ul.tasks
+        li.task.feature
+          ul.summary
+            li.status.pending pending
+            li.action.start
+              button start
+            li.group.a design
+            li.description More stuff to do
+          ul.details
+            li.author
+              abbr title='Author'
+              span Phil Thompson
+            li.assigned
+              abbr title='Assigned to'
+              span Phil Thompson
+            li.verifier
+              abbr title='Verified by'
+              span Phil Thompson
+            li.completed
+
+footer.groups
+  h1 Groups
+  ul.groups
+    li.group
+      button +
+    li.group.a tasks
+    li.group.b projects
+    li.group.c releases
+    li.group.d stats
+    li.group.e users
+    li.group.f security
+    li.group.g performance
+

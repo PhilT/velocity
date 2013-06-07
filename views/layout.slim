@@ -1,0 +1,28 @@
+doctype 5
+html
+  head
+    title Velocity - Manage Projects, Simply.
+    meta charset='UTF-8'
+    link href='http://fonts.googleapis.com/css?family=Ropa+Sans|Comfortaa' rel='stylesheet' type='text/css'
+    link href='application.css' rel='stylesheet' type='text/css'
+  body
+    header
+      #logo
+      h1 Velocity
+      nav
+        ul
+          li
+            a href='#' PROJECTS
+          li
+            a.current href='#' TASKS
+          li
+            a href='#' RELEASES
+          li
+            a href='#' STATS
+          li
+            a href='#' USERS
+          li
+            a href='#' LOGOUT
+          li#velocity
+            a href='#' Velocity: 0
+    == yield

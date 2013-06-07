@@ -9,6 +9,7 @@ group :development do
   gem 'bourbon'
   gem 'guard-livereload'
   gem 'jasmine'
+  gem 'neat'
   gem 'rack-livereload'
   gem 'rake-pipeline'
   gem 'rake-pipeline-web-filters'

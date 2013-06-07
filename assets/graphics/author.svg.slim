@@ -1,6 +1,20 @@
 - scale = 3.5
-- fill = 'gray'
-- transform = "translate(1, 1), scale(#{scale})"
-svg width=(5 * scale) height=(4 * scale + 1) xmlns='http://www.w3.org/2000/svg' version='1.1'
-  circle cx=2 cy=1 r=1 fill=fill transform=transform
-  path d='M1.5 1.5 Q0 2.5 0 4 L4 4 Q4 2.5 2.5 1.5' fill=fill transform=transform
+- width = 5
+svg width=(width * scale * 3) height=(4 * scale + 1) xmlns='http://www.w3.org/2000/svg' version='1.1'
+  defs
+    sass:
+      @import colours
+      circle, path
+        fill: gray
+      polyline
+        fill: $tertiary_light
+
+  - 3.times do |i|
+    - transform = "translate(#{width * scale * i + 1}, 1), scale(#{scale})"
+    circle cx=2 cy=1 r=1 transform=transform
+    path d='M1.5 1.5 Q0 2.5 0 4 L4 4 Q4 2.5 2.5 1.5' transform=transform
+
+    - if i == 1
+      polyline points='0,2 2,2.5 4,0 2,4' fill='#A5C261' transform=transform
+    - if i == 2
+      polyline points='0,2 0.5,2 0.5,1 2,2.5 0.5,4 0.5,3 0,3 0,2' transform=transform
